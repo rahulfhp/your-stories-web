@@ -18,7 +18,7 @@ export default function Home() {
   } = useStoriesStore();
 
   const [moreStoriesPage, setMoreStoriesPage] = useState(0);
-  const STORIES_PER_PAGE = 10;
+  const STORIES_PER_PAGE = 9;
 
   useEffect(() => {
     // Fetch handpicked stories on component mount
