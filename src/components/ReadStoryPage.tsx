@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Story } from '@/stores/stories';
 import useStoriesStore from '@/stores/stories';
@@ -13,13 +13,11 @@ import {
   BookmarkIcon, 
   ShareIcon,
   ArrowLeftIcon,
-  HeartIcon,
   EyeIcon
 } from '@heroicons/react/24/outline';
 import { 
   StarIcon as StarFilledIcon, 
-  BookmarkIcon as BookmarkFilledIcon,
-  HeartIcon as HeartFilledIcon
+  BookmarkIcon as BookmarkFilledIcon
 } from '@heroicons/react/24/solid';
 
 interface ReadStoryPageProps {
@@ -36,7 +34,6 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
   const [isLoading, setIsLoading] = useState(true);
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
 
@@ -128,16 +125,6 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
     console.log(`${isBookmarked ? 'Removing' : 'Adding'} bookmark for story:`, story._id);
   };
 
-  const handleLike = () => {
-    if (!story) return;
-    
-    // Update local state
-    setIsLiked(!isLiked);
-    
-    // TODO: Implement API call for like
-    console.log(`${isLiked ? 'Removing' : 'Adding'} like for story:`, story._id);
-  };
-
   const handleShare = () => {
     if (!story) return;
     
@@ -163,8 +150,15 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden flex items-center justify-center">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/2 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 relative z-10">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
         </div>
       </div>
@@ -173,8 +167,15 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
 
   if (!story) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden flex items-center justify-center">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/2 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-center relative z-10">
           <h2 className="text-white text-xl font-semibold mb-4">Story Not Found</h2>
           <p className="text-white/70 mb-6">The story you're looking for doesn't exist or has been removed.</p>
           <button
@@ -189,55 +190,18 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <button
-            onClick={handleBack}
-            className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors duration-200"
-          >
-            <ArrowLeftIcon className="w-5 h-5" />
-            <span>Back</span>
-          </button>
-          
-          <div className="flex items-center space-x-4">
-            {/* Action Buttons */}
-            <button
-              onClick={handleUpvote}
-              className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200"
-            >
-              {isUpvoted ? (
-                <StarFilledIcon className="w-5 h-5 text-yellow-400" />
-              ) : (
-                <StarIcon className="w-5 h-5 text-white/70" />
-              )}
-              <span className="text-white/90 text-sm">{story.upvoteCount}</span>
-            </button>
-
-            <button
-              onClick={handleBookmark}
-              className="p-2 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200"
-            >
-              {isBookmarked ? (
-                <BookmarkFilledIcon className="w-5 h-5 text-blue-400" />
-              ) : (
-                <BookmarkIcon className="w-5 h-5 text-white/70" />
-              )}
-            </button>
-
-            <button
-              onClick={handleShare}
-              className="p-2 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200"
-            >
-              <ShareIcon className="w-5 h-5 text-white/70" />
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/2 to-transparent rounded-full blur-3xl"></div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-24 relative z-10">
+        {/* Back Button */}
+
         {/* Story Header */}
         <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8 shadow-2xl">
           {/* Cover Image */}
@@ -336,16 +300,30 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
         {/* Bottom Actions */}
         <div className="mt-8 flex items-center justify-center space-x-4">
           <button
-            onClick={handleLike}
+            onClick={handleUpvote}
             className="group flex items-center space-x-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
           >
-            {isLiked ? (
-              <HeartFilledIcon className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform duration-200" />
+            {isUpvoted ? (
+              <StarFilledIcon className="w-5 h-5 text-yellow-400 group-hover:scale-110 transition-transform duration-200" />
             ) : (
-              <HeartIcon className="w-5 h-5 text-white/70 group-hover:text-red-400 transition-colors duration-200" />
+              <StarIcon className="w-5 h-5 text-white/70 group-hover:text-yellow-400 transition-colors duration-200" />
             )}
             <span className="text-white/90 group-hover:text-white transition-colors duration-200">
-              {isLiked ? 'Liked' : 'Like this story'}
+              {story.upvoteCount}
+            </span>
+          </button>
+
+          <button
+            onClick={handleBookmark}
+            className="group flex items-center space-x-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+          >
+            {isBookmarked ? (
+              <BookmarkFilledIcon className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+            ) : (
+              <BookmarkIcon className="w-5 h-5 text-white/70 group-hover:text-blue-400 transition-colors duration-200" />
+            )}
+            <span className="text-white/90 group-hover:text-white transition-colors duration-200">
+              {isBookmarked ? 'Saved' : 'Save'}
             </span>
           </button>
 
@@ -354,48 +332,8 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
             className="group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
           >
             <ShareIcon className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
-            <span className="text-white font-medium">Share Story</span>
+            <span className="text-white font-medium">Share</span>
           </button>
-        </div>
-
-        {/* Additional Story Actions */}
-        <div className="mt-6 flex items-center justify-center">
-          <div className="flex items-center space-x-6 px-6 py-3 bg-white/5 rounded-2xl backdrop-blur-md border border-white/10">
-            <button
-              onClick={handleUpvote}
-              className="group flex items-center space-x-2 text-white/70 hover:text-yellow-400 transition-colors duration-200"
-            >
-              {isUpvoted ? (
-                <StarFilledIcon className="w-5 h-5 text-yellow-400 group-hover:scale-110 transition-transform duration-200" />
-              ) : (
-                <StarIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-              )}
-              <span className="text-sm font-medium">{story.upvoteCount}</span>
-            </button>
-
-            <div className="w-px h-6 bg-white/20"></div>
-
-            <button
-              onClick={handleBookmark}
-              className="group flex items-center space-x-2 text-white/70 hover:text-blue-400 transition-colors duration-200"
-            >
-              {isBookmarked ? (
-                <BookmarkFilledIcon className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform duration-200" />
-              ) : (
-                <BookmarkIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-              )}
-              <span className="text-sm font-medium">
-                {isBookmarked ? 'Saved' : 'Save'}
-              </span>
-            </button>
-
-            <div className="w-px h-6 bg-white/20"></div>
-
-            <div className="flex items-center space-x-2 text-white/60">
-              <EyeIcon className="w-4 h-4" />
-              <span className="text-sm">{story.readCount}</span>
-            </div>
-          </div>
         </div>
       </div>
 

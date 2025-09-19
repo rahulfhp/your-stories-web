@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Header from "@/components/Header";
 import useStoriesStore from "@/stores/stories";
 import StoryCard from '@/components/StoryCard';
 
@@ -44,7 +43,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0">

@@ -5,18 +5,19 @@ import { useSearchParams } from 'next/navigation';
 import ReadStoryPage from '@/components/ReadStoryPage';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     storyId: string;
-  };
+  }>;
 }
 
 const ReadStoryPageRoute: React.FC<PageProps> = ({ params }) => {
+  const resolvedParams = React.use(params);
   const searchParams = useSearchParams();
   const sourceType = searchParams.get('from') as 'handpicked' | 'more-stories' | 'search' | 'bookmarked' || 'handpicked';
 
   return (
     <ReadStoryPage 
-      storyId={params.storyId} 
+      storyId={resolvedParams.storyId} 
       sourceType={sourceType}
     />
   );
