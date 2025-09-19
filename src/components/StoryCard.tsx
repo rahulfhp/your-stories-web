@@ -1,5 +1,7 @@
 import React from 'react';
 import { Story } from '@/stores/stories';
+import TestImage from "../../public/TestImage.svg"
+import Image from 'next/image';
 
 interface StoryCardProps {
   storyData: Story;
@@ -30,15 +32,19 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
       {/* Story Cover Image */}
       <div className="relative h-48 overflow-hidden">
         {storyData.coverPicRef ? (
-          <img
+          <Image
             src={storyData.coverPicRef}
             alt={storyData.storyTitle}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            fill
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-purple-600/50 to-blue-600/50 flex items-center justify-center">
-            <div className="text-white/70 text-6xl">📖</div>
-          </div>
+          <Image
+            src={TestImage}
+            alt={storyData.storyTitle}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            fill
+          />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
