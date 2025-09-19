@@ -44,16 +44,23 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="container mx-auto px-4 py-8 pt-24">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/2 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 py-8 pt-24 relative z-10">
           
           {/* Handpicked Stories Section */}
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-white/90">
                 ✨ Handpicked Stories
               </h2>
-              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-purple-500 to-transparent rounded"></div>
+              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-white/30 to-transparent rounded"></div>
             </div>
             
             {handpickedError && (
@@ -99,7 +106,7 @@ export default function Home() {
             
             {!isLoadingHandpicked && (!handpickedStories || handpickedStories.length === 0) && !handpickedError && (
               <div className="text-center py-12">
-                <p className="text-gray-400 text-lg">No handpicked stories available at the moment.</p>
+                <p className="text-white/60 text-lg">No handpicked stories available at the moment.</p>
               </div>
             )}
           </section>
@@ -107,10 +114,10 @@ export default function Home() {
           {/* More Stories Section */}
           <section>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-white/90">
                 📚 More Stories
               </h2>
-              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-blue-500 to-transparent rounded"></div>
+              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-white/20 to-transparent rounded"></div>
             </div>
             
             {moreStoriesError && (
@@ -156,7 +163,7 @@ export default function Home() {
             
             {!isLoadingMore && (!moreStories || moreStories.length === 0) && !moreStoriesError && (
               <div className="text-center py-12">
-                <p className="text-gray-400 text-lg">No more stories available at the moment.</p>
+                <p className="text-white/60 text-lg">No more stories available at the moment.</p>
               </div>
             )}
             
@@ -165,7 +172,7 @@ export default function Home() {
               <div className="text-center mt-8">
                 <button
                   onClick={handleLoadMoreStories}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                  className="bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 hover:border-white/30 text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
                 >
                   Load More Stories
                 </button>

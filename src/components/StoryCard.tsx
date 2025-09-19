@@ -24,7 +24,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
 
   return (
     <div 
-      className="group relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl"
+      className="group relative bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl shadow-lg shadow-black/20"
       onClick={onClick}
     >
       {/* Story Cover Image */}
@@ -49,7 +49,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute top-3 right-3 w-8 h-8 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center text-white transition-colors duration-200"
+            className="absolute top-3 right-3 w-8 h-8 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center text-white transition-colors duration-200 backdrop-blur-md border border-white/20"
           >
             ×
           </button>
@@ -120,13 +120,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             {storyData.tagList.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-white/10 text-white/80 text-xs rounded-full"
+                className="px-2 py-1 bg-white/15 text-white/80 text-xs rounded-full backdrop-blur-md border border-white/20"
               >
                 #{tag}
               </span>
             ))}
             {storyData.tagList.length > 3 && (
-              <span className="px-2 py-1 bg-white/10 text-white/60 text-xs rounded-full">
+              <span className="px-2 py-1 bg-white/15 text-white/60 text-xs rounded-full backdrop-blur-md border border-white/20">
                 +{storyData.tagList.length - 3}
               </span>
             )}
@@ -136,7 +136,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
         {/* Country Badge */}
         {storyData.country && (
           <div className="absolute top-4 left-4">
-            <span className="px-2 py-1 bg-black/50 text-white text-xs rounded-full backdrop-blur-sm">
+            <span className="px-2 py-1 bg-black/30 text-white text-xs rounded-full backdrop-blur-md border border-white/20">
               📍 {storyData.country}
             </span>
           </div>

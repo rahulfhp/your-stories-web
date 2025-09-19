@@ -66,10 +66,10 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   onClick
 }) => {
   if (button) {
-    const baseClasses = "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110";
+    const baseClasses = "px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm";
     const variantClasses = buttonVariant === 'outlined' 
-      ? "border border-white/20 text-white hover:bg-white/10" 
-      : "bg-white text-black hover:bg-gray-200";
+      ? "border border-white/20 text-white/90 hover:bg-white/10 hover:border-white/30" 
+      : "bg-white/20 text-white hover:bg-white/30 border border-white/10";
     
     return (
       <button 
@@ -84,7 +84,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   if (avatar) {
     return (
       <div 
-        className="w-8 h-8 rounded-full overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
+        className="w-8 h-8 rounded-full overflow-hidden cursor-pointer transition-all duration-300 hover:scale-110 border border-white/20 backdrop-blur-sm"
         onClick={onClick}
       >
         {src ? (
@@ -96,7 +96,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gray-600 flex items-center justify-center text-white text-sm">
+          <div className="w-full h-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/90 text-sm">
             {alt?.charAt(0) || '?'}
           </div>
         )}
@@ -107,10 +107,10 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   if (Icon) {
     return (
       <div 
-        className="p-2 rounded-lg cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 hover:bg-white/10"
+        className="p-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-110 hover:bg-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20"
         onClick={onClick}
       >
-        <Icon className="w-5 h-5 text-white" />
+        <Icon className="w-5 h-5 text-white/90" />
       </div>
     );
   }
@@ -201,13 +201,13 @@ const Header: React.FC<HeaderProps> = ({
         {/* Backdrop blur container */}
         <div className="relative">
           {/* Background with blur effect */}
-          <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-[20px] border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]" />
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]" />
           
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/40 to-gray-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-gray-900/40" />
           
           {/* Content */}
-          <div className="relative flex justify-between items-center w-full px-6 py-3 transition-all duration-300 ease-in-out md:px-8 lg:px-12 md:py-4">
+          <div className="relative flex justify-between items-center w-full px-6 py-3 transition-all duration-500 ease-in-out md:px-8 lg:px-12 md:py-4">
             
             {/* Logo Section */}
             <div className="flex items-center">
