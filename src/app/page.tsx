@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from "@/components/Header";
 import useStoriesStore from "@/stores/stories";
 import StoryCard from '@/components/StoryCard';
 
 export default function Home() {
+  const router = useRouter();
   const {
     handpickedStories,
     moreStories,
@@ -35,10 +37,9 @@ export default function Home() {
     setMoreStoriesPage(nextPage);
   };
 
-  const handleStoryClick = (storyId: string) => {
-    // Handle story click - navigate to story detail page
-    console.log('Story clicked:', storyId);
-    // You can implement navigation logic here
+  const handleStoryClick = (storyId: string, sourceType: 'handpicked' | 'more-stories') => {
+    // Navigate to story detail page with source type
+    router.push(`/read/${storyId}?source=${sourceType}`);
   };
 
   return (
@@ -98,7 +99,7 @@ export default function Home() {
                   <StoryCard
                     key={story._id}
                     storyData={story}
-                    onClick={() => handleStoryClick(story._id)}
+                    onClick={() => handleStoryClick(story._id, 'handpicked')}
                   />
                 )) : null}
               </div>
@@ -133,7 +134,7 @@ export default function Home() {
                 <StoryCard
                   key={story._id}
                   storyData={story}
-                  onClick={() => handleStoryClick(story._id)}
+                  onClick={() => handleStoryClick(story._id, 'more-stories')}
                 />
               )) : null}
             </div>
