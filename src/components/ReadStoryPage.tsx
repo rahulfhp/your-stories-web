@@ -199,10 +199,9 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8 pt-24 relative z-10">
-        {/* Back Button */}
-
-        {/* Story Header */}
+      <div className="flex justify-center px-4 py-8 pt-24 relative z-10">
+        <div className="w-full max-w-2xl">
+          {/* Story Header */}
         <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8 shadow-2xl">
           {/* Cover Image */}
           {story.coverPicRef && (
@@ -334,6 +333,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId, sourceType }) =>
             <ShareIcon className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
             <span className="text-white font-medium">Share</span>
           </button>
+        </div>
         </div>
       </div>
 
