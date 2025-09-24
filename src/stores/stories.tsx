@@ -1,5 +1,7 @@
-import { create } from 'zustand';
-import axios from 'axios';
+import { create } from "zustand";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useAuthStore } from "./auth";
 
 // Story interface based on API response structure
 interface Story {
@@ -38,34 +40,54 @@ interface StoriesResponse {
 // Store state interface
 interface StoriesState {
   // State
+  userId: string | null;
   handpickedStories: Story[];
   moreStories: Story[];
   isLoadingHandpicked: boolean;
   isLoadingMore: boolean;
   handpickedError: string | null;
   moreStoriesError: string | null;
-  
+
+  bookmarkedStories: Story[];
+  isLoadingBookmarked: boolean;
+  bookmarkedError: string | null;
+
   // Actions
   fetchHandpickedStories: () => Promise<void>;
   fetchMoreStories: (limit: number, skip: number) => Promise<void>;
   addStory: (story: Story) => void;
+
+  fetchBookmarkedStories: () => Promise<void>;
+  unBookmarkStory: (storyId: string) => Promise<void>;
+
+  upvoteStory: (storyId: string) => Promise<void>;
+  downvoteStory: (storyId: string) => Promise<void>;
+  bookmarkStory: (storyId: string) => Promise<void>;
+  unbookmarkStory: (storyId: string) => Promise<void>;
+
   clearErrors: () => void;
 }
 
 // Base URL - you may need to adjust this based on your environment
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+const { currentUser } = useAuthStore.getState();
+
+const token = window.localStorage.getItem("ys_access_token");
+
 // Create axios config - adjust headers as needed
 const getConfig = () => ({
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     // Add authorization header if needed
-    // 'Authorization': `Bearer ${token}`,
-    'ngrok-skip-browser-warning': 'true', // Skip ngrok browser warning
-  }
+    Authorization: `Bearer ${token}`,
+    "ngrok-skip-browser-warning": "true", // Skip ngrok browser warning
+  },
 });
 
 const useStoriesStore = create<StoriesState>((set, get) => ({
+  userId: currentUser?._id || null,
+
   // Initial state
   handpickedStories: [],
   moreStories: [],
@@ -74,24 +96,29 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   handpickedError: null,
   moreStoriesError: null,
 
+  bookmarkedStories: [],
+  isLoadingBookmarked: false,
+  bookmarkedError: null,
+
   // Fetch handpicked stories
   fetchHandpickedStories: async () => {
     set({ isLoadingHandpicked: true, handpickedError: null });
-    
+
     try {
       const config = getConfig();
-      const response = await axios.get<StoriesResponse>(`${BASE_URL}handPickedStories/get`, config);
+      const response = await axios.get<StoriesResponse>(
+        `${BASE_URL}handPickedStories/get`,
+        config
+      );
 
-      console.log('handpickedStories', response)
-      
-      set({ 
+      set({
         handpickedStories: response.data.Stories,
-        isLoadingHandpicked: false 
+        isLoadingHandpicked: false,
       });
     } catch (error: any) {
-      set({ 
-        handpickedError: error.message || 'Failed to fetch handpicked stories',
-        isLoadingHandpicked: false 
+      set({
+        handpickedError: error.message || "Failed to fetch handpicked stories",
+        isLoadingHandpicked: false,
       });
     }
   },
@@ -99,47 +126,164 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   // Fetch more stories with pagination
   fetchMoreStories: async (limit: number, skip: number) => {
     set({ isLoadingMore: true, moreStoriesError: null });
-    
+
     try {
       const config = getConfig();
       const data = { limit, skip };
-      
+
       const response = await axios.post<StoriesResponse>(
-        `${BASE_URL}liveStories/get?limit=${limit}&skip=${skip}`, 
-        data, 
+        `${BASE_URL}liveStories/get?limit=${limit}&skip=${skip}`,
+        data,
         config
       );
-      
+
       // If skip is 0, replace the stories, otherwise append
       const currentMoreStories = get().moreStories;
-      const newStories = skip === 0 ? response.data.Stories : [...currentMoreStories, ...response.data.Stories];
-      
-      set({ 
+      const newStories =
+        skip === 0
+          ? response.data.Stories
+          : [...currentMoreStories, ...response.data.Stories];
+
+      set({
         moreStories: newStories,
-        isLoadingMore: false 
+        isLoadingMore: false,
       });
     } catch (error: any) {
-      set({ 
-        moreStoriesError: error.message || 'Failed to fetch more stories',
-        isLoadingMore: false 
+      set({
+        moreStoriesError: error.message || "Failed to fetch more stories",
+        isLoadingMore: false,
       });
     }
   },
 
   // Add a single story (for future use)
   addStory: (story: Story) => {
-    set((state) => ({ 
-      moreStories: [...state.moreStories, story] 
+    set((state) => ({
+      moreStories: [...state.moreStories, story],
     }));
+  },
+
+  // Fetch bookmarked stories
+  fetchBookmarkedStories: async () => {
+    set({ isLoadingBookmarked: true, bookmarkedError: null });
+    try {
+      const config = getConfig();
+      const response = await axios.post<StoriesResponse>(
+        `${BASE_URL}bookmarkedStories/get`,
+        config
+      );
+      set({
+        bookmarkedStories: response.data.Stories,
+        isLoadingBookmarked: false,
+      });
+    } catch (error: any) {
+      set({
+        bookmarkedError: error.message || "Failed to fetch bookmarked stories",
+        isLoadingBookmarked: false,
+      });
+    }
+  },
+
+  // Unbookmark story
+  unBookmarkStory: async (storyId: string) => {
+    try {
+      const config = getConfig();
+      await axios.delete(`${BASE_URL}user/unBookmarkStory/${storyId}`, config);
+      // remove story from local state
+      const updated = get().bookmarkedStories.filter((s) => s._id !== storyId);
+      set({ bookmarkedStories: updated });
+    } catch (error: any) {
+      console.error("Failed to unbookmark story", error.message);
+    }
+  },
+
+  upvoteStory: async (storyId) => {
+    const userId = get().userId;
+    try {
+      const config = getConfig();
+      const res = await axios.put(
+        `${BASE_URL}user/upVoteStory/${userId}/${storyId}`,
+        {}, // no body, backend handles user via session
+        config
+      );
+
+      if (res.data?.type === "success") {
+        toast.success("Story upvoted");
+      } else {
+        toast.error("Failed to upvote");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  downvoteStory: async (storyId) => {
+    const userId = get().userId;
+    try {
+      const config = getConfig();
+      const res = await axios.put(
+        `${BASE_URL}user/downVoteStory/${userId}/${storyId}`,
+        {},
+        config
+      );
+
+      if (res.data?.type === "success") {
+        toast.success("Downvote removed");
+      } else {
+        toast.error("Failed to downvote");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  bookmarkStory: async (storyId) => {
+    const userId = get().userId;
+    try {
+      const config = getConfig();
+      const res = await axios.put(
+        `${BASE_URL}user/bookmarkStory/${userId}/${storyId}`,
+        {},
+        config
+      );
+
+      if (res.data?.type === "success") {
+        toast.success("Story bookmarked");
+      } else {
+        toast.error("Failed to bookmark");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  unbookmarkStory: async (storyId) => {
+    const userId = get().userId;
+    try {
+      const config = getConfig();
+      const res = await axios.put(
+        `${BASE_URL}user/unBookmarkStory/${userId}/${storyId}`,
+        {},
+        config
+      );
+
+      if (res.data?.type === "success") {
+        toast.success("Bookmark removed");
+      } else {
+        toast.error("Failed to unbookmark");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   },
 
   // Clear all errors
   clearErrors: () => {
-    set({ 
-      handpickedError: null, 
-      moreStoriesError: null 
+    set({
+      handpickedError: null,
+      moreStoriesError: null,
     });
-  }
+  },
 }));
 
 export default useStoriesStore;

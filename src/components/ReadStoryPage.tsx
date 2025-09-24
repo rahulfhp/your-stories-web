@@ -30,7 +30,17 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   sourceType,
 }) => {
   const router = useRouter();
-  const { handpickedStories, moreStories } = useStoriesStore();
+  const {
+    handpickedStories,
+    moreStories,
+    upvoteStory,
+    downvoteStory,
+    bookmarkStory,
+    unbookmarkStory,
+  } = useStoriesStore();
+
+  const requireAuth = useAuthStore((s) => s.requireAuth);
+  const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
 
   // State management
   const [story, setStory] = useState<Story | null>(null);
@@ -39,9 +49,6 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-
-  const requireAuth = useAuthStore((s) => s.requireAuth);
-  const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
 
   // Find story based on ID and source type
   useEffect(() => {
@@ -113,21 +120,15 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     if (!story) return;
 
     requireAuth(() => {
-      // Update local state
-      setIsUpvoted(!isUpvoted);
-
-      // Update story upvote count
-      const updatedStory = {
-        ...story,
-        upvoteCount: isUpvoted ? story.upvoteCount - 1 : story.upvoteCount + 1,
-      };
-      setStory(updatedStory);
-
-      // TODO: Implement API call for upvote
-      console.log(
-        `${isUpvoted ? "Removing" : "Adding"} upvote for story:`,
-        story._id
-      );
+      if (isUpvoted) {
+        downvoteStory(story._id);
+        setIsUpvoted(false);
+        setStory({ ...story, upvoteCount: story.upvoteCount - 1 });
+      } else {
+        upvoteStory(story._id);
+        setIsUpvoted(true);
+        setStory({ ...story, upvoteCount: story.upvoteCount + 1 });
+      }
     });
   };
 
@@ -135,14 +136,13 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     if (!story) return;
 
     requireAuth(() => {
-      // Update local state
-      setIsBookmarked(!isBookmarked);
-
-      // TODO: Implement API call for bookmark
-      console.log(
-        `${isBookmarked ? "Removing" : "Adding"} bookmark for story:`,
-        story._id
-      );
+      if (isBookmarked) {
+        unbookmarkStory(story._id);
+        setIsBookmarked(false);
+      } else {
+        bookmarkStory(story._id);
+        setIsBookmarked(true);
+      }
     });
   };
 
