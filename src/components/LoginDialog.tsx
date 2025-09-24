@@ -2,12 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/stores/auth";
 
 interface LoginDialogProps {
   open: boolean;
@@ -20,11 +17,18 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
   onClose,
   onLogin,
 }) => {
-  // Handle Login
-  const handleOnClick = (provider: string) => {
-    if (onLogin) {
-      onLogin(provider);
-    }
+  const loginWithProvider = useAuthStore((s) => s.loginWithProvider);
+
+  const handleOnClick = async (provider: any) => {
+    const providerKey =
+      provider === "google" || provider === "facebook" ? provider : undefined;
+    // Keep backward compatibility if parent passes string, else use explicit keys
+    const selected: "google" | "facebook" =
+      typeof provider === "string"
+        ? (provider as "google" | "facebook")
+        : providerKey || "google";
+    await loginWithProvider(selected);
+    if (onLogin) onLogin(selected);
     onClose();
   };
 
@@ -62,7 +66,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
         <div className="flex flex-col items-center justify-center space-y-4 mt-8">
           <Button
             onClick={() => handleOnClick("google")}
-            className="w-3xs h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl text-white hover:text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            className="w-3xs h-12 cursor-pointer bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl text-white hover:text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             variant="outline"
           >
             <Image
@@ -77,7 +81,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
 
           <Button
             onClick={() => handleOnClick("facebook")}
-            className="w-3xs h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl text-white hover:text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            className="w-3xs h-12 bg-white/10 cursor-pointer hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl text-white hover:text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             variant="outline"
           >
             <Image

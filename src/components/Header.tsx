@@ -14,6 +14,7 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import LoginDialog from "./LoginDialog";
+import { useAuthStore } from "@/stores/auth";
 
 // Types
 interface User {
@@ -88,11 +89,9 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
         onClick={onClick}
       >
         {src ? (
-          <Image
-            src={src}
+          <img
+            src={src || alt?.charAt(0)?.toUpperCase()}
             alt={alt || "Avatar"}
-            width={32}
-            height={32}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -132,6 +131,11 @@ const Header: React.FC<HeaderProps> = ({
   const [open, setOpen] = useState(false);
   const [writePublish, setWritePublish] = useState(false);
 
+  const currentUser = useAuthStore((s) => s.currentUser);
+  const isLoginDialogOpen = useAuthStore((s) => s.isLoginDialogOpen);
+  const openLoginDialog = useAuthStore((s) => s.openLoginDialog);
+  const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
+
   const handleClick = (
     event: React.MouseEvent<HTMLElement | SVGSVGElement>
   ) => {
@@ -142,11 +146,13 @@ const Header: React.FC<HeaderProps> = ({
 
   const handleClickOpen = () => {
     setOpen(true);
+    openLoginDialog();
   };
 
   const handleClose = () => {
     setOpen(false);
     setAnchorEl(null);
+    closeLoginDialog();
   };
 
   useEffect(() => {
@@ -157,7 +163,7 @@ const Header: React.FC<HeaderProps> = ({
     }
   }, [user, pathname]);
 
-  const isUserLoggedIn = user.length || user.user;
+  const isUserLoggedIn = currentUser || user.length || user.user;
   const isAdminLoggedIn = admin.length || admin.email;
 
   return (
@@ -254,8 +260,14 @@ const Header: React.FC<HeaderProps> = ({
                     <Link href="/profile">
                       <TopBarOption
                         avatar={true}
-                        alt={user.user?.displayName}
-                        src={user.user?.photoURL}
+                        alt={
+                          (currentUser?.displayName ||
+                            user.user?.displayName) as string
+                        }
+                        src={
+                          (currentUser?.photoURL ||
+                            user.user?.photoURL) as string
+                        }
                       />
                     </Link>
                   ) : (
@@ -269,7 +281,7 @@ const Header: React.FC<HeaderProps> = ({
       </header>
 
       {/* Login Dialog */}
-      <LoginDialog open={open} onClose={handleClose} />
+      <LoginDialog open={open || isLoginDialogOpen} onClose={handleClose} />
     </>
   );
 };

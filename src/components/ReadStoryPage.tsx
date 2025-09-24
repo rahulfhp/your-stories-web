@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Story } from "@/stores/stories";
 import useStoriesStore from "@/stores/stories";
 import LoginDialog from "./LoginDialog";
+import { useAuthStore } from "@/stores/auth";
 
 // Icons
 import {
@@ -38,6 +39,9 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
+
+  const requireAuth = useAuthStore((s) => s.requireAuth);
+  const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
 
   // Find story based on ID and source type
   useEffect(() => {
@@ -108,38 +112,38 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const handleUpvote = () => {
     if (!story) return;
 
-    setShowLoginDialog(true);
+    requireAuth(() => {
+      // Update local state
+      setIsUpvoted(!isUpvoted);
 
-    // Update local state
-    setIsUpvoted(!isUpvoted);
+      // Update story upvote count
+      const updatedStory = {
+        ...story,
+        upvoteCount: isUpvoted ? story.upvoteCount - 1 : story.upvoteCount + 1,
+      };
+      setStory(updatedStory);
 
-    // Update story upvote count
-    const updatedStory = {
-      ...story,
-      upvoteCount: isUpvoted ? story.upvoteCount - 1 : story.upvoteCount + 1,
-    };
-    setStory(updatedStory);
-
-    // TODO: Implement API call for upvote
-    console.log(
-      `${isUpvoted ? "Removing" : "Adding"} upvote for story:`,
-      story._id
-    );
+      // TODO: Implement API call for upvote
+      console.log(
+        `${isUpvoted ? "Removing" : "Adding"} upvote for story:`,
+        story._id
+      );
+    });
   };
 
   const handleBookmark = () => {
     if (!story) return;
 
-    setShowLoginDialog(true);
+    requireAuth(() => {
+      // Update local state
+      setIsBookmarked(!isBookmarked);
 
-    // Update local state
-    setIsBookmarked(!isBookmarked);
-
-    // TODO: Implement API call for bookmark
-    console.log(
-      `${isBookmarked ? "Removing" : "Adding"} bookmark for story:`,
-      story._id
-    );
+      // TODO: Implement API call for bookmark
+      console.log(
+        `${isBookmarked ? "Removing" : "Adding"} bookmark for story:`,
+        story._id
+      );
+    });
   };
 
   const handleShare = () => {
@@ -174,6 +178,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
   const handleClose = () => {
     setShowLoginDialog(false);
+    closeLoginDialog();
   };
 
   if (isLoading) {
