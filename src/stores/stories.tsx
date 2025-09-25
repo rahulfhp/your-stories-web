@@ -171,7 +171,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
     set({ isLoadingBookmarked: true, bookmarkedError: null });
     try {
       const config = getConfig();
-      const response = await axios.post<StoriesResponse>(
+      const response = await axios.get<StoriesResponse>(
         `${BASE_URL}bookmarkedStories/get`,
         config
       );
