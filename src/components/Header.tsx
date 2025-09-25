@@ -83,6 +83,16 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   }
 
   if (avatar) {
+    // Get initials from the name (first letter of first and last name)
+    const getInitials = (name?: string) => {
+      if (!name) return "?";
+      const names = name.trim().split(" ");
+      if (names.length === 1) {
+        return names[0].charAt(0).toUpperCase();
+      }
+      return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+    };
+
     return (
       <div
         className="w-8 h-8 rounded-full overflow-hidden cursor-pointer transition-all duration-300 hover:scale-110 border border-white/20 backdrop-blur-sm"
@@ -90,13 +100,24 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
       >
         {src ? (
           <img
-            src={src || alt?.charAt(0)?.toUpperCase()}
+            src={src}
             alt={alt || "Avatar"}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              // Hide the image and show initials if image fails to load
+              (e.target as HTMLImageElement).style.display = 'none';
+              const parent = (e.target as HTMLImageElement).parentElement;
+              if (parent) {
+                const initialsDiv = document.createElement('div');
+                initialsDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
+                initialsDiv.textContent = getInitials(alt);
+                parent.appendChild(initialsDiv);
+              }
+            }}
           />
         ) : (
-          <div className="w-full h-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/90 text-sm">
-            {alt?.charAt(0) || "?"}
+          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm">
+            {getInitials(alt)}
           </div>
         )}
       </div>

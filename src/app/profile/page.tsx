@@ -15,6 +15,8 @@ const ProfilePage: React.FC = () => {
     router.push("/");
   };
 
+  console.log("user", user);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pt-24">
       <div className="max-w-5xl mx-auto px-6">
@@ -27,15 +29,14 @@ const ProfilePage: React.FC = () => {
           {/* Left column: Avatar + About + Logout */}
           <div className="md:col-span-1">
             <div className="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
-              <div className="w-28 h-28 rounded-xl overflow-hidden bg-purple-600/60 flex items-center justify-center mx-auto">
+              <div className="w-28 h-28 relative rounded-xl overflow-hidden bg-purple-600/60 flex items-center justify-center mx-auto">
                 {user?.photoURL ? (
-                  <img
-                    src={
-                      user?.photoURL || user?.photoURL?.charAt(0)?.toUpperCase()
-                    }
-                    alt={user?.displayName?.charAt(0)?.toUpperCase() || "U"}
-                    className="w-full h-full object-cover"
-                  />
+                  <Image
+                  src={user?.photoURL}
+                  alt={user?.displayName?.charAt(0)?.toUpperCase() || "U"}
+                  fill
+                  className="object-cover"
+                />
                 ) : (
                   <span className="text-white text-3xl font-bold">
                     {user?.displayName?.charAt(0) || "U"}
