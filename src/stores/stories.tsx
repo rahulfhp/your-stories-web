@@ -73,17 +73,20 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const { currentUser } = useAuthStore.getState();
 
-const token = window.localStorage.getItem("ys_access_token");
-
 // Create axios config - adjust headers as needed
-const getConfig = () => ({
-  headers: {
-    "Content-Type": "application/json",
-    // Add authorization header if needed
-    Authorization: `Bearer ${token}`,
-    "ngrok-skip-browser-warning": "true", // Skip ngrok browser warning
-  },
-});
+const getConfig = () => {
+  // Safely access localStorage only on client side
+  const token = typeof window !== 'undefined' ? window.localStorage.getItem("ys_access_token") : null;
+  
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      // Add authorization header if needed
+      ...(token && { Authorization: `Bearer ${token}` }),
+      "ngrok-skip-browser-warning": "true", // Skip ngrok browser warning
+    },
+  };
+};
 
 const useStoriesStore = create<StoriesState>((set, get) => ({
   userId: currentUser?._id || null,
