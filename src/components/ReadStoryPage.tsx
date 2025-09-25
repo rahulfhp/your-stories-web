@@ -41,6 +41,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
   const requireAuth = useAuthStore((s) => s.requireAuth);
   const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
+  const currentUser = useAuthStore((s) => s.currentUser);
 
   // State management
   const [story, setStory] = useState<Story | null>(null);
@@ -87,6 +88,10 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
         if (foundStory) {
           setStory(foundStory);
+          // Check if story is bookmarked by current user
+          if (currentUser?.bookmarkedStories) {
+            setIsBookmarked(currentUser.bookmarkedStories.includes(foundStory._id));
+          }
         }
       } catch (error) {
         console.error("Error fetching story:", error);
@@ -96,7 +101,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     };
 
     findStory();
-  }, [storyId, sourceType, handpickedStories, moreStories]);
+  }, [storyId, sourceType, handpickedStories, moreStories, currentUser?.bookmarkedStories]);
 
   // Format date
   const formatDate = (timestamp: number) => {
