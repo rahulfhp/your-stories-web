@@ -237,6 +237,17 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
+        // Update local state and localStorage
+        const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+        if (currentUser) {
+          const updatedBookmarks = [...(currentUser.bookmarkedStories || []), storyId];
+          const updatedUser = { ...currentUser, bookmarkedStories: updatedBookmarks };
+          updateUserInLocalStorage(updatedUser);
+        }
+        
+        // Refresh bookmarked stories list
+        get().fetchBookmarkedStories();
+        
         toast.success("Story bookmarked");
       } else {
         toast.error("Failed to bookmark");
@@ -258,6 +269,17 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
+        // Update local state and localStorage
+        const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+        if (currentUser) {
+          const updatedBookmarks = (currentUser.bookmarkedStories || []).filter(id => id !== storyId);
+          const updatedUser = { ...currentUser, bookmarkedStories: updatedBookmarks };
+          updateUserInLocalStorage(updatedUser);
+        }
+        
+        // Refresh bookmarked stories list
+        get().fetchBookmarkedStories();
+        
         toast.success("Bookmark removed");
       } else {
         toast.error("Failed to unbookmark");

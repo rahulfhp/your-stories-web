@@ -30,6 +30,8 @@ interface AuthState {
   // Guard utility
   requireAuth: (onAuthenticated: () => void) => void;
   accessToken: string | null;
+  // Update user data in localStorage
+  updateUserInLocalStorage: (updatedUser: BackendUserProfile) => void;
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -119,6 +121,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       onAuthenticated();
     } else {
       state.openLoginDialog();
+    }
+  },
+
+  updateUserInLocalStorage: (updatedUser: BackendUserProfile) => {
+    set({ currentUser: updatedUser });
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('ys_auth_user', JSON.stringify(updatedUser));
     }
   },
 }));
