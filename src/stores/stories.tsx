@@ -63,7 +63,7 @@ interface StoriesState {
   upvoteStory: (storyId: string) => Promise<void>;
   downvoteStory: (storyId: string) => Promise<void>;
   bookmarkStory: (storyId: string) => Promise<void>;
-  unbookmarkStory: (storyId: string) => Promise<void>;
+  removeBookmarkStory: (storyId: string) => Promise<void>;
 
   clearErrors: () => void;
 }
@@ -260,7 +260,8 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
     }
   },
 
-  unbookmarkStory: async (storyId) => {
+  // Remove bookmark story
+  removeBookmarkStory: async (storyId) => {
     const userId = get().userId;
     try {
       const config = getConfig();

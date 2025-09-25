@@ -36,7 +36,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     upvoteStory,
     downvoteStory,
     bookmarkStory,
-    unbookmarkStory,
+    removeBookmarkStory,
   } = useStoriesStore();
 
   const requireAuth = useAuthStore((s) => s.requireAuth);
@@ -142,7 +142,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
     requireAuth(() => {
       if (isBookmarked) {
-        unbookmarkStory(story._id);
+        removeBookmarkStory(story._id);
         setIsBookmarked(false);
       } else {
         bookmarkStory(story._id);
