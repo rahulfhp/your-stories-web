@@ -188,6 +188,13 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 
   upvoteStory: async (storyId) => {
     const userId = get().userId;
+    const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+    
+    if (!userId || !currentUser) {
+      toast.error("Please login to upvote stories");
+      return;
+    }
+
     try {
       const config = getConfig();
       const res = await axios.put(
@@ -197,17 +204,52 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
+        // Update story upvote count in all story arrays
+        set((state) => ({
+          handpickedStories: state.handpickedStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: story.upvoteCount + 1 }
+              : story
+          ),
+          moreStories: state.moreStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: story.upvoteCount + 1 }
+              : story
+          ),
+          bookmarkedStories: state.bookmarkedStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: story.upvoteCount + 1 }
+              : story
+          ),
+        }));
+
+        // Update user's upVoteStories in localStorage
+        const updatedUpVoteStories = [...(currentUser.upVoteStories || []), storyId];
+        const updatedUser = {
+          ...currentUser,
+          upVoteStories: updatedUpVoteStories
+        };
+        updateUserInLocalStorage(updatedUser);
+
         toast.success("Story upvoted");
       } else {
         toast.error("Failed to upvote");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Failed to upvote story");
     }
   },
 
   downvoteStory: async (storyId) => {
     const userId = get().userId;
+    const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+    
+    if (!userId || !currentUser) {
+      toast.error("Please login to manage votes");
+      return;
+    }
+
     try {
       const config = getConfig();
       const res = await axios.put(
@@ -217,12 +259,40 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
-        toast.success("Downvote removed");
+        // Update story upvote count in all story arrays (decrease by 1)
+        set((state) => ({
+          handpickedStories: state.handpickedStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: Math.max(0, story.upvoteCount - 1) }
+              : story
+          ),
+          moreStories: state.moreStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: Math.max(0, story.upvoteCount - 1) }
+              : story
+          ),
+          bookmarkedStories: state.bookmarkedStories.map(story =>
+            story._id === storyId 
+              ? { ...story, upvoteCount: Math.max(0, story.upvoteCount - 1) }
+              : story
+          ),
+        }));
+
+        // Remove story from user's upVoteStories in localStorage
+        const updatedUpVoteStories = (currentUser.upVoteStories || []).filter(id => id !== storyId);
+        const updatedUser = {
+          ...currentUser,
+          upVoteStories: updatedUpVoteStories
+        };
+        updateUserInLocalStorage(updatedUser);
+
+        toast.success("Upvote removed");
       } else {
-        toast.error("Failed to downvote");
+        toast.error("Failed to remove upvote");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Failed to remove upvote");
     }
   },
 

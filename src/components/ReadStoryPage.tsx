@@ -92,6 +92,10 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
           if (currentUser?.bookmarkedStories) {
             setIsBookmarked(currentUser.bookmarkedStories.includes(foundStory._id));
           }
+          // Check if story is upvoted by current user
+          if (currentUser?.upVoteStories) {
+            setIsUpvoted(currentUser.upVoteStories.includes(foundStory._id));
+          }
         }
       } catch (error) {
         console.error("Error fetching story:", error);
@@ -101,7 +105,21 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     };
 
     findStory();
-  }, [storyId, sourceType, handpickedStories, moreStories, currentUser?.bookmarkedStories]);
+  }, [storyId, sourceType, handpickedStories, moreStories, currentUser?.bookmarkedStories, currentUser?.upVoteStories]);
+
+  // Sync upvote state when user's upVoteStories changes
+  useEffect(() => {
+    if (story && currentUser?.upVoteStories) {
+      setIsUpvoted(currentUser.upVoteStories.includes(story._id));
+    }
+  }, [currentUser?.upVoteStories, story?._id]);
+
+  // Sync bookmark state when user's bookmarkedStories changes
+  useEffect(() => {
+    if (story && currentUser?.bookmarkedStories) {
+      setIsBookmarked(currentUser.bookmarkedStories.includes(story._id));
+    }
+  }, [currentUser?.bookmarkedStories, story?._id]);
 
   // Format date
   const formatDate = (timestamp: number) => {
@@ -121,18 +139,39 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   };
 
   // Handle interactions
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
     if (!story) return;
 
-    requireAuth(() => {
-      if (isUpvoted) {
-        downvoteStory(story._id);
-        setIsUpvoted(false);
-        setStory({ ...story, upvoteCount: story.upvoteCount - 1 });
-      } else {
-        upvoteStory(story._id);
-        setIsUpvoted(true);
-        setStory({ ...story, upvoteCount: story.upvoteCount + 1 });
+    requireAuth(async () => {
+      const currentUpvoteState = isUpvoted;
+      const currentUpvoteCount = story.upvoteCount;
+      
+      // Optimistic update
+      setIsUpvoted(!currentUpvoteState);
+      setStory({ ...story, upvoteCount: currentUpvoteState ? currentUpvoteCount - 1 : currentUpvoteCount + 1 });
+
+      try {
+        if (currentUpvoteState) {
+          // Currently upvoted, so downvote
+          await downvoteStory(story._id);
+        } else {
+          // Not upvoted, so upvote
+          await upvoteStory(story._id);
+        }
+        
+        // Get updated story from store to sync with latest data
+        const updatedStory = useStoriesStore.getState().handpickedStories.find(s => s._id === story._id) ||
+                           useStoriesStore.getState().moreStories.find(s => s._id === story._id) ||
+                           useStoriesStore.getState().bookmarkedStories.find(s => s._id === story._id);
+        
+        if (updatedStory) {
+          setStory(updatedStory);
+        }
+      } catch (error) {
+        // Revert optimistic update on error
+        setIsUpvoted(currentUpvoteState);
+        setStory({ ...story, upvoteCount: currentUpvoteCount });
+        console.error('Error handling upvote:', error);
       }
     });
   };
