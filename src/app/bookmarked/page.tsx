@@ -12,7 +12,7 @@ export default function BookmarkedPage() {
     isLoadingBookmarked,
     bookmarkedError,
     fetchBookmarkedStories,
-    unBookmarkStory,
+    removeBookmarkStory,
   } = useStoriesStore();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function BookmarkedPage() {
   };
 
   const handleRemove = (storyId: string) => {
-    unBookmarkStory(storyId);
+    removeBookmarkStory(storyId);
   };
 
   return (

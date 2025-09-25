@@ -58,7 +58,6 @@ interface StoriesState {
   addStory: (story: Story) => void;
 
   fetchBookmarkedStories: () => Promise<void>;
-  unBookmarkStory: (storyId: string) => Promise<void>;
 
   upvoteStory: (storyId: string) => Promise<void>;
   downvoteStory: (storyId: string) => Promise<void>;
@@ -184,19 +183,6 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
         bookmarkedError: error.message || "Failed to fetch bookmarked stories",
         isLoadingBookmarked: false,
       });
-    }
-  },
-
-  // Unbookmark story
-  unBookmarkStory: async (storyId: string) => {
-    try {
-      const config = getConfig();
-      await axios.delete(`${BASE_URL}user/unBookmarkStory/${storyId}`, config);
-      // remove story from local state
-      const updated = get().bookmarkedStories.filter((s) => s._id !== storyId);
-      set({ bookmarkedStories: updated });
-    } catch (error: any) {
-      console.error("Failed to unbookmark story", error.message);
     }
   },
 
