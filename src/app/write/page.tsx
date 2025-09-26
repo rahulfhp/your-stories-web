@@ -403,7 +403,7 @@ const WriteStoryPage: React.FC = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting || selectedTags.length === 0 || !coverImage || formData.title.length < 5 || formData.body.length < 500}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 backdrop-blur-md"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105"
               >
                 <CloudArrowUpIcon className="w-4 h-4 mr-2" />
                 {isSubmitting ? 'Publishing...' : 'Publish Story'}
@@ -473,13 +473,6 @@ const WriteStoryPage: React.FC = () => {
                             alt={image.alt_description || 'Unsplash image'}
                             className="w-full h-full object-cover"
                           />
-                          
-                          {/* Overlay */}
-                          <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div className="bg-blue-500 rounded-full p-2">
-                              <CheckIcon className="w-5 h-5 text-white" />
-                            </div>
-                          </div>
                         </div>
                       ))}
                     </div>
