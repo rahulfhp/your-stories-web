@@ -13,7 +13,7 @@ interface PageProps {
 const ReadStoryPageRoute: React.FC<PageProps> = ({ params }) => {
   const resolvedParams = React.use(params);
   const searchParams = useSearchParams();
-  const sourceType = searchParams.get('source') as 'handpicked' | 'more-stories' | 'search' | 'bookmarked' || 'handpicked';
+  const sourceType = searchParams.get('source') as 'handpicked' | 'more-stories' | 'search' | 'bookmarked' | 'profile' || 'handpicked';
 
   return (
     <ReadStoryPage 

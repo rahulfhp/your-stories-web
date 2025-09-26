@@ -2,6 +2,7 @@ import React from 'react';
 import { Story } from '@/stores/stories';
 import TestImage from "../../public/TestImage.svg"
 import Image from 'next/image';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface StoryCardProps {
   storyData: Story;
@@ -25,7 +26,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
   };
 
   return (
-    <div 
+    <div
       className="group relative bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl shadow-lg shadow-black/20"
       onClick={onClick}
     >
@@ -47,7 +48,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        
+
         {/* Remove Button */}
         {onRemove && (
           <button
@@ -55,9 +56,9 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute top-3 right-3 w-8 h-8 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center text-white transition-colors duration-200 backdrop-blur-md border border-white/20"
+            className="absolute top-3 right-3 group/remove p-2 bg-red-300 backdrop-blur-xl border border-red-400/40 rounded-full transition-all duration-300 scale-110 shadow-[0_8px_32px_0_rgba(239,68,68,0.3)] cursor-pointer"
           >
-            ×
+            <XMarkIcon className="w-4 h-4 text-red-400 transition-colors duration-200" />
           </button>
         )}
       </div>
@@ -75,13 +76,17 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
               />
             ) : (
               <span className="text-white text-sm font-semibold">
-                {storyData.userName?.charAt(0)?.toUpperCase() || 'U'}
+                {storyData.userName?.charAt(0)?.toUpperCase() || "U"}
               </span>
             )}
           </div>
           <div>
-            <p className="text-white/90 text-sm font-medium">{storyData.userName}</p>
-            <p className="text-white/60 text-xs">{storyData.profession || 'Storyteller'}</p>
+            <p className="text-white/90 text-sm font-medium">
+              {storyData.userName}
+            </p>
+            <p className="text-white/60 text-xs">
+              {storyData.profession || "Storyteller"}
+            </p>
           </div>
         </div>
 
@@ -93,7 +98,8 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
         {/* Story Preview */}
         {storyData.storyContent && (
           <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">
-            {storyData.storyContent.replace(/<[^>]*>/g, '').substring(0, 100)}...
+            {storyData.storyContent.replace(/<[^>]*>/g, "").substring(0, 100)}
+            ...
           </p>
         )}
 
