@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 import LoginDialog from "./LoginDialog";
 import { useAuthStore } from "@/stores/auth";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 // Types
 interface User {
@@ -72,8 +73,8 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
       "px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm";
     const variantClasses =
       buttonVariant === "outlined"
-        ? "border border-white/20 text-white/90 hover:bg-white/10 hover:border-white/30"
-        : "bg-white/20 text-white hover:bg-white/30 border border-white/10";
+        ? "border dark:border-white/20 dark:text-white/90 dark:hover:bg-white/10 dark:hover:border-white/30 border-gray-300/40 text-gray-700 hover:bg-gray-100/20 hover:border-gray-400/50"
+        : "dark:bg-white/20 dark:text-white dark:hover:bg-white/30 dark:border-white/10 bg-gray-800/20 text-gray-800 hover:bg-gray-900/30 border-gray-700/10";
 
     return (
       <button className={`${baseClasses} ${variantClasses}`} onClick={onClick}>
@@ -95,7 +96,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
 
     return (
       <div
-        className="w-8 h-8 rounded-full overflow-hidden cursor-pointer transition-all duration-300 hover:scale-110 border border-white/20 backdrop-blur-sm"
+        className="w-8 h-8 rounded-full overflow-hidden cursor-pointer transition-all duration-300 hover:scale-110 border backdrop-blur-sm dark:border-white/20 border-gray-300/30"
         onClick={onClick}
       >
         {src ? (
@@ -116,7 +117,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             }}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm">
+          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center dark:text-white text-gray-700 font-semibold text-sm">
             {getInitials(alt)}
           </div>
         )}
@@ -193,10 +194,10 @@ const Header: React.FC<HeaderProps> = ({
         {/* Backdrop blur container */}
         <div className="relative">
           {/* Background with blur effect */}
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]" />
+          <div className="absolute inset-0 backdrop-blur-xl border-b shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] dark:bg-black/20 dark:border-white/10 bg-white/20 border-black/10" />
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-gray-900/40" />
+          <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-black/30 dark:to-gray-900/40 bg-gradient-to-br from-white/30 to-blue-50/40" />
 
           {/* Content */}
           <div className="relative flex justify-between items-center w-full px-6 py-3 transition-all duration-500 ease-in-out md:px-8 lg:px-12 md:py-4">
@@ -211,24 +212,24 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center">
               {isAdminLoggedIn ? (
                 /* Admin Section */
-                <div className="flex items-center bg-gray-900/60 backdrop-blur-[10px] rounded-xl px-3 py-1.5 border border-white/10 shadow-[0_4px_16px_0_rgba(0,0,0,0.2)] transition-all duration-200 cursor-pointer hover:bg-gray-900/80 hover:-translate-y-0.5">
+                <div className="flex items-center backdrop-blur-[10px] rounded-xl px-3 py-1.5 border shadow-[0_4px_16px_0_rgba(0,0,0,0.2)] transition-all duration-200 cursor-pointer hover:-translate-y-0.5 dark:bg-gray-900/60 dark:border-white/10 dark:hover:bg-gray-900/80 bg-white/60 border-gray-300/20 hover:bg-white/80">
                   <TopBarOption
                     avatar={true}
                     alt={admin.displayName}
                     src={admin.photoURL}
                   />
                   <ChevronDownIcon
-                    className="w-4 h-4 text-white ml-2 cursor-pointer"
+                    className="w-4 h-4 ml-2 cursor-pointer dark:text-white text-gray-700"
                     onClick={handleClick}
                   />
 
                   {/* Popover */}
                   {openPopover && (
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50">
-                      <div className="bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden">
+                      <div className="backdrop-blur-xl border rounded-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden dark:bg-gray-900/80 dark:border-white/10 bg-white/80 border-gray-300/20">
                         <button
                           onClick={() => onAdminSignOut?.(router)}
-                          className="w-full px-4 py-2 text-white font-medium text-left hover:bg-white/10 transition-colors duration-200"
+                          className="w-full px-4 py-2 font-medium text-left transition-colors duration-200 dark:text-white dark:hover:bg-white/10 text-gray-700 hover:bg-gray-100/20"
                         >
                           Logout
                         </button>
@@ -239,6 +240,9 @@ const Header: React.FC<HeaderProps> = ({
               ) : (
                 /* Regular User Section */
                 <div className="flex items-center gap-3">
+                  {/* Theme Switcher */}
+                  <ThemeSwitcher />
+
                   {/* Search Icon */}
                   <Link href="/search">
                     <TopBarOption Icon={SearchIcon} />
@@ -307,4 +311,4 @@ const Header: React.FC<HeaderProps> = ({
   );
 };
 
-export default Header;
+export { Header as default };
