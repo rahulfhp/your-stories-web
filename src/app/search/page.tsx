@@ -173,7 +173,7 @@ const SearchPage: React.FC = () => {
                       }
                     `}
                   >
-                    #{tagData.tag}
+                    {tagData.tag}
                     {isSelected && (
                       <XMarkIcon className="w-4 h-4 ml-2 inline" />
                     )}
@@ -192,7 +192,7 @@ const SearchPage: React.FC = () => {
                   key={tag}
                   className="px-3 py-1 bg-white/20 text-white text-sm rounded-full backdrop-blur-md border border-white/20 flex items-center space-x-1"
                 >
-                  <span>#{tag}</span>
+                  <span>{tag}</span>
                   <button
                     onClick={() => removeTag(tag)}
                     className="hover:text-red-300 transition-colors"
