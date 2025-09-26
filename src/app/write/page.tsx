@@ -55,6 +55,7 @@ const WriteStoryPage: React.FC = () => {
 
   // Image gallery state
   const [searchQuery, setSearchQuery] = useState('');
+  const [hasSearched, setHasSearched] = useState(false);
   const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(null);
 
   // Load draft on component mount
@@ -62,12 +63,7 @@ const WriteStoryPage: React.FC = () => {
     loadDraft();
   }, [loadDraft]);
 
-  // Search for images when dialog opens or search query changes
-  useEffect(() => {
-    if (isImageGalleryOpen && searchQuery.trim()) {
-      searchImages(searchQuery);
-    }
-  }, [isImageGalleryOpen, searchQuery, searchImages]);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,13 +86,27 @@ const WriteStoryPage: React.FC = () => {
   const handleImageSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      searchImages(searchQuery);
+      setHasSearched(true);
+      searchImages(searchQuery.trim());
+    }
+  };
+
+  const handleSearchInputKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (searchQuery.trim()) {
+        setHasSearched(true);
+        searchImages(searchQuery.trim());
+      }
     }
   };
 
   const handleImageSelect = (image: UnsplashImage) => {
     setCoverImage(image);
     setImageGalleryOpen(false);
+    // Reset search state when dialog closes
+    setSearchQuery('');
+    setHasSearched(false);
   };
 
   const handleImageGalleryClose = () => {
@@ -439,14 +449,15 @@ const WriteStoryPage: React.FC = () => {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyPress={handleSearchInputKeyPress}
                       placeholder="Search for images..."
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 pl-12 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-12 py-3 pr-24 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
                     />
                     <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
                     <Button
                       type="submit"
                       disabled={isLoadingImages}
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md px-4 py-2 rounded-lg transition-all duration-300"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg transition-all duration-300 text-sm"
                     >
                       {isLoadingImages ? 'Searching...' : 'Search'}
                     </Button>
@@ -476,7 +487,7 @@ const WriteStoryPage: React.FC = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
+                  ) : hasSearched ? (
                     <div className="text-center py-12">
                       <PhotoIcon className="w-16 h-16 text-white/30 mx-auto mb-4" />
                       <p className="text-white/70 text-lg">
@@ -484,6 +495,16 @@ const WriteStoryPage: React.FC = () => {
                       </p>
                       <p className="text-white/50 text-sm mt-2">
                         Try searching for different keywords
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <PhotoIcon className="w-16 h-16 text-white/30 mx-auto mb-4" />
+                      <p className="text-white/70 text-lg">
+                        Search for images to get started
+                      </p>
+                      <p className="text-white/50 text-sm mt-2">
+                        Enter keywords and press Enter or click Search
                       </p>
                     </div>
                   )}
