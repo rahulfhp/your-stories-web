@@ -28,6 +28,11 @@ const SearchPage: React.FC = () => {
 
   const [inputValue, setInputValue] = useState('');
 
+  // Sync inputValue with searchQuery from store
+  useEffect(() => {
+    setInputValue(searchQuery || '');
+  }, [searchQuery]);
+
   useEffect(() => {
     // Check if there's a tag in the URL params
     const tagFromUrl = searchParams.get('tag');
@@ -37,21 +42,35 @@ const SearchPage: React.FC = () => {
     }
   }, [searchParams, addTag, searchByTag]);
 
+  // Handle input changes and clear searchQuery when input is empty
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    
+    // If input is cleared, also clear the searchQuery in store
+    if (!value.trim()) {
+      setSearchQuery('');
+    }
+  }, [setSearchQuery]);
+
   // Debounced search effect to prevent stuttering
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       // Perform search when tags change
       if (selectedTags.length > 0) {
-        if (searchQuery) {
+        if (searchQuery && searchQuery.trim()) {
           searchByTitleAndTagList(searchQuery, selectedTags);
         } else {
           searchByTagList(selectedTags);
         }
+      } else if (searchQuery && searchQuery.trim()) {
+        // Only search by title if there's a search query
+        searchByTitle(searchQuery);
       }
     }, 300); // 300ms debounce
 
     return () => clearTimeout(timeoutId);
-  }, [selectedTags, searchQuery, searchByTagList, searchByTitleAndTagList]);
+  }, [selectedTags, searchQuery, searchByTagList, searchByTitleAndTagList, searchByTitle]);
 
   const handleSearch = useCallback(() => {
     if (inputValue.trim()) {
@@ -120,7 +139,7 @@ const SearchPage: React.FC = () => {
                 type="text"
                 placeholder="Search stories by title..."
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className="flex-1 bg-transparent text-white placeholder-white/50 text-lg focus:outline-none"
               />
