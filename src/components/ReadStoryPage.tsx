@@ -22,7 +22,7 @@ import {
 
 interface ReadStoryPageProps {
   storyId: string;
-  sourceType: "handpicked" | "more-stories" | "search" | "bookmarked";
+  sourceType: "handpicked" | "more-stories" | "search" | "bookmarked" | "profile";
 }
 
 const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
@@ -33,6 +33,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const {
     handpickedStories,
     moreStories,
+    userStories,
     upvoteStory,
     downvoteStory,
     bookmarkStory,
@@ -82,13 +83,23 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
               .getState()
               .moreStories.find((s) => s._id === storyId);
           }
+        } else if (sourceType === "profile") {
+          foundStory = userStories.find((s) => s._id === storyId);
+          // If not found and user is logged in, fetch user stories
+          if (!foundStory && currentUser?.email) {
+            await useStoriesStore.getState().fetchUserStories(currentUser.email);
+            foundStory = useStoriesStore
+              .getState()
+              .userStories.find((s) => s._id === storyId);
+          }
         }
         // For search and bookmarked, we'll need to implement those stores later
         // For now, try to find in both existing stores as fallback
         else {
           foundStory =
             handpickedStories.find((s) => s._id === storyId) ||
-            moreStories.find((s) => s._id === storyId);
+            moreStories.find((s) => s._id === storyId) ||
+            userStories.find((s) => s._id === storyId);
         }
 
         if (foundStory) {
@@ -119,7 +130,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     };
 
     findStory();
-  }, [storyId, sourceType, handpickedStories, moreStories, currentUser?.bookmarkedStories, currentUser?.upVoteStories]);
+  }, [storyId, sourceType, handpickedStories, moreStories, userStories, currentUser?.bookmarkedStories, currentUser?.upVoteStories, currentUser?.email]);
 
   // Sync upvote state when user's upVoteStories changes
   useEffect(() => {
