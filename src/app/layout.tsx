@@ -31,7 +31,35 @@ export default function RootLayout({
       >
         <Header />
         {children}
-        <Toaster position="top-center" />
+        <Toaster 
+          position="top-center"
+          toastOptions={{
+            className: 'toast-glassmorphism',
+            duration: 4000,
+            style: {},
+            success: {
+              className: 'toast-glassmorphism toast-success',
+              iconTheme: {
+                primary: '#22c55e',
+                secondary: 'white',
+              },
+            },
+            error: {
+              className: 'toast-glassmorphism toast-error',
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: 'white',
+              },
+            },
+            loading: {
+              className: 'toast-glassmorphism toast-loading',
+              iconTheme: {
+                primary: '#3b82f6',
+                secondary: 'white',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );
