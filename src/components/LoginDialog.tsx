@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth";
 
@@ -36,6 +36,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="w-full md:max-w-md mx-auto bg-gradient-to-br from-gray-900/90 to-black/95 backdrop-blur-xl border border-white/15 rounded-3xl text-white p-8 shadow-2xl">
         <DialogHeader className="space-y-6">
+          <DialogTitle className="sr-only">Login to YourStories</DialogTitle>
           {/* Logo Section */}
           <div className="flex items-center justify-center gap-2 mt-4">
             <Image
