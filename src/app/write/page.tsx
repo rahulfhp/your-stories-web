@@ -94,12 +94,9 @@ const WriteStoryPage: React.FC = () => {
     }
   };
 
-  const handleImageSelect = () => {
-    if (selectedImage) {
-      setCoverImage(selectedImage);
-      setImageGalleryOpen(false);
-      setSelectedImage(null);
-    }
+  const handleImageSelect = (image: UnsplashImage) => {
+    setCoverImage(image);
+    setImageGalleryOpen(false);
   };
 
   const handleImageGalleryClose = () => {
@@ -397,7 +394,7 @@ const WriteStoryPage: React.FC = () => {
                 type="button"
                 onClick={handleSaveDraft}
                 disabled={isSavingDraft}
-                className="bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105"
               >
                 <BookmarkIcon className="w-4 h-4 mr-2" />
                 {isSavingDraft ? 'Saving...' : 'Save Draft'}
@@ -406,7 +403,7 @@ const WriteStoryPage: React.FC = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting || selectedTags.length === 0 || !coverImage || formData.title.length < 5 || formData.body.length < 500}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 backdrop-blur-md"
               >
                 <CloudArrowUpIcon className="w-4 h-4 mr-2" />
                 {isSubmitting ? 'Publishing...' : 'Publish Story'}
@@ -468,14 +465,8 @@ const WriteStoryPage: React.FC = () => {
                       {unsplashImages.map((image: UnsplashImage) => (
                         <div
                           key={image.id}
-                          onClick={() => setSelectedImage(image)}
-                          className={`
-                            relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 aspect-square
-                            ${selectedImage?.id === image.id 
-                              ? 'ring-4 ring-blue-400 shadow-lg shadow-blue-400/50' 
-                              : 'hover:shadow-lg'
-                            }
-                          `}
+                          onClick={() => handleImageSelect(image)}
+                          className="relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 aspect-square hover:shadow-lg"
                         >
                           <img
                             src={image.urls.small}
@@ -485,11 +476,9 @@ const WriteStoryPage: React.FC = () => {
                           
                           {/* Overlay */}
                           <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                            {selectedImage?.id === image.id && (
-                              <div className="bg-blue-500 rounded-full p-2">
-                                <CheckIcon className="w-5 h-5 text-white" />
-                              </div>
-                            )}
+                            <div className="bg-blue-500 rounded-full p-2">
+                              <CheckIcon className="w-5 h-5 text-white" />
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -506,44 +495,6 @@ const WriteStoryPage: React.FC = () => {
                     </div>
                   )}
                 </div>
-
-                {/* Selected Image Preview & Actions */}
-                {selectedImage && (
-                  <div className="mt-6 pt-6 border-t border-white/20">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <img
-                          src={selectedImage.urls.thumb}
-                          alt={selectedImage.alt_description || 'Selected image'}
-                          className="w-16 h-16 object-cover rounded-lg"
-                        />
-                        <div>
-                          <p className="text-white font-medium">
-                            Selected Image
-                          </p>
-                          <p className="text-white/70 text-sm">
-                            {selectedImage.user.name} on Unsplash
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex space-x-3">
-                        <Button
-                          onClick={() => setSelectedImage(null)}
-                          className="bg-white/20 hover:bg-white/30 text-white border border-white/20"
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={handleImageSelect}
-                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0"
-                        >
-                          Use This Image
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             </DialogContent>
           </Dialog>
