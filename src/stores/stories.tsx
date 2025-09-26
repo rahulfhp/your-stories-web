@@ -52,12 +52,18 @@ interface StoriesState {
   isLoadingBookmarked: boolean;
   bookmarkedError: string | null;
 
+  // User's created stories
+  userStories: Story[];
+  isLoadingUserStories: boolean;
+  userStoriesError: string | null;
+
   // Actions
   fetchHandpickedStories: () => Promise<void>;
   fetchMoreStories: (limit: number, skip: number) => Promise<void>;
   addStory: (story: Story) => void;
 
   fetchBookmarkedStories: () => Promise<void>;
+  fetchUserStories: (userEmail: string) => Promise<void>;
 
   upvoteStory: (storyId: string) => Promise<void>;
   downvoteStory: (storyId: string) => Promise<void>;
@@ -102,6 +108,11 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   bookmarkedStories: [],
   isLoadingBookmarked: false,
   bookmarkedError: null,
+
+  // User's created stories initial state
+  userStories: [],
+  isLoadingUserStories: false,
+  userStoriesError: null,
 
   // Fetch handpicked stories
   fetchHandpickedStories: async () => {
@@ -183,6 +194,27 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       set({
         bookmarkedError: error.message || "Failed to fetch bookmarked stories",
         isLoadingBookmarked: false,
+      });
+    }
+  },
+
+  // Fetch user's created stories
+  fetchUserStories: async (userEmail: string) => {
+    set({ isLoadingUserStories: true, userStoriesError: null });
+    try {
+      const config = getConfig();
+      const response = await axios.get<StoriesResponse>(
+        `${BASE_URL}profileStories/get/${userEmail}`,
+        config
+      );
+      set({
+        userStories: response.data.Stories,
+        isLoadingUserStories: false,
+      });
+    } catch (error: any) {
+      set({
+        userStoriesError: error.message || "Failed to fetch user stories",
+        isLoadingUserStories: false,
       });
     }
   },
