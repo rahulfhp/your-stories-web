@@ -437,18 +437,18 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                         </button>
                       )}
 
-                      {/* Twitter Link */}
+                      {/* X (Twitter) Link */}
                       {story.twitterLink && (
                         <button
                           onClick={() => {
                             const twitterUrl = `https://twitter.com/${story.twitterLink}`;
                             window.open(twitterUrl, '_blank', 'noopener,noreferrer');
                           }}
-                          className="group w-7 h-7 bg-white/10 hover:bg-sky-500/80 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
-                          title={`Twitter: @${story.twitterLink}`}
+                          className="group w-7 h-7 bg-white/10 hover:bg-black/80 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                          title={`X (Twitter): @${story.twitterLink}`}
                         >
-                          <svg className="w-3.5 h-3.5 text-white/70 group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                          <svg className="w-3.5 h-3.5 text-white/70 group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
                           </svg>
                         </button>
                       )}
