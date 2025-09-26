@@ -54,7 +54,7 @@ const WriteStoryPage: React.FC = () => {
   } = useWriteStoryStore();
 
   // Image gallery state
-  const [searchQuery, setSearchQuery] = useState('nature');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(null);
 
   // Load draft on component mount
@@ -439,7 +439,7 @@ const WriteStoryPage: React.FC = () => {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search for images... (e.g., nature, technology, business)"
+                      placeholder="Search for images..."
                       className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 pl-12 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
                     />
                     <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
