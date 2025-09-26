@@ -117,7 +117,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             }}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center dark:text-white text-gray-700 font-semibold text-sm">
+          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center dark:text-white text-white font-semibold text-sm">
             {getInitials(alt)}
           </div>
         )}
@@ -128,10 +128,12 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   if (Icon) {
     return (
       <div
-        className="p-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-110 hover:bg-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20"
+        className="p-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-110 backdrop-blur-sm border transition-colors
+                   dark:hover:bg-white/10 dark:border-white/10 dark:hover:border-white/20
+                   hover:bg-gray-100/20 border-gray-300/20 hover:border-gray-400/30"
         onClick={onClick}
       >
-        <Icon className="w-5 h-5 text-white/90" />
+        <Icon className="w-5 h-5 dark:text-white/90 text-gray-700 transition-colors" />
       </div>
     );
   }
