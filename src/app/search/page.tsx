@@ -132,7 +132,7 @@ const SearchPage: React.FC = () => {
         {/* Search Section */}
         <div className="max-w-4xl mx-auto mb-8">
           {/* Search Input */}
-          <div className="bg-gray-200/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/60 dark:border-white/20 rounded-2xl p-6 mb-6 hover:bg-gray-300/90 dark:hover:bg-white/15 transition-all duration-300">
+          <div className="bg-white/90 dark:bg-white/10 backdrop-blur-xl border border-gray-300/80 dark:border-white/20 rounded-2xl p-6 mb-6 hover:bg-white/95 dark:hover:bg-white/15 transition-all duration-300 shadow-lg dark:shadow-none">
             <div className="flex items-center space-x-4">
               <MagnifyingGlassIcon className="w-6 h-6 text-gray-600 dark:text-white/70 flex-shrink-0" />
               <input
@@ -153,7 +153,7 @@ const SearchPage: React.FC = () => {
           </div>
 
           {/* Tags Section */}
-          <div className="bg-gray-200/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/60 dark:border-white/20 rounded-2xl p-6 hover:bg-gray-300/90 dark:hover:bg-white/15 transition-all duration-300">
+            <div className="bg-white/90 dark:bg-white/10 backdrop-blur-xl border border-gray-300/80 dark:border-white/20 rounded-2xl p-6 hover:bg-white/95 dark:hover:bg-white/15 transition-all duration-300 shadow-lg dark:shadow-none">
             <h3 className="text-gray-800 dark:text-white font-semibold text-lg mb-4 flex items-center">
               <span className="mr-2">🏷️</span>
               Filter by Tags
@@ -172,7 +172,11 @@ const SearchPage: React.FC = () => {
                       borderColor: isSelected 
                         ? tagData.color 
                         : `${tagData.color}40`, // 40% opacity for border
-                      color: isSelected ? '#000000' : (tagData.color === '#FFFFFF' || tagData.color === '#ffffff') ? '#000000' : '#ffffff',
+                      color: isSelected 
+                        ? '#000000' 
+                        : (tagData.color === '#FFFFFF' || tagData.color === '#ffffff') 
+                          ? '#000000' 
+                          : tagData.color,
                       boxShadow: isSelected 
                         ? `0 4px 20px ${tagData.color}40` 
                         : 'none'
