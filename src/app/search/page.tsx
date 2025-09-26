@@ -165,13 +165,37 @@ const SearchPage: React.FC = () => {
                   <button
                     key={tagData.tag}
                     onClick={() => handleTagClick(tagData.tag)}
+                    style={{
+                      backgroundColor: isSelected 
+                        ? tagData.color 
+                        : `${tagData.color}20`, // 20% opacity for unselected
+                      borderColor: isSelected 
+                        ? tagData.color 
+                        : `${tagData.color}40`, // 40% opacity for border
+                      color: isSelected ? '#000000' : '#ffffff',
+                      boxShadow: isSelected 
+                        ? `0 4px 20px ${tagData.color}40` 
+                        : 'none'
+                    }}
                     className={`
-                      px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border
+                      px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                       ${isSelected 
-                        ? 'text-white border-white/30 shadow-lg bg-white/20' 
-                        : 'text-white/80 border-white/20 hover:border-white/40 bg-white/10 hover:bg-white/15'
+                        ? 'shadow-lg font-semibold transform hover:scale-110' 
+                        : 'hover:shadow-md hover:brightness-125'
                       }
                     `}
+                    onMouseEnter={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.backgroundColor = `${tagData.color}35`;
+                        e.currentTarget.style.borderColor = `${tagData.color}60`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.backgroundColor = `${tagData.color}20`;
+                        e.currentTarget.style.borderColor = `${tagData.color}40`;
+                      }
+                    }}
                   >
                     {tagData.tag}
                     {isSelected && (
@@ -187,20 +211,30 @@ const SearchPage: React.FC = () => {
           {selectedTags.length > 0 && (
             <div className="mt-4 flex items-center space-x-2">
               <span className="text-white/70 text-sm">Selected:</span>
-              {selectedTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 bg-white/20 text-white text-sm rounded-full backdrop-blur-md border border-white/20 flex items-center space-x-1"
-                >
-                  <span>{tag}</span>
-                  <button
-                    onClick={() => removeTag(tag)}
-                    className="hover:text-red-300 transition-colors"
+              {selectedTags.map((tag) => {
+                const tagData = memoizedTags.find(t => t.tag === tag);
+                const tagColor = tagData?.color || '#6B7280';
+                return (
+                  <span
+                    key={tag}
+                    style={{
+                      backgroundColor: tagColor,
+                      borderColor: tagColor,
+                      color: '#000000',
+                      boxShadow: `0 2px 10px ${tagColor}30`
+                    }}
+                    className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium"
                   >
-                    <XMarkIcon className="w-3 h-3" />
-                  </button>
-                </span>
-              ))}
+                    <span>{tag}</span>
+                    <button
+                      onClick={() => removeTag(tag)}
+                      className="hover:text-red-600 transition-colors"
+                    >
+                      <XMarkIcon className="w-3 h-3" />
+                    </button>
+                  </span>
+                );
+              })}
               <button
                 onClick={() => selectedTags.forEach(tag => removeTag(tag))}
                 className="text-white/50 hover:text-white text-sm transition-colors"
