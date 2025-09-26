@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import useSearchStore, { TAGS_WITH_COLOR } from '@/stores/search';
@@ -37,18 +37,23 @@ const SearchPage: React.FC = () => {
     }
   }, [searchParams, addTag, searchByTag]);
 
+  // Debounced search effect to prevent stuttering
   useEffect(() => {
-    // Perform search when tags change
-    if (selectedTags.length > 0) {
-      if (searchQuery) {
-        searchByTitleAndTagList(searchQuery, selectedTags);
-      } else {
-        searchByTagList(selectedTags);
+    const timeoutId = setTimeout(() => {
+      // Perform search when tags change
+      if (selectedTags.length > 0) {
+        if (searchQuery) {
+          searchByTitleAndTagList(searchQuery, selectedTags);
+        } else {
+          searchByTagList(selectedTags);
+        }
       }
-    }
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(timeoutId);
   }, [selectedTags, searchQuery, searchByTagList, searchByTitleAndTagList]);
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     if (inputValue.trim()) {
       setSearchQuery(inputValue.trim());
       if (selectedTags.length > 0) {
@@ -57,30 +62,33 @@ const SearchPage: React.FC = () => {
         searchByTitle(inputValue.trim());
       }
     }
-  };
+  }, [inputValue, selectedTags, setSearchQuery, searchByTitleAndTagList, searchByTitle]);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
-  };
+  }, [handleSearch]);
 
-  const handleTagClick = (tag: string) => {
+  const handleTagClick = useCallback((tag: string) => {
     if (selectedTags.includes(tag)) {
       removeTag(tag);
     } else {
       addTag(tag);
     }
-  };
+  }, [selectedTags, removeTag, addTag]);
 
-  const handleStoryClick = (storyId: string) => {
+  const handleStoryClick = useCallback((storyId: string) => {
     router.push(`/read/${storyId}?source=search`);
-  };
+  }, [router]);
 
-  const getTagColor = (tag: string) => {
+  const getTagColor = useCallback((tag: string) => {
     const tagData = TAGS_WITH_COLOR.find(t => t.tag === tag);
     return tagData?.color || '#6B7280';
-  };
+  }, []);
+
+  // Memoize tag data to prevent re-renders
+  const memoizedTags = useMemo(() => TAGS_WITH_COLOR, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
@@ -91,7 +99,7 @@ const SearchPage: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
@@ -132,7 +140,7 @@ const SearchPage: React.FC = () => {
               Filter by Tags
             </h3>
             <div className="flex flex-wrap gap-3">
-              {TAGS_WITH_COLOR.map((tagData) => {
+              {memoizedTags.map((tagData) => {
                 const isSelected = selectedTags.includes(tagData.tag);
                 return (
                   <button
@@ -141,14 +149,10 @@ const SearchPage: React.FC = () => {
                     className={`
                       px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border
                       ${isSelected 
-                        ? 'text-white border-white/40 shadow-lg' 
-                        : 'text-white/80 border-white/20 hover:border-white/40'
+                        ? 'text-white border-white/30 shadow-lg bg-white/20' 
+                        : 'text-white/80 border-white/20 hover:border-white/40 bg-white/10 hover:bg-white/15'
                       }
                     `}
-                    style={{
-                      backgroundColor: isSelected ? tagData.color : 'rgba(255, 255, 255, 0.1)',
-                      borderColor: isSelected ? tagData.color : undefined,
-                    }}
                   >
                     #{tagData.tag}
                     {isSelected && (
