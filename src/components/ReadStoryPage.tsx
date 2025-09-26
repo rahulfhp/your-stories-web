@@ -37,11 +37,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     downvoteStory,
     bookmarkStory,
     removeBookmarkStory,
+    readStory,
   } = useStoriesStore();
-
-  const requireAuth = useAuthStore((s) => s.requireAuth);
+  
+  const { currentUser, requireAuth } = useAuthStore();
   const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
-  const currentUser = useAuthStore((s) => s.currentUser);
 
   // State management
   const [story, setStory] = useState<Story | null>(null);
@@ -50,6 +50,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
+  
+  // Timer state for read tracking
+  const [readTimer, setReadTimer] = useState(0);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [hasMarkedAsRead, setHasMarkedAsRead] = useState(false);
 
   // Find story based on ID and source type
   useEffect(() => {
@@ -96,6 +101,15 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
           if (currentUser?.upVoteStories) {
             setIsUpvoted(currentUser.upVoteStories.includes(foundStory._id));
           }
+          // Start the read timer when story is loaded
+          setIsTimerActive(true);
+          setReadTimer(0);
+          
+          // Check if story is already marked as read
+          if (currentUser?.readStories && currentUser.readStories.includes(foundStory._id)) {
+            setHasMarkedAsRead(true);
+            setIsTimerActive(false);
+          }
         }
       } catch (error) {
         console.error("Error fetching story:", error);
@@ -112,7 +126,49 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     if (story && currentUser?.upVoteStories) {
       setIsUpvoted(currentUser.upVoteStories.includes(story._id));
     }
-  }, [currentUser?.upVoteStories, story?._id]);
+  }, [currentUser?.bookmarkedStories, story?._id]);
+
+  // Timer logic for read tracking (15 seconds)
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (isTimerActive && readTimer < 15) {
+      interval = setInterval(() => {
+        setReadTimer(prev => prev + 1);
+      }, 1000);
+    } else if (readTimer >= 15 && !hasMarkedAsRead && currentUser && story) {
+      // Timer completed, mark story as read
+      handleMarkAsRead();
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isTimerActive, readTimer, hasMarkedAsRead, currentUser, story]);
+
+  // Handle marking story as read
+  const handleMarkAsRead = async () => {
+    if (!currentUser || !story || hasMarkedAsRead) return;
+
+    try {
+      // Check if story is already in readStories to avoid duplicate API calls
+      const currentReadStories = currentUser.readStories || [];
+      if (!currentReadStories.includes(story._id)) {
+        // Call the store's readStory function
+        await readStory(story._id);
+        setHasMarkedAsRead(true);
+        setIsTimerActive(false);
+      } else {
+        // Story already marked as read
+        setHasMarkedAsRead(true);
+        setIsTimerActive(false);
+      }
+    } catch (error) {
+      console.error('Error marking story as read:', error);
+    }
+  };
 
   // Sync bookmark state when user's bookmarkedStories changes
   useEffect(() => {

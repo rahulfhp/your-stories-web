@@ -32,6 +32,8 @@ interface AuthState {
   accessToken: string | null;
   // Update user data in localStorage
   updateUserInLocalStorage: (updatedUser: BackendUserProfile) => void;
+  // Add story to read list
+  addToReadStories: (storyId: string) => void;
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -128,6 +130,22 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ currentUser: updatedUser });
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('ys_auth_user', JSON.stringify(updatedUser));
+    }
+  },
+
+  addToReadStories: (storyId: string) => {
+    const { currentUser } = useAuthStore.getState();
+    if (currentUser) {
+      // Check if story is already in readStories to avoid duplicates
+      const currentReadStories = currentUser.readStories || [];
+      if (!currentReadStories.includes(storyId)) {
+        const updatedReadStories = [...currentReadStories, storyId];
+        const updatedUser = {
+          ...currentUser,
+          readStories: updatedReadStories
+        };
+        useAuthStore.getState().updateUserInLocalStorage(updatedUser);
+      }
     }
   },
 }));

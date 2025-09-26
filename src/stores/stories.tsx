@@ -63,6 +63,7 @@ interface StoriesState {
   downvoteStory: (storyId: string) => Promise<void>;
   bookmarkStory: (storyId: string) => Promise<void>;
   removeBookmarkStory: (storyId: string) => Promise<void>;
+  readStory: (storyId: string) => Promise<void>;
 
   clearErrors: () => void;
 }
@@ -356,6 +357,38 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       }
     } catch (err) {
       console.error(err);
+    }
+  },
+
+  readStory: async (storyId) => {
+    const userId = get().userId;
+    const { currentUser, addToReadStories } = useAuthStore.getState();
+    
+    if (!userId || !currentUser) {
+      toast.error("Please login to track reading progress");
+      return;
+    }
+
+    try {
+      // Check if story is already in readStories to avoid duplicate API calls
+      const currentReadStories = currentUser.readStories || [];
+      if (currentReadStories.includes(storyId)) {
+        return; // Already marked as read
+      }
+
+      const config = getConfig();
+      const res = await axios.put(
+        `${BASE_URL}user/updateReadList/${userId}/${storyId}`,
+        {}, // no body, backend handles user via session
+        config
+      );
+
+      if (res.data?.type === "success") {
+        // Update user's readStories in localStorage through auth store
+        addToReadStories(storyId);
+      }
+    } catch (error) {
+      // console.error("Error marking story as read:", error);
     }
   },
 
