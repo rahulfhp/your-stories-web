@@ -121,7 +121,7 @@ const SearchPage: React.FC = () => {
       <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text">
             Search Stories
           </h1>
           <p className="text-white/70 text-lg">
