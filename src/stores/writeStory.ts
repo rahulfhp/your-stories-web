@@ -332,7 +332,7 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
             userName: user.displayName || '',
           };
 
-          await axios.post(`${BASE_URL}/createStory/create`, storyData, getConfig());
+          await axios.post(`${BASE_URL}createStory/create`, storyData, getConfig());
           
           toast.success('Your story has been submitted successfully!');
           

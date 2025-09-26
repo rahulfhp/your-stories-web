@@ -412,6 +412,7 @@ const WriteStoryPage: React.FC = () => {
               
               <Button
                 type="submit"
+                onClick={handleSubmit}
                 disabled={isSubmitting || selectedTags.length === 0 || !coverImage || formData.title.length < 5 || formData.body.length < 500}
                 className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105"
               >
