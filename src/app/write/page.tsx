@@ -139,8 +139,8 @@ const WriteStoryPage: React.FC = () => {
           </div>
 
           {/* Main Form */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-2xl space-y-0">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 mb-6">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-2xl space-y-8">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
               <input
                 type="text"
                 placeholder="Your Story Title..."
@@ -157,7 +157,7 @@ const WriteStoryPage: React.FC = () => {
 
             {/* Story Body */}
             {visibleSections.body && (
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 mb-6">
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
                 <textarea
                   placeholder="Tell your story... (minimum 500 characters)"
                   value={formData.body}
@@ -176,7 +176,7 @@ const WriteStoryPage: React.FC = () => {
 
             {/* Cover Image */}
             {visibleSections.coverImage && (
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 mb-6">
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
                 {coverImage ? (
                   <div className="relative">
                     <img
@@ -416,7 +416,7 @@ const WriteStoryPage: React.FC = () => {
 
           {/* Image Gallery Dialog */}
           <Dialog open={isImageGalleryOpen} onOpenChange={handleImageGalleryClose}>
-            <DialogContent className="max-w-6xl max-h-[90vh] bg-white/10 backdrop-blur-xl border border-white/20 text-white overflow-hidden">
+            <DialogContent className="max-w-6xl max-h-[90vh] bg-white/10 backdrop-blur-xl border border-white/20 text-white overflow-hidden z-[9999]">
               <DialogTitle className="sr-only">
                 Select Cover Image
               </DialogTitle>
