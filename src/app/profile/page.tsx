@@ -59,7 +59,7 @@ const ProfilePage: React.FC = () => {
           {/* Left column: Avatar + About + Logout */}
           <div className="lg:col-span-1">
             <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/15 rounded-2xl p-4 sm:p-6 shadow-lg shadow-gray-400/20 dark:shadow-black/20">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 relative rounded-xl overflow-hidden bg-purple-600/60 flex items-center justify-center mx-auto">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 relative rounded-xl overflow-hidden bg-sky-500/60 flex items-center justify-center mx-auto">
                 {user?.photoURL ? (
                   <Image
                   src={user?.photoURL}

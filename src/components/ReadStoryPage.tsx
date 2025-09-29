@@ -329,7 +329,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
           </p>
           <button
             onClick={handleBack}
-            className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-purple-600/80 hover:bg-purple-600 text-white rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 text-sm sm:text-base"
+            className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-sky-500/80 hover:bg-sky-500 text-white rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 text-sm sm:text-base"
           >
             Go Back
           </button>
@@ -389,7 +389,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
             {/* Author Info */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
               <div className="flex items-center space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center flex-shrink-0">
                   {story.profilePicRef ? (
                     <Image
                       src={story.profilePicRef}
@@ -454,7 +454,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                               "noopener,noreferrer"
                             );
                           }}
-                          className="group w-6 h-6 sm:w-7 sm:h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-gradient-to-br hover:from-purple-600/80 hover:to-pink-600/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                          className="group w-6 h-6 sm:w-7 sm:h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-gradient-to-br hover:from-sky-500/80 hover:to-pink-500/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
                           title={`Instagram: @${story.instagramLink}`}
                         >
                           <svg
@@ -573,7 +573,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
             <button
               onClick={handleShare}
-              className="group flex items-center justify-center space-x-2 w-full sm:w-auto px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="group flex items-center justify-center space-x-2 w-full sm:w-auto px-4 sm:px-6 py-3 bg-gradient-to-r from-sky-500/80 to-blue-600/80 hover:from-sky-500 hover:to-blue-600 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
               <ShareIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:scale-110 transition-transform duration-200" />
               <span className="text-sm sm:text-base text-white font-medium">Share</span>

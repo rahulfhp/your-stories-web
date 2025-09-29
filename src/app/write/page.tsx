@@ -128,7 +128,7 @@ const WriteStoryPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-48 h-48 sm:w-80 sm:h-80 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -right-40 w-48 h-48 sm:w-80 sm:h-80 bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-48 h-48 sm:w-80 sm:h-80 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-pink-500/5 dark:bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
@@ -137,7 +137,7 @@ const WriteStoryPage: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-6 sm:mb-8 px-4 sm:px-0">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 bg-gradient-to-r from-gray-800 via-purple-600 to-gray-800 dark:from-white dark:via-purple-200 dark:to-white bg-clip-text">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 bg-gradient-to-r from-gray-800 via-sky-500 to-gray-800 dark:from-white dark:via-sky-200 dark:to-white bg-clip-text">
               Share Your Story
             </h1>
             <p className="text-gray-600 dark:text-white/70 text-base sm:text-lg px-4 sm:px-0">

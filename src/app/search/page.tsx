@@ -115,13 +115,13 @@ const SearchPage: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-purple-400/15 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-sky-400/15 dark:bg-sky-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-2 sm:px-3 lg:px-4 xl:px-6 pt-20 sm:pt-24 pb-6 sm:pb-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 bg-gradient-to-r from-gray-800 via-purple-600 to-gray-800 dark:from-white dark:via-purple-200 dark:to-white bg-clip-text">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 bg-gradient-to-r from-gray-800 via-sky-500 to-gray-800 dark:from-white dark:via-sky-200 dark:to-white bg-clip-text">
             Search Stories
           </h1>
           <p className="text-gray-600 dark:text-white/70 text-base sm:text-lg">

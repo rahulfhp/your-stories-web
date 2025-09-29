@@ -67,7 +67,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
       <div className="p-4 space-y-3">
         {/* Author Info */}
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center">
             {storyData.profilePicRef ? (
               <img
                 src={storyData.profilePicRef}
@@ -91,7 +91,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
         </div>
 
         {/* Story Title */}
-        <h3 className="text-gray-900 dark:text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-purple-200 transition-colors duration-200">
+        <h3 className="text-gray-900 dark:text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-sky-200 transition-colors duration-200">
           {storyData.storyTitle}
         </h3>
 

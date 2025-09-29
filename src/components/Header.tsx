@@ -120,7 +120,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
               const parent = (e.target as HTMLImageElement).parentElement;
               if (parent) {
                 const fallbackDiv = document.createElement('div');
-                fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
+                fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
                 if (initials) {
                   fallbackDiv.textContent = initials;
                 } else {
@@ -132,7 +132,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             }}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center dark:text-white text-white font-semibold text-sm">
+          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center dark:text-white text-white font-semibold text-sm">
             {initials ? initials : <UserIcon className="w-4 h-4" />}
           </div>
         )}
