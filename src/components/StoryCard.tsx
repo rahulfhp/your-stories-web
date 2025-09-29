@@ -27,7 +27,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
 
   return (
     <div
-      className="group relative bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl shadow-lg shadow-black/20"
+      className="group relative bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl overflow-hidden hover:bg-gray-200/90 dark:hover:bg-white/10 hover:border-gray-400/60 dark:hover:border-white/30 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl shadow-lg shadow-gray-400/20 dark:shadow-black/20"
       onClick={onClick}
     >
       {/* Story Cover Image */}
@@ -47,7 +47,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             fill
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 dark:from-black/60 via-transparent to-transparent" />
 
         {/* Remove Button */}
         {onRemove && (
@@ -81,30 +81,30 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             )}
           </div>
           <div>
-            <p className="text-white/90 text-sm font-medium">
+            <p className="text-gray-800 dark:text-white/90 text-sm font-medium">
               {storyData.userName}
             </p>
-            <p className="text-white/60 text-xs">
+            <p className="text-gray-600 dark:text-white/60 text-xs">
               {storyData.profession || "Storyteller"}
             </p>
           </div>
         </div>
 
         {/* Story Title */}
-        <h3 className="text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-purple-200 transition-colors duration-200">
+        <h3 className="text-gray-900 dark:text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-purple-200 transition-colors duration-200">
           {storyData.storyTitle}
         </h3>
 
         {/* Story Preview */}
         {storyData.storyContent && (
-          <p className="text-white/70 text-sm line-clamp-2 leading-relaxed">
+          <p className="text-gray-700 dark:text-white/70 text-sm line-clamp-2 leading-relaxed">
             {storyData.storyContent.replace(/<[^>]*>/g, "").substring(0, 100)}
             ...
           </p>
         )}
 
         {/* Story Meta */}
-        <div className="flex items-center justify-between text-white/60 text-xs">
+        <div className="flex items-center justify-between text-gray-600 dark:text-white/60 text-xs">
           <div className="flex items-center space-x-4">
             <span>{formatDate(storyData.publishDate)}</span>
             <span>•</span>
@@ -132,13 +132,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             {storyData.tagList.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-white/15 text-white/80 text-xs rounded-full backdrop-blur-md border border-white/20"
+                className="px-2 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-700 dark:text-white/80 text-xs rounded-full backdrop-blur-md border border-gray-300/50 dark:border-white/20"
               >
                 #{tag}
               </span>
             ))}
             {storyData.tagList.length > 3 && (
-              <span className="px-2 py-1 bg-white/15 text-white/60 text-xs rounded-full backdrop-blur-md border border-white/20">
+              <span className="px-2 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-600 dark:text-white/60 text-xs rounded-full backdrop-blur-md border border-gray-300/50 dark:border-white/20">
                 +{storyData.tagList.length - 3}
               </span>
             )}

@@ -43,12 +43,12 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/2 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 py-8 pt-24 relative z-10">
@@ -56,15 +56,15 @@ export default function Home() {
           {/* Handpicked Stories Section */}
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white/90">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white/90">
                 ✨ Handpicked Stories
               </h2>
-              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-white/30 to-transparent rounded"></div>
+              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-gray-400/40 dark:from-white/30 to-transparent rounded"></div>
             </div>
             
             {handpickedError && (
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
-                <p className="text-red-400 text-sm">
+              <div className="bg-red-100 dark:bg-red-500/10 border border-red-300 dark:border-red-500/30 rounded-lg p-4 mb-6">
+                <p className="text-red-700 dark:text-red-400 text-sm">
                   Failed to load handpicked stories: {handpickedError}
                 </p>
               </div>
@@ -74,17 +74,17 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, index) => (
                   <div key={index} className="animate-pulse">
-                    <div className="bg-white/10 rounded-2xl p-4">
-                      <div className="bg-white/20 h-[150px] rounded-xl mb-3"></div>
+                    <div className="bg-gray-200/60 dark:bg-white/10 rounded-2xl p-4">
+                      <div className="bg-gray-300/80 dark:bg-white/20 h-[150px] rounded-xl mb-3"></div>
                       <div className="space-y-3">
                         <div className="flex items-center space-x-2">
-                          <div className="bg-white/20 w-6 h-6 rounded-full"></div>
-                          <div className="bg-white/20 h-3 w-24 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 w-6 h-6 rounded-full"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-24 rounded"></div>
                         </div>
-                        <div className="bg-white/20 h-4 w-3/4 rounded"></div>
+                        <div className="bg-gray-300/80 dark:bg-white/20 h-4 w-3/4 rounded"></div>
                         <div className="flex space-x-4">
-                          <div className="bg-white/20 h-3 w-20 rounded"></div>
-                          <div className="bg-white/20 h-3 w-16 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-20 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-16 rounded"></div>
                         </div>
                       </div>
                     </div>
@@ -105,7 +105,7 @@ export default function Home() {
             
             {!isLoadingHandpicked && (!handpickedStories || handpickedStories.length === 0) && !handpickedError && (
               <div className="text-center py-12">
-                <p className="text-white/60 text-lg">No handpicked stories available at the moment.</p>
+                <p className="text-gray-600 dark:text-white/60 text-lg">No handpicked stories available at the moment.</p>
               </div>
             )}
           </section>
@@ -113,15 +113,15 @@ export default function Home() {
           {/* More Stories Section */}
           <section>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white/90">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white/90">
                 📚 More Stories
               </h2>
-              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-white/20 to-transparent rounded"></div>
+              <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-gray-400/30 dark:from-white/20 to-transparent rounded"></div>
             </div>
             
             {moreStoriesError && (
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
-                <p className="text-red-400 text-sm">
+              <div className="bg-red-100 dark:bg-red-500/10 border border-red-300 dark:border-red-500/30 rounded-lg p-4 mb-6">
+                <p className="text-red-700 dark:text-red-400 text-sm">
                   Failed to load more stories: {moreStoriesError}
                 </p>
               </div>
@@ -141,17 +141,17 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 {[...Array(3)].map((_, index) => (
                   <div key={index} className="animate-pulse">
-                    <div className="bg-white/10 rounded-2xl p-4">
-                      <div className="bg-white/20 h-[150px] rounded-xl mb-3"></div>
+                    <div className="bg-gray-200/60 dark:bg-white/10 rounded-2xl p-4">
+                      <div className="bg-gray-300/80 dark:bg-white/20 h-[150px] rounded-xl mb-3"></div>
                       <div className="space-y-3">
                         <div className="flex items-center space-x-2">
-                          <div className="bg-white/20 w-6 h-6 rounded-full"></div>
-                          <div className="bg-white/20 h-3 w-24 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 w-6 h-6 rounded-full"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-24 rounded"></div>
                         </div>
-                        <div className="bg-white/20 h-4 w-3/4 rounded"></div>
+                        <div className="bg-gray-300/80 dark:bg-white/20 h-4 w-3/4 rounded"></div>
                         <div className="flex space-x-4">
-                          <div className="bg-white/20 h-3 w-20 rounded"></div>
-                          <div className="bg-white/20 h-3 w-16 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-20 rounded"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 w-16 rounded"></div>
                         </div>
                       </div>
                     </div>
@@ -162,7 +162,7 @@ export default function Home() {
             
             {!isLoadingMore && (!moreStories || moreStories.length === 0) && !moreStoriesError && (
               <div className="text-center py-12">
-                <p className="text-white/60 text-lg">No more stories available at the moment.</p>
+                <p className="text-gray-600 dark:text-white/60 text-lg">No more stories available at the moment.</p>
               </div>
             )}
             
@@ -171,7 +171,7 @@ export default function Home() {
               <div className="text-center mt-8">
                 <button
                   onClick={handleLoadMoreStories}
-                  className="bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 hover:border-white/30 text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+                  className="bg-gray-200/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:border-gray-400/70 dark:hover:border-white/30 text-gray-800 dark:text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
                 >
                   Load More Stories
                 </button>
