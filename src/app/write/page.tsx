@@ -315,43 +315,15 @@ const WriteStoryPage: React.FC = () => {
                       type="button"
                       onClick={() => isSelected ? removeTag(tagData.tag) : addTag(tagData.tag)}
                       disabled={isDisabled}
-                      style={{
-                        backgroundColor: isSelected 
-                          ? tagData.color 
-                          : isDisabled 
-                          ? 'rgba(255, 255, 255, 0.05)' 
-                          : `${tagData.color}20`,
-                        borderColor: isSelected 
-                          ? tagData.color 
-                          : isDisabled 
-                          ? 'rgba(255, 255, 255, 0.1)' 
-                          : `${tagData.color}40`,
-                        color: isSelected ? '#000000' : isDisabled ? 'rgba(255, 255, 255, 0.3)' : '#ffffff',
-                        boxShadow: isSelected 
-                          ? `0 4px 20px ${tagData.color}40` 
-                          : 'none'
-                      }}
                       className={`
                         px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                         ${isSelected 
-                          ? 'shadow-lg font-semibold transform hover:scale-110' 
+                          ? 'bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl' 
                           : isDisabled
-                          ? 'cursor-not-allowed'
-                          : 'hover:shadow-md hover:brightness-125'
+                          ? 'bg-gray-100/50 dark:bg-white/5 text-gray-400 dark:text-white/30 border-gray-200/50 dark:border-white/10 cursor-not-allowed'
+                          : 'bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30'
                         }
                       `}
-                      onMouseEnter={(e) => {
-                        if (!isSelected && !isDisabled) {
-                          e.currentTarget.style.backgroundColor = `${tagData.color}35`;
-                          e.currentTarget.style.borderColor = `${tagData.color}60`;
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isSelected && !isDisabled) {
-                          e.currentTarget.style.backgroundColor = `${tagData.color}20`;
-                          e.currentTarget.style.borderColor = `${tagData.color}40`;
-                        }
-                      }}
                     >
                       {tagData.tag}
                     </button>
@@ -364,17 +336,10 @@ const WriteStoryPage: React.FC = () => {
                 <div className="mt-4 flex items-center space-x-2">
                   <span className="text-gray-600 dark:text-white/70 text-sm">Selected:</span>
                   {selectedTags.map((tag) => {
-                    const tagData = TAGS_WITH_COLOR.find(t => t.tag === tag);
                     return (
                       <span
                         key={tag}
-                        style={{
-                          backgroundColor: tagData?.color,
-                          borderColor: tagData?.color,
-                          color: '#000000',
-                          boxShadow: `0 2px 10px ${tagData?.color}30`
-                        }}
-                        className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium"
+                        className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg"
                       >
                         <span>{tag}</span>
                         <button
