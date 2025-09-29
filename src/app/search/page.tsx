@@ -166,9 +166,9 @@ const SearchPage: React.FC = () => {
                     key={tagData.tag}
                     onClick={() => handleTagClick(tagData.tag)}
                     className={`
-                      px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
+                      px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                       ${isSelected 
-                        ? 'bg-purple-600 text-white border-purple-600 shadow-lg' 
+                        ? 'bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl' 
                         : 'bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30'
                       }
                     `}
@@ -182,35 +182,6 @@ const SearchPage: React.FC = () => {
               })}
             </div>
           </div>
-
-          {/* Selected Tags Display */}
-          {selectedTags.length > 0 && (
-            <div className="mt-4 flex items-center space-x-2">
-              <span className="text-gray-600 dark:text-white/70 text-sm">Selected:</span>
-              {selectedTags.map((tag) => {
-                return (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-md hover:shadow-lg transition-all duration-200"
-                  >
-                    <span>{tag}</span>
-                    <button
-                      onClick={() => removeTag(tag)}
-                      className="hover:text-red-500 dark:hover:text-red-600 transition-colors"
-                    >
-                      <XMarkIcon className="w-3 h-3" />
-                    </button>
-                  </span>
-                );
-              })}
-              <button
-                onClick={() => selectedTags.forEach(tag => removeTag(tag))}
-                className="text-gray-500 dark:text-white/50 hover:text-gray-800 dark:hover:text-white text-sm transition-colors"
-              >
-                Clear all
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Results Section */}
