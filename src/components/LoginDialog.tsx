@@ -42,20 +42,9 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
             <span className="text-2xl font-bold text-gray-800 dark:text-white tracking-wide font-montserrat">
               Join
             </span>
-            <Image
-              src="/YourStoriesLogo.svg"
-              alt="YourStories"
-              width={100}
-              height={20}
-              className="object-contain dark:block hidden"
-            />
-            <Image
-              src="/YourStoriesLogoLight.svg"
-              alt="YourStories"
-              width={100}
-              height={20}
-              className="object-contain block dark:hidden"
-            />
+            <span className="text-3xl font-bold text-[#50BDE7] font-lobster">
+              YourHour
+            </span>
           </div>
 
           {/* Description */}
