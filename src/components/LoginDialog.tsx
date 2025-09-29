@@ -39,13 +39,9 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
           <DialogTitle className="sr-only">Login to YourStories</DialogTitle>
           {/* Logo Section */}
           <div className="flex items-center justify-center gap-2 mt-4">
-            <Image
-              src="/JoinWhiteText.svg"
-              alt="Join"
-              width={60}
-              height={20}
-              className="object-contain"
-            />
+            <span className="text-2xl font-bold text-gray-800 dark:text-white tracking-wide">
+              Join
+            </span>
             <Image
               src="/YourStoriesLogo.svg"
               alt="YourStories"
