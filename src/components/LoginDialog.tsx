@@ -51,7 +51,14 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
               alt="YourStories"
               width={100}
               height={20}
-              className="object-contain"
+              className="object-contain dark:block hidden"
+            />
+            <Image
+              src="/YourStoriesLogoLight.svg"
+              alt="YourStories"
+              width={100}
+              height={20}
+              className="object-contain block dark:hidden"
             />
           </div>
 
