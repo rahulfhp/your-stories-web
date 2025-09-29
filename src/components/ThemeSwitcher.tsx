@@ -20,10 +20,10 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) => {
         transition-all duration-300 ease-in-out
         backdrop-blur-xl border
         hover:scale-105 active:scale-95
-        focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus:outline-none
         ${theme === 'dark' 
-          ? 'bg-gray-800/60 border-white/20 hover:bg-gray-700/70 focus:ring-white/30' 
-          : 'bg-white/40 border-gray-300/30 hover:bg-white/60 focus:ring-blue-500/30'
+          ? 'bg-gray-800/60 border-white/20 hover:bg-gray-700/70' 
+          : 'bg-white/40 border-gray-300/30 hover:bg-white/60'
         }
         ${className}
       `}
@@ -37,15 +37,15 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) => {
           backdrop-blur-sm border
           flex items-center justify-center
           ${theme === 'dark'
-            ? 'translate-x-3 bg-gray-100/90 border-gray-200/50 shadow-lg'
-            : '-translate-x-3 bg-gray-800/90 border-gray-700/50 shadow-lg'
+            ? '-translate-x-3 bg-white border-gray-200 shadow-lg'
+            : 'translate-x-3 bg-gray-800 border-gray-600 shadow-lg'
           }
         `}
       >
         {theme === 'dark' ? (
-          <SunIcon className="w-3 h-3 text-yellow-600" />
+          <MoonIcon className="w-3 h-3 text-blue-600" />
         ) : (
-          <MoonIcon className="w-3 h-3 text-blue-200" />
+          <SunIcon className="w-3 h-3 text-yellow-400" />
         )}
       </div>
       
