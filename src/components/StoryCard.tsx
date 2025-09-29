@@ -132,13 +132,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             {storyData.tagList.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-white/15 text-white/80 text-xs rounded-full backdrop-blur-md border border-white/20"
+                className="px-2 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-700 dark:text-white/80 text-xs rounded-full backdrop-blur-md border border-gray-300/50 dark:border-white/20"
               >
                 #{tag}
               </span>
             ))}
             {storyData.tagList.length > 3 && (
-              <span className="px-2 py-1 bg-white/15 text-white/60 text-xs rounded-full backdrop-blur-md border border-white/20">
+              <span className="px-2 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-600 dark:text-white/60 text-xs rounded-full backdrop-blur-md border border-gray-300/50 dark:border-white/20">
                 +{storyData.tagList.length - 3}
               </span>
             )}
