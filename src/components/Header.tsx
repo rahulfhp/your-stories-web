@@ -18,6 +18,7 @@ import {
   SunIcon,
   MoonIcon,
   PencilIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 import LoginDialog from "./LoginDialog";
 import { useAuthStore } from "@/stores/auth";
@@ -93,13 +94,15 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
   if (avatar) {
     // Get initials from the name (first letter of first and last name)
     const getInitials = (name?: string) => {
-      if (!name) return "?";
+      if (!name) return null; // Return null to show UserIcon instead
       const names = name.trim().split(" ");
       if (names.length === 1) {
         return names[0].charAt(0).toUpperCase();
       }
       return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
     };
+
+    const initials = getInitials(alt);
 
     return (
       <div
@@ -112,20 +115,25 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             alt={alt || "Avatar"}
             className="w-full h-full object-cover"
             onError={(e) => {
-              // Hide the image and show initials if image fails to load
+              // Hide the image and show initials or UserIcon if image fails to load
               (e.target as HTMLImageElement).style.display = 'none';
               const parent = (e.target as HTMLImageElement).parentElement;
               if (parent) {
-                const initialsDiv = document.createElement('div');
-                initialsDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
-                initialsDiv.textContent = getInitials(alt);
-                parent.appendChild(initialsDiv);
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
+                if (initials) {
+                  fallbackDiv.textContent = initials;
+                } else {
+                  // Create UserIcon for fallback
+                  fallbackDiv.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
+                }
+                parent.appendChild(fallbackDiv);
               }
             }}
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 backdrop-blur-sm flex items-center justify-center dark:text-white text-white font-semibold text-sm">
-            {getInitials(alt)}
+            {initials ? initials : <UserIcon className="w-4 h-4" />}
           </div>
         )}
       </div>
