@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import YourStoriesLogo from "../../public/YourStoriesLogo.svg";
+import YourStoriesLogoLight from "../../public/YourStoriesLogoLight.svg";
 
 // Icons (using Heroicons as replacement for MUI icons)
 import {
@@ -42,7 +43,8 @@ interface HeaderProps {
 // Logo Component
 const Logo: React.FC = () => (
   <div className="w-40 h-10 relative md:w-44 md:h-11">
-    <Image src={YourStoriesLogo} alt="Logo" fill className="object-contain" />
+    <Image src={YourStoriesLogo} alt="Logo" fill className="object-contain dark:block hidden" />
+    <Image src={YourStoriesLogoLight} alt="Logo" fill className="object-contain block dark:hidden" />
   </div>
 );
 

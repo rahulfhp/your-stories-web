@@ -142,7 +142,13 @@ const ProfilePage: React.FC = () => {
                       src="/YourStoriesLogo.svg"
                       alt="No stories"
                       fill
-                      className="object-contain"
+                      className="object-contain dark:block hidden"
+                    />
+                    <Image
+                      src="/YourStoriesLogoLight.svg"
+                      alt="No stories"
+                      fill
+                      className="object-contain block dark:hidden"
                     />
                   </div>
                   <p className="text-gray-700 dark:text-white/80 mb-2">You haven't created any stories yet</p>
