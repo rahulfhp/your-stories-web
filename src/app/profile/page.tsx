@@ -39,17 +39,24 @@ const ProfilePage: React.FC = () => {
   console.log("user", user);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pt-24">
-      <div className="max-w-5xl mx-auto px-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black pt-24 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <h1 className="text-white text-2xl font-semibold mb-6">
+        <h1 className="text-gray-800 dark:text-white text-2xl font-semibold mb-6">
           {user?.displayName || "Profile"}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left column: Avatar + About + Logout */}
           <div className="md:col-span-1">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
+            <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/15 rounded-2xl p-6 shadow-lg shadow-gray-400/20 dark:shadow-black/20">
               <div className="w-28 h-28 relative rounded-xl overflow-hidden bg-purple-600/60 flex items-center justify-center mx-auto">
                 {user?.photoURL ? (
                   <Image
@@ -59,22 +66,22 @@ const ProfilePage: React.FC = () => {
                   className="object-cover"
                 />
                 ) : (
-                  <span className="text-white text-3xl font-bold">
+                  <span className="text-white dark:text-white text-3xl font-bold">
                     {user?.displayName?.charAt(0) || "U"}
                   </span>
                 )}
               </div>
 
               <div className="mt-6">
-                <h2 className="text-white/80 text-sm mb-2">ABOUT</h2>
-                <p className="text-white text-base font-medium">
+                <h2 className="text-gray-600 dark:text-white/80 text-sm mb-2">ABOUT</h2>
+                <p className="text-gray-800 dark:text-white text-base font-medium">
                   {user?.displayName || "-"}
                 </p>
               </div>
               <div className="flex items-center justify-center">
                 <button
                   onClick={handleLogout}
-                  className="mt-6 w-40 px-4 py-2 cursor-pointer rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition"
+                  className="mt-6 w-40 px-4 py-2 cursor-pointer rounded-xl bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/15 transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
                 >
                   Logout
                 </button>
@@ -84,18 +91,18 @@ const ProfilePage: React.FC = () => {
 
           {/* Right column: User's Created Stories */}
           <div className="md:col-span-2">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
+            <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/15 rounded-2xl p-6 shadow-lg shadow-gray-400/20 dark:shadow-black/20">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-white/90">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-white/90">
                   📝 Your Stories
                 </h2>
-                <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-white/30 to-transparent rounded"></div>
+                <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-gray-400/40 dark:from-white/30 to-transparent rounded"></div>
               </div>
 
               {/* Error State */}
               {userStoriesError && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
-                  <p className="text-red-400 text-sm">
+                <div className="bg-red-100 dark:bg-red-500/10 border border-red-300 dark:border-red-500/30 rounded-lg p-4 mb-6">
+                  <p className="text-red-700 dark:text-red-400 text-sm">
                     Failed to load your stories: {userStoriesError}
                   </p>
                 </div>
@@ -106,11 +113,11 @@ const ProfilePage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[...Array(4)].map((_, index) => (
                     <div key={index} className="animate-pulse">
-                      <div className="bg-white/10 rounded-2xl p-4">
-                        <div className="bg-white/20 h-[150px] rounded-xl mb-3"></div>
+                      <div className="bg-gray-200/60 dark:bg-white/10 rounded-2xl p-4">
+                        <div className="bg-gray-300/80 dark:bg-white/20 h-[150px] rounded-xl mb-3"></div>
                         <div className="space-y-2">
-                          <div className="bg-white/20 h-4 rounded w-3/4"></div>
-                          <div className="bg-white/20 h-3 rounded w-1/2"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-4 rounded w-3/4"></div>
+                          <div className="bg-gray-300/80 dark:bg-white/20 h-3 rounded w-1/2"></div>
                         </div>
                       </div>
                     </div>
@@ -138,14 +145,14 @@ const ProfilePage: React.FC = () => {
                       className="object-contain"
                     />
                   </div>
-                  <p className="text-white/80 mb-2">You haven't created any stories yet</p>
+                  <p className="text-gray-700 dark:text-white/80 mb-2">You haven't created any stories yet</p>
                   <a
                     href="/write"
-                    className="text-sky-400 hover:underline font-semibold"
+                    className="text-blue-600 dark:text-sky-400 hover:underline font-semibold"
                   >
                     WRITE YOUR FIRST STORY
                   </a>
-                  <p className="text-white/60 mt-2 text-sm">
+                  <p className="text-gray-600 dark:text-white/60 mt-2 text-sm">
                     Share your journey and inspire others
                   </p>
                 </div>
