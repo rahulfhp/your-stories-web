@@ -39,7 +39,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
           <DialogTitle className="sr-only">Login to YourStories</DialogTitle>
           {/* Logo Section */}
           <div className="flex items-center justify-center gap-2 mt-4">
-            <span className="text-2xl font-bold text-gray-800 dark:text-white tracking-wide">
+            <span className="text-2xl font-bold text-gray-800 dark:text-white tracking-wide font-montserrat">
               Join
             </span>
             <Image
