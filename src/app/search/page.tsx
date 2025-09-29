@@ -165,41 +165,13 @@ const SearchPage: React.FC = () => {
                   <button
                     key={tagData.tag}
                     onClick={() => handleTagClick(tagData.tag)}
-                    style={{
-                      backgroundColor: isSelected 
-                        ? tagData.color 
-                        : `${tagData.color}20`, // 20% opacity for unselected
-                      borderColor: isSelected 
-                        ? tagData.color 
-                        : `${tagData.color}40`, // 40% opacity for border
-                      color: isSelected 
-                        ? '#000000' 
-                        : (tagData.color === '#FFFFFF' || tagData.color === '#ffffff') 
-                          ? '#000000' 
-                          : tagData.color,
-                      boxShadow: isSelected 
-                        ? `0 4px 20px ${tagData.color}40` 
-                        : 'none'
-                    }}
                     className={`
                       px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                       ${isSelected 
-                        ? 'shadow-lg font-semibold transform hover:scale-110' 
-                        : 'hover:shadow-md hover:brightness-125'
+                        ? 'bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl' 
+                        : 'bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30'
                       }
                     `}
-                    onMouseEnter={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.backgroundColor = `${tagData.color}35`;
-                        e.currentTarget.style.borderColor = `${tagData.color}60`;
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.backgroundColor = `${tagData.color}20`;
-                        e.currentTarget.style.borderColor = `${tagData.color}40`;
-                      }
-                    }}
                   >
                     {tagData.tag}
                     {isSelected && (
@@ -216,23 +188,15 @@ const SearchPage: React.FC = () => {
             <div className="mt-4 flex items-center space-x-2">
               <span className="text-gray-600 dark:text-white/70 text-sm">Selected:</span>
               {selectedTags.map((tag) => {
-                const tagData = memoizedTags.find(t => t.tag === tag);
-                const tagColor = tagData?.color || '#6B7280';
                 return (
                   <span
                     key={tag}
-                    style={{
-                      backgroundColor: tagColor,
-                      borderColor: tagColor,
-                      color: '#000000',
-                      boxShadow: `0 2px 10px ${tagColor}30`
-                    }}
-                    className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium"
+                    className="px-3 py-1 text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-md hover:shadow-lg transition-all duration-200"
                   >
                     <span>{tag}</span>
                     <button
                       onClick={() => removeTag(tag)}
-                      className="hover:text-red-600 transition-colors"
+                      className="hover:text-red-500 dark:hover:text-red-600 transition-colors"
                     >
                       <XMarkIcon className="w-3 h-3" />
                     </button>
