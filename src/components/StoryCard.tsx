@@ -56,9 +56,9 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute top-3 right-3 group/remove p-2 bg-red-300 backdrop-blur-xl border border-red-400/40 rounded-full transition-all duration-300 scale-110 shadow-[0_8px_32px_0_rgba(239,68,68,0.3)] cursor-pointer"
+            className="absolute top-3 right-3 group/remove p-2 bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-full transition-all duration-300 hover:bg-red-100/90 dark:hover:bg-red-900/30 hover:border-red-300/60 dark:hover:border-red-400/40 hover:scale-110 shadow-lg shadow-gray-400/20 dark:shadow-black/20 cursor-pointer"
           >
-            <XMarkIcon className="w-4 h-4 text-red-400 transition-colors duration-200" />
+            <XMarkIcon className="w-4 h-4 text-gray-600 dark:text-white/70 group-hover/remove:text-red-500 dark:group-hover/remove:text-red-400 transition-colors duration-200" />
           </button>
         )}
       </div>
