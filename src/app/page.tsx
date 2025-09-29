@@ -44,19 +44,21 @@ export default function Home() {
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden">
-        {/* Animated background elements */}
+        {/* Animated background elements - optimized for mobile */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
+          <div className="hidden sm:block">
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          </div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
         </div>
         
-        <div className="container mx-auto px-4 py-8 pt-24 relative z-10">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-20 sm:pt-24 relative z-10">
           
           {/* Handpicked Stories Section */}
-          <section className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white/90">
+          <section className="mb-8 sm:mb-10 lg:mb-12">
+            <div className="flex items-center justify-between mb-4 sm:mb-5 lg:mb-6">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white/90">
                 ✨ Handpicked Stories
               </h2>
               <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-gray-400/40 dark:from-white/30 to-transparent rounded"></div>
@@ -71,7 +73,7 @@ export default function Home() {
             )}
             
             {isLoadingHandpicked ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                 {[...Array(6)].map((_, index) => (
                   <div key={index} className="animate-pulse">
                     <div className="bg-gray-200/60 dark:bg-white/10 rounded-2xl p-4">
@@ -92,7 +94,7 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                 {handpickedStories && handpickedStories.length > 0 ? handpickedStories.map((story) => (
                   <StoryCard
                     key={story._id}
@@ -104,16 +106,16 @@ export default function Home() {
             )}
             
             {!isLoadingHandpicked && (!handpickedStories || handpickedStories.length === 0) && !handpickedError && (
-              <div className="text-center py-12">
-                <p className="text-gray-600 dark:text-white/60 text-lg">No handpicked stories available at the moment.</p>
+              <div className="text-center py-8 sm:py-10 lg:py-12">
+                <p className="text-gray-600 dark:text-white/60 text-base sm:text-lg">No handpicked stories available at the moment.</p>
               </div>
             )}
           </section>
 
           {/* More Stories Section */}
           <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white/90">
+            <div className="flex items-center justify-between mb-4 sm:mb-5 lg:mb-6">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white/90">
                 📚 More Stories
               </h2>
               <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-gray-400/30 dark:from-white/20 to-transparent rounded"></div>
@@ -127,7 +129,7 @@ export default function Home() {
               </div>
             )}
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
               {moreStories && moreStories.length > 0 ? moreStories.map((story) => (
                 <StoryCard
                   key={story._id}
@@ -138,7 +140,7 @@ export default function Home() {
             </div>
             
             {isLoadingMore && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 mt-6">
                 {[...Array(3)].map((_, index) => (
                   <div key={index} className="animate-pulse">
                     <div className="bg-gray-200/60 dark:bg-white/10 rounded-2xl p-4">
@@ -161,8 +163,8 @@ export default function Home() {
             )}
             
             {!isLoadingMore && (!moreStories || moreStories.length === 0) && !moreStoriesError && (
-              <div className="text-center py-12">
-                <p className="text-gray-600 dark:text-white/60 text-lg">No more stories available at the moment.</p>
+              <div className="text-center py-8 sm:py-10 lg:py-12">
+                <p className="text-gray-600 dark:text-white/60 text-base sm:text-lg">No more stories available at the moment.</p>
               </div>
             )}
             
