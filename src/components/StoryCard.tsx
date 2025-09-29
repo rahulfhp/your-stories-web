@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@/stores/stories';
 import TestImage from "../../public/TestImage.svg"
 import Image from 'next/image';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, EyeIcon, StarIcon } from '@heroicons/react/24/outline';
 
 interface StoryCardProps {
   storyData: Story;
@@ -113,13 +113,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
           <div className="flex items-center space-x-3">
             {storyData.upvoteCount > 0 && (
               <span className="flex items-center space-x-1">
-                <span>👍</span>
+                <StarIcon className="w-3.5 h-3.5" />
                 <span>{storyData.upvoteCount}</span>
               </span>
             )}
             {storyData.readCount > 0 && (
               <span className="flex items-center space-x-1">
-                <span>👁</span>
+                <EyeIcon className="w-3.5 h-3.5" />
                 <span>{storyData.readCount}</span>
               </span>
             )}
