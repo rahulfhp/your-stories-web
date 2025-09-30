@@ -351,7 +351,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
       <div className="flex justify-center px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-20 sm:pt-24 md:pt-28 lg:pt-28 relative z-10">
         <div className="w-full max-w-2xl">
           {/* Story Header */}
-          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 lg:mb-8 shadow-2xl">
+          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 lg:mb-8 shadow-lg">
             {/* Cover Image */}
             <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-6">
               {story.coverPicRef ? (
@@ -534,7 +534,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
           </div>
 
           {/* Story Content */}
-          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl">
+          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg">
             <div
               className="prose prose-sm sm:prose-base lg:prose-lg prose-gray dark:prose-invert max-w-none text-gray-800 dark:text-white/90 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: story.storyContent }}
