@@ -106,16 +106,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
                   key={tagData.tag}
                   onClick={() => handleTagClick(tagData.tag)}
                   className={`
-                    px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border
+                    px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                     ${isSelected 
-                      ? 'text-white border-white/40 shadow-md' 
-                      : 'text-white/80 border-white/20 hover:border-white/40'
+                      ? 'bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl' 
+                      : 'bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30'
                     }
                   `}
-                  style={{
-                    backgroundColor: isSelected ? tagData.color : 'rgba(255, 255, 255, 0.1)',
-                    borderColor: isSelected ? tagData.color : undefined,
-                  }}
                 >
                   #{tagData.tag}
                 </button>
@@ -131,12 +127,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
                 {selectedTags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-1 bg-white/20 text-white text-xs rounded-full backdrop-blur-md border border-white/20 flex items-center space-x-1"
+                    className="px-2 py-1 text-xs rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg"
                   >
                     <span>#{tag}</span>
                     <button
                       onClick={() => removeTag(tag)}
-                      className="hover:text-red-300 transition-colors"
+                      className="hover:text-red-600 transition-colors"
                     >
                       <XMarkIcon className="w-3 h-3" />
                     </button>

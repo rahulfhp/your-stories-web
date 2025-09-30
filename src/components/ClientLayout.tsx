@@ -27,7 +27,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <Header />
       {children}
       <Toaster
-        position="top-right"
+        position="top-center"
         toastOptions={{
           duration: 4000,
           className: "glassmorphism-toast",

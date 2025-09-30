@@ -295,16 +295,16 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden flex items-center justify-center px-4">
         {/* Animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
         </div>
 
-        <div className="bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl p-8 relative z-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-600 dark:border-white"></div>
+        <div className="bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 relative z-10">
+          <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-gray-600 dark:border-white"></div>
         </div>
       </div>
     );
@@ -312,24 +312,24 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
   if (!story) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden flex items-center justify-center px-4">
         {/* Animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-gray-400/10 dark:bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-gray-300/8 dark:bg-white/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
         </div>
 
-        <div className="bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl p-8 text-center relative z-10">
-          <h2 className="text-gray-800 dark:text-white text-xl font-semibold mb-4">
+        <div className="bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center relative z-10 max-w-md w-full">
+          <h2 className="text-gray-800 dark:text-white text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
             Story Not Found
           </h2>
-          <p className="text-gray-600 dark:text-white/70 mb-6">
+          <p className="text-gray-600 dark:text-white/70 mb-4 sm:mb-6 text-sm sm:text-base">
             The story you're looking for doesn't exist or has been removed.
           </p>
           <button
             onClick={handleBack}
-            className="px-6 py-3 bg-purple-600/80 hover:bg-purple-600 text-white rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200"
+            className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-sky-500/80 hover:bg-sky-500 text-white rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 text-sm sm:text-base"
           >
             Go Back
           </button>
@@ -348,12 +348,12 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex justify-center px-4 py-8 pt-24 relative z-10">
+      <div className="flex justify-center px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-20 sm:pt-24 md:pt-28 lg:pt-28 relative z-10">
         <div className="w-full max-w-2xl">
           {/* Story Header */}
-          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-3xl p-8 mb-8 shadow-2xl">
+          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 lg:mb-8 shadow-2xl">
             {/* Cover Image */}
-            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden mb-6">
+            <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-6">
               {story.coverPicRef ? (
                 <Image
                   src={story.coverPicRef}
@@ -373,8 +373,8 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
               {/* Country Badge */}
               {story.country && (
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-black/50 text-white text-sm rounded-full backdrop-blur-md border border-white/20">
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
+                  <span className="px-2 sm:px-3 py-1 bg-black/50 text-white text-xs sm:text-sm rounded-full backdrop-blur-md border border-white/20">
                     📍 {story.country}
                   </span>
                 </div>
@@ -382,14 +382,14 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
             </div>
 
             {/* Story Title */}
-            <h1 className="text-gray-900 dark:text-white text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <h1 className="text-gray-900 dark:text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
               {story.storyTitle}
             </h1>
 
             {/* Author Info */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center flex-shrink-0">
                   {story.profilePicRef ? (
                     <Image
                       src={story.profilePicRef}
@@ -399,16 +399,16 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-white text-lg font-semibold">
+                    <span className="text-white text-sm sm:text-lg font-semibold">
                       {story.userName?.charAt(0)?.toUpperCase() || "U"}
                     </span>
                   )}
                 </div>
-                <div>
-                  <p className="text-gray-900 dark:text-white font-semibold">
+                <div className="min-w-0 flex-1">
+                  <p className="text-gray-900 dark:text-white font-semibold text-sm sm:text-base truncate">
                     {story.userName}
                   </p>
-                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                  <p className="text-gray-600 dark:text-white/60 text-xs sm:text-sm truncate">
                     {story.profession || "Storyteller"}
                   </p>
 
@@ -416,7 +416,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                   {(story.facebookLink ||
                     story.instagramLink ||
                     story.twitterLink) && (
-                    <div className="flex items-center space-x-2 mt-2">
+                    <div className="flex items-center space-x-1.5 sm:space-x-2 mt-1.5 sm:mt-2">
                       {/* Facebook Link */}
                       {story.facebookLink && (
                         <button
@@ -430,11 +430,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                               "noopener,noreferrer"
                             );
                           }}
-                          className="group w-7 h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-blue-600/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                          className="group w-6 h-6 sm:w-7 sm:h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-blue-600/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
                           title={`Facebook: ${story.facebookLink}`}
                         >
                           <svg
-                            className="w-3.5 h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
@@ -454,11 +454,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                               "noopener,noreferrer"
                             );
                           }}
-                          className="group w-7 h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-gradient-to-br hover:from-purple-600/80 hover:to-pink-600/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                          className="group w-6 h-6 sm:w-7 sm:h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-gradient-to-br hover:from-sky-500/80 hover:to-pink-500/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
                           title={`Instagram: @${story.instagramLink}`}
                         >
                           <svg
-                            className="w-3.5 h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
@@ -478,11 +478,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
                               "noopener,noreferrer"
                             );
                           }}
-                          className="group w-7 h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-black/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                          className="group w-6 h-6 sm:w-7 sm:h-7 bg-gray-200/80 dark:bg-white/10 hover:bg-black/80 rounded-full flex items-center justify-center backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-110 hover:shadow-lg"
                           title={`X (Twitter): @${story.twitterLink}`}
                         >
                           <svg
-                            className="w-3.5 h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-600 dark:text-white/70 group-hover:text-white transition-colors duration-200"
                             fill="currentColor"
                             viewBox="0 0 16 16"
                           >
@@ -496,8 +496,8 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
               </div>
 
               {/* Story Meta */}
-              <div className="text-right">
-                <p className="text-gray-700 dark:text-white/80 text-sm">
+              <div className="text-left sm:text-right">
+                <p className="text-gray-700 dark:text-white/80 text-xs sm:text-sm">
                   {formatDate(story.publishDate)}
                 </p>
                 <p className="text-gray-500 dark:text-white/60 text-xs">
@@ -508,11 +508,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
 
             {/* Tags */}
             {story.tagList && story.tagList.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                 {story.tagList.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-700 dark:text-white/80 text-sm rounded-full backdrop-blur-md border border-gray-300/40 dark:border-white/20"
+                    className="px-2 sm:px-3 py-1 bg-gray-200/80 dark:bg-white/15 text-gray-700 dark:text-white/80 text-xs sm:text-sm rounded-full backdrop-blur-md border border-gray-300/40 dark:border-white/20"
                   >
                     #{tag}
                   </span>
@@ -521,62 +521,62 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
             )}
 
             {/* Story Stats */}
-            <div className="flex items-center space-x-6 text-gray-600 dark:text-white/60 text-sm">
-              <div className="flex items-center space-x-2">
-                <EyeIcon className="w-4 h-4" />
+            <div className="flex items-center space-x-4 sm:space-x-6 text-gray-600 dark:text-white/60 text-xs sm:text-sm">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <EyeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{story.readCount} reads</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <StarIcon className="w-4 h-4" />
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <StarIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{story.upvoteCount} upvotes</span>
               </div>
             </div>
           </div>
 
           {/* Story Content */}
-          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-3xl p-8 shadow-2xl">
+          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl">
             <div
-              className="prose prose-lg prose-gray dark:prose-invert max-w-none text-gray-800 dark:text-white/90 leading-relaxed"
+              className="prose prose-sm sm:prose-base lg:prose-lg prose-gray dark:prose-invert max-w-none text-gray-800 dark:text-white/90 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: story.storyContent }}
             />
           </div>
 
           {/* Bottom Actions */}
-          <div className="mt-8 flex items-center justify-center space-x-4">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <button
               onClick={handleUpvote}
-              className="group flex items-center space-x-2 px-6 py-3 bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="group flex items-center justify-center space-x-2 w-full sm:w-auto px-4 sm:px-6 py-3 bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
               {isUpvoted ? (
-                <StarFilledIcon className="w-5 h-5 text-yellow-400 group-hover:scale-110 transition-transform duration-200" />
+                <StarFilledIcon className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 group-hover:scale-110 transition-transform duration-200" />
               ) : (
-                <StarIcon className="w-5 h-5 text-gray-600 dark:text-white/70 group-hover:text-yellow-400 transition-colors duration-200" />
+                <StarIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-white/70 group-hover:text-yellow-400 transition-colors duration-200" />
               )}
-              <span className="text-gray-800 dark:text-white/90 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
+              <span className="text-sm sm:text-base text-gray-800 dark:text-white/90 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
                 {story.upvoteCount}
               </span>
             </button>
 
             <button
               onClick={handleBookmark}
-              className="group flex items-center space-x-2 px-6 py-3 bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="group flex items-center justify-center space-x-2 w-full sm:w-auto px-4 sm:px-6 py-3 bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
               {isBookmarked ? (
-                <BookmarkFilledIcon className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+                <BookmarkFilledIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:scale-110 transition-transform duration-200" />
               ) : (
-                <BookmarkIcon className="w-5 h-5 text-gray-600 dark:text-white/70 group-hover:text-blue-400 transition-colors duration-200" />
+                <BookmarkIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-white/70 group-hover:text-blue-400 transition-colors duration-200" />
               )}
-              <span className="text-gray-800 dark:text-white/90 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
+              <span className="text-sm sm:text-base text-gray-800 dark:text-white/90 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
                 {isBookmarked ? "Saved" : "Save"}
               </span>
             </button>
 
             <button
               onClick={handleShare}
-              className="group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="group flex items-center justify-center space-x-2 w-full sm:w-auto px-4 sm:px-6 py-3 bg-gradient-to-r from-sky-500/80 to-blue-600/80 hover:from-sky-500 hover:to-blue-600 rounded-xl backdrop-blur-md border border-gray-300/40 dark:border-white/20 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
-              <ShareIcon className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-white font-medium">Share</span>
+              <ShareIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:scale-110 transition-transform duration-200" />
+              <span className="text-sm sm:text-base text-white font-medium">Share</span>
             </button>
           </div>
         </div>

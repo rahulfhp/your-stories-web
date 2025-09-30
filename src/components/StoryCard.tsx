@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@/stores/stories';
 import TestImage from "../../public/TestImage.svg"
 import Image from 'next/image';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, EyeIcon, StarIcon } from '@heroicons/react/24/outline';
 
 interface StoryCardProps {
   storyData: Story;
@@ -56,9 +56,9 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute top-3 right-3 group/remove p-2 bg-red-300 backdrop-blur-xl border border-red-400/40 rounded-full transition-all duration-300 scale-110 shadow-[0_8px_32px_0_rgba(239,68,68,0.3)] cursor-pointer"
+            className="absolute top-3 right-3 group/remove p-2 bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-full transition-all duration-300 hover:bg-red-100/90 dark:hover:bg-red-900/30 hover:border-red-300/60 dark:hover:border-red-400/40 hover:scale-110 shadow-lg shadow-gray-400/20 dark:shadow-black/20 cursor-pointer"
           >
-            <XMarkIcon className="w-4 h-4 text-red-400 transition-colors duration-200" />
+            <XMarkIcon className="w-4 h-4 text-gray-600 dark:text-white/70 group-hover/remove:text-red-500 dark:group-hover/remove:text-red-400 transition-colors duration-200" />
           </button>
         )}
       </div>
@@ -67,7 +67,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
       <div className="p-4 space-y-3">
         {/* Author Info */}
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center">
             {storyData.profilePicRef ? (
               <img
                 src={storyData.profilePicRef}
@@ -91,7 +91,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
         </div>
 
         {/* Story Title */}
-        <h3 className="text-gray-900 dark:text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-purple-200 transition-colors duration-200">
+        <h3 className="text-gray-900 dark:text-white font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-sky-200 transition-colors duration-200">
           {storyData.storyTitle}
         </h3>
 
@@ -113,13 +113,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
           <div className="flex items-center space-x-3">
             {storyData.upvoteCount > 0 && (
               <span className="flex items-center space-x-1">
-                <span>👍</span>
+                <StarIcon className="w-3.5 h-3.5" />
                 <span>{storyData.upvoteCount}</span>
               </span>
             )}
             {storyData.readCount > 0 && (
               <span className="flex items-center space-x-1">
-                <span>👁</span>
+                <EyeIcon className="w-3.5 h-3.5" />
                 <span>{storyData.readCount}</span>
               </span>
             )}
