@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import useSearchStore, { TAGS_WITH_COLOR } from '@/stores/search';
 import StoryCard from '@/components/StoryCard';
 
-const SearchPage: React.FC = () => {
+const SearchContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -282,6 +282,14 @@ const SearchPage: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SearchPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
+      <SearchContent />
+    </Suspense>
   );
 };
 
