@@ -111,16 +111,16 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             <span>{formatReadTime(storyData.readCount || 0)}</span>
           </div>
           <div className="flex items-center space-x-3">
-            {storyData.upvoteCount > 0 && (
-              <span className="flex items-center space-x-1">
-                <StarIcon className="w-3.5 h-3.5" />
-                <span>{storyData.upvoteCount}</span>
-              </span>
-            )}
             {storyData.readCount > 0 && (
               <span className="flex items-center space-x-1">
                 <EyeIcon className="w-3.5 h-3.5" />
                 <span>{storyData.readCount}</span>
+              </span>
+            )}
+            {storyData.upvoteCount > 0 && (
+              <span className="flex items-center space-x-1">
+                <StarIcon className="w-3.5 h-3.5" />
+                <span>{storyData.upvoteCount}</span>
               </span>
             )}
           </div>

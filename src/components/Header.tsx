@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -171,6 +171,9 @@ const Header: React.FC<HeaderProps> = ({
   const [writePublish, setWritePublish] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Ref for mobile menu to detect outside clicks
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
   const currentUser = useAuthStore((s) => s.currentUser);
   const isLoginDialogOpen = useAuthStore((s) => s.isLoginDialogOpen);
   const openLoginDialog = useAuthStore((s) => s.openLoginDialog);
@@ -210,6 +213,29 @@ const Header: React.FC<HeaderProps> = ({
       setWritePublish(false);
     }
   }, [user, pathname]);
+
+  // Handle outside clicks to close mobile menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    // Add event listener when mobile menu is open
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   const isUserLoggedIn = currentUser || user.length || user.user;
   const isAdminLoggedIn = admin.length || admin.email;
@@ -371,11 +397,14 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div className={`md:hidden absolute top-full right-0 z-40 w-64 transition-all duration-300 ease-in-out ${
-            mobileMenuOpen 
-              ? 'translate-x-0 opacity-100' 
-              : 'translate-x-full opacity-0 pointer-events-none'
-          }`}>
+          <div 
+            ref={mobileMenuRef}
+            className={`md:hidden absolute top-full right-0 z-40 w-64 transition-all duration-300 ease-in-out ${
+              mobileMenuOpen 
+                ? 'translate-x-0 opacity-100' 
+                : 'translate-x-full opacity-0 pointer-events-none'
+            }`}
+          >
             <div className="backdrop-blur-xl border rounded-l-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] dark:bg-black/40 dark:border-white/10 bg-white/40 border-black/10">
               <div className="px-4 py-4 space-y-2">
                 {!isAdminLoggedIn && (
