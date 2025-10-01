@@ -223,10 +223,10 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   upvoteStory: async (storyId) => {
-    const userId = get().userId;
     const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+    const userId = get().userId || currentUser?._id;
 
-    if (!userId || !currentUser) {
+    if (!userId && !currentUser) {
       toast.error("Please login to upvote stories");
       return;
     }
@@ -261,7 +261,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 
         // Update user's upVoteStories in localStorage
         const updatedUpVoteStories = [
-          ...(currentUser.upVoteStories || []),
+          ...(currentUser?.upVoteStories || []),
           storyId,
         ];
         const updatedUser = {
@@ -276,10 +276,10 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   downvoteStory: async (storyId) => {
-    const userId = get().userId;
     const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
+    const userId = get().userId || currentUser?._id;
 
-    if (!userId || !currentUser) {
+    if (!userId && !currentUser) {
       toast.error("Please login to manage votes");
       return;
     }
@@ -313,7 +313,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
         }));
 
         // Remove story from user's upVoteStories in localStorage
-        const updatedUpVoteStories = (currentUser.upVoteStories || []).filter(
+        const updatedUpVoteStories = (currentUser?.upVoteStories || []).filter(
           (id) => id !== storyId
         );
         const updatedUser = {
@@ -328,7 +328,9 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   bookmarkStory: async (storyId) => {
-    const userId = get().userId;
+    const { currentUser } = useAuthStore.getState();
+    const userId = get().userId || currentUser?._id;
+    
     try {
       const config = getConfig();
       const res = await axios.put(
@@ -363,7 +365,9 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 
   // Remove bookmark story
   removeBookmarkStory: async (storyId) => {
-    const userId = get().userId;
+    const { currentUser } = useAuthStore.getState();
+    const userId = get().userId || currentUser?._id;
+
     try {
       const config = getConfig();
       const res = await axios.put(
@@ -396,17 +400,17 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   readStory: async (storyId) => {
-    const userId = get().userId;
-    const { currentUser, addToReadStories } = useAuthStore.getState();
+      const { currentUser, addToReadStories } = useAuthStore.getState();
+      const userId = get().userId || currentUser?._id;
 
-    if (!userId || !currentUser) {
+    if (!userId && !currentUser?._id) {
       toast.error("Please login to track reading progress");
       return;
     }
 
     try {
       // Check if story is already in readStories to avoid duplicate API calls
-      const currentReadStories = currentUser.readStories || [];
+      const currentReadStories = currentUser?.readStories || [];
       if (currentReadStories.includes(storyId)) {
         return; // Already marked as read
       }
