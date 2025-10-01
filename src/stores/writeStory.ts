@@ -73,7 +73,7 @@ interface WriteStoryStore {
   formData: StoryFormData;
   selectedTags: string[];
   coverImage: UnsplashImage | null;
-  
+
   // UI state
   visibleSections: {
     body: boolean;
@@ -82,36 +82,36 @@ interface WriteStoryStore {
     twitterLink: boolean;
     instagramLink: boolean;
   };
-  
+
   // Loading states
   isSubmitting: boolean;
   isSavingDraft: boolean;
   isLoadingImages: boolean;
-  
+
   // Image gallery
   unsplashImages: UnsplashImage[];
   imageSearchQuery: string;
   isImageGalleryOpen: boolean;
-  
+
   // Actions
   updateFormData: (field: keyof StoryFormData, value: string) => void;
   addTag: (tag: string) => void;
   removeTag: (tag: string) => void;
   setCoverImage: (image: UnsplashImage | null) => void;
   toggleSection: (section: keyof WriteStoryStore['visibleSections']) => void;
-  
+
   // Image gallery actions
   searchImages: (query: string) => Promise<void>;
   setImageGalleryOpen: (open: boolean) => void;
-  
+
   // Draft actions
   saveDraft: () => void;
   loadDraft: () => void;
   clearDraft: () => void;
-  
+
   // Submit story
   submitStory: (user: any) => Promise<boolean>;
-  
+
   // Reset form
   resetForm: () => void;
 }
@@ -138,7 +138,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 // Create axios config
 const getConfig = () => {
   const token = typeof window !== 'undefined' ? window.localStorage.getItem("ys_access_token") : null;
-  
+
   return {
     headers: {
       "Content-Type": "application/json",
@@ -195,7 +195,7 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
       // Image gallery actions
       searchImages: async (query) => {
         set({ isLoadingImages: true, imageSearchQuery: query });
-        
+
         try {
           const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
           const response = await axios.get(
@@ -206,11 +206,10 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
               },
             }
           );
-          
+
           set({ unsplashImages: response.data.results });
         } catch (error) {
           console.error('Error fetching images:', error);
-          toast.error('Failed to fetch images');
           set({ unsplashImages: [] });
         } finally {
           set({ isLoadingImages: false });
@@ -222,7 +221,7 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
       // Draft actions
       saveDraft: () => {
         set({ isSavingDraft: true });
-        
+
         try {
           const { formData, selectedTags, coverImage, visibleSections } = get();
           const draftData: DraftData = {
@@ -231,12 +230,10 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
             coverImage,
             visibleSections,
           };
-          
+
           localStorage.setItem('ys_draft_story', JSON.stringify(draftData));
-          toast.success('Story saved as draft');
         } catch (error) {
           console.error('Error saving draft:', error);
-          toast.error('Failed to save draft');
         } finally {
           set({ isSavingDraft: false });
         }
@@ -272,28 +269,28 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
       // Submit story
       submitStory: async (user) => {
         const { formData, selectedTags, coverImage } = get();
-        
+
         // Validation
         if (!user) {
           toast.error('Please login to submit your story');
           return false;
         }
-        
+
         if (formData.title.length < 5 || formData.title.length > 50) {
           toast.error('Title should be 5 to 50 characters long');
           return false;
         }
-        
+
         if (formData.body.length < 500 || formData.body.length > 5000) {
           toast.error('Story should be 500 to 5000 characters long');
           return false;
         }
-        
+
         if (!coverImage) {
           toast.error('Please select a cover image');
           return false;
         }
-        
+
         if (selectedTags.length === 0) {
           toast.error('Please choose at least 1 tag');
           return false;
@@ -333,13 +330,13 @@ export const useWriteStoryStore = create<WriteStoryStore>()(
           };
 
           await axios.post(`${BASE_URL}createStory/create`, storyData, getConfig());
-          
+
           toast.success('Your story has been submitted successfully!');
-          
+
           // Clear form and draft
           get().resetForm();
           get().clearDraft();
-          
+
           return true;
         } catch (error) {
           console.error('Error submitting story:', error);
