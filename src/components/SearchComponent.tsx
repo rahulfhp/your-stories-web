@@ -73,7 +73,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
           />
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-md border border-white/20"
+            className="cursor-pointer px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-md border border-white/20"
           >
             Search
           </button>
@@ -91,13 +91,13 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
             {selectedTags.length > 0 && (
               <button
                 onClick={clearAllTags}
-                className="text-white/60 hover:text-white text-xs transition-colors"
+                className="text-white/60 hover:text-white text-xs transition-colors cursor-pointer"
               >
                 Clear all
               </button>
             )}
           </div>
-          
+
           <div className="flex flex-wrap gap-2 mb-3">
             {TAGS_WITH_COLOR.slice(0, 8).map((tagData) => {
               const isSelected = selectedTags.includes(tagData.tag);
@@ -107,9 +107,10 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
                   onClick={() => handleTagClick(tagData.tag)}
                   className={`
                     px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
-                    ${isSelected 
-                      ? 'bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl' 
-                      : 'bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30'
+                    ${
+                      isSelected
+                        ? "bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl"
+                        : "bg-gray-200/80 dark:bg-white/10 text-gray-700 dark:text-white/80 border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:shadow-md hover:border-gray-400/80 dark:hover:border-white/30"
                     }
                   `}
                 >
