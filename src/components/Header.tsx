@@ -78,7 +78,7 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
 }) => {
   if (button) {
     const baseClasses =
-      "px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm";
+      "cursor-pointer px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm";
     const variantClasses =
       buttonVariant === "outlined"
         ? "border dark:border-white/20 dark:text-white/90 dark:hover:bg-white/10 dark:hover:border-white/30 border-gray-300/40 text-gray-700 hover:bg-gray-100/20 hover:border-gray-400/50"
@@ -255,7 +255,11 @@ const Header: React.FC<HeaderProps> = ({
           <div className="relative flex justify-between items-center w-full px-4 py-2 transition-all duration-500 ease-in-out sm:px-6 sm:py-3 md:px-8 lg:px-12 md:py-4">
             {/* Logo Section */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
+              <Link
+                href="/"
+                className="flex items-center"
+                onClick={closeMobileMenu}
+              >
                 <Logo />
               </Link>
             </div>
@@ -360,7 +364,7 @@ const Header: React.FC<HeaderProps> = ({
               <Link href="/search" onClick={closeMobileMenu}>
                 <TopBarOption Icon={SearchIcon} />
               </Link>
-              
+
               {/* Profile Avatar or Login for mobile */}
               {isUserLoggedIn ? (
                 <Link href="/profile" onClick={closeMobileMenu}>
@@ -371,8 +375,7 @@ const Header: React.FC<HeaderProps> = ({
                         user.user?.displayName) as string
                     }
                     src={
-                      (currentUser?.photoURL ||
-                        user.user?.photoURL) as string
+                      (currentUser?.photoURL || user.user?.photoURL) as string
                     }
                   />
                 </Link>
@@ -397,12 +400,12 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div 
+          <div
             ref={mobileMenuRef}
             className={`md:hidden absolute top-full right-0 z-40 w-64 transition-all duration-300 ease-in-out ${
-              mobileMenuOpen 
-                ? 'translate-x-0 opacity-100' 
-                : 'translate-x-full opacity-0 pointer-events-none'
+              mobileMenuOpen
+                ? "translate-x-0 opacity-100"
+                : "translate-x-full opacity-0 pointer-events-none"
             }`}
           >
             <div className="backdrop-blur-xl border rounded-l-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] dark:bg-black/40 dark:border-white/10 bg-white/40 border-black/10">
@@ -416,7 +419,9 @@ const Header: React.FC<HeaderProps> = ({
                           <SunIcon className="w-5 h-5 dark:text-white/90 text-gray-700 dark:hidden" />
                           <MoonIcon className="w-5 h-5 dark:text-white/90 text-gray-700 hidden dark:block" />
                         </div>
-                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">Theme</span>
+                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                          Theme
+                        </span>
                       </div>
                       <ThemeSwitcher />
                     </div>
@@ -426,7 +431,9 @@ const Header: React.FC<HeaderProps> = ({
                       <Link href="/bookmarked" onClick={closeMobileMenu}>
                         <div className="flex items-center gap-3 py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20">
                           <BookmarkIcon className="w-5 h-5 dark:text-white/90 text-gray-700" />
-                          <span className="text-sm font-medium dark:text-white/90 text-gray-700">Bookmarked</span>
+                          <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                            Bookmarked
+                          </span>
                         </div>
                       </Link>
                     ) : (
@@ -438,7 +445,9 @@ const Header: React.FC<HeaderProps> = ({
                         className="w-full flex items-center gap-3 py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20"
                       >
                         <BookmarkIcon className="w-5 h-5 dark:text-white/90 text-gray-700" />
-                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">Bookmarked</span>
+                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                          Bookmarked
+                        </span>
                       </button>
                     )}
 
@@ -446,9 +455,11 @@ const Header: React.FC<HeaderProps> = ({
                     {isUserLoggedIn ? (
                       !writePublish ? (
                         <Link href="/write" onClick={closeMobileMenu}>
-                          <div className="flex items-center gap-3 py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20">
+                          <div className="flex items-center gap-3 cursor-pointer py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20">
                             <PencilIcon className="w-5 h-5 dark:text-white/90 text-gray-700" />
-                            <span className="text-sm font-medium dark:text-white/90 text-gray-700">Write</span>
+                            <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                              Write
+                            </span>
                           </div>
                         </Link>
                       ) : null
@@ -458,10 +469,12 @@ const Header: React.FC<HeaderProps> = ({
                           handleClickOpen();
                           closeMobileMenu();
                         }}
-                        className="w-full flex items-center gap-3 py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20"
+                        className="w-full flex items-center gap-3 cursor-pointer py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20"
                       >
                         <PencilIcon className="w-5 h-5 dark:text-white/90 text-gray-700" />
-                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">Write</span>
+                        <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                          Write
+                        </span>
                       </button>
                     )}
                   </>

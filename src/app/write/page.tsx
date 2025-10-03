@@ -350,7 +350,7 @@ const WriteStoryPage: React.FC = () => {
                       key={option.key}
                       type="button"
                       onClick={() => toggleSection(option.key)}
-                      className="flex items-center space-x-2 p-2.5 sm:p-3 bg-white/60 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 border border-gray-300/60 dark:border-white/20 rounded-lg sm:rounded-xl transition-all duration-300 text-gray-800 dark:text-white hover:scale-105"
+                      className="cursor-pointer flex items-center space-x-2 p-2.5 sm:p-3 bg-white/60 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 border border-gray-300/60 dark:border-white/20 rounded-lg sm:rounded-xl transition-all duration-300 text-gray-800 dark:text-white hover:scale-105"
                     >
                       <span className="flex items-center justify-center text-gray-800 dark:text-white">
                         {option.icon}
@@ -387,7 +387,7 @@ const WriteStoryPage: React.FC = () => {
                       }
                       disabled={isDisabled}
                       className={`
-                        px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
+                        cursor-pointer px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 backdrop-blur-md border-2
                         ${
                           isSelected
                             ? "bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg font-semibold transform hover:scale-110 hover:shadow-xl"
@@ -413,7 +413,7 @@ const WriteStoryPage: React.FC = () => {
                     return (
                       <span
                         key={tag}
-                        className="px-2.5 sm:px-3 py-1 text-xs sm:text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg"
+                        className="cursor-pointer px-2.5 sm:px-3 py-1 text-xs sm:text-sm rounded-full backdrop-blur-md border-2 flex items-center space-x-1 font-medium bg-gray-800 dark:bg-white text-white dark:text-gray-900 border-gray-800 dark:border-white shadow-lg"
                       >
                         <span>{tag}</span>
                         <button
@@ -431,7 +431,7 @@ const WriteStoryPage: React.FC = () => {
                     onClick={() =>
                       selectedTags.forEach((tag) => removeTag(tag))
                     }
-                    className="text-gray-500 dark:text-white/50 hover:text-gray-700 dark:hover:text-white text-xs sm:text-sm transition-colors"
+                    className="cursor-pointer text-gray-500 dark:text-white/50 hover:text-gray-700 dark:hover:text-white text-xs sm:text-sm transition-colors"
                   >
                     Clear all
                   </button>
@@ -445,7 +445,7 @@ const WriteStoryPage: React.FC = () => {
                 type="button"
                 onClick={handleSaveDraft}
                 disabled={isSavingDraft}
-                className="w-full sm:w-auto bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base"
+                className="cursor-pointer w-full sm:w-auto bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base"
               >
                 <BookmarkIcon className="w-4 h-4 mr-2" />
                 {isSavingDraft ? "Saving..." : "Save Draft"}
@@ -461,7 +461,7 @@ const WriteStoryPage: React.FC = () => {
                   formData.title.length < 5 ||
                   formData.body.length < 500
                 }
-                className="w-full sm:w-auto bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base"
+                className="cursor-pointer w-full sm:w-auto bg-gray-200/80 dark:bg-white/10 hover:bg-gray-300/90 dark:hover:bg-white/20 text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base"
               >
                 <CloudArrowUpIcon className="w-4 h-4 mr-2" />
                 {isSubmitting ? "Publishing..." : "Publish Story"}
