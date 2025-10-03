@@ -59,7 +59,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  
+
   // Timer state for read tracking
   const [readTimer, setReadTimer] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
@@ -160,7 +160,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
   // Timer logic for read tracking (15 seconds)
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
+
     if (isTimerActive && readTimer < 15) {
       interval = setInterval(() => {
         setReadTimer((prev) => prev + 1);
@@ -217,13 +217,14 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
   };
 
   // Handle interactions
-  const handleUpvote = async () => {
+  const handleUpvote = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (!story) return;
 
     requireAuth(async () => {
       const currentUpvoteState = isUpvoted;
       const currentUpvoteCount = story.upvoteCount;
-      
+
       // Optimistic update
       setIsUpvoted(!currentUpvoteState);
       setStory({
@@ -241,7 +242,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
           // Not upvoted, so upvote
           await upvoteStory(story._id);
         }
-        
+
         // Get updated story from store to sync with latest data
         const updatedStory =
           useStoriesStore
@@ -272,7 +273,8 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
     });
   };
 
-  const handleBookmark = () => {
+  const handleBookmark = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (!story) return;
 
     requireAuth(() => {
