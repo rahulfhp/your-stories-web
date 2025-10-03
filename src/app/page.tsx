@@ -37,8 +37,9 @@ export default function Home() {
   };
 
   const handleStoryClick = (storyId: string, sourceType: 'handpicked' | 'more-stories') => {
-    // Navigate to story detail page with source type
-    router.push(`/read/${storyId}?source=${sourceType}`);
+    // Navigate to story detail page with source type comment date- 3-oct-2025
+    // router.push(`/read/${storyId}?source=${sourceType}`);
+    router.push(`/read/${storyId}`);
   };
 
   return (

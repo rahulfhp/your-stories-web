@@ -37,6 +37,11 @@ interface StoriesResponse {
   Stories: Story[];
 }
 
+// Single story response interface
+interface SingleStoryResponse {
+  story: Story;
+}
+
 // Store state interface
 interface StoriesState {
   // State
@@ -60,6 +65,7 @@ interface StoriesState {
   // Actions
   fetchHandpickedStories: () => Promise<void>;
   fetchMoreStories: (limit: number, skip: number) => Promise<void>;
+  fetchStoryById: (storyId: string) => Promise<Story | null>;
   addStory: (story: Story) => void;
 
   fetchBookmarkedStories: () => Promise<void>;
@@ -170,6 +176,21 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
         moreStoriesError: error.message || "Failed to fetch more stories",
         isLoadingMore: false,
       });
+    }
+  },
+
+  // Fetch single story by ID
+  fetchStoryById: async (storyId: string) => {
+    try {
+      const config = getConfig();
+      const response = await axios.get<SingleStoryResponse>(
+        `${BASE_URL}liveStories/getStoryById/${storyId}`,
+        config
+      );
+
+      return response.data.story;
+    } catch (error: any) {
+      return null;
     }
   },
 
@@ -400,8 +421,8 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   readStory: async (storyId) => {
-      const { currentUser, addToReadStories } = useAuthStore.getState();
-      const userId = get().userId || currentUser?._id;
+    const { currentUser, addToReadStories } = useAuthStore.getState();
+    const userId = get().userId || currentUser?._id;
 
     if (!userId && !currentUser?._id) {
       toast.error("Please login to track reading progress");
@@ -427,7 +448,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
         addToReadStories(storyId);
       }
     } catch (error) {
-      // console.error("Error marking story as read:", error);
+      console.error("Error marking story as read:", error);
     }
   },
 
@@ -441,4 +462,4 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 }));
 
 export default useStoriesStore;
-export type { Story, StoriesResponse };
+export type { Story, StoriesResponse, SingleStoryResponse };

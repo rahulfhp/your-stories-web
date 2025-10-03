@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Story } from "@/stores/stories";
 import useStoriesStore from "@/stores/stories";
+import useSearchStore from "@/stores/search";
 import LoginDialog from "./LoginDialog";
 import { useAuthStore } from "@/stores/auth";
-import TestImage from "../../public/TestImage.svg"
+import TestImage from "../../public/TestImage.svg";
 
 // Icons
 import {
@@ -23,25 +24,31 @@ import {
 
 interface ReadStoryPageProps {
   storyId: string;
-  sourceType: "handpicked" | "more-stories" | "search" | "bookmarked" | "profile";
+  // sourceType?:
+  //   | "handpicked"
+  //   | "more-stories"
+  //   | "search"
+  //   | "bookmarked"
+  //   | "profile";
 }
 
-const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
-  storyId,
-  sourceType,
-}) => {
+const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
   const router = useRouter();
   const {
     handpickedStories,
     moreStories,
     userStories,
+    bookmarkedStories,
+    fetchStoryById,
     upvoteStory,
     downvoteStory,
     bookmarkStory,
     removeBookmarkStory,
     readStory,
   } = useStoriesStore();
-  
+
+  const { searchResults } = useSearchStore();
+
   const { currentUser, requireAuth } = useAuthStore();
   const closeLoginDialog = useAuthStore((s) => s.closeLoginDialog);
 
@@ -58,85 +65,95 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [hasMarkedAsRead, setHasMarkedAsRead] = useState(false);
 
-  // Find story based on ID and source type
+  // Find story based on ID
   useEffect(() => {
     const findStory = async () => {
       setIsLoading(true);
       let foundStory: Story | undefined;
 
       try {
-        // First, try to find in existing stores
-        if (sourceType === "handpicked") {
-          foundStory = handpickedStories.find((s) => s._id === storyId);
-          // If not found and store is empty, fetch handpicked stories
-          if (!foundStory && handpickedStories.length === 0) {
-            await useStoriesStore.getState().fetchHandpickedStories();
-            foundStory = useStoriesStore
-              .getState()
-              .handpickedStories.find((s) => s._id === storyId);
+        // First, try to find story in all existing stores
+        foundStory =
+          handpickedStories.find((s) => s._id === storyId) ||
+          moreStories.find((s) => s._id === storyId) ||
+          userStories.find((s) => s._id === storyId) ||
+          bookmarkedStories.find((s) => s._id === storyId) ||
+          searchResults.find((s) => s._id === storyId);
+
+        // If not found in any store, fetch from backend by ID
+        if (!foundStory) {
+          const fetchedStory = await fetchStoryById(storyId);
+          if (fetchedStory) {
+            foundStory = fetchedStory;
+          } else {
+            console.error("fetchStoryById returned null or undefined");
           }
-        } else if (sourceType === "more-stories") {
-          foundStory = moreStories.find((s) => s._id === storyId);
-          // If not found and store is empty, fetch more stories
-          if (!foundStory && moreStories.length === 0) {
-            await useStoriesStore.getState().fetchMoreStories(20, 0);
-            foundStory = useStoriesStore
-              .getState()
-              .moreStories.find((s) => s._id === storyId);
-          }
-        } else if (sourceType === "profile") {
-          foundStory = userStories.find((s) => s._id === storyId);
-          // If not found and user is logged in, fetch user stories
-          if (!foundStory && currentUser?.email) {
-            await useStoriesStore.getState().fetchUserStories(currentUser.email);
-            foundStory = useStoriesStore
-              .getState()
-              .userStories.find((s) => s._id === storyId);
-          }
-        }
-        // For search and bookmarked, we'll need to implement those stores later
-        // For now, try to find in both existing stores as fallback
-        else {
-          foundStory =
-            handpickedStories.find((s) => s._id === storyId) ||
-            moreStories.find((s) => s._id === storyId) ||
-            userStories.find((s) => s._id === storyId);
         }
 
         if (foundStory) {
           setStory(foundStory);
+
           // Check if story is bookmarked by current user
           if (currentUser?.bookmarkedStories) {
-            setIsBookmarked(currentUser.bookmarkedStories.includes(foundStory._id));
+            setIsBookmarked(
+              currentUser.bookmarkedStories.includes(foundStory._id)
+            );
           }
+
           // Check if story is upvoted by current user
           if (currentUser?.upVoteStories) {
             setIsUpvoted(currentUser.upVoteStories.includes(foundStory._id));
           }
-          // Start the read timer when story is loaded
-          setIsTimerActive(true);
-          setReadTimer(0);
-          
+
           // Check if story is already marked as read
-          if (currentUser?.readStories && currentUser.readStories.includes(foundStory._id)) {
+          if (
+            currentUser?.readStories &&
+            currentUser.readStories.includes(foundStory._id)
+          ) {
             setHasMarkedAsRead(true);
             setIsTimerActive(false);
+          } else {
+            // Start the read timer when story is loaded
+            setIsTimerActive(true);
+            setReadTimer(0);
           }
+        } else {
+          setStory(null); // Explicitly set to null
         }
       } catch (error) {
-        console.error("Error fetching story:", error);
+        setStory(null); // Set to null on error
       } finally {
         setIsLoading(false);
       }
     };
 
-    findStory();
-  }, [storyId, sourceType, handpickedStories, moreStories, userStories, currentUser?.bookmarkedStories, currentUser?.upVoteStories, currentUser?.email]);
+    if (storyId) {
+      findStory();
+    }
+  }, [
+    storyId,
+    handpickedStories,
+    moreStories,
+    userStories,
+    bookmarkedStories,
+    searchResults,
+    fetchStoryById,
+    currentUser?.bookmarkedStories,
+    currentUser?.upVoteStories,
+    currentUser?.readStories,
+  ]);
 
   // Sync upvote state when user's upVoteStories changes
   useEffect(() => {
     if (story && currentUser?.upVoteStories) {
       setIsUpvoted(currentUser.upVoteStories.includes(story._id));
+    }
+  }, [currentUser?.upVoteStories, story?._id]);
+
+  // Sync bookmark state when user's bookmarkedStories changes
+  useEffect(() => {
+    if (story && currentUser?.bookmarkedStories) {
+      setIsBookmarked(currentUser.bookmarkedStories.includes(story._id));
     }
   }, [currentUser?.bookmarkedStories, story?._id]);
 
@@ -146,7 +163,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
     
     if (isTimerActive && readTimer < 15) {
       interval = setInterval(() => {
-        setReadTimer(prev => prev + 1);
+        setReadTimer((prev) => prev + 1);
       }, 1000);
     } else if (readTimer >= 15 && !hasMarkedAsRead && currentUser && story) {
       // Timer completed, mark story as read
@@ -178,16 +195,9 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
         setIsTimerActive(false);
       }
     } catch (error) {
-      console.error('Error marking story as read:', error);
+      console.error("Error marking story as read:", error);
     }
   };
-
-  // Sync bookmark state when user's bookmarkedStories changes
-  useEffect(() => {
-    if (story && currentUser?.bookmarkedStories) {
-      setIsBookmarked(currentUser.bookmarkedStories.includes(story._id));
-    }
-  }, [currentUser?.bookmarkedStories, story?._id]);
 
   // Format date
   const formatDate = (timestamp: number) => {
@@ -216,7 +226,12 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
       
       // Optimistic update
       setIsUpvoted(!currentUpvoteState);
-      setStory({ ...story, upvoteCount: currentUpvoteState ? currentUpvoteCount - 1 : currentUpvoteCount + 1 });
+      setStory({
+        ...story,
+        upvoteCount: currentUpvoteState
+          ? currentUpvoteCount - 1
+          : currentUpvoteCount + 1,
+      });
 
       try {
         if (currentUpvoteState) {
@@ -228,10 +243,23 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
         }
         
         // Get updated story from store to sync with latest data
-        const updatedStory = useStoriesStore.getState().handpickedStories.find(s => s._id === story._id) ||
-                           useStoriesStore.getState().moreStories.find(s => s._id === story._id) ||
-                           useStoriesStore.getState().bookmarkedStories.find(s => s._id === story._id);
-        
+        const updatedStory =
+          useStoriesStore
+            .getState()
+            .handpickedStories.find((s) => s._id === story._id) ||
+          useStoriesStore
+            .getState()
+            .moreStories.find((s) => s._id === story._id) ||
+          useStoriesStore
+            .getState()
+            .userStories.find((s) => s._id === story._id) ||
+          useStoriesStore
+            .getState()
+            .bookmarkedStories.find((s) => s._id === story._id) ||
+          useSearchStore
+            .getState()
+            .searchResults.find((s) => s._id === story._id);
+
         if (updatedStory) {
           setStory(updatedStory);
         }
@@ -239,7 +267,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({
         // Revert optimistic update on error
         setIsUpvoted(currentUpvoteState);
         setStory({ ...story, upvoteCount: currentUpvoteCount });
-        console.error('Error handling upvote:', error);
+        console.error("Error handling upvote:", error);
       }
     });
   };
