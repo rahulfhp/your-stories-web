@@ -247,7 +247,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
     const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
     const userId = get().userId || currentUser?._id;
 
-    if (!userId && !currentUser) {
+    if (!userId || !currentUser?._id) {
       toast.error("Please login to upvote stories");
       return;
     }
@@ -282,11 +282,12 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 
         // Update user's upVoteStories in localStorage
         const updatedUpVoteStories = [
-          ...(currentUser?.upVoteStories || []),
+          ...(currentUser.upVoteStories || []),
           storyId,
         ];
         const updatedUser = {
           ...currentUser,
+          _id: currentUser._id,
           upVoteStories: updatedUpVoteStories,
         };
         updateUserInLocalStorage(updatedUser);
@@ -300,7 +301,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
     const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
     const userId = get().userId || currentUser?._id;
 
-    if (!userId && !currentUser) {
+    if (!userId || !currentUser?._id) {
       toast.error("Please login to manage votes");
       return;
     }
@@ -314,7 +315,7 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
-        // Update story upvote count in all story arrays (decrease by 1)
+        // Update story upvote count (decrease)
         set((state) => ({
           handpickedStories: state.handpickedStories.map((story) =>
             story._id === storyId
@@ -333,12 +334,12 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
           ),
         }));
 
-        // Remove story from user's upVoteStories in localStorage
-        const updatedUpVoteStories = (currentUser?.upVoteStories || []).filter(
+        const updatedUpVoteStories = (currentUser.upVoteStories || []).filter(
           (id) => id !== storyId
         );
         const updatedUser = {
           ...currentUser,
+          _id: currentUser._id,
           upVoteStories: updatedUpVoteStories,
         };
         updateUserInLocalStorage(updatedUser);
@@ -349,9 +350,11 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
   },
 
   bookmarkStory: async (storyId) => {
-    const { currentUser } = useAuthStore.getState();
+    const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
     const userId = get().userId || currentUser?._id;
-    
+
+    if (!userId || !currentUser?._id) return;
+
     try {
       const config = getConfig();
       const res = await axios.put(
@@ -361,20 +364,16 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
-        // Update local state and localStorage
-        const { currentUser, updateUserInLocalStorage } =
-          useAuthStore.getState();
-        if (currentUser) {
-          const updatedBookmarks = [
-            ...(currentUser.bookmarkedStories || []),
-            storyId,
-          ];
-          const updatedUser = {
-            ...currentUser,
-            bookmarkedStories: updatedBookmarks,
-          };
-          updateUserInLocalStorage(updatedUser);
-        }
+        const updatedBookmarks = [
+          ...(currentUser.bookmarkedStories || []),
+          storyId,
+        ];
+        const updatedUser = {
+          ...currentUser,
+          _id: currentUser._id,
+          bookmarkedStories: updatedBookmarks,
+        };
+        updateUserInLocalStorage(updatedUser);
 
         // Refresh bookmarked stories list
         get().fetchBookmarkedStories();
@@ -386,8 +385,10 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
 
   // Remove bookmark story
   removeBookmarkStory: async (storyId) => {
-    const { currentUser } = useAuthStore.getState();
+    const { currentUser, updateUserInLocalStorage } = useAuthStore.getState();
     const userId = get().userId || currentUser?._id;
+
+    if (!userId || !currentUser?._id) return;
 
     try {
       const config = getConfig();
@@ -398,19 +399,15 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       );
 
       if (res.data?.type === "success") {
-        // Update local state and localStorage
-        const { currentUser, updateUserInLocalStorage } =
-          useAuthStore.getState();
-        if (currentUser) {
-          const updatedBookmarks = (currentUser.bookmarkedStories || []).filter(
-            (id) => id !== storyId
-          );
-          const updatedUser = {
-            ...currentUser,
-            bookmarkedStories: updatedBookmarks,
-          };
-          updateUserInLocalStorage(updatedUser);
-        }
+        const updatedBookmarks = (currentUser.bookmarkedStories || []).filter(
+          (id) => id !== storyId
+        );
+        const updatedUser = {
+          ...currentUser,
+          _id: currentUser._id,
+          bookmarkedStories: updatedBookmarks,
+        };
+        updateUserInLocalStorage(updatedUser);
 
         // Refresh bookmarked stories list
         get().fetchBookmarkedStories();
@@ -424,17 +421,14 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
     const { currentUser, addToReadStories } = useAuthStore.getState();
     const userId = get().userId || currentUser?._id;
 
-    if (!userId && !currentUser?._id) {
+    if (!userId || !currentUser?._id) {
       toast.error("Please login to track reading progress");
       return;
     }
 
     try {
-      // Check if story is already in readStories to avoid duplicate API calls
-      const currentReadStories = currentUser?.readStories || [];
-      if (currentReadStories.includes(storyId)) {
-        return; // Already marked as read
-      }
+      const currentReadStories = currentUser.readStories || [];
+      if (currentReadStories.includes(storyId)) return;
 
       const config = getConfig();
       const res = await axios.put(
