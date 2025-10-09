@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import { Toaster } from "react-hot-toast";
 import { useThemeStore } from "@/stores/theme";
+import Footer from "./Footer";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -51,6 +52,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           },
         }}
       />
+      <Footer />
     </>
   );
 }

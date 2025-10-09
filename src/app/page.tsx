@@ -174,7 +174,7 @@ export default function Home() {
               <div className="text-center mt-8">
                 <button
                   onClick={handleLoadMoreStories}
-                  className="bg-gray-200/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:border-gray-400/70 dark:hover:border-white/30 text-gray-800 dark:text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+                  className="bg-gray-200/80 dark:bg-white/10 backdrop-blur-xl border border-gray-300/60 dark:border-white/20 hover:bg-gray-300/90 dark:hover:bg-white/20 hover:border-gray-400/70 dark:hover:border-white/30 text-gray-800 dark:text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)] cursor-pointer"
                 >
                   Load More Stories
                 </button>
