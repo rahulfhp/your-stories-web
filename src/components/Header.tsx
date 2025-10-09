@@ -49,8 +49,18 @@ interface HeaderProps {
 // Logo Component
 const Logo: React.FC = () => (
   <div className="w-34 h-10 relative sm:w-36 sm:h-10 md:w-42 md:h-12 lg:w-50 lg:h-15">
-    <Image src={YourStoriesLogo} alt="Logo" fill className="object-contain dark:block hidden" />
-    <Image src={YourStoriesLogoLight} alt="Logo" fill className="object-contain block dark:hidden" />
+    <Image
+      src={YourStoriesLogo}
+      alt="Logo"
+      fill
+      className="object-contain dark:block hidden"
+    />
+    <Image
+      src={YourStoriesLogoLight}
+      alt="Logo"
+      fill
+      className="object-contain block dark:hidden"
+    />
   </div>
 );
 
@@ -99,7 +109,9 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
       if (names.length === 1) {
         return names[0].charAt(0).toUpperCase();
       }
-      return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+      return (
+        names[0].charAt(0) + names[names.length - 1].charAt(0)
+      ).toUpperCase();
     };
 
     const initials = getInitials(alt);
@@ -116,16 +128,18 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             className="w-full h-full object-cover"
             onError={(e) => {
               // Hide the image and show initials or UserIcon if image fails to load
-              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).style.display = "none";
               const parent = (e.target as HTMLImageElement).parentElement;
               if (parent) {
-                const fallbackDiv = document.createElement('div');
-                fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
+                const fallbackDiv = document.createElement("div");
+                fallbackDiv.className =
+                  "w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm";
                 if (initials) {
                   fallbackDiv.textContent = initials;
                 } else {
                   // Create UserIcon for fallback
-                  fallbackDiv.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
+                  fallbackDiv.innerHTML =
+                    '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
                 }
                 parent.appendChild(fallbackDiv);
               }
@@ -228,12 +242,12 @@ const Header: React.FC<HeaderProps> = ({
 
     // Add event listener when mobile menu is open
     if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     // Cleanup event listener
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileMenuOpen]);
 
@@ -296,6 +310,18 @@ const Header: React.FC<HeaderProps> = ({
               ) : (
                 /* Regular User Section - Desktop */
                 <div className="flex items-center gap-3">
+                  {currentUser?.userRole === "admin" && (
+                    <Link href="/admin">
+                      <button
+                        className="px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm border
+                 dark:border-white/20 dark:text-white/90 dark:hover:bg-white/10 dark:hover:border-white/30
+                 border-gray-300/40 text-gray-700 hover:bg-gray-100/20 hover:border-gray-400/50"
+                      >
+                        Stories
+                      </button>
+                    </Link>
+                  )}
+
                   {/* Theme Switcher */}
                   <ThemeSwitcher />
 
@@ -412,6 +438,20 @@ const Header: React.FC<HeaderProps> = ({
               <div className="px-4 py-4 space-y-2">
                 {!isAdminLoggedIn && (
                   <>
+                    {currentUser?.userRole === "admin" && (
+                      <Link href="/admin" onClick={closeMobileMenu}>
+                        <div
+                          className="flex items-center gap-3 py-3 px-3 rounded-xl transition-colors duration-200 
+                    dark:hover:bg-white/10 hover:bg-gray-100/20"
+                        >
+                          <PencilIcon className="w-5 h-5 dark:text-white/90 text-gray-700" />
+                          <span className="text-sm font-medium dark:text-white/90 text-gray-700">
+                            Stories
+                          </span>
+                        </div>
+                      </Link>
+                    )}
+
                     {/* Theme Switcher */}
                     <div className="flex items-center justify-between py-3 px-3 rounded-xl transition-colors duration-200 dark:hover:bg-white/10 hover:bg-gray-100/20">
                       <div className="flex items-center gap-3">

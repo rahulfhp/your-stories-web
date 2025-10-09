@@ -15,6 +15,7 @@ interface BackendUserProfile {
   readStories?: string[];
   bookmarkedStories?: string[];
   upVoteStories?: string[];
+  userRole?: string;
 }
 
 interface AuthState {
@@ -34,6 +35,9 @@ interface AuthState {
   updateUserInLocalStorage: (updatedUser: BackendUserProfile) => void;
   // Add story to read list
   addToReadStories: (storyId: string) => void;
+  // Admin check
+  user: BackendUserProfile | null;
+  isAdmin: boolean;
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -44,6 +48,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   error: null,
   isLoginDialogOpen: false,
   accessToken: null,
+
+  // Add missing fields
+  user: null,         // same type as currentUser
+  isAdmin: false,     // default to false
 
   loginWithProvider: async (provider: AuthProviderId) => {
     set({ isLoading: true, error: null });
@@ -60,38 +68,41 @@ export const useAuthStore = create<AuthState>((set) => ({
       const providerId = provider === 'google' ? 'google.com-web' : 'facebook.com-web';
 
       // Send user details to backend sign-in API
-      try {
-        const resp = await axios.post(
-          `${BASE_URL}user/signIn`,
-          {
-            displayName: user.displayName,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
-            photoURL: user.photoURL,
-            providerId,
+      const resp = await axios.post(
+        `${BASE_URL}user/signIn`,
+        {
+          displayName: user.displayName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          photoURL: user.photoURL,
+          providerId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true',
           },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'ngrok-skip-browser-warning': 'true',
-            },
-          }
-        );
-
-        const backendUser: BackendUserProfile = resp.data?.user;
-        const accessToken: string | null = resp.data?.accessToken || null;
-
-        set({ currentUser: backendUser, accessToken, isLoading: false, error: null, isLoginDialogOpen: false });
-
-        // Persist to localStorage for hydration
-        if (typeof window !== 'undefined') {
-          window.localStorage.setItem('ys_auth_user', JSON.stringify(backendUser));
-          if (accessToken) window.localStorage.setItem('ys_access_token', accessToken);
         }
-      } catch (apiError) {
-        const message = apiError instanceof Error ? apiError.message : 'Login failed';
-        set({ isLoading: false, error: message });
-        return;
+      );
+
+      const backendUser: BackendUserProfile = resp.data?.user;
+      const accessToken: string | null = resp.data?.accessToken || null;
+
+      const isAdmin = backendUser.userRole === 'admin';
+
+      set({
+        currentUser: backendUser,
+        user: backendUser,
+        accessToken,
+        isAdmin,
+        isLoading: false,
+        error: null,
+        isLoginDialogOpen: false,
+      });
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('ys_auth_user', JSON.stringify(backendUser));
+        if (accessToken) window.localStorage.setItem('ys_access_token', accessToken);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Login failed';
@@ -103,7 +114,13 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       await firebase.auth().signOut();
-      set({ currentUser: null, accessToken: null, isLoading: false });
+      set({
+        currentUser: null,
+        user: null,
+        accessToken: null,
+        isAdmin: false,
+        isLoading: false,
+      });
       if (typeof window !== 'undefined') {
         window.localStorage.removeItem('ys_auth_user');
         window.localStorage.removeItem('ys_access_token');
@@ -118,16 +135,13 @@ export const useAuthStore = create<AuthState>((set) => ({
   closeLoginDialog: () => set({ isLoginDialogOpen: false }),
 
   requireAuth: (onAuthenticated: () => void) => {
-    const state = (useAuthStore.getState());
-    if (state.currentUser) {
-      onAuthenticated();
-    } else {
-      state.openLoginDialog();
-    }
+    const state = useAuthStore.getState();
+    if (state.currentUser) onAuthenticated();
+    else state.openLoginDialog();
   },
 
   updateUserInLocalStorage: (updatedUser: BackendUserProfile) => {
-    set({ currentUser: updatedUser });
+    set({ currentUser: updatedUser, user: updatedUser });
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('ys_auth_user', JSON.stringify(updatedUser));
     }
@@ -140,10 +154,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const currentReadStories = currentUser.readStories || [];
       if (!currentReadStories.includes(storyId)) {
         const updatedReadStories = [...currentReadStories, storyId];
-        const updatedUser = {
-          ...currentUser,
-          readStories: updatedReadStories
-        };
+        const updatedUser = { ...currentUser, readStories: updatedReadStories };
         useAuthStore.getState().updateUserInLocalStorage(updatedUser);
       }
     }
