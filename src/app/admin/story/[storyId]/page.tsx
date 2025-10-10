@@ -75,7 +75,7 @@ export default function StoryDetailPage({ params }: StoryDetailPageProps) {
           <div className="flex gap-3">
             <Button
               variant="destructive"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 cursor-pointer"
               onClick={handleReject}
             >
               <X className="h-4 w-4" />
@@ -83,7 +83,7 @@ export default function StoryDetailPage({ params }: StoryDetailPageProps) {
             </Button>
             <Button
               variant="default"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 cursor-pointer"
               onClick={handleApprove}
             >
               <Check className="h-4 w-4" />

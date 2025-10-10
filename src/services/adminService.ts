@@ -135,7 +135,7 @@ export const adminService = {
   rejectStories: async (storyIds: string[]): Promise<ApproveRejectResponse> => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}pendingStories/reject`,
+        `${API_BASE_URL}rejectStories/reject`,
         { storyIds },
         getConfig()
       );

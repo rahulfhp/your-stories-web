@@ -88,6 +88,7 @@ export default function AdminPage() {
               variant="destructive"
               onClick={handleRejectSelected}
               disabled={selectedStoryIds.length === 0 || isLoading}
+              className="cursor-pointer"
             >
               Reject Selected
             </Button>
@@ -95,6 +96,7 @@ export default function AdminPage() {
               variant="default"
               onClick={handleApproveSelected}
               disabled={selectedStoryIds.length === 0 || isLoading}
+              className="cursor-pointer"
             >
               Approve Selected
             </Button>

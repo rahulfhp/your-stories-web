@@ -313,7 +313,7 @@ const Header: React.FC<HeaderProps> = ({
                   {currentUser?.userRole === "admin" && (
                     <Link href="/admin">
                       <button
-                        className="px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm border
+                        className="px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105 backdrop-blur-sm border cursor-pointer
                  dark:border-white/20 dark:text-white/90 dark:hover:bg-white/10 dark:hover:border-white/30
                  border-gray-300/40 text-gray-700 hover:bg-gray-100/20 hover:border-gray-400/50"
                       >
