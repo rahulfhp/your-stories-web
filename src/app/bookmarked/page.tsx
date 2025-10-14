@@ -28,7 +28,7 @@ export default function BookmarkedPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black pt-20 sm:pt-24 md:pt-28 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black pt-20 sm:pt-24 md:pt-28 relative overflow-hidden">
       {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0">
         <div className="hidden sm:block">

@@ -48,9 +48,19 @@ interface HeaderProps {
 
 // Logo Component
 const Logo: React.FC = () => (
-  <div className="w-32 h-8 relative sm:w-36 sm:h-9 md:w-40 md:h-10 lg:w-44 lg:h-11">
-    <Image src={YourStoriesLogo} alt="Logo" fill className="object-contain dark:block hidden" />
-    <Image src={YourStoriesLogoLight} alt="Logo" fill className="object-contain block dark:hidden" />
+  <div className="w-34 h-10 relative sm:w-36 sm:h-10 md:w-42 md:h-12 lg:w-50 lg:h-15">
+    <Image
+      src={YourStoriesLogo}
+      alt="Logo"
+      fill
+      className="object-contain dark:block hidden"
+    />
+    <Image
+      src={YourStoriesLogoLight}
+      alt="Logo"
+      fill
+      className="object-contain block dark:hidden"
+    />
   </div>
 );
 
