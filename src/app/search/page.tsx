@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import useSearchStore, { TAGS_WITH_COLOR } from "@/stores/search";
 import StoryCard from "@/components/StoryCard";
+import { trackSearchPerformed, trackCategoryClicked } from "@/lib/analytics";
 
 const SearchContent: React.FC = () => {
   const router = useRouter();
@@ -92,8 +93,12 @@ const SearchContent: React.FC = () => {
       setSearchQuery(inputValue.trim());
       if (selectedTags.length > 0) {
         searchByTitleAndTagList(inputValue.trim(), selectedTags);
+        // Track search with tags
+        trackSearchPerformed(inputValue.trim(), searchResults.length);
       } else {
         searchByTitle(inputValue.trim());
+        // Track search without tags
+        trackSearchPerformed(inputValue.trim(), searchResults.length);
       }
     }
   }, [
@@ -102,6 +107,7 @@ const SearchContent: React.FC = () => {
     setSearchQuery,
     searchByTitleAndTagList,
     searchByTitle,
+    searchResults.length,
   ]);
 
   const handleKeyPress = useCallback(
@@ -119,6 +125,8 @@ const SearchContent: React.FC = () => {
         removeTag(tag);
       } else {
         addTag(tag);
+        // Track category clicked event
+        trackCategoryClicked(tag);
       }
     },
     [selectedTags, removeTag, addTag]

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import axios from 'axios';
 import firebase from '@/config/firebaseConfig';
 import { googleProvider, facebookProvider } from '@/config/authProviders';
+import { trackUserLoggedIn, identifyUser } from '@/lib/analytics';
 
 type AuthProviderId = 'google' | 'facebook';
 
@@ -82,6 +83,16 @@ export const useAuthStore = create<AuthState>((set) => ({
         const accessToken: string | null = resp.data?.accessToken || null;
 
         set({ currentUser: backendUser, accessToken, isLoading: false, error: null, isLoginDialogOpen: false });
+        
+        // Track login with provider only
+        trackUserLoggedIn(provider);      
+        
+        // Identify user in Mixpanel
+        identifyUser({
+          userId: backendUser._id,
+          email: backendUser.email || '',
+          name: backendUser.displayName || ''
+        });
 
         // Persist to localStorage for hydration
         if (typeof window !== 'undefined') {
