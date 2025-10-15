@@ -126,30 +126,7 @@
     -webkit-backdrop-filter: blur(20px);
     min-height: 100vh;
   }
-  
-  /* Light theme body styling */
-  body:not(.dark) {
-    background: linear-gradient(135deg, 
-      rgba(240, 248, 255, 0.9) 0%, 
-      rgba(224, 242, 254, 0.8) 25%,
-      rgba(219, 234, 254, 0.7) 50%,
-      rgba(239, 246, 255, 0.8) 75%,
-      rgba(248, 250, 252, 0.9) 100%
-    );
-    background-attachment: fixed;
-  }
-  
-  /* Dark theme body styling */
-  body.dark {
-    background: linear-gradient(135deg, 
-      rgba(15, 23, 42, 0.95) 0%, 
-      rgba(30, 41, 59, 0.9) 25%,
-      rgba(51, 65, 85, 0.85) 50%,
-      rgba(30, 41, 59, 0.9) 75%,
-      rgba(15, 23, 42, 0.95) 100%
-    );
-    background-attachment: fixed;
-  }
+
 }
 
 /* Custom Glassmorphism Toast Styles */
