@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="w-full relative overflow-hidden">
       {/* Background with blur & gradient */}
       <div className="absolute inset-0 backdrop-blur-xl border-t shadow-[0_-8px_32px_0_rgba(0,0,0,0.2)] dark:bg-black/20 dark:border-white/10 bg-white/20 border-black/10" />
-      <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-black/80 dark:to-gray-900/80 bg-gradient-to-br from-white/40 to-blue-50/40" />
+      <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-black/80 dark:to-gray-900/80 bg-gradient-to-br from-white to-blue-50/40" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-16 xl:px-[8.83rem] py-8 sm:py-12 lg:py-[3rem] flex flex-col justify-between gap-8">
         {/* Main Content */}
