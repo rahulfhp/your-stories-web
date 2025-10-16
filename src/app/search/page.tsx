@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import useSearchStore, { TAGS_WITH_COLOR } from "@/stores/search";
 import StoryCard from "@/components/StoryCard";
-import { trackSearchPerformed, trackCategoryClicked } from "@/lib/analytics";
+import { trackSearchPerformed, trackTagsClicked } from "@/lib/analytics";
 
 const SearchContent: React.FC = () => {
   const router = useRouter();
@@ -126,7 +126,7 @@ const SearchContent: React.FC = () => {
       } else {
         addTag(tag);
         // Track category clicked event
-        trackCategoryClicked(tag);
+        trackTagsClicked(tag);
       }
     },
     [selectedTags, removeTag, addTag]

@@ -50,7 +50,7 @@ export const trackStoryViewed = (story: Story) => {
   try {
     mixpanel.track('story_viewed', {
       story_id: story._id,
-      category: story.tagList?.join(', ') || '',
+      tagList: story.tagList?.join(', ') || '',
       author: story.userName,
       read_time_estimate: estimateReadTime(story.storyContent),
       story_title: story.storyTitle,
@@ -148,15 +148,29 @@ export const trackStoryBookmarkRemoved = (storyId: string, storyTitle: string) =
   }
 };
 
+export const trackStoryShared = (storyId: string, storyTitle: string, method: 'native' | 'clipboard') => {
+  if (!isBrowser) return;
+
+  try {
+    mixpanel.track('story_shared', {
+      story_id: storyId,
+      story_title: storyTitle,
+      share_method: method,
+    });
+  } catch (error) {
+    console.error('Mixpanel track error:', error);
+  }
+};
+
 // DISCOVERY EVENTS
 
 // Track search performed
-export const trackSearchPerformed = (query: string, resultCount: number) => {
+export const trackSearchPerformed = (search_query: string, resultCount: number) => {
   if (!isBrowser) return;
   
   try {
     mixpanel.track('search_performed', {
-      query,
+      search_query,
       result_count: resultCount,
     });
   } catch (error) {
@@ -164,13 +178,13 @@ export const trackSearchPerformed = (query: string, resultCount: number) => {
   }
 };
 
-// Track category clicked
-export const trackCategoryClicked = (category: string) => {
+// Track tags clicked
+export const trackTagsClicked = (tag: string) => {
   if (!isBrowser) return;
   
   try {
-    mixpanel.track('category_clicked', {
-      category,
+    mixpanel.track('tags_clicked', {
+      tag,
     });
   } catch (error) {
     console.error('Mixpanel track error:', error);
