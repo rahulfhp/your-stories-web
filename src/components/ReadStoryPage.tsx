@@ -55,6 +55,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
     bookmarkStory,
     removeBookmarkStory,
     readStory,
+    updateViewCount,
   } = useStoriesStore();
 
   const { searchResults } = useSearchStore();
@@ -243,6 +244,21 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       trackTimeSpentReading(story, readTimer);
     }
   }, [isTimerActive, readTimer, story]);
+
+  // call updateViewCount after 15 seconds
+  useEffect(() => {
+    if (!story) return;
+
+    const timer = setTimeout(() => {
+      try {
+        updateViewCount(story._id);
+      } catch (err) {
+        console.error("Failed to update view count:", err);
+      }
+    }, 15000); // 15 seconds
+
+    return () => clearTimeout(timer);
+  }, [story]);
 
   // Handle marking story as read
   const handleMarkAsRead = async () => {
