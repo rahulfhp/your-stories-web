@@ -76,6 +76,7 @@ interface StoriesState {
   bookmarkStory: (storyId: string) => Promise<void>;
   removeBookmarkStory: (storyId: string) => Promise<void>;
   readStory: (storyId: string) => Promise<void>;
+  updateViewCount: (storyId: string) => Promise<void>;
 
   clearErrors: () => void;
 }
@@ -443,6 +444,20 @@ const useStoriesStore = create<StoriesState>((set, get) => ({
       }
     } catch (error) {
       console.error("Error marking story as read:", error);
+    }
+  },
+
+  updateViewCount: async (storyId: string) => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL}liveStories/updateViewCount/${storyId}`,
+        {},
+        getConfig()
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error updating view count:", error);
+      throw error;
     }
   },
 

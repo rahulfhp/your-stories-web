@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Story } from "@/stores/stories";
@@ -9,6 +9,16 @@ import useSearchStore from "@/stores/search";
 import LoginDialog from "./LoginDialog";
 import { useAuthStore } from "@/stores/auth";
 import TestImage from "../../public/TestImage.svg";
+import {
+  trackStoryViewed,
+  trackReadProgress,
+  trackTimeSpentReading,
+  trackStoryUpvoteRemoved,
+  trackStoryUpvoted,
+  trackStoryBookmarkRemoved,
+  trackStoryBookmarked,
+  trackStoryShared,
+} from "@/lib/analytics";
 
 // Icons
 import {
@@ -45,6 +55,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
     bookmarkStory,
     removeBookmarkStory,
     readStory,
+    updateViewCount,
   } = useStoriesStore();
 
   const { searchResults } = useSearchStore();
@@ -64,6 +75,10 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
   const [readTimer, setReadTimer] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [hasMarkedAsRead, setHasMarkedAsRead] = useState(false);
+
+  // Scroll tracking for read progress
+  const [trackedMilestones, setTrackedMilestones] = useState<number[]>([]);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Find story based on ID
   useEffect(() => {
@@ -150,6 +165,47 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
     }
   }, [currentUser?.upVoteStories, story?._id]);
 
+  // Track story view when story is loaded
+  useEffect(() => {
+    if (story) {
+      // Track story_viewed event
+      trackStoryViewed(story);
+    }
+  }, [story]);
+
+  // Handle scroll tracking for read progress
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+
+      const element = contentRef.current;
+      const totalHeight = element.scrollHeight - element.clientHeight;
+      const scrollPosition = window.scrollY - element.offsetTop;
+      const currentProgress = Math.min(
+        100,
+        Math.max(0, Math.floor((scrollPosition / totalHeight) * 100))
+      );
+
+      // Track read progress at 25%, 50%, 75%, and 100%
+      const milestones = [25, 50, 75, 100];
+      milestones.forEach((milestone) => {
+        if (
+          currentProgress >= milestone &&
+          !trackedMilestones.includes(milestone)
+        ) {
+          // Track the milestone
+          if (story) {
+            trackReadProgress(story, milestone as 25 | 50 | 75 | 100);
+            setTrackedMilestones((prev) => [...prev, milestone]);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [story, trackedMilestones]);
+
   // Sync bookmark state when user's bookmarkedStories changes
   useEffect(() => {
     if (story && currentUser?.bookmarkedStories) {
@@ -174,8 +230,35 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       if (interval) {
         clearInterval(interval);
       }
+
+      // Track time spent reading when component unmounts or timer stops
+      if (story && readTimer > 0) {
+        trackTimeSpentReading(story, readTimer);
+      }
     };
   }, [isTimerActive, readTimer, hasMarkedAsRead, currentUser, story]);
+
+  // Track time spent reading every 60 seconds while reading
+  useEffect(() => {
+    if (isTimerActive && readTimer > 0 && readTimer % 60 === 0 && story) {
+      trackTimeSpentReading(story, readTimer);
+    }
+  }, [isTimerActive, readTimer, story]);
+
+  // call updateViewCount after 15 seconds
+  useEffect(() => {
+    if (!story) return;
+
+    const timer = setTimeout(() => {
+      try {
+        updateViewCount(story._id);
+      } catch (err) {
+        console.error("Failed to update view count:", err);
+      }
+    }, 15000); // 15 seconds
+
+    return () => clearTimeout(timer);
+  }, [story]);
 
   // Handle marking story as read
   const handleMarkAsRead = async () => {
@@ -238,9 +321,13 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
         if (currentUpvoteState) {
           // Currently upvoted, so downvote
           await downvoteStory(story._id);
+          // Track upvote removed event
+          trackStoryUpvoteRemoved(story._id, story.storyTitle);
         } else {
           // Not upvoted, so upvote
           await upvoteStory(story._id);
+          // Track upvote event
+          trackStoryUpvoted(story._id, story.storyTitle);
         }
 
         // Get updated story from store to sync with latest data
@@ -281,34 +368,61 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       if (isBookmarked) {
         removeBookmarkStory(story._id);
         setIsBookmarked(false);
+        // Track bookmark removed event
+        trackStoryBookmarkRemoved(story._id, story.storyTitle);
       } else {
         bookmarkStory(story._id);
         setIsBookmarked(true);
+        // Track bookmark event
+        trackStoryBookmarked(story._id, story.storyTitle);
       }
     });
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     if (!story) return;
 
+    const shareData = {
+      title: story.storyTitle,
+      text:
+        story.storyContent.replace(/<[^>]*>/g, "").substring(0, 100) + "...",
+      url: window.location.href,
+    };
+
+    // Check if native share is available
     if (navigator.share) {
-      navigator
-        .share({
-          title: story.storyTitle,
-          text:
-            story.storyContent.replace(/<[^>]*>/g, "").substring(0, 100) +
-            "...",
-          url: window.location.href,
-        })
-        .catch(console.error);
+      try {
+        await navigator.share(shareData);
+        // Share was successful - track it
+        trackStoryShared(story._id, story.storyTitle, "native");
+      } catch (error: any) {
+        // User canceled or error occurred - don't track
+        if (error.name === "AbortError") {
+          console.log("Share was canceled by user");
+        } else {
+          console.error("Error sharing:", error);
+          // Try clipboard fallback on error
+          fallbackToClipboard();
+        }
+      }
     } else {
-      // Fallback: copy to clipboard
+      // Native share not available, use clipboard fallback
+      fallbackToClipboard();
+    }
+
+    // Helper function for clipboard fallback
+    function fallbackToClipboard() {
+      if (!story) return; // Guard clause to satisfy TypeScript
+
       navigator.clipboard
         .writeText(window.location.href)
         .then(() => {
-          alert("Link copied to clipboard!");
+          // Successfully copied to clipboard - track it
+          trackStoryShared(story._id, story.storyTitle, "clipboard");
         })
-        .catch(() => {
+        .catch((clipboardError) => {
+          console.error("Clipboard error:", clipboardError);
+          // Show share menu as last resort (don't track)
           setShowShareMenu(!showShareMenu);
         });
     }
@@ -564,7 +678,10 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
           </div>
 
           {/* Story Content */}
-          <div className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg overflow-hidden">
+          <div
+            ref={contentRef}
+            className="bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-gray-300/40 dark:border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg overflow-hidden"
+          >
             <div
               className="prose prose-sm sm:prose-base lg:prose-lg prose-gray dark:prose-invert max-w-none text-gray-800 dark:text-white/90 leading-relaxed break-words"
               dangerouslySetInnerHTML={{ __html: story.storyContent }}

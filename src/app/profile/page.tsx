@@ -6,6 +6,7 @@ import useStoriesStore from "@/stores/stories";
 import StoryCard from "@/components/StoryCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { trackProfileVisited } from "@/lib/analytics";
 
 const ProfilePage: React.FC = () => {
   const user = useAuthStore((s) => s.currentUser);
@@ -33,10 +34,11 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     if (user?.email) {
       fetchUserStories(user.email);
+      
+      // Track profile visit
+      trackProfileVisited();
     }
-  }, [user?.email, fetchUserStories]);
-
-  console.log("user", user);
+  }, [user?.email, user?._id, fetchUserStories]);
 
   return (
     <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black py-20 sm:py-24 md:py-28 relative overflow-hidden">

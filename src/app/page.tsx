@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useStoriesStore from "@/stores/stories";
 import StoryCard from '@/components/StoryCard';
+import { trackHomepageVisited } from '@/lib/analytics';
 
 export default function Home() {
   const router = useRouter();
@@ -27,6 +28,9 @@ export default function Home() {
     
     // Fetch initial more stories
     fetchMoreStories(STORIES_PER_PAGE, 0);
+    
+    // Track homepage visit
+    trackHomepageVisited();
   }, [fetchHandpickedStories, fetchMoreStories]);
 
   const handleLoadMoreStories = () => {
