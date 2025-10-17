@@ -232,17 +232,17 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       }
 
       // Track time spent reading when component unmounts or timer stops
-      if (story && readTimer > 0) {
-        trackTimeSpentReading(story, readTimer);
-      }
+      // if (story && readTimer > 0) {
+      //   trackTimeSpentReading(story, readTimer);
+      // }
     };
   }, [isTimerActive, readTimer, hasMarkedAsRead, currentUser, story]);
 
   // Track time spent reading every 60 seconds while reading
   useEffect(() => {
-    if (isTimerActive && readTimer > 0 && readTimer % 60 === 0 && story) {
-      trackTimeSpentReading(story, readTimer);
-    }
+    // if (isTimerActive && readTimer > 0 && readTimer % 60 === 0 && story) {
+    //   trackTimeSpentReading(story, readTimer);
+    // }
   }, [isTimerActive, readTimer, story]);
 
   // call updateViewCount after 15 seconds
