@@ -3,6 +3,9 @@
 import Image from "next/image";
 import YourStoriesLogo from "../../public/YourStoriesLogo.svg";
 import YourStoriesLogoLight from "../../public/YourStoriesLogoLight.svg";
+import MindefyLogo from "../../public/mindefy-logo.svg";
+import MindefyDarkLogo from "../../public/mindefy-dark-logo.svg";
+import Link from "next/link";
 
 export default function Footer() {
   const getYear = new Date().getFullYear();
@@ -19,7 +22,26 @@ export default function Footer() {
           {/* Logo Section */}
           <div className="flex-shrink-0 w-full lg:w-auto">
             <div className="flex flex-col gap-3 sm:gap-4 items-center lg:items-start">
+              <h3 className="text-base sm:text-lg font-semibold">
+                Handcrafted with ❤️ By
+              </h3>
               {/* Main Mindefy Logo */}
+              <div className="relative w-40 sm:w-48 lg:w-[15.63rem] h-10 sm:h-12 lg:h-[4.02rem] mb-3">
+                <Link href="https://mindefy.tech/" target="blank">
+                  <Image
+                    src={MindefyDarkLogo}
+                    alt="Logo"
+                    fill
+                    className="object-contain dark:block hidden"
+                  />
+                  <Image
+                    src={MindefyLogo}
+                    alt="Logo"
+                    fill
+                    className="object-contain block dark:hidden"
+                  />
+                </Link>
+              </div>
               <div className="relative w-40 sm:w-48 lg:w-[15.63rem] h-10 sm:h-12 lg:h-[4.02rem]">
                 <Image
                   src={YourStoriesLogo}
@@ -183,8 +205,11 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div className="text-center text-sm sm:text-base opacity-80 font-bold text-gray-800 dark:text-white">
-          &copy; Mindefy Technologies Private Limited™, {getYear}. All rights
-          reserved.
+          &copy;{" "}
+          <Link href="https://mindefy.tech/" target="blank">
+            Mindefy Technologies Private Limited™
+          </Link>
+          , {getYear}. All rights reserved.
         </div>
       </div>
     </footer>
