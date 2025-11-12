@@ -6,11 +6,11 @@ import type { NextRequest } from 'next/server';
  * 
  * This middleware routes users based on the domain they're accessing:
  * - stories.yourhourapp.com: Shows app pages (/, /bookmarked, /profile, /read, /search, /write)
- * - test.yourhourapp.com: Shows marketing/info pages (/home, /about, /contact, /privacy, /terms)
+ * - demo.yourhourapp.com: Shows marketing/info pages (/home, /about, /contact, /privacy, /terms)
  * - yourhourapp.com (future): Shows marketing/info pages
  * 
  * Current setup for testing:
- * - test.yourhourapp.com → marketing pages
+ * - demo.yourhourapp.com → marketing pages
  * - stories.yourhourapp.com → app pages
  */
 
@@ -35,7 +35,7 @@ const MAIN_DOMAIN_PAGES = [
 const APP_DOMAINS = ['stories.yourhourapp.com'];
 
 // Domains that serve marketing pages (main domain equivalent)
-const MARKETING_DOMAINS = ['test.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
+const MARKETING_DOMAINS = ['demo.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -50,7 +50,7 @@ export function middleware(request: NextRequest) {
   // Check if it's an app domain (stories subdomain)
   const isAppDomain = !isLocalhost && APP_DOMAINS.some(appDomain => domain === appDomain);
   
-  // Check if it's a marketing domain (test subdomain or main domain)
+  // Check if it's a marketing domain (demo subdomain or main domain)
   const isMarketingDomain = !isLocalhost && MARKETING_DOMAINS.some(marketingDomain => domain === marketingDomain);
 
   // Handle root path "/" - redirect marketing domain to /home
