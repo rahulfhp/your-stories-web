@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
-import MarketingHeader from "@/components/MarketingHeader";
+import WebsiteHeader from "@/components/WebsiteHeader";
 import { Toaster } from "react-hot-toast";
 import { useThemeStore } from "@/stores/theme";
 import Footer from "./Footer";
-import MarketingFooter from "./MarketingFooter";
+import WebsiteFooter from "./WebsiteFooter";
 import { getDomainType } from "@/lib/domainUtils";
 
 interface ClientLayoutProps {
@@ -15,7 +15,9 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const { theme } = useThemeStore();
-  const [domainType, setDomainType] = useState<'app' | 'marketing' | 'localhost'>('localhost');
+  const [domainType, setDomainType] = useState<"app" | "website" | "localhost">(
+    "localhost"
+  );
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -26,20 +28,25 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   useEffect(() => {
     // Initialize theme on mount
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
+    if (theme === "dark") {
+      root.classList.add("dark");
     } else {
-      root.classList.remove('dark');
+      root.classList.remove("dark");
     }
   }, [theme]);
 
   // Determine which header and footer to use
   // On localhost, default to app header/footer, but allow override via domain detection
-  const useMarketingLayout = isClient && (domainType === 'marketing' || (domainType === 'localhost' && typeof window !== 'undefined' && window.location.pathname.startsWith('/home')));
+  const useWebsiteLayout =
+    isClient &&
+    (domainType === "website" ||
+      (domainType === "localhost" &&
+        typeof window !== "undefined" &&
+        window.location.pathname.startsWith("/home")));
 
   return (
     <>
-      {useMarketingLayout ? <MarketingHeader /> : <Header />}
+      {useWebsiteLayout ? <WebsiteHeader /> : <Header />}
       {children}
       <Toaster
         position="top-center"
@@ -66,7 +73,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           },
         }}
       />
-      {useMarketingLayout ? <MarketingFooter /> : <Footer />}
+      {useWebsiteLayout ? <WebsiteFooter /> : <Footer />}
     </>
   );
 }

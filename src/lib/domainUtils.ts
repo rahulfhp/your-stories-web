@@ -5,8 +5,8 @@
 // Domains that serve app pages
 const APP_DOMAINS = ['stories.yourhourapp.com'];
 
-// Domains that serve marketing pages
-const MARKETING_DOMAINS = ['demo.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
+// Domains that serve website pages
+const WEBSITE_DOMAINS = ['demo.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
 
 export function isAppDomain(): boolean {
   if (typeof window === 'undefined') return false;
@@ -14,13 +14,13 @@ export function isAppDomain(): boolean {
   return APP_DOMAINS.some(domain => hostname === domain);
 }
 
-export function isMarketingDomain(): boolean {
+export function isWebsiteDomain(): boolean {
   if (typeof window === 'undefined') return false;
   const hostname = window.location.hostname;
-  return MARKETING_DOMAINS.some(domain => hostname === domain);
+  return WEBSITE_DOMAINS.some(domain => hostname === domain);
 }
 
-export function getDomainType(): 'app' | 'marketing' | 'localhost' {
+export function getDomainType(): 'app' | 'website' | 'localhost' {
   if (typeof window === 'undefined') return 'localhost';
   const hostname = window.location.hostname;
   
@@ -32,8 +32,8 @@ export function getDomainType(): 'app' | 'marketing' | 'localhost' {
     return 'app';
   }
   
-  if (MARKETING_DOMAINS.some(domain => hostname === domain)) {
-    return 'marketing';
+  if (WEBSITE_DOMAINS.some(domain => hostname === domain)) {
+    return 'website';
   }
   
   // Default to app for unknown domains
