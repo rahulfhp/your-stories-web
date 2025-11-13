@@ -25,7 +25,6 @@ const SUBDOMAIN_PAGES = [
 ];
 
 const MAIN_DOMAIN_PAGES = [
-  '/home',
   '/about',
   '/contact',
   '/privacy',
@@ -53,20 +52,15 @@ export function middleware(request: NextRequest) {
   // Check if it's a marketing domain (demo subdomain or main domain)
   const isMarketingDomain = !isLocalhost && MARKETING_DOMAINS.some(marketingDomain => domain === marketingDomain);
 
-  // Handle root path "/" - redirect marketing domain to /home
-  if (isMarketingDomain && pathname === '/') {
-    return NextResponse.redirect(new URL('/home', request.url));
-  }
-
-  // If accessing app pages on marketing domain, redirect
+  // If accessing app pages on marketing domain, redirect to root
   if (isMarketingDomain) {
     const isAppPage = SUBDOMAIN_PAGES.some(page => 
       pathname === page || pathname.startsWith(page + '/')
     );
     
     if (isAppPage && pathname !== '/') {
-      // Redirect to marketing home page
-      return NextResponse.redirect(new URL('/home', request.url));
+      // Redirect to marketing home page (root)
+      return NextResponse.redirect(new URL('/', request.url));
     }
   }
 

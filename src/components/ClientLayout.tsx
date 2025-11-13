@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
+import MarketingHeader from "@/components/MarketingHeader";
 import { Toaster } from "react-hot-toast";
 import { useThemeStore } from "@/stores/theme";
 import Footer from "./Footer";
+import MarketingFooter from "./MarketingFooter";
+import { getDomainType } from "@/lib/domainUtils";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -12,6 +15,13 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const { theme } = useThemeStore();
+  const [domainType, setDomainType] = useState<'app' | 'marketing' | 'localhost'>('localhost');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    setDomainType(getDomainType());
+  }, []);
 
   useEffect(() => {
     // Initialize theme on mount
@@ -23,9 +33,13 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     }
   }, [theme]);
 
+  // Determine which header and footer to use
+  // On localhost, default to app header/footer, but allow override via domain detection
+  const useMarketingLayout = isClient && (domainType === 'marketing' || (domainType === 'localhost' && typeof window !== 'undefined' && window.location.pathname.startsWith('/home')));
+
   return (
     <>
-      <Header />
+      {useMarketingLayout ? <MarketingHeader /> : <Header />}
       {children}
       <Toaster
         position="top-center"
@@ -52,7 +66,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           },
         }}
       />
-      <Footer />
+      {useMarketingLayout ? <MarketingFooter /> : <Footer />}
     </>
   );
 }
