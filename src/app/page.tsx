@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import useStoriesStore from "@/stores/stories";
 import StoryCard from '@/components/StoryCard';
 import { trackHomepageVisited } from '@/lib/analytics';
+import { getDomainType } from "@/lib/domainUtils";
+import MarketingHomePage from "@/components/MarketingHomePage";
 
 export default function Home() {
   const router = useRouter();
@@ -16,22 +18,37 @@ export default function Home() {
     handpickedError,
     moreStoriesError,
     fetchHandpickedStories,
-    fetchMoreStories
+    fetchMoreStories,
   } = useStoriesStore();
 
+  const [domainType, setDomainType] = useState<
+    "app" | "marketing" | "localhost"
+  >("localhost");
+
+  const [isClient, setIsClient] = useState(false);
   const [moreStoriesPage, setMoreStoriesPage] = useState(0);
+
   const STORIES_PER_PAGE = 9;
 
+  // Detect domain and mark client-side
   useEffect(() => {
-    // Fetch handpicked stories on component mount
-    fetchHandpickedStories();
-    
-    // Fetch initial more stories
-    fetchMoreStories(STORIES_PER_PAGE, 0);
-    
-    // Track homepage visit
-    trackHomepageVisited();
-  }, [fetchHandpickedStories, fetchMoreStories]);
+    setIsClient(true);
+    setDomainType(getDomainType());
+  }, []);
+
+  // Only fetch stories when not on marketing domain
+  useEffect(() => {
+    if (isClient && domainType !== "marketing") {
+      // Fetch handpicked stories on component mount
+      fetchHandpickedStories();
+
+      // Fetch initial more stories
+      fetchMoreStories(STORIES_PER_PAGE, 0);
+      
+      // Track homepage visit
+      trackHomepageVisited();
+    }
+  }, [isClient, domainType, fetchHandpickedStories, fetchMoreStories]);
 
   const handleLoadMoreStories = () => {
     const nextPage = moreStoriesPage + 1;
@@ -45,6 +62,11 @@ export default function Home() {
     // router.push(`/read/${storyId}?source=${sourceType}`);
     router.push(`/read/${storyId}`);
   };
+
+  // Conditional render
+  if (isClient && domainType === "marketing") {
+    return <MarketingHomePage />;
+  }
 
   return (
     <>
