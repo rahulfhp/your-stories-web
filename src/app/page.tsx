@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import useStoriesStore from "@/stores/stories";
-import StoryCard from '@/components/StoryCard';
-import { trackHomepageVisited } from '@/lib/analytics';
+import StoryCard from "@/components/StoryCard";
+import { trackHomepageVisited } from "@/lib/analytics";
 import { getDomainType } from "@/lib/domainUtils";
-import MarketingHomePage from "@/components/MarketingHomePage";
+import WebsiteHomePage from "@/components/WebsiteHomePage";
 
 export default function Home() {
   const router = useRouter();
@@ -21,9 +21,9 @@ export default function Home() {
     fetchMoreStories,
   } = useStoriesStore();
 
-  const [domainType, setDomainType] = useState<
-    "app" | "marketing" | "localhost"
-  >("localhost");
+  const [domainType, setDomainType] = useState<"app" | "website" | "localhost">(
+    "localhost"
+  );
 
   const [isClient, setIsClient] = useState(false);
   const [moreStoriesPage, setMoreStoriesPage] = useState(0);
@@ -36,15 +36,15 @@ export default function Home() {
     setDomainType(getDomainType());
   }, []);
 
-  // Only fetch stories when not on marketing domain
+  // Only fetch stories when not on website domain
   useEffect(() => {
-    if (isClient && domainType !== "marketing") {
+    if (isClient && domainType !== "website") {
       // Fetch handpicked stories on component mount
       fetchHandpickedStories();
 
       // Fetch initial more stories
       fetchMoreStories(STORIES_PER_PAGE, 0);
-      
+
       // Track homepage visit
       trackHomepageVisited();
     }
@@ -64,8 +64,8 @@ export default function Home() {
   };
 
   // Conditional render
-  if (isClient && domainType === "marketing") {
-    return <MarketingHomePage />;
+  if (isClient && domainType === "website") {
+    return <WebsiteHomePage />;
   }
 
   return (
