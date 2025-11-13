@@ -118,10 +118,10 @@ export default function WebsiteHomePage() {
         <div className="container mx-auto px-4">
           {/* Heading */}
           <div className="text-center mb-10 md:mb-12 mt-6 md:mt-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-3 font-bold font-montserrat">
+            <h1 className="text-xl text-black sm:text-2xl md:text-3xl mb-2 sm:mb-3 font-bold font-montserrat">
               Meet YourHour
             </h1>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide font-montserrat">
+            <h1 className="text-xl text-black sm:text-2xl md:text-3xl font-bold tracking-wide font-montserrat">
               The Best ScreenTime App
             </h1>
           </div>
@@ -270,13 +270,13 @@ export default function WebsiteHomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="w-full max-w-lg">
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 The Dashboard
               </h2>
-              <h3 className="text-xl md:text-2xl mb-4 font-montserrat font-medium">
+              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
                 Your Daily Usage Summary
               </h3>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 Mr. Slow awaits you on this board! The app keeps a track on your
                 "Usage Time" & "Unlock Count" and thereby, gives a comparative
                 infographic view of your today's and past 7-day's activity.
@@ -313,13 +313,13 @@ export default function WebsiteHomePage() {
               />
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 The Reports
               </h2>
-              <h3 className="text-xl md:text-2xl mb-4 font-montserrat font-medium">
+              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
                 Multiple Detailed Reports
               </h3>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 YourHour app provides its users insightful Daily, Weekly and
                 Monthly infographic based reports for their app usage with great
                 analytics. The Daily consolidated usage report gets delivered
@@ -340,13 +340,13 @@ export default function WebsiteHomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 The Goal Spots
               </h2>
-              <h3 className="text-xl md:text-2xl mb-4 font-montserrat font-medium">
+              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
                 Know Your Level of Addiction!
               </h3>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 Using the data of your phone usage for past 7 days, YourHour app
                 defines the Category of Phone Addict that you currently are from
                 the listed six categories vis-a-vis Addicted, Obsessed,
@@ -384,10 +384,10 @@ export default function WebsiteHomePage() {
               />
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 Smart & Curated Challenges
               </h2>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 YourHour app provides personalized challenge recommendations to
                 its users to help them Break the Habit Loop.
               </p>
@@ -407,10 +407,10 @@ export default function WebsiteHomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 Usage Analytics
               </h2>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 Generate PDF reports with all the important analytics at your
                 fingertips.
               </p>
@@ -446,10 +446,10 @@ export default function WebsiteHomePage() {
               />
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
+              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
                 Export your data to XLSX format!
               </h2>
-              <p className="mb-6 font-montserrat font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
                 YourHour app does not store any of your data, so all your data
                 is stored in your phone memory and you can export the entire
                 data since the installation of the app in excel format for your
@@ -509,7 +509,7 @@ export default function WebsiteHomePage() {
               href="https://stories.yourhourapp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-70"
+              className="text-center text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-70"
             >
               Let's Read
             </a>
