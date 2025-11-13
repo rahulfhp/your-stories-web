@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import useStoriesStore from "@/stores/stories";
-import StoryCard from "@/components/StoryCard";
+import WebsiteStoryCard from "./WebsiteStoryCard";
 
 export default function WebsiteHomePage() {
   const [isSticky, setIsSticky] = useState(false);
@@ -495,7 +495,7 @@ export default function WebsiteHomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {handpickedStories && handpickedStories.length > 0
               ? handpickedStories.map((story) => (
-                  <StoryCard
+                  <WebsiteStoryCard
                     key={story._id}
                     storyData={story}
                     onClick={() => handleStoryClick(story._id)}
