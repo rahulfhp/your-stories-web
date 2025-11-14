@@ -23,14 +23,14 @@ export default function PrivacyPolicyPage() {
         </h3>
 
         {/* Paragraphs */}
-        <p className="mb-5 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-5 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           Mindefy Labs ("we", or "us") is happy to provide YourHour (the "App")
           that helps users ("you") improve their mobile experience with
           privacy-focused app usage tools. When using the App, you may consent
           to us collecting some of your personal information.
         </p>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           The purpose of this Privacy Policy is to provide you with a clear
           understanding of what personal information we have access to when you
           use the App, as well as what personal information may be collected
@@ -44,13 +44,13 @@ export default function PrivacyPolicyPage() {
           Overview
         </h4>
 
-        <p className="mb-5 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-5 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           This Privacy Policy explains how Mindefy Labs collects, stores, uses,
           transfers and shares your personal information in connection with the
           App, which is available for download from the Google Play™ store.
         </p>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           We may and reserve the right to update this Privacy Policy to reflect
           changes in and to keep you informed about our privacy practices.
           Please periodically review the App or the relevant Google Play™ store
@@ -62,14 +62,14 @@ export default function PrivacyPolicyPage() {
           Personal Information We Collect About You
         </h4>
 
-        <p className="mb-5 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-5 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           When you install the App, you will be explicitly asked to grant the
           App permission to access your device's usage data (the "Accessible
           Data"). The App locally processes the Accessible Data to provide
           various features and functionality to you.
         </p>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           Only for some features in the app, we may ask you to sign up and
           provide your name, email, date of birth, and country. You are entirely
           free to decide whether or not to share the Collected Data. However,
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
           How We Use Your Personal Information
         </h4>
 
-        <ul className="list-disc pl-6 mb-8 text-gray-700 space-y-2 text-base  md:text-lg leading-relaxed font-normal font-montserrat">
+        <ul className="list-disc pl-6 mb-8 text-gray-700 space-y-2 text-base leading-relaxed font-normal font-montserrat">
           <li>To operate, maintain, debug, and improve the App</li>
           <li>To send technical notices, updates, and alerts</li>
           <li>To respond to support and customer queries</li>
@@ -93,7 +93,7 @@ export default function PrivacyPolicyPage() {
           No Sale of Personal Information
         </h4>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           We do not and will never sell your personal information to advertising
           platforms, data brokers, or information resellers. We will also never
           sell your personal information as may be defined by applicable laws.
@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
           Information Security
         </h4>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           We take appropriate security measures to protect against unauthorized
           access, alteration, disclosure, or destruction of data. These include
           internal security reviews of our data collection, storage, and
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
           Updates / Changes
         </h4>
 
-        <p className="mb-8 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-8 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           We may alter our privacy policy from time to time to incorporate
           necessary changes in technology, applicable law, or any other variant.
           We reserve the right to change the terms of this Privacy Policy at any
@@ -128,13 +128,13 @@ export default function PrivacyPolicyPage() {
           Questions / Grievance Redressal
         </h4>
 
-        <p className="mb-4 text-gray-700 leading-relaxed text-base  md:text-lg font-normal font-montserrat">
+        <p className="mb-4 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           If you have any grievance relating to the processing of information
           provided by you, please contact our Grievance Department at{" "}
           <b>contact@mind-e-fy.com</b> or write to us at:
         </p>
 
-        <p className="text-gray-700 text-base  md:text-lg leading-relaxed font-normal font-montserrat mb-2">
+        <p className="text-gray-700 text-base leading-relaxed font-normal font-montserrat mb-2">
           <b>Mindefy Technologies Private Limited</b>
           <br />
           201, Atulya IT Park,
@@ -152,7 +152,7 @@ export default function PrivacyPolicyPage() {
         rel="noopener noreferrer"
         className="fixed bottom-16 right-2 z-50 flex items-center gap-2"
       >
-        <span className="hidden md:inline-block bg-white px-4 py-2 rounded shadow-lg text-sm border border-gray-200 font-normal font-montserrat">
+        <span className="hidden md:inline-block bg-white px-4 py-2 rounded shadow-lg text-[#080a3c] text-sm border border-gray-200 font-normal font-montserrat">
           Message us
         </span>
         <img
