@@ -330,7 +330,7 @@ Let's get started! 🚀`;
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Send a message..."
-                className="flex-1 border border-[#757575] rounded-full px-3 py-2.5 text-sm font-montserrat focus:outline-none focus:border-black"
+                className="flex-1 border border-[#757575] text-black rounded-full px-3 py-2.5 text-sm font-montserrat focus:outline-none focus:border-black"
               />
               <button
                 onClick={handleSendMessage}
