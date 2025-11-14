@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import useStoriesStore from "@/stores/stories";
 import WebsiteStoryCard from "./WebsiteStoryCard";
+import MindfulNestChatbot from "./MindfulNestChatbot";
 
 export default function WebsiteHomePage() {
   const [isSticky, setIsSticky] = useState(false);
@@ -486,6 +487,9 @@ export default function WebsiteHomePage() {
           </div>
         </div>
       </section>
+
+      {/* MindfulNest Chatbot */}
+      <MindfulNestChatbot />
 
       {/* Scroll to Top Button */}
       {isSticky && (

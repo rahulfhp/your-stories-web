@@ -119,6 +119,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply text-foreground;
     background: var(--background);
@@ -248,8 +249,41 @@ body.dark .toast-glassmorphism .toast-message {
     transform: translateY(-100%) scale(0.95);
     opacity: 0;
   }
+
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
+}
+
+/* website chatbot loading and animations */
+@keyframes dotColorChange {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(1);
+    background-color: #333333;
+  }
+
+  40% {
+    transform: scale(1.5);
+    background-color: #21abe1;
+  }
+}
+
+.dots-loading span {
+  animation: dotColorChange 1.5s infinite ease-in-out;
+}
+
+.dots-loading span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dots-loading span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.dots-loading span:nth-child(3) {
+  animation-delay: 0.6s;
 }
