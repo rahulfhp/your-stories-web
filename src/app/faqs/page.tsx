@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question:
-      "How can I use floating timer in devices like Redmi, Oppo, Vivi, Realme etc?",
+      "How can I use floating timer in devices like Redmi, Oppo, Vivo, Realme etc?",
     answer:
       "Try to lock YourHour app in the recent apps to avoid killing it accidentally. You can also remove it from the list of battery optimized apps in your phone settings.",
   },
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     question:
-      "How can I use Auto Lock in devices like Redmi, Oppo, Vivi, Realme etc?",
+      "How can I use Auto Lock in devices like Redmi, Oppo, Vivo, Realme etc?",
     answer:
       "Try to lock YourHour app in the recent apps to avoid killing it accidentally. You can also remove it from the list of battery optimized apps in your phone settings.",
   },
