@@ -22,92 +22,11 @@ export default function WebsiteHomePage() {
   }, []);
 
   const handleStoryClick = (storyId: string) => {
-    window.open(`/read/${storyId}`, "_blank");
+    window.open(`https://stories.yourhourapp.com/read/${storyId}`, "_blank");
   };
 
   return (
     <div className="bg-white">
-      {/* Add CSS for animations */}
-      <style jsx>{`
-        @keyframes slideInUp {
-          from {
-            transform: translateY(100px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeInRight {
-          from {
-            transform: translateX(100px);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeInLeft {
-          from {
-            transform: translateX(-100px);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .animate-on-scroll {
-          opacity: 0;
-        }
-
-        .animate-in.slide-up {
-          animation: slideInUp 0.6s ease-out forwards;
-        }
-
-        .animate-in.fade-right {
-          animation: fadeInRight 0.8s ease-out forwards;
-        }
-
-        .animate-in.fade-left {
-          animation: fadeInLeft 0.8s ease-out forwards;
-        }
-
-        .animate-in.fade-in {
-          animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        .delay-100 {
-          animation-delay: 0.1s;
-        }
-
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .delay-300 {
-          animation-delay: 0.3s;
-        }
-
-        .delay-400 {
-          animation-delay: 0.4s;
-        }
-      `}</style>
-
       {/* Hero Section */}
       <section
         className="relative pt-28 md:pt-32 pb-10 md:pb-12 min-h-screen bg-bottom bg-no-repeat bg-cover"

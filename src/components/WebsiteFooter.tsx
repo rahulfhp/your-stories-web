@@ -142,19 +142,19 @@ export default function WebsiteFooter() {
                   EXPLORE
                 </h4>
                 <a
-                  href="faq.html"
+                  href="/faqs"
                   className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors mb-3 font-montserrat"
                 >
                   FAQs
                 </a>
                 <a
-                  href="blogs.html"
+                  href="/blogs"
                   className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors mb-3 font-montserrat"
                 >
                   Blogs
                 </a>
                 <a
-                  href="privacy_policy.html"
+                  href="/privacy-policy"
                   className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
                 >
                   Privacy Policy
