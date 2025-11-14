@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-8 sm:gap-12 lg:gap-[6rem] flex-1">
           {/* Logo Section */}
           <div className="flex-shrink-0 w-full lg:w-auto">
-            <div className="flex flex-col gap-3 sm:gap-4 items-center lg:items-start">
+            <div className="flex flex-col gap-3 sm:gap-4 items-start">
               <h3 className="text-base sm:text-lg font-semibold">
                 Handcrafted with ❤️ By
               </h3>
@@ -66,7 +66,7 @@ export default function Footer() {
               <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                 INDIA OFFICE
               </h3>
-              <div className="text-xs sm:text-sm opacity-90 space-y-1">
+              <div className="text-sm sm:text-base opacity-90 space-y-1">
                 <p>201, Atulya IT Park,</p>
                 <p>Khandwa Road, Indore-452001</p>
                 <p>(M.P.) India</p>
@@ -83,7 +83,7 @@ export default function Footer() {
               <h3 className="text-base sm:text-lg font-semibold mt-6 mb-3 sm:mb-4">
                 UAE OFFICE
               </h3>
-              <div className="text-xs sm:text-sm opacity-90 space-y-1">
+              <div className="text-sm sm:text-base opacity-90 space-y-1">
                 <p>Dubai Silicon Oasis, DDP, Building A1,</p>
                 <p>Dubai, United Arab Emirates</p>
                 <p className="mt-2 sm:mt-3">+971 52 232 4382</p>
@@ -95,7 +95,7 @@ export default function Footer() {
               <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                 COMPANY
               </h3>
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-xs sm:text-sm opacity-90">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
                   href="https://mindefy.tech/about-us"
                   target="_blank"
@@ -118,7 +118,7 @@ export default function Footer() {
               <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                 PORTFOLIO
               </h3>
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-xs sm:text-sm opacity-90">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
                   href="https://mindefy.tech/your-hour"
                   target="_blank"
@@ -162,7 +162,7 @@ export default function Footer() {
               <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                 SERVICES
               </h3>
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-xs sm:text-sm opacity-90">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
                   href="https://mindefy.tech/hybrid-app-development"
                   target="_blank"
