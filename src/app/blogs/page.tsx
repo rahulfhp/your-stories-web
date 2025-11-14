@@ -245,7 +245,7 @@ export default function BlogsPage() {
         rel="noopener noreferrer"
         className="fixed bottom-16 right-2 z-50 flex items-center gap-2"
       >
-        <span className="hidden md:inline-block bg-white px-4 py-2 rounded shadow-lg text-sm border border-gray-200 font-normal font-montserrat">
+        <span className="hidden md:inline-block bg-white px-4 py-2 rounded shadow-lg text-sm text-[#080a3c] border border-gray-200 font-normal font-montserrat">
           Message us
         </span>
         <img
