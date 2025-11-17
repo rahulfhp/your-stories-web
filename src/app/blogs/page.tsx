@@ -1,110 +1,7 @@
 "use client";
 
+import { blogs } from "@/lib/website-blogs";
 import { useEffect, useState } from "react";
-
-const blogs = [
-  {
-    id: 1,
-    category: "2020",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_Letter-To-Device_gap.jpg",
-    author: "Wesley D'Souza",
-    title: "A Letter To My Smartphone!",
-    date: "Mar 14, 2020",
-  },
-  {
-    id: 2,
-    category: "2020",
-    link: "#",
-    image:
-      "yourhour-website-img/yourhourapp_Girl-using-charging-smartphone_gap.jpg",
-    author: "Wesley D'Souza",
-    title: "Phone Addiction",
-    date: "April 16, 2020",
-  },
-  {
-    id: 3,
-    category: "2020",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_Humanity_gap.jpg",
-    author: "Wesley D'Souza",
-    title: "The Great Covid Realisation",
-    date: "May 18, 2020",
-  },
-  {
-    id: 4,
-    category: "2020",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_meditation_gap.jpg",
-    author: "Wesley D'Souza",
-    title: "Mindfulness and Productivity",
-    date: "June 21, 2020",
-  },
-  {
-    id: 5,
-    category: "2020",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_Nickel-Boys_gap.jpg",
-    author: "Wesley D'Souza",
-    title:
-      "A Review of Colson Whitehead's Pulitzer Prize-winning novel 'Nickel Boys'",
-    date: "July 01, 2020",
-  },
-  {
-    id: 6,
-    category: "2019",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_looking-for-solution_gap.jpg",
-    author: "Daksh Haldar",
-    title: "Procrastination and Ways to Overcome It",
-    date: "June 30, 2019",
-  },
-  {
-    id: 7,
-    category: "2019",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_To-Do-List_gap.jpg",
-    author: "Daksh Haldar",
-    title: "Three Ways to Manage Your Time",
-    date: "May 14, 2019",
-  },
-  {
-    id: 8,
-    category: "2019",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_work-from-home-and-office_gap.jpg",
-    author: "Daksh Haldar",
-    title: "The Office Away From Office",
-    date: "June 16, 2019",
-  },
-  {
-    id: 9,
-    category: "2019",
-    link: "#",
-    image: "yourhour-website-img/Youhour_app_Top.jpg",
-    author: "Daksh Haldar",
-    title: 'The Difference between "AVERAGE AND SUCCESS"',
-    date: "July 16, 2019",
-  },
-  {
-    id: 10,
-    category: "2018",
-    link: "#",
-    image: "yourhour-website-img/yourhourapp_relationship_gap5_3.jpg",
-    author: "Jamila Johar",
-    title: '"YOUNG V/S THE OLD!" Smart Phones Seperating Generations!',
-    date: "March 16, 2018",
-  },
-  {
-    id: 11,
-    category: "2018",
-    link: "#",
-    image: "yourhour-website-img/YourHour_app_NewDrug.jpg",
-    author: "Jamila Johar",
-    title: '"MOBILE ADDICTION" The Show Behind!',
-    date: "April 16, 2018",
-  },
-];
 
 export default function BlogsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -200,7 +97,7 @@ export default function BlogsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBlogs.map((blog) => (
               <div key={blog.id} className="mb-4">
-                <a href={blog.link}>
+                <a href={`/blog/${blog.id}`}>
                   <div className="bg-white h-[26rem] rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
                     <div className="overflow-hidden">
                       <img
