@@ -27,6 +27,7 @@ const SUBDOMAIN_PAGES = [
 const MAIN_DOMAIN_PAGES = [
   '/faqs',
   '/blogs',
+  '/blog',
   '/privacy-policy',
 ];
 
