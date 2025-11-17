@@ -13,7 +13,7 @@ export default function WebsiteHeader() {
             {/* Left Logo */}
             <Link href="/" rel="noopener noreferrer" className="flex-shrink-0">
               <img
-                src="yourhour-website-img/YourHourApp-logo.svg"
+                src="/yourhour-website-img/YourHourApp-logo.svg"
                 alt="YourHour"
                 className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto"
               />
@@ -27,7 +27,7 @@ export default function WebsiteHeader() {
               className="flex-shrink-0"
             >
               <img
-                src="yourhour-website-img/stories-logo.svg"
+                src="/yourhour-website-img/stories-logo.svg"
                 alt="YourStories"
                 className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto"
               />

@@ -24,14 +24,14 @@ export default function WebsiteFooter() {
               className="mb-4"
             >
               <img
-                src="yourhour-website-img/Mindefy-logo.svg"
+                src="/yourhour-website-img/Mindefy-logo.svg"
                 alt="Mindefy Logo"
                 className="h-10"
               />
             </a>
 
             <img
-              src="yourhour-website-img/Footer-logo.webp"
+              src="/yourhour-website-img/Footer-logo.webp"
               alt="Make in India Badge"
               className="h-14 mb-5"
             />
