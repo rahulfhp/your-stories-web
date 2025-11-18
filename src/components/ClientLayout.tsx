@@ -15,13 +15,12 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const { theme } = useThemeStore();
-  const [domainType, setDomainType] = useState<"app" | "website" | "localhost">(
-    "localhost"
-  );
-  const [isClient, setIsClient] = useState(false);
+  const [domainType, setDomainType] = useState<
+    "app" | "website" | "localhost" | null
+  >(null);
 
   useEffect(() => {
-    setIsClient(true);
+    // Detect domain type immediately on mount
     setDomainType(getDomainType());
   }, []);
 
@@ -36,13 +35,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }, [theme]);
 
   // Determine which header and footer to use
-  // On localhost, default to app header/footer, but allow override via domain detection
   const useWebsiteLayout =
-    isClient &&
-    (domainType === "website" ||
-      (domainType === "localhost" &&
-        typeof window !== "undefined" &&
-        window.location.pathname.startsWith("/home")));
+    domainType === "website" ||
+    (domainType === "localhost" &&
+      typeof window !== "undefined" &&
+      window.location.pathname.startsWith("/home"));
+
+  // Don't render anything until domain type is determined
+  if (domainType === null) {
+    return null;
+  }
 
   return (
     <>

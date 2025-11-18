@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { trackWebsiteHeaderStoriesLogoClicked } from "@/lib/website-analytics";
 
 export default function WebsiteHeader() {
   return (
@@ -25,6 +26,7 @@ export default function WebsiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0"
+              onClick={() => trackWebsiteHeaderStoriesLogoClicked()}
             >
               <img
                 src="/yourhour-website-img/stories-logo.svg"

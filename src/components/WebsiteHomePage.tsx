@@ -5,6 +5,40 @@ import { Star } from "lucide-react";
 import useStoriesStore from "@/stores/stories";
 import WebsiteStoryCard from "./WebsiteStoryCard";
 import MindfulNestChatbot from "./MindfulNestChatbot";
+import {
+  trackWebsiteHomepageVisited,
+  trackWebsiteGooglePlayClicked,
+  trackWebsiteBottomStoriesLogoClicked,
+  trackWebsiteHandpickedStoryCardClicked,
+  trackWebsiteLetsReadClicked,
+} from "@/lib/website-analytics";
+
+const featuresInNews = [
+  "inc42",
+  "dainik_bhasker",
+  "sakal",
+  "dailyStar",
+  "independent",
+  "dailyhunt",
+  "lifehack",
+  "witty_spark",
+  "tracxn",
+  "nerdschalk",
+  "techarival",
+  "techConnecto",
+  "techdator",
+  "newsBytes",
+  "tech_comuters",
+  "Elcome",
+  "android4all",
+  "cosmo",
+  "h2s",
+  "gt",
+  "geochild",
+  "rochamama",
+  "steemit",
+  "topbest",
+];
 
 export default function WebsiteHomePage() {
   const [isSticky, setIsSticky] = useState(false);
@@ -15,6 +49,9 @@ export default function WebsiteHomePage() {
     // Fetch handpicked stories on component mount
     fetchHandpickedStories();
 
+    // Track homepage visit event
+    trackWebsiteHomepageVisited();
+
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
@@ -22,7 +59,9 @@ export default function WebsiteHomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleStoryClick = (storyId: string) => {
+  const handleStoryClick = (storyId: string, storyTitle: string) => {
+    // Track Story card Click event
+    trackWebsiteHandpickedStoryCardClicked(storyId, storyTitle);
     window.open(`https://stories.yourhourapp.com/read/${storyId}`, "_blank");
   };
 
@@ -146,6 +185,7 @@ export default function WebsiteHomePage() {
               href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWebsiteGooglePlayClicked()}
             >
               <img
                 src="yourhour-website-img/GooglePlay.png"
@@ -399,6 +439,7 @@ export default function WebsiteHomePage() {
               href="https://stories.yourhourapp.com/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWebsiteBottomStoriesLogoClicked()}
             >
               <img
                 src="yourhour-website-img/stories-logo.svg"
@@ -418,7 +459,9 @@ export default function WebsiteHomePage() {
                   <WebsiteStoryCard
                     key={story._id}
                     storyData={story}
-                    onClick={() => handleStoryClick(story._id)}
+                    onClick={() =>
+                      handleStoryClick(story._id, story.storyTitle)
+                    }
                   />
                 ))
               : null}
@@ -430,6 +473,7 @@ export default function WebsiteHomePage() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-center text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-70"
+              onClick={() => trackWebsiteLetsReadClicked()}
             >
               Let's Read
             </a>
@@ -439,41 +483,16 @@ export default function WebsiteHomePage() {
 
       {/* Featured In Section */}
       <section className="py-16 bg-[#333333]">
-        <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <h3 className="text-center text-white font-montserrat font-bold text-2xl md:text-3xl mb-10">
             Featured In The News
           </h3>
 
           <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-4 md:gap-y-6">
-            {[
-              "inc42",
-              "dainik_bhasker",
-              "sakal",
-              "dailyStar",
-              "independent",
-              "dailyhunt",
-              "lifehack",
-              "witty_spark",
-              "tracxn",
-              "nerdschalk",
-              "techarival",
-              "techConnecto",
-              "techdator",
-              "newsBytes",
-              "tech_comuters",
-              "Elcome",
-              "android4all",
-              "cosmo",
-              "h2s",
-              "gt",
-              "geochild",
-              "rochamama",
-              "steemit",
-              "topbest",
-            ].map((logo, idx) => (
+            {featuresInNews.map((logo, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center w-[130px] sm:w-[150px] md:w-[170px] lg:w-[190px]"
+                className="flex items-center justify-center w-[100px] md:w-[120px] lg:w-[150px]"
               >
                 <img
                   src={`yourhour-website-img/yourhour_${logo}.${
