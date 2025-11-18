@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { trackWebsiteChatbotOpened, trackWebsiteChatbotClosed, trackWebsiteChatbotQuerySubmitted } from "@/lib/website-analytics";
 
 export default function MindfulNestChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -104,6 +105,10 @@ Let's get started! 🚀`;
     const userInput = inputValue.trim();
     if (!userInput) return;
 
+    // Track query submission event with 150-character limit
+    const truncated = userInput.length > 150 ? userInput.slice(0, 150) : userInput;
+    trackWebsiteChatbotQuerySubmitted(truncated);
+
     const newMessage = {
       content: userInput,
       sender: "user",
@@ -165,6 +170,7 @@ Let's get started! 🚀`;
 
   const openChatbot = () => {
     setIsChatOpen(true);
+    trackWebsiteChatbotOpened();
     const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     if (chatHistory.length === 0 && messages.length === 0) {
       initializeChat();
@@ -173,6 +179,7 @@ Let's get started! 🚀`;
 
   const closeChatbot = () => {
     setIsChatOpen(false);
+    trackWebsiteChatbotClosed();
   };
 
   const handleOverlayClick = (e) => {

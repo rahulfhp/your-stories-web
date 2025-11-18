@@ -13,7 +13,7 @@ export default function WebsiteFooter() {
           {/* Logo and Social */}
           <div className="flex flex-col items-start">
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-[#13151A] font-montserrat">
+              <h4 className="w-fit text-lg font-semibold text-[#13151A] font-montserrat">
                 Handcrafted with ❤️ By
               </h4>
             </div>

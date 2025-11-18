@@ -2,6 +2,7 @@
 
 import { blogs } from "@/lib/website-blogs";
 import { useEffect, useState } from "react";
+import { trackWebsiteBlogsPageVisited, trackWebsiteBlogCardClicked } from "@/lib/website-analytics";
 
 export default function BlogsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -14,6 +15,11 @@ export default function BlogsPage() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track blogs page visit event on mount
+  useEffect(() => {
+    trackWebsiteBlogsPageVisited();
   }, []);
 
   function getInitials(name: string) {
@@ -97,7 +103,12 @@ export default function BlogsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBlogs.map((blog) => (
               <div key={blog.id} className="mb-4">
-                <a href={`/blog/${blog.id}`}>
+                <a
+                  href={`/blog/${blog.id}`}
+                  onClick={() =>
+                    trackWebsiteBlogCardClicked(blog.id, blog.title, "normal")
+                  }
+                >
                   <div className="bg-white h-[26rem] rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
                     <div className="overflow-hidden">
                       <img
