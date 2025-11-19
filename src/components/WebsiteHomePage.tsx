@@ -427,6 +427,32 @@ export default function WebsiteHomePage() {
         </div>
       </section>
 
+      {/* The Dark Mode */}
+      <section className="py-12 px-4 md:px-[10%]">
+        <div className="container mx-auto">
+          {/* contents */}
+          <div className="text-center mb-5 mx-auto">
+            <h2 className="text-3xl text-black md:text-4xl mb-7 font-montserrat font-bold tracking-wide">
+              The Dark Mode
+            </h2>
+            <h3 className="text-xl text-black md:text-2xl mb-7 font-montserrat font-medium">
+              Know Your Level of Addictions
+            </h3>
+            <p className="max-w-4xl mx-auto text-center text-black font-montserrat font-normal leading-[180%] tracking-wide">
+              YourHour equips the user with Dark Mode feature where they can
+              change the App Layout, according to their preference. And guess
+              what? You can use this feature for free!
+            </p>
+          </div>
+          {/* Phone image */}
+          <img
+            src="yourhour-website-img/yourhour-dark-image.webp"
+            alt="Export"
+            className="w-full max-w-[1120px] mx-auto py-5"
+          />
+        </div>
+      </section>
+      
       {/* Featured In Section */}
       <section className="py-16 bg-[#333333]">
         <div className="max-w-6xl mx-auto px-4">
