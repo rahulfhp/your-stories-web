@@ -1,7 +1,5 @@
 "use client";
 
-import { Facebook, Linkedin, Instagram } from "lucide-react";
-
 export default function WebsiteFooter() {
   const getYear = new Date().getFullYear();
 
@@ -9,7 +7,7 @@ export default function WebsiteFooter() {
     <footer className="bg-gradient-to-b from-white to-[#a0e9f0] pt-16 pb-6">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between gap-10">
+        <div className="flex flex-col lg:flex-row justify-between gap-20">
           {/* Logo and Social */}
           <div className="flex flex-col items-start">
             <div className="mb-4">
@@ -21,19 +19,19 @@ export default function WebsiteFooter() {
               href="https://mind-e-fy.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4"
+              className="mb-6"
             >
               <img
                 src="/yourhour-website-img/Mindefy-logo.svg"
                 alt="Mindefy Logo"
-                className="h-10"
+                className="h-12"
               />
             </a>
 
             <img
               src="/yourhour-website-img/Footer-logo.webp"
               alt="Make in India Badge"
-              className="h-14 mb-5"
+              className="h-14 mb-6"
             />
 
             {/* Social Icons */}
@@ -43,27 +41,24 @@ export default function WebsiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="p-2 rounded-full bg-[#f5f5f5] hover:bg-[#23aae2] transition"
               >
-                <Facebook className="h-5 w-5 text-[#333]" />
+                <img src="/yourhour-website-img/facebook.svg" alt="icon" />
               </a>
               <a
                 href="https://www.linkedin.com/company/mindefytechnologies/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="p-2 rounded-full bg-[#f5f5f5] hover:bg-[#23aae2] transition"
               >
-                <Linkedin className="h-5 w-5 text-[#333]" />
+                <img src="/yourhour-website-img/linkedin.svg" alt="icon" />
               </a>
               <a
                 href="https://www.instagram.com/mindefy_technologies?igsh=MThpZGRkeWNxdHhnaA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="p-2 rounded-full bg-[#f5f5f5] hover:bg-[#23aae2] transition"
               >
-                <Instagram className="h-5 w-5 text-[#333]" />
+                <img src="/yourhour-website-img/insta.svg" alt="icon" />
               </a>
             </div>
           </div>
@@ -75,37 +70,39 @@ export default function WebsiteFooter() {
               <h4 className="font-semibold text-base text-[#13151A] mb-4 font-montserrat">
                 INDIA OFFICE
               </h4>
-              <p className="text-sm text-[#13151A] leading-relaxed font-montserrat">
+              <p className="text-sm font-medium text-[#13151A] leading-loose font-montserrat">
                 201, Atulya IT Park,
                 <br />
-                Khandwa Road,
-                <br />
-                Indore-452001
-                <br />
+                <p className="text-sm font-medium text-[#13151A] leading-normal font-montserrat">
+                  Khandwa Road, Indore-
+                  <br />
+                  452001
+                </p>
                 (M.P.) India
               </p>
               <a
                 href="mailto:rahul@mindefy.tech"
-                className="text-sm text-[#13151A] hover:text-[#23aae2] block mt-1 font-montserrat"
+                className="text-sm w-fit font-medium text-[#13151A] hover:text-[#23aae2] leading-loose block mt-1 font-montserrat"
               >
                 Email Us
               </a>
-              <p className="text-sm text-[#13151A] font-montserrat">
+              <p className="text-sm font-medium text-[#13151A] leading-loose font-montserrat">
                 +91-731-2996160
               </p>
-              <p className="text-sm text-[#13151A] mb-4 font-montserrat">
+              <p className="text-sm font-medium text-[#13151A] leading-loose mb-4 font-montserrat">
                 +91-90961-26060
               </p>
 
               <div>
-                <h4 className="font-semibold text-base text-[#13151A] mb-2 font-montserrat">
+                <h4 className="font-semibold text-base text-[#13151A] leading-loose mb-2 font-montserrat">
                   UAE OFFICE
                 </h4>
-                <p className="text-sm text-[#13151A] leading-relaxed font-montserrat">
-                  Dubai Silicon Oasis,
+                <p className="text-sm font-medium text-[#13151A] leading-normal font-montserrat">
+                  Dubai Silicon Oasis, DDP,
                   <br />
-                  DDP, Building A1,
-                  <br />
+                  Building A1,
+                </p>
+                <p className="text-sm font-medium text-[#13151A] leading-loose font-montserrat">
                   Dubai, United Arab Emirates
                   <br />
                   +971 52 232 4382
@@ -123,7 +120,7 @@ export default function WebsiteFooter() {
                   href="https://mindefy.tech/about-us"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors mb-3 font-montserrat"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
                 >
                   About
                 </a>
@@ -131,7 +128,7 @@ export default function WebsiteFooter() {
                   href="https://mindefy.tech/testimonials"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
                 >
                   Testimonials
                 </a>
@@ -142,20 +139,20 @@ export default function WebsiteFooter() {
                   EXPLORE
                 </h4>
                 <a
-                  href="/faqs"
-                  className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors mb-3 font-montserrat"
-                >
-                  FAQs
-                </a>
-                <a
                   href="/blogs"
-                  className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors mb-3 font-montserrat"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
                 >
                   Blogs
                 </a>
                 <a
+                  href="/faqs"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
+                >
+                  FAQs
+                </a>
+                <a
                   href="/privacy-policy"
-                  className="block text-sm text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
                 >
                   Privacy Policy
                 </a>
@@ -171,7 +168,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/your-hour"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 YourHour
               </a>
@@ -179,7 +176,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/spector"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 Spector
               </a>
@@ -187,7 +184,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/early-foods"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 Early Foods
               </a>
@@ -195,7 +192,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/jego"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 JEGO
               </a>
@@ -203,7 +200,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/digi-bill"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] font-montserrat"
               >
                 GreenBill
               </a>
@@ -218,7 +215,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/hybrid-app-development"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 Hybrid App Development
               </a>
@@ -226,7 +223,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/startup-support"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 Startup Support & Consulting
               </a>
@@ -234,7 +231,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/digital-transformation"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 Digital Transformation
               </a>
@@ -242,7 +239,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/mvp-development"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] mb-3 font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
                 MVP Dev. & PMF Test
               </a>
@@ -250,7 +247,7 @@ export default function WebsiteFooter() {
                 href="https://mindefy.tech/staff-services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-sm text-[#13151A] hover:text-[#23aae2] font-montserrat"
+                className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] font-montserrat"
               >
                 Staff Augmentation Services
               </a>
@@ -260,7 +257,7 @@ export default function WebsiteFooter() {
 
         {/* Copyright */}
         <div className="border-t border-[#c5e7eb] mt-10 pt-4 text-center">
-          <p className="text-sm text-[#13151A]">
+          <p className="text-sm font-medium text-[#13151A]">
             ©{" "}
             <a
               href="https://mindefy.tech"

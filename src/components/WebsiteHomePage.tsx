@@ -12,6 +12,7 @@ import {
   trackWebsiteHandpickedStoryCardClicked,
   trackWebsiteLetsReadClicked,
 } from "@/lib/website-analytics";
+import FeaturesPage from "./YourHourAppFeatures";
 
 const featuresInNews = [
   "inc42",
@@ -69,27 +70,32 @@ export default function WebsiteHomePage() {
     <div className="bg-white">
       {/* Hero Section */}
       <section
-        className="relative pt-28 md:pt-32 pb-10 md:pb-12 min-h-screen bg-bottom bg-no-repeat bg-cover"
+        className="relative pt-28 md:pt-54 pb-10 md:pb-12 min-h-screen"
         style={{
           backgroundImage: "url(yourhour-website-img/hero-BG-Img.webp)",
+          backgroundPosition: "center bottom",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          width: "100%",
+          height: "auto",
         }}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 pb-[20%] md:pb-[24%]">
           {/* Heading */}
-          <div className="text-center mb-10 md:mb-12 mt-6 md:mt-8">
-            <h1 className="text-xl text-black sm:text-2xl md:text-3xl mb-2 sm:mb-3 font-bold font-montserrat">
+          <div className="text-center mb-10 md:mb-12">
+            <h1 className="text-xl text-black sm:text-2xl md:text-4xl mb-2 sm:mb-3 font-bold tracking-wide font-lobster">
               Meet YourHour
             </h1>
-            <h1 className="text-xl text-black sm:text-2xl md:text-3xl font-bold tracking-wide font-montserrat">
+            <h1 className="text-xl text-black sm:text-2xl md:text-4xl font-bold tracking-wide font-lobster">
               The Best ScreenTime App
             </h1>
           </div>
 
           {/* Social Proofing */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-20 mb-10 md:mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-32 mb-10 md:mb-12">
             {/* Side Card 1 */}
             <div
-              className="w-50 sm:w-55 md:w-63 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
+              className="w-50 sm:w-55 md:w-58 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
               style={{
                 backgroundImage: "url(yourhour-website-img/SideLeafCrown.svg)",
               }}
@@ -97,7 +103,7 @@ export default function WebsiteHomePage() {
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm mb-1">
                 Available in
               </div>
-              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-xl mb-1">
+              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl mb-1">
                 25 Global
               </div>
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm">
@@ -115,7 +121,7 @@ export default function WebsiteHomePage() {
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm mb-1">
                 Trusted By Over
               </div>
-              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-xl mb-1">
+              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl mb-1">
                 5 Million
               </div>
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm">
@@ -125,7 +131,7 @@ export default function WebsiteHomePage() {
 
             {/* Side Card 2 */}
             <div
-              className="w-50 sm:w-55 md:w-63 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
+              className="w-50 sm:w-55 md:w-58 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
               style={{
                 backgroundImage: "url(yourhour-website-img/SideLeafCrown.svg)",
               }}
@@ -169,7 +175,7 @@ export default function WebsiteHomePage() {
                     </div>
                   );
                 })}
-                <span className="ml-1 text-[#36BFCB] text-sm sm:text-base">
+                <span className="ml-1 text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl">
                   4.6
                 </span>
               </div>
@@ -225,207 +231,8 @@ export default function WebsiteHomePage() {
         </div>
       </section>
 
-      {/* Features Section - The Dashboard */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="w-full max-w-lg">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                The Dashboard
-              </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
-                Your Daily Usage Summary
-              </h3>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                Mr. Slow awaits you on this board! The app keeps a track on your
-                "Usage Time" & "Unlock Count" and thereby, gives a comparative
-                infographic view of your today's and past 7-day's activity.
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>Create Your Goals</li>
-                <li>Set Screen Unlock Count</li>
-                <li>Track Usage Time</li>
-                <li>Analyse Most Used Apps</li>
-                <li>Track Most Visited Apps</li>
-                <li>Check Your Addiction Level</li>
-              </ul>
-            </div>
-            <div className="text-center">
-              <img
-                src="yourhour-website-img/phoneaddiction_dashboard.webp"
-                alt="Dashboard"
-                className="w-full max-w-[25rem] mx-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - The Reports */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center order-2 md:order-1">
-              <img
-                src="yourhour-website-img/phoneaddiction_multiple_reports.webp"
-                alt="Reports"
-                className="w-full max-w-[25rem] mx-auto"
-              />
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                The Reports
-              </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
-                Multiple Detailed Reports
-              </h3>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                YourHour app provides its users insightful Daily, Weekly and
-                Monthly infographic based reports for their app usage with great
-                analytics. The Daily consolidated usage report gets delivered
-                everyday through a notification.
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>Daily Reports</li>
-                <li>Weekly Reports</li>
-                <li>Monthly Reports</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Goal Spots */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                The Goal Spots
-              </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-montserrat font-medium">
-                Know Your Level of Addiction!
-              </h3>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                Using the data of your phone usage for past 7 days, YourHour app
-                defines the Category of Phone Addict that you currently are from
-                the listed six categories vis-a-vis Addicted, Obsessed,
-                Dependent, Habitual, Achiever and Champion.
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>Addicted</li>
-                <li>Obsessed</li>
-                <li>Dependent</li>
-                <li>Habitual</li>
-                <li>Achiever</li>
-                <li>Champion</li>
-              </ul>
-            </div>
-            <div className="text-center">
-              <img
-                src="yourhour-website-img/phoneaddiction_level.webp"
-                alt="Addiction Level"
-                className="w-full max-w-[25rem] mx-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Challenges */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center order-2 md:order-1">
-              <img
-                src="yourhour-website-img/phoneaddiction_challenges.webp"
-                alt="Challenges"
-                className="w-full max-w-[25rem] md:h-[37.5rem] mx-auto object-contain"
-              />
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                Smart & Curated Challenges
-              </h2>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                YourHour app provides personalized challenge recommendations to
-                its users to help them Break the Habit Loop.
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>App Diet Challenge</li>
-                <li>App Fasting Challenge</li>
-                <li>No Phone Challenge</li>
-                <li>Scheduled Challenges!</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Usage Analytics */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                Usage Analytics
-              </h2>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                Generate PDF reports with all the important analytics at your
-                fingertips.
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>Weekly and Monthly Average</li>
-                <li>Top Used Category</li>
-                <li>Peak Usage Time</li>
-                <li>Top Used Apps</li>
-                <li>Track Daywise Phone Usage</li>
-                <li>Carbon Footprint Reduction</li>
-              </ul>
-            </div>
-            <div className="text-center">
-              <img
-                src="yourhour-website-img/phoneaddiction_detailed_reports.webp"
-                alt="Analytics"
-                className="w-full max-w-[25rem] mx-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Export Data */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center order-2 md:order-1">
-              <img
-                src="yourhour-website-img/phoneaddiction_reports.webp"
-                alt="Export"
-                className="w-full max-w-[25rem] mx-auto"
-              />
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-montserrat font-bold tracking-wide">
-                Export your data to XLSX format!
-              </h2>
-              <p className="mb-6 text-black font-montserrat font-normal leading-[180%] tracking-wide text-justify">
-                YourHour app does not store any of your data, so all your data
-                is stored in your phone memory and you can export the entire
-                data since the installation of the app in excel format for your
-                data analysis or statistics purpose.
-              </p>
-
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
-                <li>Export Data to PDF</li>
-                <li>Export Data to Excel</li>
-                <li>Backup on Google Drive</li>
-                <li>Share with Friends</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* YourHourApp Features Section */}
+      <FeaturesPage />
 
       {/* Featured In Section */}
       <section className="py-16 bg-[#333333]">
@@ -499,7 +306,7 @@ export default function WebsiteHomePage() {
               href="https://stories.yourhourapp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-70"
+              className="text-center font-semibold font-montserrat text-lg text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-80"
               onClick={() => trackWebsiteLetsReadClicked()}
             >
               Let's Read
