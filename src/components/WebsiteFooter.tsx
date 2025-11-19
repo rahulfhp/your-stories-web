@@ -73,10 +73,11 @@ export default function WebsiteFooter() {
               <p className="text-sm font-medium text-[#13151A] leading-loose font-montserrat">
                 201, Atulya IT Park,
                 <br />
-                Khandwa Road,
-                <br />
-                Indore-452001
-                <br />
+                <p className="text-sm font-medium text-[#13151A] leading-normal font-montserrat">
+                  Khandwa Road, Indore-
+                  <br />
+                  452001
+                </p>
                 (M.P.) India
               </p>
               <a
@@ -96,11 +97,12 @@ export default function WebsiteFooter() {
                 <h4 className="font-semibold text-base text-[#13151A] leading-loose mb-2 font-montserrat">
                   UAE OFFICE
                 </h4>
+                <p className="text-sm font-medium text-[#13151A] leading-normal font-montserrat">
+                  Dubai Silicon Oasis, DDP,
+                  <br />
+                  Building A1,
+                </p>
                 <p className="text-sm font-medium text-[#13151A] leading-loose font-montserrat">
-                  Dubai Silicon Oasis,
-                  <br />
-                  DDP, Building A1,
-                  <br />
                   Dubai, United Arab Emirates
                   <br />
                   +971 52 232 4382
