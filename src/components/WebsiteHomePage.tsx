@@ -77,19 +77,19 @@ export default function WebsiteHomePage() {
         <div className="container mx-auto px-4">
           {/* Heading */}
           <div className="text-center mb-10 md:mb-12 mt-6 md:mt-8">
-            <h1 className="text-xl text-black sm:text-2xl md:text-3xl mb-2 sm:mb-3 font-bold font-montserrat">
+            <h1 className="text-xl text-black sm:text-2xl md:text-4xl mb-2 sm:mb-3 font-bold tracking-wide font-lobster">
               Meet YourHour
             </h1>
-            <h1 className="text-xl text-black sm:text-2xl md:text-3xl font-bold tracking-wide font-montserrat">
+            <h1 className="text-xl text-black sm:text-2xl md:text-4xl font-bold tracking-wide font-lobster">
               The Best ScreenTime App
             </h1>
           </div>
 
           {/* Social Proofing */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-20 mb-10 md:mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-32 mb-10 md:mb-12">
             {/* Side Card 1 */}
             <div
-              className="w-50 sm:w-55 md:w-63 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
+              className="w-50 sm:w-55 md:w-58 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
               style={{
                 backgroundImage: "url(yourhour-website-img/SideLeafCrown.svg)",
               }}
@@ -97,7 +97,7 @@ export default function WebsiteHomePage() {
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm mb-1">
                 Available in
               </div>
-              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-xl mb-1">
+              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl mb-1">
                 25 Global
               </div>
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm">
@@ -115,7 +115,7 @@ export default function WebsiteHomePage() {
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm mb-1">
                 Trusted By Over
               </div>
-              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-xl mb-1">
+              <div className="text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl mb-1">
                 5 Million
               </div>
               <div className="text-[#36BFCB] font-montserrat font-bold text-xs sm:text-sm">
@@ -125,7 +125,7 @@ export default function WebsiteHomePage() {
 
             {/* Side Card 2 */}
             <div
-              className="w-50 sm:w-55 md:w-63 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
+              className="w-50 sm:w-55 md:w-58 h-25 sm:h-28 md:h-29 text-center flex flex-col justify-center bg-center bg-no-repeat bg-cover"
               style={{
                 backgroundImage: "url(yourhour-website-img/SideLeafCrown.svg)",
               }}
@@ -169,7 +169,7 @@ export default function WebsiteHomePage() {
                     </div>
                   );
                 })}
-                <span className="ml-1 text-[#36BFCB] text-sm sm:text-base">
+                <span className="ml-1 text-[#36BFCB] font-montserrat font-black text-lg sm:text-2xl">
                   4.6
                 </span>
               </div>
@@ -241,7 +241,7 @@ export default function WebsiteHomePage() {
                 "Usage Time" & "Unlock Count" and thereby, gives a comparative
                 infographic view of your today's and past 7-day's activity.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>Create Your Goals</li>
                 <li>Set Screen Unlock Count</li>
                 <li>Track Usage Time</li>
@@ -285,7 +285,7 @@ export default function WebsiteHomePage() {
                 analytics. The Daily consolidated usage report gets delivered
                 everyday through a notification.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>Daily Reports</li>
                 <li>Weekly Reports</li>
                 <li>Monthly Reports</li>
@@ -312,7 +312,7 @@ export default function WebsiteHomePage() {
                 the listed six categories vis-a-vis Addicted, Obsessed,
                 Dependent, Habitual, Achiever and Champion.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>Addicted</li>
                 <li>Obsessed</li>
                 <li>Dependent</li>
@@ -351,7 +351,7 @@ export default function WebsiteHomePage() {
                 YourHour app provides personalized challenge recommendations to
                 its users to help them Break the Habit Loop.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>App Diet Challenge</li>
                 <li>App Fasting Challenge</li>
                 <li>No Phone Challenge</li>
@@ -374,7 +374,7 @@ export default function WebsiteHomePage() {
                 Generate PDF reports with all the important analytics at your
                 fingertips.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>Weekly and Monthly Average</li>
                 <li>Top Used Category</li>
                 <li>Peak Usage Time</li>
@@ -416,7 +416,7 @@ export default function WebsiteHomePage() {
                 data analysis or statistics purpose.
               </p>
 
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] items-center font-montserrat font-bold list-disc pl-4">
                 <li>Export Data to PDF</li>
                 <li>Export Data to Excel</li>
                 <li>Backup on Google Drive</li>
@@ -499,7 +499,7 @@ export default function WebsiteHomePage() {
               href="https://stories.yourhourapp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-70"
+              className="text-center font-semibold font-montserrat text-lg text-[#21ABE1] border border-[#21ABE1] px-4 py-3 rounded-xl hover:opacity-80"
               onClick={() => trackWebsiteLetsReadClicked()}
             >
               Let's Read
