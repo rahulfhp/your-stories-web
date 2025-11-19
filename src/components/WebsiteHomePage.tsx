@@ -69,14 +69,19 @@ export default function WebsiteHomePage() {
     <div className="bg-white">
       {/* Hero Section */}
       <section
-        className="relative pt-28 md:pt-32 pb-10 md:pb-12 min-h-screen bg-bottom bg-no-repeat bg-cover"
+        className="relative pt-28 md:pt-54 pb-10 md:pb-12 min-h-screen"
         style={{
           backgroundImage: "url(yourhour-website-img/hero-BG-Img.webp)",
+          backgroundPosition: "center bottom",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          width: "100%",
+          height: "auto",
         }}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 pb-[20%] md:pb-[24%]">
           {/* Heading */}
-          <div className="text-center mb-10 md:mb-12 mt-6 md:mt-8">
+          <div className="text-center mb-10 md:mb-12">
             <h1 className="text-xl text-black sm:text-2xl md:text-4xl mb-2 sm:mb-3 font-bold tracking-wide font-lobster">
               Meet YourHour
             </h1>
@@ -452,7 +457,7 @@ export default function WebsiteHomePage() {
           />
         </div>
       </section>
-      
+
       {/* Featured In Section */}
       <section className="py-16 bg-[#333333]">
         <div className="max-w-6xl mx-auto px-4">
