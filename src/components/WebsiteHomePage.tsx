@@ -226,7 +226,7 @@ export default function WebsiteHomePage() {
       </section>
 
       {/* Features Section - The Dashboard */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="w-full max-w-lg">
@@ -241,14 +241,14 @@ export default function WebsiteHomePage() {
                 "Usage Time" & "Unlock Count" and thereby, gives a comparative
                 infographic view of your today's and past 7-day's activity.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>Create Your Goals</div>
-                <div>Set Screen Unlock Count</div>
-                <div>Track Usage Time</div>
-                <div>Analyse Most Used Apps</div>
-                <div>Track Most Visited Apps</div>
-                <div>Check Your Addiction Level</div>
-              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>Create Your Goals</li>
+                <li>Set Screen Unlock Count</li>
+                <li>Track Usage Time</li>
+                <li>Analyse Most Used Apps</li>
+                <li>Track Most Visited Apps</li>
+                <li>Check Your Addiction Level</li>
+              </ul>
             </div>
             <div className="text-center">
               <img
@@ -262,7 +262,7 @@ export default function WebsiteHomePage() {
       </section>
 
       {/* Features Section - The Reports */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-center order-2 md:order-1">
@@ -285,18 +285,18 @@ export default function WebsiteHomePage() {
                 analytics. The Daily consolidated usage report gets delivered
                 everyday through a notification.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>Daily Reports</div>
-                <div>Weekly Reports</div>
-                <div>Monthly Reports</div>
-              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>Daily Reports</li>
+                <li>Weekly Reports</li>
+                <li>Monthly Reports</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section - Goal Spots */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -312,14 +312,14 @@ export default function WebsiteHomePage() {
                 the listed six categories vis-a-vis Addicted, Obsessed,
                 Dependent, Habitual, Achiever and Champion.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>Addicted</div>
-                <div>Obsessed</div>
-                <div>Dependent</div>
-                <div>Habitual</div>
-                <div>Achiever</div>
-                <div>Champion</div>
-              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>Addicted</li>
+                <li>Obsessed</li>
+                <li>Dependent</li>
+                <li>Habitual</li>
+                <li>Achiever</li>
+                <li>Champion</li>
+              </ul>
             </div>
             <div className="text-center">
               <img
@@ -333,7 +333,7 @@ export default function WebsiteHomePage() {
       </section>
 
       {/* Features Section - Challenges */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-center order-2 md:order-1">
@@ -351,19 +351,19 @@ export default function WebsiteHomePage() {
                 YourHour app provides personalized challenge recommendations to
                 its users to help them Break the Habit Loop.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>App Diet Challenge</div>
-                <div>App Fasting Challenge</div>
-                <div>No Phone Challenge</div>
-                <div>Scheduled Challenges!</div>
-              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>App Diet Challenge</li>
+                <li>App Fasting Challenge</li>
+                <li>No Phone Challenge</li>
+                <li>Scheduled Challenges!</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section - Usage Analytics */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -374,14 +374,14 @@ export default function WebsiteHomePage() {
                 Generate PDF reports with all the important analytics at your
                 fingertips.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>Weekly and Monthly Average</div>
-                <div>Top Used Category</div>
-                <div>Peak Usage Time</div>
-                <div>Top Used Apps</div>
-                <div>Track Daywise Phone Usage</div>
-                <div>Carbon Footprint Reduction</div>
-              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>Weekly and Monthly Average</li>
+                <li>Top Used Category</li>
+                <li>Peak Usage Time</li>
+                <li>Top Used Apps</li>
+                <li>Track Daywise Phone Usage</li>
+                <li>Carbon Footprint Reduction</li>
+              </ul>
             </div>
             <div className="text-center">
               <img
@@ -395,7 +395,7 @@ export default function WebsiteHomePage() {
       </section>
 
       {/* Features Section - Export Data */}
-      <section className="py-16 px-4 md:px-[10%]">
+      <section className="py-12 px-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-center order-2 md:order-1">
@@ -415,13 +415,40 @@ export default function WebsiteHomePage() {
                 data since the installation of the app in excel format for your
                 data analysis or statistics purpose.
               </p>
-              <div className="grid grid-cols-2 gap-3 text-[#21ABE1] font-montserrat font-bold">
-                <div>Export Data to PDF</div>
-                <div>Export Data to Excel</div>
-                <div>Backup on Google Drive</div>
-                <div>Share with Friends</div>
-              </div>
+
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#21ABE1] items-center font-montserrat font-bold list-disc pl-4">
+                <li>Export Data to PDF</li>
+                <li>Export Data to Excel</li>
+                <li>Backup on Google Drive</li>
+                <li>Share with Friends</li>
+              </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured In Section */}
+      <section className="py-16 bg-[#333333]">
+        <div className="max-w-6xl mx-auto px-4">
+          <h3 className="text-center text-white font-montserrat font-bold text-2xl md:text-3xl mb-10">
+            Featured In The News
+          </h3>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-4 md:gap-y-6">
+            {featuresInNews.map((logo, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-center w-[100px] md:w-[120px] lg:w-[150px]"
+              >
+                <img
+                  src={`yourhour-website-img/yourhour_${logo}.${
+                    logo === "techdator" ? "png" : "webp"
+                  }`}
+                  alt={logo}
+                  className="h-25 sm:h-28 md:h-38 w-auto object-contain"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -477,32 +504,6 @@ export default function WebsiteHomePage() {
             >
               Let's Read
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured In Section */}
-      <section className="py-16 bg-[#333333]">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-center text-white font-montserrat font-bold text-2xl md:text-3xl mb-10">
-            Featured In The News
-          </h3>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-4 md:gap-y-6">
-            {featuresInNews.map((logo, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-center w-[100px] md:w-[120px] lg:w-[150px]"
-              >
-                <img
-                  src={`yourhour-website-img/yourhour_${logo}.${
-                    logo === "techdator" ? "png" : "webp"
-                  }`}
-                  alt={logo}
-                  className="h-25 sm:h-28 md:h-38 w-auto object-contain"
-                />
-              </div>
-            ))}
           </div>
         </div>
       </section>
