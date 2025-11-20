@@ -6,10 +6,10 @@ import type { NextRequest } from 'next/server';
  * 
  * This middleware routes users based on the domain they're accessing:
  * - stories.yourhourapp.com: Shows app pages (/, /bookmarked, /profile, /read, /search, /write)
- * - demo.yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /privacy-policy)
- * - yourhourapp.com (future): Shows website/info pages
+ * - demo.yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
+ * - yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
  * 
- * Current setup for testing:
+ * Setup for testing:
  * - demo.yourhourapp.com → website pages 
  * - stories.yourhourapp.com → app pages
  */

@@ -23,20 +23,36 @@ export function isWebsiteDomain(): boolean {
 export function getDomainType(): 'app' | 'website' | 'localhost' {
   if (typeof window === 'undefined') return 'localhost';
   const hostname = window.location.hostname;
-  
+
   if (hostname === 'localhost' || hostname.startsWith('localhost:') || hostname.startsWith('127.0.0.1')) {
     return 'localhost';
   }
-  
+
   if (APP_DOMAINS.some(domain => hostname === domain)) {
     return 'app';
   }
-  
+
   if (WEBSITE_DOMAINS.some(domain => hostname === domain)) {
     return 'website';
   }
-  
+
   // Default to app for unknown domains
+  return 'app';
+}
+
+// This method use to show favicon and title as per the domain
+export function getDomainTypeByHost(hostname: string): 'app' | 'website' | 'localhost' {
+  if (!hostname) return 'localhost';
+  const lower = hostname.toLowerCase();
+  if (lower === 'localhost' || lower.startsWith('localhost:') || lower.startsWith('127.0.0.1')) {
+    return 'localhost';
+  }
+  if (APP_DOMAINS.some(domain => lower === domain)) {
+    return 'app';
+  }
+  if (WEBSITE_DOMAINS.some(domain => lower === domain)) {
+    return 'website';
+  }
   return 'app';
 }
 
