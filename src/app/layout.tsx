@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import type { Metadata } from "next";
 import { getDomainTypeByHost } from "@/lib/domainUtils";
 
+// Fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,20 +28,33 @@ const lobster = Lobster({
   weight: ["400"],
 });
 
-// Added method to show favicon and title as per the domain
+// Dynamic Metadata for the (favicon + title) based on the domain
 export async function generateMetadata(): Promise<Metadata> {
   const h = headers();
   const host = (await h).get("x-forwarded-host") || (await h).get("host") || "";
+
   const domainType = getDomainTypeByHost(host);
   const isWebsite = domainType === "website";
+
+  // Decide favicon path
+  const iconPath = isWebsite
+    ? "/yourhour-website-img/website-favicon.png"
+    : "/stories-favicon.ico";
+
   return {
     title: isWebsite
       ? "YourHour App: Smartphone Addiction Tracker and Controller | Digital Wellness App | Digital Wellbeing App | Mobile Addiction Tracker App | Mindefy Labs | Mindefy Solutions | Mind-e-fy | Your Hour App | YourHour | Mobile Addiction Tracker App | Mind-e-fy Solutions"
       : "YourStories – Where Stories Find You!",
+
+    // Force favicon override (stops flashing)
     icons: {
-      icon: isWebsite
-        ? "/yourhour-website-img/website-favicon.png"
-        : "/stories-favicon.ico",
+      icon: iconPath,
+      other: [
+        {
+          rel: "icon",
+          url: iconPath,
+        },
+      ],
     },
   };
 }
@@ -52,6 +66,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Prevent fallback favicon flash */}
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${lobster.variable} antialiased`}
       >
