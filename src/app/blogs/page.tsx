@@ -2,11 +2,25 @@
 
 import { blogs } from "@/lib/website-blogs";
 import { useEffect, useState } from "react";
-import { trackWebsiteBlogsPageVisited, trackWebsiteBlogCardClicked } from "@/lib/website-analytics";
+import {
+  trackWebsiteBlogsPageVisited,
+  trackWebsiteBlogCardClicked,
+} from "@/lib/website-analytics";
+
+// Utility function to create SEO-friendly slug
+function createBlogSlug(title: string, id: number): string {
+  const slug = title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+    .trim();
+
+  return `${slug}-${id}`;
+}
 
 export default function BlogsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
-
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -73,9 +87,9 @@ export default function BlogsPage() {
 
       {/* blog Title */}
       <div className="container mx-auto px-4 text-center">
-        <span className="text-4xl text-black font-semibold font-montserrat leading-normal">
+        <h1 className="text-4xl text-black font-semibold font-montserrat leading-normal">
           Blogs
-        </span>
+        </h1>
       </div>
 
       {/* Filter Buttons */}
@@ -104,7 +118,7 @@ export default function BlogsPage() {
             {filteredBlogs.map((blog) => (
               <div key={blog.id} className="mb-4">
                 <a
-                  href={`/blog/${blog.id}`}
+                  href={`/blog/${createBlogSlug(blog.title, blog.id)}`}
                   onClick={() =>
                     trackWebsiteBlogCardClicked(blog.id, blog.title, "normal")
                   }

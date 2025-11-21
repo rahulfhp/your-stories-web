@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function WebsiteFooter() {
   const getYear = new Date().getFullYear();
 
@@ -138,24 +140,30 @@ export default function WebsiteFooter() {
                 <h4 className="font-semibold text-base text-[#13151A] mb-4">
                   EXPLORE
                 </h4>
-                <a
+                <Link
+                  href="/"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
+                >
+                  Home
+                </Link>
+                <Link
                   href="/blogs"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
                 >
                   Blogs
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/faqs"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
                 >
                   FAQs
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/privacy-policy"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </div>
             </div>
 

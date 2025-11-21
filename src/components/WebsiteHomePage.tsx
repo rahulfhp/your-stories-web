@@ -86,9 +86,9 @@ export default function WebsiteHomePage() {
             <h1 className="text-xl text-black sm:text-2xl md:text-4xl mb-2 sm:mb-3 font-bold tracking-wide font-lobster">
               Meet YourHour
             </h1>
-            <h1 className="text-xl text-black sm:text-2xl md:text-4xl font-bold tracking-wide font-lobster">
+            <h2 className="text-xl text-black sm:text-2xl md:text-4xl font-bold tracking-wide font-lobster">
               The Best ScreenTime App
-            </h1>
+            </h2>
           </div>
 
           {/* Social Proofing */}

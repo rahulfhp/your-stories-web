@@ -18,9 +18,9 @@ export default function PrivacyPolicyPage() {
       {/* A4 Styled Container (never shrinks or changes layout) */}
       <section className="bg-white rounded-lg shadow-xl p-5 md:p-8 max-w-4xl min-h-[70rem]">
         {/* Title */}
-        <h3 className="text-4xl font-semibold text-[#23AAE2] font-montserrat tracking-tight mb-8">
+        <h1 className="text-4xl font-semibold text-[#23AAE2] font-montserrat tracking-tight mb-8">
           Privacy Policy
-        </h3>
+        </h1>
 
         {/* Paragraphs */}
         <p className="mb-5 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
         <p className="mb-4 text-gray-700 leading-relaxed text-base font-normal font-montserrat">
           If you have any grievance relating to the processing of information
           provided by you, please contact our Grievance Department at{" "}
-          <b>contact@mind-e-fy.com</b> or write to us at:
+          <b>rahul@mindefy.tech</b> or write to us at:
         </p>
 
         <p className="text-gray-700 text-base leading-relaxed font-normal font-montserrat mb-2">
