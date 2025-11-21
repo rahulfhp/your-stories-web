@@ -94,9 +94,9 @@ export default function FAQPage() {
 
       {/* FAQ Title */}
       <div className="container mx-auto px-4 text-center">
-        <span className="text-4xl text-black font-normal font-montserrat leading-normal">
+        <h1 className="text-4xl text-black font-semibold font-montserrat leading-normal">
           Frequently Asked Questions
-        </span>
+        </h1>
       </div>
 
       {/* FAQ List */}

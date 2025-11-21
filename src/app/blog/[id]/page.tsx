@@ -77,12 +77,22 @@ const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => {
   }
 };
 
+// Utility function to extract ID from slug
+function extractIdFromSlug(slug: string): number {
+  // Extract the last segment after the final hyphen
+  const parts = slug.split("-");
+  const id = parts[parts.length - 1];
+  return Number(id);
+}
+
 /* Main Blog Detail Component */
 export default function BlogDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const id = params?.id;
-  const blogId = Number(id);
+  const slug = params?.id as string;
+
+  // Extract blog ID from slug (e.g., "mental-health-tips-5" -> 5)
+  const blogId = extractIdFromSlug(slug);
   const blog = blogData[blogId];
 
   const [isSticky, setIsSticky] = useState(false);

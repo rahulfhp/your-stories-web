@@ -40,9 +40,9 @@ export default function BookmarkedPage() {
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8 relative z-10">
         <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white/90">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white/90">
             🔖 Bookmarked Stories
-          </h2>
+          </h1>
           <div className="h-1 flex-1 ml-3 sm:ml-4 bg-gradient-to-r from-gray-400/40 dark:from-white/30 to-transparent rounded"></div>
         </div>
 
