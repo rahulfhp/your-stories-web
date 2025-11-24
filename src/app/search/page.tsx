@@ -12,6 +12,7 @@ import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import useSearchStore, { TAGS_WITH_COLOR } from "@/stores/search";
 import StoryCard from "@/components/StoryCard";
 import { trackSearchPerformed, trackTagsClicked } from "@/lib/analytics";
+import { createStorySlug } from "@/lib/utils";
 
 const SearchContent: React.FC = () => {
   const router = useRouter();
@@ -133,8 +134,9 @@ const SearchContent: React.FC = () => {
   );
 
   const handleStoryClick = useCallback(
-    (storyId: string) => {
-      router.push(`/read/${storyId}?source=search`);
+    (storyId: string, storyTitle: string) => {
+      const slug = createStorySlug(storyTitle, storyId);
+      router.push(`/read/${slug}`);
     },
     [router]
   );
@@ -312,7 +314,7 @@ const SearchContent: React.FC = () => {
                 <StoryCard
                   key={story._id}
                   storyData={story}
-                  onClick={() => handleStoryClick(story._id)}
+                  onClick={() => handleStoryClick(story._id, story.storyTitle)}
                 />
               ))}
             </div>

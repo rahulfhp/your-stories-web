@@ -99,13 +99,12 @@ export const blogs: Blogs[] = [
         title: '"MOBILE ADDICTION" The Show Behind!',
         date: "April 16, 2018",
     },
-
     {
         id: 12,
         category: "2019",
         image: "yourhour-website-img/YourHour_app_Boredom_Top.jpg",
         author: "Daksh Haldar",
-        title: '"BORDOM=CREATIVITY" The Art Of Doing Nothing!',
+        title: '"BOREDOM = CREATIVITY" The Art Of Doing Nothing!',
         date: "June 10, 2019",
     },
 ];
@@ -521,7 +520,7 @@ export const blogData: BlogData = {
 
     7: {
         id: 7,
-        title: "3 Ways to Man age Your Time! Zen and the art of time management!",
+        title: "Three Ways to Manage Your Time",
         author: "Daksh Haldar",
         date: "May 14, 2019",
         category: "2019",
@@ -613,8 +612,7 @@ export const blogData: BlogData = {
 
     8: {
         id: 8,
-        title:
-            "The Office Away From Office! Work From Home is fast turning into the new normal!",
+        title: "The Office Away From Office",
         author: "Daksh Haldar",
         date: "June 16, 2019",
         category: "2019",
@@ -1193,7 +1191,7 @@ export const blogData: BlogData = {
 
     12: {
         id: 12,
-        title: `"BORDOM=CREATIVITY" The Art Of Doing Nothing!`,
+        title: '"BOREDOM = CREATIVITY" The Art Of Doing Nothing!',
         author: "Steven Smith",
         date: "September 31, 2020",
         category: "2020",

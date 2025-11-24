@@ -4,6 +4,7 @@ import "./globals.css";
 import { headers } from "next/headers";
 import type { Metadata } from "next";
 import { getDomainTypeByHost } from "@/lib/domainUtils";
+import StructuredDataSchema from "@/components/SEOSchema";
 
 // Fonts
 const geistSans = Geist({
@@ -108,19 +109,79 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: metadataBase,
     },
+
+    // Open Graph for social sharing
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: metadataBase.toString(),
+      siteName: isWebsite ? "YourHour App" : "YourStories - YourHour",
+      title: isWebsite
+        ? "YourHour - Screen Time Management & Digital Wellbeing"
+        : "YourStories - Real Screen Time Recovery Stories",
+      description: isWebsite
+        ? "Take control of your screen time with YourHour. Track usage, set limits, and build healthier digital habits."
+        : "Read and share authentic stories about overcoming phone addiction and reducing screen time.",
+      images: [
+        {
+          url: "/yourhour-website-img/website-favicon.png",
+          width: 1200,
+          height: 630,
+          alt: isWebsite ? "YourHour App" : "YourStories",
+        },
+      ],
+    },
+
+    // Twitter Card
+    twitter: {
+      card: "summary_large_image",
+      title: isWebsite
+        ? "YourHour - Screen Time Management & Digital Wellbeing"
+        : "YourStories - Real Screen Time Recovery Stories",
+      description: isWebsite
+        ? "Take control of your screen time with YourHour."
+        : "Read and share authentic screen time recovery stories.",
+      images: ["/yourhour-website-img/website-favicon.png"],
+    },
+
+    // Additional metadata
+    applicationName: isWebsite ? "YourHour" : "YourStories",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: isWebsite ? "YourHour" : "YourStories",
+    },
+    formatDetection: {
+      telephone: false,
+    },
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Determine domain type
+  const h = headers();
+  const host = (await h).get("x-forwarded-host") || (await h).get("host") || "";
+  const domainType = getDomainTypeByHost(host);
+  const isWebsite = domainType === "website";
+
   return (
     <html lang="en">
       <head>
         {/* Prevent fallback favicon flash */}
         <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+
+        {/* Manifest for PWA and shortcuts */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* Theme color */}
+        <meta name="theme-color" content="#ffffff" />
+
+        {/* Add Structured Data for SEO shortcuts */}
+        <StructuredDataSchema isWebsite={isWebsite} />
       </head>
 
       <body

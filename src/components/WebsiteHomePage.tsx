@@ -13,6 +13,7 @@ import {
   trackWebsiteLetsReadClicked,
 } from "@/lib/website-analytics";
 import FeaturesPage from "./YourHourAppFeatures";
+import { createStorySlug } from "@/lib/utils";
 
 const featuresInNews = [
   "inc42",
@@ -63,7 +64,8 @@ export default function WebsiteHomePage() {
   const handleStoryClick = (storyId: string, storyTitle: string) => {
     // Track Story card Click event
     trackWebsiteHandpickedStoryCardClicked(storyId, storyTitle);
-    window.open(`https://stories.yourhourapp.com/read/${storyId}`, "_blank");
+    const slug = createStorySlug(storyTitle, storyId);
+    window.open(`https://stories.yourhourapp.com/read/${slug}`, "_blank");
   };
 
   return (

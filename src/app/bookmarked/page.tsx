@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useStoriesStore from "@/stores/stories";
 import StoryCard from "@/components/StoryCard";
+import { createStorySlug } from "@/lib/utils";
 
 export default function BookmarkedPage() {
   const router = useRouter();
@@ -19,8 +20,9 @@ export default function BookmarkedPage() {
     fetchBookmarkedStories();
   }, [fetchBookmarkedStories]);
 
-  const handleStoryClick = (storyId: string) => {
-    router.push(`/read/${storyId}?source=bookmarked`);
+  const handleStoryClick = (storyId: string, storyTitle: string) => {
+    const slug = createStorySlug(storyTitle, storyId);
+    router.push(`/read/${slug}`);
   };
 
   const handleRemove = (storyId: string) => {
@@ -82,7 +84,7 @@ export default function BookmarkedPage() {
                 <StoryCard
                   key={story._id}
                   storyData={story}
-                  onClick={() => handleStoryClick(story._id)}
+                  onClick={() => handleStoryClick(story._id, story.storyTitle)}
                   onRemove={() => handleRemove(story._id)}
                 />
               ))

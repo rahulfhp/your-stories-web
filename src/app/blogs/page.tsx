@@ -6,18 +6,7 @@ import {
   trackWebsiteBlogsPageVisited,
   trackWebsiteBlogCardClicked,
 } from "@/lib/website-analytics";
-
-// Utility function to create SEO-friendly slug
-function createBlogSlug(title: string, id: number): string {
-  const slug = title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "") // Remove special characters
-    .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
-    .trim();
-
-  return `${slug}-${id}`;
-}
+import { createBlogSlug } from "@/lib/utils";
 
 export default function BlogsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
