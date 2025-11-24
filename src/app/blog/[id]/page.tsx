@@ -113,9 +113,12 @@ export default function BlogDetailPage() {
   const blog = blogMatch?.blog;
   const blogId = blogMatch?.id;
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
+    setTimeout(() => setIsLoading(false), 250);
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
@@ -131,6 +134,14 @@ export default function BlogDetailPage() {
       parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : "";
     return `${first}${last}`;
   };
+
+  if (isLoading && !blog) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin h-12 w-12 border-4 border-[#21ABE1] border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   if (!blog) {
     return (

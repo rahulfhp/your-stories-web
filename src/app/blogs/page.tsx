@@ -11,8 +11,10 @@ import { createBlogSlug } from "@/lib/utils";
 export default function BlogsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [isSticky, setIsSticky] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => setIsLoading(false), 400);
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
@@ -104,47 +106,74 @@ export default function BlogsPage() {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredBlogs.map((blog) => (
-              <div key={blog.id} className="mb-4">
-                <a
-                  href={`/blog/${createBlogSlug(blog.title, blog.id)}`}
-                  onClick={() =>
-                    trackWebsiteBlogCardClicked(blog.id, blog.title, "normal")
-                  }
-                >
-                  <div className="bg-white h-[26rem] rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
-                    <div className="overflow-hidden">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-full h-60 object-cover transition-transform hover:scale-110"
-                      />
-                    </div>
+            {isLoading
+              ? [...Array(6)].map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white h-[26rem] rounded-lg shadow-lg overflow-hidden animate-pulse"
+                  >
+                    <div className="h-60 bg-gray-200"></div>
+
                     <div className="p-6">
                       <div className="flex items-center mb-4">
-                        {/* Avatar Circle */}
-                        <div className="w-10 h-10 rounded-full bg-[#21ABE1] flex items-center justify-center mr-3">
-                          <span className="text-white font-semibold text-base">
-                            {getInitials(blog.author)}
-                          </span>
-                        </div>
-
-                        {/* Author Name */}
-                        <p className="text-sm text-gray-700 font-medium font-montserrat">
-                          {blog.author}
-                        </p>
+                        <div className="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                        <div className="w-32 h-4 bg-gray-300 rounded"></div>
                       </div>
-                      <p className="text-lg font-semibold text-[#4a6f8a] mb-2 line-clamp-2 font-montserrat">
-                        {blog.title}
-                      </p>
-                      <p className="text-sm text-gray-500 font-montserrat">
-                        {blog.date}
-                      </p>
+
+                      <div className="h-5 bg-gray-300 rounded w-3/4 mb-3"></div>
+                      <div className="h-5 bg-gray-200 rounded w-2/4 mb-3"></div>
+
+                      <div className="h-4 bg-gray-200 rounded w-1/3"></div>
                     </div>
                   </div>
-                </a>
-              </div>
-            ))}
+                ))
+              :
+                filteredBlogs.map((blog) => (
+                  <div
+                    key={blog.id}
+                    className="mb-4 transition-opacity duration-300 opacity-100"
+                  >
+                    <a
+                      href={`/blog/${createBlogSlug(blog.title, blog.id)}`}
+                      onClick={() =>
+                        trackWebsiteBlogCardClicked(
+                          blog.id,
+                          blog.title,
+                          "normal"
+                        )
+                      }
+                    >
+                      <div className="bg-white h-[26rem] rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
+                        <div className="overflow-hidden">
+                          <img
+                            src={blog.image}
+                            alt={blog.title}
+                            className="w-full h-60 object-cover transition-transform hover:scale-110"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <div className="flex items-center mb-4">
+                            <div className="w-10 h-10 rounded-full bg-[#21ABE1] flex items-center justify-center mr-3">
+                              <span className="text-white font-semibold text-base">
+                                {getInitials(blog.author)}
+                              </span>
+                            </div>
+                            {/* Author Name */}
+                            <p className="text-sm text-gray-700 font-medium font-montserrat">
+                              {blog.author}
+                            </p>
+                          </div>
+                          <p className="text-lg font-semibold text-[#4a6f8a] mb-2 line-clamp-2 font-montserrat">
+                            {blog.title}
+                          </p>
+                          <p className="text-sm text-gray-500 font-montserrat">
+                            {blog.date}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
           </div>
         </div>
       </section>
