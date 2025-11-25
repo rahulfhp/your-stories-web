@@ -41,7 +41,7 @@ export default async function SitemapPage() {
   return (
     <>
       {isWebsite ? (
-        <div className="pt-20 w-full bg-gradient-to-b from-white to-blue-50/40">
+        <div className="pt-20 w-full bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <header className="mb-8 text-center">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
@@ -73,7 +73,7 @@ export default async function SitemapPage() {
           </div>
         </div>
       ) : (
-        <div className="pt-20 w-full bg-gradient-to-b from-white to-blue-50/40 dark:from-black dark:to-gray-900">
+        <div className="pt-20 w-full bg-white dark:from-black dark:to-gray-900">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <header className="mb-8 text-center">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white">
