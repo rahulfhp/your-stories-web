@@ -73,7 +73,7 @@ export default async function SitemapPage() {
           </div>
         </div>
       ) : (
-        <div className="pt-20 w-full bg-white dark:from-black dark:to-gray-900">
+        <div className="pt-20 w-full bg-gradient-to-b from-white to-white dark:from-black dark:to-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <header className="mb-8 text-center">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white">
@@ -93,7 +93,8 @@ export default async function SitemapPage() {
                     <li key={page.href}>
                       <Link
                         href={page.href}
-                        className="block px-4 py-2 rounded-lg text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 bg-gray-100/70 dark:bg-white/10 hover:bg-gray-200/80 dark:hover:bg-white/20 transition-colors cursor-pointer"
+                        // className="block px-4 py-2 rounded-lg text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 bg-gray-100/70 dark:bg-white/5 hover:bg-gray-200/80 dark:hover:border-white/30 transition-colors cursor-pointer"
+                        className="block px-4 py-2 rounded-lg text-gray-800 dark:text-white border border-gray-300/60 dark:border-white/20 bg-gray-100/80 dark:bg-black/25 backdrop-blur-xl hover:bg-gray-200/90 dark:hover:bg-white/10 hover:border-gray-400/60 dark:hover:border-white/30 transition-all duration-300"
                       >
                         {page.label}
                       </Link>
