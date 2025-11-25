@@ -110,6 +110,12 @@ export default function Footer() {
                 >
                   Testimonials
                 </a>
+                <Link
+                  href="/site-map"
+                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                >
+                  Sitemap
+                </Link>
               </div>
             </div>
 
