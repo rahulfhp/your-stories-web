@@ -164,6 +164,12 @@ export default function WebsiteFooter() {
                 >
                   Privacy Policy
                 </Link>
+                <Link
+                  href="/site-map"
+                  className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mt-4 font-montserrat"
+                >
+                  Sitemap
+                </Link>
               </div>
             </div>
 
