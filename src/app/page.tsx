@@ -64,9 +64,9 @@ export default function Home() {
     sourceType: "handpicked" | "more-stories"
   ) => {
     // Navigate to story detail page with source type comment date- 3-oct-2025
-    // router.push(`/read/${storyId}?source=${sourceType}`);
+    // router.push(`/screentime/${storyId}?source=${sourceType}`);
     const slug = createStorySlug(storyTitle, storyId);
-    router.push(`/read/${slug}`);
+    router.push(`/screentime/${slug}`);
   };
 
   // Conditional render

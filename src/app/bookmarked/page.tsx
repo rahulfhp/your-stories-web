@@ -22,7 +22,7 @@ export default function BookmarkedPage() {
 
   const handleStoryClick = (storyId: string, storyTitle: string) => {
     const slug = createStorySlug(storyTitle, storyId);
-    router.push(`/read/${slug}`);
+    router.push(`/screentime/${slug}`);
   };
 
   const handleRemove = (storyId: string) => {

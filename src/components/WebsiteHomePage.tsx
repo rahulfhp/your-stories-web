@@ -74,7 +74,7 @@ export default function WebsiteHomePage() {
     // Track Story card Click event
     trackWebsiteHandpickedStoryCardClicked(storyId, storyTitle);
     const slug = createStorySlug(storyTitle, storyId);
-    window.open(`https://stories.yourhourapp.com/read/${slug}`, "_blank");
+    window.open(`https://stories.yourhourapp.com/screentime/${slug}`, "_blank");
   };
 
   return (

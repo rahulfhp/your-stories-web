@@ -136,7 +136,7 @@ const SearchContent: React.FC = () => {
   const handleStoryClick = useCallback(
     (storyId: string, storyTitle: string) => {
       const slug = createStorySlug(storyTitle, storyId);
-      router.push(`/read/${slug}`);
+      router.push(`/screentime/${slug}`);
     },
     [router]
   );

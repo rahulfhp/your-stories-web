@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
  * Domain-based Routing Middleware
  * 
  * This middleware routes users based on the domain they're accessing:
- * - stories.yourhourapp.com: Shows app pages (/, /bookmarked, /profile, /read, /search, /write)
+ * - stories.yourhourapp.com: Shows app pages (/, /bookmarked, /profile, /screentime, /search, /write)
  * - demo.yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
  * - yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
  * 
@@ -19,7 +19,7 @@ const SUBDOMAIN_PAGES = [
   '/',
   '/bookmarked',
   '/profile',
-  '/read',
+  '/screentime',
   '/search',
   '/write',
 ];
