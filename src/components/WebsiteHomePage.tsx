@@ -13,6 +13,7 @@ import {
   trackWebsiteLetsReadClicked,
 } from "@/lib/website-analytics";
 import FeaturesPage from "./YourHourAppFeatures";
+import { createStorySlug } from "@/lib/utils";
 
 const featuresInNews = [
   "inc42",
@@ -43,12 +44,19 @@ const featuresInNews = [
 
 export default function WebsiteHomePage() {
   const [isSticky, setIsSticky] = useState(false);
+  const [loadingStories, setLoadingStories] = useState(true);
 
   const { handpickedStories, fetchHandpickedStories } = useStoriesStore();
 
   useEffect(() => {
     // Fetch handpicked stories on component mount
-    fetchHandpickedStories();
+    const loadStories = async () => {
+      setLoadingStories(true);
+      await fetchHandpickedStories();
+      setLoadingStories(false);
+    };
+
+    loadStories();
 
     // Track homepage visit event
     trackWebsiteHomepageVisited();
@@ -56,14 +64,17 @@ export default function WebsiteHomePage() {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleStoryClick = (storyId: string, storyTitle: string) => {
     // Track Story card Click event
     trackWebsiteHandpickedStoryCardClicked(storyId, storyTitle);
-    window.open(`https://stories.yourhourapp.com/read/${storyId}`, "_blank");
+    const slug = createStorySlug(storyTitle, storyId);
+    window.open(`https://stories.yourhourapp.com/screentime/${slug}`, "_blank");
   };
 
   return (
@@ -288,7 +299,15 @@ export default function WebsiteHomePage() {
 
           {/* Stories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {handpickedStories && handpickedStories.length > 0
+            {loadingStories
+              ? // Skeleton Loaders (6 placeholders)
+                [...Array(6)].map((_, index) => (
+                  <div
+                    key={index}
+                    className="animate-pulse bg-gray-200 rounded-xl h-72 w-full"
+                  />
+                ))
+              : handpickedStories && handpickedStories.length > 0
               ? handpickedStories.map((story) => (
                   <WebsiteStoryCard
                     key={story._id}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { blogData, BlogSection } from "@/lib/website-blogs";
 import { PopularPosts } from "@/components/PopularBlogs";
+import { createSlugFromTitle, extractBlogIdFromSlug } from "@/lib/utils";
 
 /* Section Renderer Component */
 interface SectionRendererProps {
@@ -77,12 +78,29 @@ const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => {
   }
 };
 
-// Utility function to extract ID from slug
-function extractIdFromSlug(slug: string): number {
-  // Extract the last segment after the final hyphen
-  const parts = slug.split("-");
-  const id = parts[parts.length - 1];
-  return Number(id);
+// Find blog by matching slug
+function findBlogBySlug(slug: string) {
+  // First, try to extract ID from the end of slug
+  const id = extractBlogIdFromSlug(slug);
+
+  // Check if this ID exists in blogData
+  if (blogData[id]) {
+    return { id: id, blog: blogData[id] };
+  }
+
+  // Fallback: search by matching the clean slug (without SEO keywords and ID)
+  // This handles old URLs or direct slug matches
+  const blogEntries = Object.entries(blogData);
+  for (const [blogId, blogContent] of blogEntries) {
+    const blogSlug = createSlugFromTitle(blogContent.title);
+
+    // Check if slug contains the blog's clean slug
+    if (slug.includes(blogSlug)) {
+      return { id: Number(blogId), blog: blogContent };
+    }
+  }
+
+  return null;
 }
 
 /* Main Blog Detail Component */
@@ -91,13 +109,16 @@ export default function BlogDetailPage() {
   const router = useRouter();
   const slug = params?.id as string;
 
-  // Extract blog ID from slug (e.g., "mental-health-tips-5" -> 5)
-  const blogId = extractIdFromSlug(slug);
-  const blog = blogData[blogId];
+  const blogMatch = findBlogBySlug(slug);
+  const blog = blogMatch?.blog;
+  const blogId = blogMatch?.id;
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
+    setTimeout(() => setIsLoading(false), 250);
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
@@ -113,6 +134,14 @@ export default function BlogDetailPage() {
       parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : "";
     return `${first}${last}`;
   };
+
+  if (isLoading && !blog) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin h-12 w-12 border-4 border-[#21ABE1] border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   if (!blog) {
     return (
@@ -172,7 +201,7 @@ export default function BlogDetailPage() {
 
       {/* Blog Content */}
       <article className="max-w-4xl mx-auto px-4 pb-16">
-        {blog.sections.map((section, index) => (
+        {blog.sections.map((section: any, index: number) => (
           <SectionRenderer key={index} section={section} />
         ))}
       </article>

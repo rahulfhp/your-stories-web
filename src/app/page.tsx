@@ -7,6 +7,7 @@ import StoryCard from "@/components/StoryCard";
 import { trackHomepageVisited } from "@/lib/analytics";
 import { getDomainType } from "@/lib/domainUtils";
 import WebsiteHomePage from "@/components/WebsiteHomePage";
+import { createStorySlug } from "@/lib/utils";
 
 export default function Home() {
   const router = useRouter();
@@ -57,10 +58,15 @@ export default function Home() {
     setMoreStoriesPage(nextPage);
   };
 
-  const handleStoryClick = (storyId: string, sourceType: 'handpicked' | 'more-stories') => {
+  const handleStoryClick = (
+    storyId: string,
+    storyTitle: string,
+    sourceType: "handpicked" | "more-stories"
+  ) => {
     // Navigate to story detail page with source type comment date- 3-oct-2025
-    // router.push(`/read/${storyId}?source=${sourceType}`);
-    router.push(`/read/${storyId}`);
+    // router.push(`/screentime/${storyId}?source=${sourceType}`);
+    const slug = createStorySlug(storyTitle, storyId);
+    router.push(`/screentime/${slug}`);
   };
 
   // Conditional render
@@ -127,7 +133,11 @@ export default function Home() {
                         key={story._id}
                         storyData={story}
                         onClick={() =>
-                          handleStoryClick(story._id, "handpicked")
+                          handleStoryClick(
+                            story._id,
+                            story.storyTitle,
+                            "handpicked"
+                          )
                         }
                       />
                     ))
@@ -170,7 +180,11 @@ export default function Home() {
                       key={story._id}
                       storyData={story}
                       onClick={() =>
-                        handleStoryClick(story._id, "more-stories")
+                        handleStoryClick(
+                          story._id,
+                          story.storyTitle,
+                          "more-stories"
+                        )
                       }
                     />
                   ))

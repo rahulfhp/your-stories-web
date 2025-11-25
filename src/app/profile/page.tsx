@@ -27,7 +27,7 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleStoryClick = (storyId: string) => {
-    router.push(`/read/${storyId}?source=profile`);
+    router.push(`/screentime/${storyId}?source=profile`);
   };
 
   // Fetch user stories when component mounts or user changes

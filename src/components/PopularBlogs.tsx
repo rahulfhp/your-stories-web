@@ -1,18 +1,24 @@
-import { popularPosts } from "@/lib/website-blogs";
+import { popularPosts, blogData } from "@/lib/website-blogs";
 import { useRouter } from "next/navigation";
 import { trackWebsiteBlogCardClicked } from "@/lib/website-analytics";
+import { createBlogSlug } from "@/lib/utils";
 
 /*    Popular Blogs Component it is used on the website blog detail page */
 export const PopularPosts: React.FC = () => {
   const router = useRouter();
 
   const handlePostClick = (id: number) => {
-    const post = popularPosts.find(p => p.id === id);
+    const post = popularPosts.find((p) => p.id === id);
     if (post) {
-      // Track popular blogs clicked event
       trackWebsiteBlogCardClicked(post.id, post.title, "popular");
     }
-    router.push(`/blog/${id}`);
+
+    // Get the actual blog from blogData using the ID
+    const actualBlog = blogData[id];
+    if (actualBlog) {
+      const slug = createBlogSlug(actualBlog.title, id);
+      router.push(`/blog/${slug}`);
+    }
   };
 
   return (

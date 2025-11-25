@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Story } from "@/stores/stories";
 import useStoriesStore from "@/stores/stories";
@@ -31,6 +31,7 @@ import {
   StarIcon as StarFilledIcon,
   BookmarkIcon as BookmarkFilledIcon,
 } from "@heroicons/react/24/solid";
+import { extractIdFromSlug } from "@/lib/utils";
 
 interface ReadStoryPageProps {
   storyId: string;
@@ -43,7 +44,11 @@ interface ReadStoryPageProps {
 }
 
 const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
+  const params = useParams();
   const router = useRouter();
+  const slug = params?.storyId || (params as any)?.id || "";
+  const actualStoryId = extractIdFromSlug(slug as string);
+
   const {
     handpickedStories,
     moreStories,
@@ -87,17 +92,17 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       let foundStory: Story | undefined;
 
       try {
-        // First, try to find story in all existing stores
+        // First, try to find story in all existing stores using actualStoryId
         foundStory =
-          handpickedStories.find((s) => s._id === storyId) ||
-          moreStories.find((s) => s._id === storyId) ||
-          userStories.find((s) => s._id === storyId) ||
-          bookmarkedStories.find((s) => s._id === storyId) ||
-          searchResults.find((s) => s._id === storyId);
+          handpickedStories.find((s) => s._id === actualStoryId) ||
+          moreStories.find((s) => s._id === actualStoryId) ||
+          userStories.find((s) => s._id === actualStoryId) ||
+          bookmarkedStories.find((s) => s._id === actualStoryId) ||
+          searchResults.find((s) => s._id === actualStoryId);
 
         // If not found in any store, fetch from backend by ID
         if (!foundStory) {
-          const fetchedStory = await fetchStoryById(storyId);
+          const fetchedStory = await fetchStoryById(actualStoryId);
           if (fetchedStory) {
             foundStory = fetchedStory;
           } else {
@@ -142,11 +147,11 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       }
     };
 
-    if (storyId) {
+    if (actualStoryId) {
       findStory();
     }
   }, [
-    storyId,
+    actualStoryId,
     handpickedStories,
     moreStories,
     userStories,

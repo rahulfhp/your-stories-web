@@ -1,0 +1,65 @@
+{
+    "title": "YourHour – Screen Time & Digital Wellbeing App",
+    "short_name": "YourHour",
+    "description": "YourHour is a powerful screen time and mobile addiction tracker app created by Mindefy Technologies. Take control of your digital habits, improve focus, and boost productivity with smart insights.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/yourhour-website-img/website-favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/yourhour-website-img/website-favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Download on Play Store",
+            "short_name": "Get App",
+            "description": "Download YourHour app from Google Play Store to track your screen time",
+            "url": "https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US",
+            "icons": [
+                {
+                    "src": "/yourhour-website-img/website-favicon.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Read Stories",
+            "short_name": "Stories",
+            "description": "Browse real screen time recovery stories from students and youngsters",
+            "url": "https://stories.yourhourapp.com/",
+            "icons": [
+                {
+                    "src": "/stories-favicon.ico",
+                    "sizes": "192x192",
+                    "type": "image/x-icon"
+                }
+            ]
+        },
+        {
+            "name": "Blogs",
+            "short_name": "Blogs",
+            "description": "Read our latest articles on digital wellbeing and screen time management",
+            "url": "https://www.yourhourapp.com/blogs",
+            "icons": [
+                {
+                    "src": "/yourhour-website-img/website-favicon.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ]
+}
