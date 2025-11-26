@@ -37,7 +37,7 @@ export default function NotFound() {
       </div>
 
       {isWebsite ? (
-        <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-24 sm:pt-28 md:pt-32 lg:pt-32 relative z-10">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-24 sm:pt-28 md:pt-32 lg:pt-32 relative z-5">
           <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center">
             {/* Glass morphism container */}
             <div className="bg-white/30 backdrop-blur-2xl rounded-3xl p-8 sm:p-10 lg:p-12 border border-white/40 shadow-[0_20px_40px_rgba(0,0,0,0.15)] ring-1 ring-white/20 max-w-2xl w-full mx-auto">
