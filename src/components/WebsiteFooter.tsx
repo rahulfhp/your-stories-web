@@ -179,7 +179,7 @@ export default function WebsiteFooter() {
                 PORTFOLIO
               </h4>
               <a
-                href="https://mindefy.tech/your-hour"
+                href="https://mindefy.tech/yourhour-screentime-app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -211,7 +211,7 @@ export default function WebsiteFooter() {
                 JEGO
               </a>
               <a
-                href="https://mindefy.tech/digi-bill"
+                href="https://mindefy.tech/green-bill"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] font-montserrat"
@@ -281,7 +281,7 @@ export default function WebsiteFooter() {
             >
               Mindefy Technologies Private Limited™
             </a>
-            , {getYear}. All rights reserved.
+            , 2015-{getYear}. All rights reserved.
           </p>
         </div>
       </div>

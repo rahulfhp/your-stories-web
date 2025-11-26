@@ -72,7 +72,7 @@ export default function Footer() {
                 <p>(M.P.) India</p>
                 <a
                   href="mailto:rahul@mindefy.tech"
-                  className="mt-2 sm:mt-3 block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="mt-2 sm:mt-3 w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Email Us
                 </a>
@@ -99,20 +99,20 @@ export default function Footer() {
                 <a
                   href="https://mindefy.tech/about-us"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   About
                 </a>
                 <a
                   href="https://mindefy.tech/testimonials"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Testimonials
                 </a>
                 <Link
                   href="/site-map"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Sitemap
                 </Link>
@@ -126,37 +126,37 @@ export default function Footer() {
               </h3>
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
-                  href="https://mindefy.tech/your-hour"
+                  href="https://mindefy.tech/yourhour-screentime-app"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   YourHour
                 </a>
                 <a
                   href="https://mindefy.tech/spector"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Spector
                 </a>
                 <a
                   href="https://mindefy.tech/early-foods"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Early Foods
                 </a>
                 <a
                   href="https://mindefy.tech/jego"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   JEGO
                 </a>
                 <a
-                  href="https://mindefy.tech/digi-bill"
+                  href="https://mindefy.tech/green-bill"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   GreenBill
                 </a>
@@ -172,35 +172,35 @@ export default function Footer() {
                 <a
                   href="https://mindefy.tech/hybrid-app-development"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Hybrid App Development
                 </a>
                 <a
                   href="https://mindefy.tech/startup-support"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Startup Support & Consulting
                 </a>
                 <a
                   href="https://mindefy.tech/digital-transformation"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Digital Transformation
                 </a>
                 <a
                   href="https://mindefy.tech/mvp-development"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   MVP Dev. & PMF Test
                 </a>
                 <a
                   href="https://mindefy.tech/staff-services"
                   target="_blank"
-                  className="block hover:opacity-100 cursor-pointer transition-opacity"
+                  className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Staff Augmenation Services
                 </a>
@@ -215,7 +215,7 @@ export default function Footer() {
           <Link href="https://mindefy.tech/" target="blank">
             Mindefy Technologies Private Limited™
           </Link>
-          , {getYear}. All rights reserved.
+          , 2015-{getYear}. All rights reserved.
         </div>
       </div>
     </footer>
