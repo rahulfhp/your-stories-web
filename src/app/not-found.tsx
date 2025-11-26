@@ -1,17 +1,32 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { getDomainTypeByHost } from "@/lib/domainUtils";
 
 export default function NotFound() {
   const router = useRouter();
 
+  // Determine domain type
+  let isWebsite;
+  if (typeof window !== "undefined") {
+    const host = window.location.host;
+    isWebsite = getDomainTypeByHost(host) === "website";
+  }
+
   const handleGoHome = () => {
-    router.push('/');
+    router.push("/");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden">
+    // LIGHT MODE ONLY IF WEBSITE
+    <div
+      className={
+        isWebsite
+          ? "light min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden"
+          : "min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden"
+      }
+    >
       {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0">
         <div className="hidden sm:block">
@@ -23,10 +38,8 @@ export default function NotFound() {
 
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 pt-24 sm:pt-28 md:pt-32 lg:pt-32 relative z-10">
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center">
-          
           {/* Glass morphism container */}
           <div className="bg-white/30 dark:bg-white/10 backdrop-blur-2xl rounded-3xl p-8 sm:p-10 lg:p-12 border border-white/40 dark:border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_40px_rgba(255,255,255,0.1)] ring-1 ring-white/20 dark:ring-white/10 max-w-2xl w-full mx-auto">
-            
             {/* 404 Image */}
             <div className="mb-8 sm:mb-10 flex justify-center">
               <div className="relative w-full max-w-md">
@@ -47,8 +60,9 @@ export default function NotFound() {
                 Oops! Page Not Found
               </h2>
               <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 leading-relaxed max-w-lg mx-auto">
-                The page you're looking for seems to have wandered off into the digital wilderness. 
-                Don't worry, even the best stories sometimes take unexpected turns!
+                The page you're looking for seems to have wandered off into the
+                digital wilderness. Don't worry, even the best stories sometimes
+                take unexpected turns!
               </p>
             </div>
 
@@ -56,7 +70,7 @@ export default function NotFound() {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
               <button
                 onClick={handleGoHome}
-                className="bg-white/40 dark:bg-white/10 backdrop-blur-2xl border border-white/60 dark:border-white/20 hover:bg-white/60 dark:hover:bg-white/20 hover:border-white/80 dark:hover:border-white/30 text-gray-800 dark:text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.1)] shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.05)] ring-1 ring-white/20 dark:ring-white/10 w-full sm:w-auto"
+                className="bg-white/40 dark:bg-white/10 backdrop-blur-2xl cursor-pointer border border-white/60 dark:border-white/20 hover:bg-white/60 dark:hover:bg-white/20 hover:border-white/80 dark:hover:border-white/30 text-gray-800 dark:text-white/90 font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.1)] shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.05)] ring-1 ring-white/20 dark:ring-white/10 w-full sm:w-auto"
               >
                 🏠 Go Home
               </button>
