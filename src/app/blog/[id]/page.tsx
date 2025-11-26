@@ -145,7 +145,7 @@ export default function BlogDetailPage() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
         <div className="text-center">
           <h2 className="text-2xl text-black font-semibold mb-2">
             Blog not found
