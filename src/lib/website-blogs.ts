@@ -12,7 +12,7 @@ export const blogs: Blogs[] = [
     {
         id: 1,
         category: "2020",
-        image: "yourhour-website-img/yourhourapp_Letter-To-Device_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Letter-To-Device_gap.webp",
         author: "Wesley D'Souza",
         title: "A Letter To My Smartphone!",
         date: "Mar 14, 2020",
@@ -21,7 +21,7 @@ export const blogs: Blogs[] = [
         id: 2,
         category: "2020",
         image:
-            "yourhour-website-img/yourhourapp_Girl-using-charging-smartphone_gap.jpg",
+            "/yourhour-website-img/yourhourapp_Girl-using-charging-smartphone_gap.webp",
         author: "Wesley D'Souza",
         title: "Phone Addiction",
         date: "April 16, 2020",
@@ -29,7 +29,7 @@ export const blogs: Blogs[] = [
     {
         id: 3,
         category: "2020",
-        image: "yourhour-website-img/yourhourapp_Humanity_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Humanity_gap.webp",
         author: "Wesley D'Souza",
         title: "The Great Covid Realisation",
         date: "May 18, 2020",
@@ -37,7 +37,7 @@ export const blogs: Blogs[] = [
     {
         id: 4,
         category: "2020",
-        image: "yourhour-website-img/yourhourapp_meditation_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_meditation_gap.webp",
         author: "Wesley D'Souza",
         title: "Mindfulness and Productivity",
         date: "June 21, 2020",
@@ -45,7 +45,7 @@ export const blogs: Blogs[] = [
     {
         id: 5,
         category: "2020",
-        image: "yourhour-website-img/yourhourapp_Nickel-Boys_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Nickel-Boys_gap.webp",
         author: "Wesley D'Souza",
         title:
             "A Review of Colson Whitehead's Pulitzer Prize-winning novel 'Nickel Boys'",
@@ -54,7 +54,7 @@ export const blogs: Blogs[] = [
     {
         id: 6,
         category: "2019",
-        image: "yourhour-website-img/yourhourapp_looking-for-solution_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_looking-for-solution_gap.webp",
         author: "Daksh Haldar",
         title: "Procrastination and Ways to Overcome It",
         date: "June 30, 2019",
@@ -62,7 +62,7 @@ export const blogs: Blogs[] = [
     {
         id: 7,
         category: "2019",
-        image: "yourhour-website-img/yourhourapp_To-Do-List_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_To-Do-List_gap.webp",
         author: "Daksh Haldar",
         title: "Three Ways to Manage Your Time",
         date: "May 14, 2019",
@@ -70,7 +70,7 @@ export const blogs: Blogs[] = [
     {
         id: 8,
         category: "2019",
-        image: "yourhour-website-img/yourhourapp_work-from-home-and-office_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_work-from-home-and-office_gap.webp",
         author: "Daksh Haldar",
         title: "The Office Away From Office",
         date: "June 16, 2019",
@@ -78,7 +78,7 @@ export const blogs: Blogs[] = [
     {
         id: 9,
         category: "2019",
-        image: "yourhour-website-img/Youhour_app_Top.jpg",
+        image: "/yourhour-website-img/Youhour_app_Top.webp",
         author: "Daksh Haldar",
         title: 'The Difference between "AVERAGE AND SUCCESS"',
         date: "July 16, 2019",
@@ -86,7 +86,7 @@ export const blogs: Blogs[] = [
     {
         id: 10,
         category: "2018",
-        image: "yourhour-website-img/yourhourapp_relationship_gap5_3.jpg",
+        image: "/yourhour-website-img/yourhourapp_relationship_gap5_3.webp",
         author: "Jamila Johar",
         title: '"YOUNG V/S THE OLD!" Smart Phones Seperating Generations!',
         date: "March 16, 2018",
@@ -94,7 +94,7 @@ export const blogs: Blogs[] = [
     {
         id: 11,
         category: "2018",
-        image: "yourhour-website-img/YourHour_app_NewDrug.jpg",
+        image: "/yourhour-website-img/YourHour_app_NewDrug.webp",
         author: "Jamila Johar",
         title: '"MOBILE ADDICTION" The Show Behind!',
         date: "April 16, 2018",
@@ -102,7 +102,7 @@ export const blogs: Blogs[] = [
     {
         id: 12,
         category: "2019",
-        image: "yourhour-website-img/YourHour_app_Boredom_Top.jpg",
+        image: "/yourhour-website-img/YourHour_app_Boredom_Top.webp",
         author: "Daksh Haldar",
         title: '"BOREDOM = CREATIVITY" The Art Of Doing Nothing!',
         date: "June 10, 2019",
@@ -115,19 +115,19 @@ export const popularPosts = [
         id: 12,
         title: '"BOREDOM = CREATIVITY" The Art Of Doing Nothing!',
         date: "June 10, 2019",
-        image: "/yourhour-website-img/YourHour_app_Boredom_Top.jpg",
+        image: "/yourhour-website-img/YourHour_app_Boredom_Top.webp",
     },
     {
         id: 4,
         title: "Mindfulness and Productivity!",
         date: "June 21, 2019",
-        image: "/yourhour-website-img/yourhourapp_multitude-of-options_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_meditation_gap.webp",
     },
     {
         id: 6,
         title: "Procrastination and Ways to Overcome It",
         date: "June 30, 2019",
-        image: "/yourhour-website-img/yourhourapp_procastination_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_looking-for-solution_gap.webp"
     },
 ];
 
@@ -162,7 +162,7 @@ export const blogData: BlogData = {
         author: "Wesley D'Souza",
         date: "Mar 14, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_Letter-To-Device_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Letter-To-Device_gap.webp",
         sections: [
             {
                 type: "text",
@@ -176,7 +176,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Texting-With-Colleague-Smartphone_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Texting-With-Colleague-Smartphone_gap.webp",
                 alt: "Phone addiction illustration",
             },
             {
@@ -203,7 +203,7 @@ export const blogData: BlogData = {
         author: "Wesley D'Souza",
         date: "April 16, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_Friends-social-media_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Friends-social-media_gap.webp",
         sections: [
             {
                 type: "text",
@@ -217,7 +217,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Girl-using-charging-smartphone_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Girl-using-charging-smartphone_gap.webp",
                 alt: "Young people using phones",
             },
             {
@@ -237,7 +237,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_friends-studying-technology_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_friends-studying-technology_gap.webp",
                 alt: "Child using phone while charging",
             },
             {
@@ -252,7 +252,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Time-and-work-productivity_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Time-and-work-productivity_gap.webp",
                 alt: "Group of teenagers using devices",
             },
             {
@@ -274,7 +274,7 @@ export const blogData: BlogData = {
         author: "Wesley D'Souza",
         date: "May 18, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_The-Great-Realisation_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_The-Great-Realisation_gap.webp",
         sections: [
             {
                 type: "text",
@@ -288,7 +288,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Happy-Relationship_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Happy-Relationship_gap.webp",
                 alt: "Young people using phones",
             },
             {
@@ -303,7 +303,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Humanity_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Humanity_gap.webp",
                 alt: "Child using phone while charging",
             },
             {
@@ -325,7 +325,7 @@ export const blogData: BlogData = {
         author: "Wesley D'Souza",
         date: "June 21, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_multitude-of-options_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_multitude-of-options_gap.webp",
         sections: [
             {
                 type: "text",
@@ -334,7 +334,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_meditation_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_meditation_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -349,7 +349,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_qualitatively-productive_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_qualitatively-productive_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -359,7 +359,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Inner-Peace_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Inner-Peace_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -369,7 +369,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_MultiTasking_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_MultiTasking_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -379,7 +379,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Stress-Release_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Stress-Release_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -402,7 +402,7 @@ export const blogData: BlogData = {
         author: "Wesley D'Souza",
         date: "July 01, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_Nickel-Boys_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Nickel-Boys_gap.webp",
         sections: [
             {
                 type: "text",
@@ -426,7 +426,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_racism-and-segregation_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_racism-and-segregation_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -448,7 +448,7 @@ export const blogData: BlogData = {
         author: "Daksh Haldar",
         date: "June 30, 2019",
         category: "2019",
-        image: "/yourhour-website-img/yourhourapp_procastination_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_procastination_gap.webp",
         sections: [
             {
                 type: "text",
@@ -462,7 +462,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Pleasure-for-small-time_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Pleasure-for-small-time_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -472,7 +472,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_push-away-work_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_push-away-work_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -482,7 +482,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_looking-for-solution_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_looking-for-solution_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -497,7 +497,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_TimeTable_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_TimeTable_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -524,7 +524,7 @@ export const blogData: BlogData = {
         author: "Daksh Haldar",
         date: "May 14, 2019",
         category: "2019",
-        image: "/yourhour-website-img/yourhourapp_Ways-To-Manage-Your-Time_gap.jpg",
+        image: "/yourhour-website-img/yourhourapp_Ways-To-Manage-Your-Time_gap.webp",
         sections: [
             {
                 type: "text",
@@ -552,7 +552,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_TimeTable _gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_TimeTable _gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -571,7 +571,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_To-Do-List_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_To-Do-List_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -584,7 +584,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Distraction_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Distraction_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -617,7 +617,7 @@ export const blogData: BlogData = {
         date: "June 16, 2019",
         category: "2019",
         image:
-            "/yourhour-website-img/yourhourapp_work-from-home-and-office_gap.jpg",
+            "/yourhour-website-img/yourhourapp_work-from-home-and-office_gap.webp",
         sections: [
             {
                 type: "text",
@@ -640,7 +640,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Productivity_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Productivity_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -654,7 +654,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_TimeTable _gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_TimeTable _gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -664,7 +664,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Distraction-free-work-environment_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Distraction-free-work-environment_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -683,7 +683,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Panning-Schedule_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Panning-Schedule_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -702,7 +702,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_work from-home_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_work from-home_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -721,7 +721,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_Take -small-breaks _gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_Take -small-breaks _gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -742,7 +742,7 @@ export const blogData: BlogData = {
         author: "Daksh Haldar",
         date: "June 16, 2019",
         category: "2019",
-        image: "/yourhour-website-img/Youhour_app_Top.jpg",
+        image: "/yourhour-website-img/Youhour_app_Top.webp",
         sections: [
             {
                 type: "text",
@@ -775,7 +775,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/Youhour_app_A_Man.jpg",
+                src: "/yourhour-website-img/Youhour_app_A_Man.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -829,7 +829,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/Yourhour_app_Aim.jpg",
+                src: "/yourhour-website-img/Yourhour_app_Aim.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -856,7 +856,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/Yourhour_app_Don't.jpg",
+                src: "/yourhour-website-img/Yourhour_app_Don't.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -892,7 +892,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/Yourhour_app_Start.jpg",
+                src: "/yourhour-website-img/Yourhour_app_Start.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -935,7 +935,7 @@ export const blogData: BlogData = {
         author: "Steven Smith",
         date: "September 31, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhourapp_relationship_gap5_3.jpg",
+        image: "/yourhour-website-img/yourhourapp_relationship_gap5_3.webp",
         sections: [
             {
                 type: "text",
@@ -949,7 +949,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_young_and_old_alike.jpg",
+                src: "/yourhour-website-img/yourhourapp_young_and_old_alike.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -973,7 +973,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_teenager_the_lost_age.jpg",
+                src: "/yourhour-website-img/yourhourapp_teenager_the_lost_age.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -987,7 +987,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_teenage_phone_addiction.jpg",
+                src: "/yourhour-website-img/yourhourapp_teenage_phone_addiction.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1011,7 +1011,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_parents_becoming_phone_addicts.jpg",
+                src: "/yourhour-website-img/yourhourapp_parents_becoming_phone_addicts.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1031,7 +1031,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhourapp_growing_digital_gap.jpg",
+                src: "/yourhour-website-img/yourhourapp_growing_digital_gap.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1057,7 +1057,7 @@ export const blogData: BlogData = {
         author: "Steven Smith",
         date: "September 31, 2020",
         category: "2020",
-        image: "/yourhour-website-img/yourhour_app_stages_header.png",
+        image: "/yourhour-website-img/yourhour_app_stages_header.webp",
         sections: [
             {
                 type: "text",
@@ -1071,7 +1071,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/YourHour_app_NewDrug.jpg",
+                src: "/yourhour-website-img/YourHour_app_NewDrug.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1094,7 +1094,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhour_app_image1.jpg",
+                src: "/yourhour-website-img/yourhour_app_image1.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1108,7 +1108,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhour_app_habitual.jpg",
+                src: "/yourhour-website-img/yourhour_app_habitual.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1127,7 +1127,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhour_app_dependent2.jpg",
+                src: "/yourhour-website-img/yourhour_app_dependent2.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1145,7 +1145,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhour_app_image_obsessed.jpg",
+                src: "/yourhour-website-img/yourhour_app_image_obsessed.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1164,7 +1164,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/yourhour_app_image_addicted2.jpg",
+                src: "/yourhour-website-img/yourhour_app_image_addicted2.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1195,7 +1195,7 @@ export const blogData: BlogData = {
         author: "Steven Smith",
         date: "September 31, 2020",
         category: "2020",
-        image: "/yourhour-website-img/YourHour_app_Boredom_Top.jpg",
+        image: "/yourhour-website-img/YourHour_app_Boredom_Top.webp",
         sections: [
             {
                 type: "text",
@@ -1209,7 +1209,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/YourHour_app_Bordom1.jpg",
+                src: "/yourhour-website-img/YourHour_app_Bordom1.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1245,7 +1245,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/YourHour_app_Boredom2.jpg",
+                src: "/yourhour-website-img/YourHour_app_Boredom2.webp",
                 alt: "Meditation at sunset",
             },
             {
@@ -1274,7 +1274,7 @@ export const blogData: BlogData = {
             },
             {
                 type: "image",
-                src: "/yourhour-website-img/YourHour_app_Boredom_last.jpg",
+                src: "/yourhour-website-img/YourHour_app_Boredom_last.webp",
                 alt: "Meditation at sunset",
             },
             {
