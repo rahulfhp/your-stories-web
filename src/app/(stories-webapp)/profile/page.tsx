@@ -14,11 +14,11 @@ const ProfilePage: React.FC = () => {
   const router = useRouter();
 
   // Stories store
-  const { 
-    userStories, 
-    isLoadingUserStories, 
-    userStoriesError, 
-    fetchUserStories 
+  const {
+    userStories,
+    isLoadingUserStories,
+    userStoriesError,
+    fetchUserStories,
   } = useStoriesStore();
 
   const handleLogout = async () => {
@@ -34,7 +34,7 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     if (user?.email) {
       fetchUserStories(user.email);
-      
+
       // Track profile visit
       trackProfileVisited();
     }
@@ -50,7 +50,7 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px] bg-gradient-to-r from-gray-200/5 dark:from-white/2 to-transparent rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 relative z-10">
         {/* Header */}
         <h1 className="text-gray-800 dark:text-white text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
@@ -64,11 +64,11 @@ const ProfilePage: React.FC = () => {
               <div className="w-24 h-24 sm:w-28 sm:h-28 relative rounded-xl overflow-hidden bg-sky-500/60 flex items-center justify-center mx-auto">
                 {user?.photoURL ? (
                   <Image
-                  src={user?.photoURL}
-                  alt={user?.displayName?.charAt(0)?.toUpperCase() || "U"}
-                  fill
-                  className="object-cover"
-                />
+                    src={user?.photoURL}
+                    alt={user?.displayName?.charAt(0)?.toUpperCase() || "U"}
+                    fill
+                    className="object-cover"
+                  />
                 ) : (
                   <span className="text-white dark:text-white text-2xl sm:text-3xl font-bold">
                     {user?.displayName?.charAt(0) || "U"}
@@ -77,7 +77,9 @@ const ProfilePage: React.FC = () => {
               </div>
 
               <div className="mt-4 sm:mt-6">
-                <h2 className="text-gray-600 dark:text-white/80 text-xs sm:text-sm mb-2">ABOUT</h2>
+                <h2 className="text-gray-600 dark:text-white/80 text-xs sm:text-sm mb-2">
+                  ABOUT
+                </h2>
                 <p className="text-gray-800 dark:text-white text-sm sm:text-base font-medium">
                   {user?.displayName || "-"}
                 </p>
@@ -155,7 +157,9 @@ const ProfilePage: React.FC = () => {
                       className="object-contain block dark:hidden"
                     />
                   </div>
-                  <p className="text-gray-700 dark:text-white/80 mb-2 text-sm sm:text-base">You haven't created any stories yet</p>
+                  <p className="text-gray-700 dark:text-white/80 mb-2 text-sm sm:text-base">
+                    You haven't created any stories yet
+                  </p>
                   <a
                     href="/write"
                     className="text-blue-600 dark:text-sky-400 hover:underline font-semibold text-sm sm:text-base"

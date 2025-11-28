@@ -58,13 +58,7 @@ export default function Home() {
     setMoreStoriesPage(nextPage);
   };
 
-  const handleStoryClick = (
-    storyId: string,
-    storyTitle: string,
-    sourceType: "handpicked" | "more-stories"
-  ) => {
-    // Navigate to story detail page with source type comment date- 3-oct-2025
-    // router.push(`/screentime/${storyId}?source=${sourceType}`);
+  const handleStoryClick = (storyId: string, storyTitle: string) => {
     const slug = createStorySlug(storyTitle, storyId);
     router.push(`/screentime/${slug}`);
   };
@@ -133,11 +127,7 @@ export default function Home() {
                         key={story._id}
                         storyData={story}
                         onClick={() =>
-                          handleStoryClick(
-                            story._id,
-                            story.storyTitle,
-                            "handpicked"
-                          )
+                          handleStoryClick(story._id, story.storyTitle)
                         }
                       />
                     ))
@@ -180,11 +170,7 @@ export default function Home() {
                       key={story._id}
                       storyData={story}
                       onClick={() =>
-                        handleStoryClick(
-                          story._id,
-                          story.storyTitle,
-                          "more-stories"
-                        )
+                        handleStoryClick(story._id, story.storyTitle)
                       }
                     />
                   ))

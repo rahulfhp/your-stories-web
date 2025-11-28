@@ -97,21 +97,21 @@ export default function Footer() {
               </h3>
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
-                  href="https://mindefy.tech/about-us"
+                  href="https://mindefy.tech/about-us-technology-innovators"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   About
                 </a>
                 <a
-                  href="https://mindefy.tech/testimonials"
+                  href="https://mindefy.tech/customer-testimonials-reviews"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Testimonials
                 </a>
                 <Link
-                  href="/site-map"
+                  href="/stories-site-map"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Sitemap
@@ -133,28 +133,28 @@ export default function Footer() {
                   YourHour
                 </a>
                 <a
-                  href="https://mindefy.tech/spector"
+                  href="https://mindefy.tech/spector-analytics-software"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Spector
                 </a>
                 <a
-                  href="https://mindefy.tech/early-foods"
+                  href="https://mindefy.tech/early-foods-e-commerce"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
-                  Early Foods
+                  EarlyFoods
                 </a>
                 <a
-                  href="https://mindefy.tech/jego"
+                  href="https://mindefy.tech/jego-ott-platform"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   JEGO
                 </a>
                 <a
-                  href="https://mindefy.tech/green-bill"
+                  href="https://mindefy.tech/greenbill-paperless-billing-software"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
@@ -170,35 +170,35 @@ export default function Footer() {
               </h3>
               <div className="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base opacity-90">
                 <a
-                  href="https://mindefy.tech/hybrid-app-development"
+                  href="https://mindefy.tech/hybrid-app-development-services"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Hybrid App Development
                 </a>
                 <a
-                  href="https://mindefy.tech/startup-support"
+                  href="https://mindefy.tech/startup-support-consulting"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Startup Support & Consulting
                 </a>
                 <a
-                  href="https://mindefy.tech/digital-transformation"
+                  href="https://mindefy.tech/digital-transformation-consulting"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   Digital Transformation
                 </a>
                 <a
-                  href="https://mindefy.tech/mvp-development"
+                  href="https://mindefy.tech/mvp-development-startup-support"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
                   MVP Dev. & PMF Test
                 </a>
                 <a
-                  href="https://mindefy.tech/staff-services"
+                  href="https://mindefy.tech/staff-augmentation-services"
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
