@@ -127,8 +127,7 @@ export default function BlogsPage() {
                     </div>
                   </div>
                 ))
-              :
-                filteredBlogs.map((blog) => (
+              : filteredBlogs.map((blog) => (
                   <div
                     key={blog.id}
                     className="mb-4 transition-opacity duration-300 opacity-100"

@@ -119,7 +119,7 @@ export default function WebsiteFooter() {
                   COMPANY
                 </h4>
                 <a
-                  href="https://mindefy.tech/about-us"
+                  href="https://mindefy.tech/about-us-technology-innovators"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mb-4 font-montserrat"
@@ -127,7 +127,7 @@ export default function WebsiteFooter() {
                   About
                 </a>
                 <a
-                  href="https://mindefy.tech/testimonials"
+                  href="https://mindefy.tech/customer-testimonials-reviews"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors font-montserrat"
@@ -165,7 +165,7 @@ export default function WebsiteFooter() {
                   Privacy Policy
                 </Link>
                 <Link
-                  href="/site-map"
+                  href="/website-site-map"
                   className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] transition-colors mt-4 font-montserrat"
                 >
                   Sitemap
@@ -187,7 +187,7 @@ export default function WebsiteFooter() {
                 YourHour
               </a>
               <a
-                href="https://mindefy.tech/spector"
+                href="https://mindefy.tech/spector-analytics-software"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -195,15 +195,15 @@ export default function WebsiteFooter() {
                 Spector
               </a>
               <a
-                href="https://mindefy.tech/early-foods"
+                href="https://mindefy.tech/early-foods-e-commerce"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
-                Early Foods
+                EarlyFoods
               </a>
               <a
-                href="https://mindefy.tech/jego"
+                href="https://mindefy.tech/jego-ott-platform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -211,7 +211,7 @@ export default function WebsiteFooter() {
                 JEGO
               </a>
               <a
-                href="https://mindefy.tech/green-bill"
+                href="https://mindefy.tech/greenbill-paperless-billing-software"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] font-montserrat"
@@ -226,7 +226,7 @@ export default function WebsiteFooter() {
                 SERVICES
               </h4>
               <a
-                href="https://mindefy.tech/hybrid-app-development"
+                href="https://mindefy.tech/hybrid-app-development-services"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -234,7 +234,7 @@ export default function WebsiteFooter() {
                 Hybrid App Development
               </a>
               <a
-                href="https://mindefy.tech/startup-support"
+                href="https://mindefy.tech/startup-support-consulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -242,7 +242,7 @@ export default function WebsiteFooter() {
                 Startup Support & Consulting
               </a>
               <a
-                href="https://mindefy.tech/digital-transformation"
+                href="https://mindefy.tech/digital-transformation-consulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -250,7 +250,7 @@ export default function WebsiteFooter() {
                 Digital Transformation
               </a>
               <a
-                href="https://mindefy.tech/mvp-development"
+                href="https://mindefy.tech/mvp-development-startup-support"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
@@ -258,7 +258,7 @@ export default function WebsiteFooter() {
                 MVP Dev. & PMF Test
               </a>
               <a
-                href="https://mindefy.tech/staff-services"
+                href="https://mindefy.tech/staff-augmentation-services"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] font-montserrat"
