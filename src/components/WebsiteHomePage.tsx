@@ -65,7 +65,7 @@ export default function WebsiteHomePage() {
       setIsSticky(window.scrollY > 100);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -208,6 +208,7 @@ export default function WebsiteHomePage() {
                 src="yourhour-website-img/GooglePlay.png"
                 alt="Get it on Google Play"
                 className="w-32 sm:w-38 inline-block"
+                loading="lazy"
               />
             </a>
           </div>
@@ -221,6 +222,7 @@ export default function WebsiteHomePage() {
             src="yourhour-website-img/YourHourDashboard.webp"
             alt="YourHour Dashboard"
             className="max-w-full h-auto mx-auto"
+            loading="lazy"
           />
         </div>
       </section>
@@ -237,6 +239,7 @@ export default function WebsiteHomePage() {
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=292643&theme=dark"
               alt="YourHour - Track and better control your phone usage | Product Hunt"
               className="w-62 h-13 inline-block"
+              loading="lazy"
             />
           </a>
         </div>
@@ -264,6 +267,7 @@ export default function WebsiteHomePage() {
                   }`}
                   alt={logo}
                   className="h-25 sm:h-28 md:h-38 w-auto object-contain"
+                  loading="lazy"
                 />
               </div>
             ))}
@@ -279,6 +283,7 @@ export default function WebsiteHomePage() {
               src="yourhour-website-img/MeetReadWrite.svg"
               alt="Meet Read Write"
               className="h-50 mx-auto mb-8"
+              loading="lazy"
             />
             <a
               href="https://stories.yourhourapp.com/"
@@ -290,6 +295,7 @@ export default function WebsiteHomePage() {
                 src="yourhour-website-img/stories-logo.svg"
                 alt="YourStories"
                 className="mx-auto mb-12"
+                loading="lazy"
               />
             </a>
             <h4 className="text-xl font-semibold font-montserrat mb-8">

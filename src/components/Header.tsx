@@ -109,7 +109,9 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
       if (names.length === 1) {
         return names[0].charAt(0).toUpperCase();
       }
-      return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+      return (
+        names[0].charAt(0) + names[names.length - 1].charAt(0)
+      ).toUpperCase();
     };
 
     const initials = getInitials(alt);
@@ -126,16 +128,18 @@ const TopBarOption: React.FC<TopBarOptionProps> = ({
             className="w-full h-full object-cover"
             onError={(e) => {
               // Hide the image and show initials or UserIcon if image fails to load
-              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).style.display = "none";
               const parent = (e.target as HTMLImageElement).parentElement;
               if (parent) {
-                const fallbackDiv = document.createElement('div');
-                fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm';
+                const fallbackDiv = document.createElement("div");
+                fallbackDiv.className =
+                  "w-full h-full bg-gradient-to-br from-blue-500 to-sky-500 backdrop-blur-sm flex items-center justify-center text-white font-semibold text-sm";
                 if (initials) {
                   fallbackDiv.textContent = initials;
                 } else {
                   // Create UserIcon for fallback
-                  fallbackDiv.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
+                  fallbackDiv.innerHTML =
+                    '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
                 }
                 parent.appendChild(fallbackDiv);
               }
@@ -238,12 +242,12 @@ const Header: React.FC<HeaderProps> = ({
 
     // Add event listener when mobile menu is open
     if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     // Cleanup event listener
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileMenuOpen]);
 
@@ -310,7 +314,7 @@ const Header: React.FC<HeaderProps> = ({
                   <ThemeSwitcher />
 
                   {/* Search Icon */}
-                  <Link href="/search">
+                  <Link href="/search" aria-label="Search">
                     <TopBarOption Icon={SearchIcon} />
                   </Link>
 
@@ -371,7 +375,11 @@ const Header: React.FC<HeaderProps> = ({
             {/* Mobile Actions Section */}
             <div className="flex md:hidden items-center gap-2">
               {/* Essential actions for mobile - only show search and profile/login */}
-              <Link href="/search" onClick={closeMobileMenu}>
+              <Link
+                href="/search"
+                onClick={closeMobileMenu}
+                aria-label="Search"
+              >
                 <TopBarOption Icon={SearchIcon} />
               </Link>
 
@@ -396,6 +404,13 @@ const Header: React.FC<HeaderProps> = ({
               {/* Hamburger Menu Button */}
               <button
                 onClick={toggleMobileMenu}
+                aria-label={
+                  mobileMenuOpen
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
+                }
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
                 className="p-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-110 backdrop-blur-sm border transition-colors
                            dark:hover:bg-white/10 dark:border-white/10 dark:hover:border-white/20
                            hover:bg-gray-100/20 border-gray-300/20 hover:border-gray-400/30"
@@ -412,6 +427,7 @@ const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Dropdown */}
           <div
             ref={mobileMenuRef}
+            id="mobile-menu"
             className={`md:hidden absolute top-full right-0 z-40 w-64 transition-all duration-300 ease-in-out ${
               mobileMenuOpen
                 ? "translate-x-0 opacity-100"

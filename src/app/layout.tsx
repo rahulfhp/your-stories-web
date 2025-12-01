@@ -182,6 +182,54 @@ export default async function RootLayout({
 
         {/* Add Structured Data for SEO shortcuts */}
         <StructuredDataSchema isWebsite={isWebsite} />
+
+        {/* Preload LCP image for YourHour website */}
+        {isWebsite && (
+          <>
+            <link
+              rel="preload"
+              as="image"
+              href="/yourhour-website-img/hero-BG-Img.webp"
+            />
+            <link
+              rel="preconnect"
+              href="https://stories.yourhourapp.com"
+              crossOrigin=""
+            />
+            <link
+              rel="preconnect"
+              href="https://chatbot.mindefy.tech"
+              crossOrigin=""
+            />
+            <link
+              rel="preconnect"
+              href="https://api.producthunt.com"
+              crossOrigin=""
+            />
+            <link rel="preconnect" href="https://play.google.com" />
+            <link
+              rel="preconnect"
+              href="https://api.mixpanel.com"
+              crossOrigin=""
+            />
+          </>
+        )}
+
+        {/* Preconnect for stories webapp external origins */}
+        {!isWebsite && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://images.unsplash.com"
+              crossOrigin=""
+            />
+            <link
+              rel="preconnect"
+              href="https://api.mixpanel.com"
+              crossOrigin=""
+            />
+          </>
+        )}
       </head>
 
       <body
