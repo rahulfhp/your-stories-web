@@ -89,9 +89,14 @@ Let's get started! 🚀`;
 
   const scrollToBottom = () => {
     if (chatBodyRef.current) {
-      setTimeout(() => {
-        chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
-      }, 0);
+      requestAnimationFrame(() => {
+        const last = chatBodyRef.current.lastElementChild;
+        if (last && last.scrollIntoView) {
+          last.scrollIntoView({ behavior: "auto", block: "end" });
+        } else {
+          chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+        }
+      });
     }
   };
 

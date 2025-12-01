@@ -223,6 +223,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_detailed_reports.webp"
                 alt="Analytics"
                 className="w-full max-w-[25rem] mx-auto"
+                loading="lazy"
               />
             </AnimatedSection>
           </div>
@@ -241,6 +242,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_reports.webp"
                 alt="Export"
                 className="w-full max-w-[25rem] mx-auto"
+                loading="lazy"
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">

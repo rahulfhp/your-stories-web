@@ -180,9 +180,10 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
 
   // Handle scroll tracking for read progress
   useEffect(() => {
-    const handleScroll = () => {
-      if (!contentRef.current) return;
+    let ticking = false;
 
+    const computeProgress = () => {
+      if (!contentRef.current) return;
       const element = contentRef.current;
       const totalHeight = element.scrollHeight - element.clientHeight;
       const scrollPosition = window.scrollY - element.offsetTop;
@@ -207,7 +208,17 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          computeProgress();
+          ticking = false;
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [story, trackedMilestones]);
 
@@ -508,6 +519,9 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   src={story.coverPicRef}
                   alt={story.storyTitle}
                   fill
+                  priority
+                  fetchPriority="high"
+                  sizes="100vw"
                   className="object-cover"
                 />
               ) : (
@@ -515,6 +529,9 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   src={TestImage}
                   alt={story.storyTitle}
                   fill
+                  priority
+                  fetchPriority="high"
+                  sizes="100vw"
                   className="object-cover"
                 />
               )}
