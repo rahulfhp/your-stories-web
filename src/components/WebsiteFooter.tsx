@@ -255,7 +255,7 @@ export default function WebsiteFooter() {
                 rel="noopener noreferrer"
                 className="w-fit block text-sm font-medium text-[#13151A] hover:text-[#23aae2] mb-4 font-montserrat"
               >
-                MVP Dev. & PMF Test
+                MVP Development
               </a>
               <a
                 href="https://mindefy.tech/staff-augmentation-services"

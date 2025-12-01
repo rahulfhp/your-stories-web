@@ -38,6 +38,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             alt={storyData.storyTitle}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             fill
+            loading="lazy"
           />
         ) : (
           <Image
@@ -45,6 +46,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
             alt={storyData.storyTitle}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             fill
+            loading="lazy"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 dark:from-black/60 via-transparent to-transparent" />
@@ -73,6 +75,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ storyData, onClick, onRemove }) =
                 src={storyData.profilePicRef}
                 alt={storyData.userName}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             ) : (
               <span className="text-white text-sm font-semibold">

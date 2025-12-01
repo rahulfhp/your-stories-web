@@ -50,6 +50,7 @@ const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => {
             src={section.src}
             alt="images"
             className="w-full h-auto rounded-lg shadow-md"
+            loading="lazy"
           />
           {section.caption && (
             <p className="text-sm text-gray-500 text-center mt-2 font-montserrat">
@@ -194,6 +195,7 @@ export default function BlogDetailPage() {
               src={blog.image}
               alt="image"
               className="w-full h-auto rounded-lg shadow-lg"
+              loading="lazy"
             />
           </div>
         )}
