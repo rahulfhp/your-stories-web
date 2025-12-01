@@ -229,6 +229,7 @@ const WriteStoryPage: React.FC = () => {
                       src={coverImage.urls.regular}
                       alt={coverImage.alt_description || "Cover image"}
                       className="w-full h-48 sm:h-64 object-cover rounded-lg sm:rounded-xl"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/20 rounded-lg sm:rounded-xl flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                       <Button
@@ -534,6 +535,7 @@ const WriteStoryPage: React.FC = () => {
                             src={image.urls.small}
                             alt={image.alt_description || "Unsplash image"}
                             className="w-full h-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                       ))}

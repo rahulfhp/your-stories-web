@@ -6,9 +6,18 @@ const AnimatedSection = ({
   className = "",
 }: any) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    // Check if screen is mobile size
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,6 +35,7 @@ const AnimatedSection = ({
     }
 
     return () => {
+      window.removeEventListener("resize", checkMobile);
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
@@ -33,6 +43,12 @@ const AnimatedSection = ({
   }, []);
 
   const getAnimationClass = () => {
+    // On mobile, always show content without animation
+    if (isMobile) {
+      return "opacity-100 translate-x-0 translate-y-0";
+    }
+
+    // On desktop, apply animations
     if (!isVisible) {
       if (direction === "left") return "opacity-0 -translate-x-20";
       if (direction === "right") return "opacity-0 translate-x-20";
@@ -44,7 +60,9 @@ const AnimatedSection = ({
   return (
     <div
       ref={sectionRef}
-      className={`transition-all duration-800 ease-out ${getAnimationClass()} ${className}`}
+      className={`${
+        !isMobile ? "transition-all duration-800 ease-out" : ""
+      } ${getAnimationClass()} ${className}`}
     >
       {children}
     </div>
@@ -84,6 +102,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_dashboard.webp"
                 alt="Dashboard"
                 className="w-full max-w-[25rem] mx-auto"
+                loading="lazy"
               />
             </AnimatedSection>
           </div>
@@ -102,6 +121,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_multiple_reports.webp"
                 alt="Reports"
                 className="w-full max-w-[25rem] mx-auto"
+                loading="lazy"
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">
@@ -158,6 +178,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_level.webp"
                 alt="Addiction Level"
                 className="w-full max-w-[25rem] mx-auto"
+                loading="lazy"
               />
             </AnimatedSection>
           </div>
@@ -176,6 +197,7 @@ const FeaturesPage = () => {
                 src="yourhour-website-img/phoneaddiction_challenges.webp"
                 alt="Challenges"
                 className="w-full max-w-[25rem] md:h-[37.5rem] mx-auto object-contain"
+                loading="lazy"
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">
@@ -287,6 +309,7 @@ const FeaturesPage = () => {
               src="yourhour-website-img/yourhour-dark-image.webp"
               alt="Export"
               className="w-full max-w-[1120px] mx-auto py-5"
+              loading="lazy"
             />
           </AnimatedSection>
         </div>

@@ -68,6 +68,7 @@ const ProfilePage: React.FC = () => {
                     alt={user?.displayName?.charAt(0)?.toUpperCase() || "U"}
                     fill
                     className="object-cover"
+                    loading="lazy"
                   />
                 ) : (
                   <span className="text-white dark:text-white text-2xl sm:text-3xl font-bold">

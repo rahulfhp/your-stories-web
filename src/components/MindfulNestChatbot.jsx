@@ -263,6 +263,7 @@ Let's get started! 🚀`;
                 src="yourhour-website-img/chatBot-icon.svg"
                 alt="chatBot Icon"
                 className="relative max-w-full h-auto mx-auto transition-transform duration-300 hover:rotate-45"
+                loading="lazy"
               />
             </div>
           </button>
@@ -289,6 +290,7 @@ Let's get started! 🚀`;
                     src="yourhour-website-img/chatBotLogo.svg"
                     alt="chatBot Icon"
                     className="relative max-w-full h-auto mx-auto transition-transform duration-300 hover:rotate-45"
+                    loading="lazy"
                   />
                 </div>
                 <span className="text-[#333333] text-center font-semibold text-2xl font-montserrat">

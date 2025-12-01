@@ -148,6 +148,7 @@ export default function BlogsPage() {
                             src={blog.image}
                             alt={blog.title}
                             className="w-full h-60 object-cover transition-transform hover:scale-110"
+                            loading="lazy"
                           />
                         </div>
                         <div className="p-6">

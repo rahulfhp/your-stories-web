@@ -523,6 +523,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   fetchPriority="high"
                   sizes="100vw"
                   className="object-cover"
+                  loading="lazy"
                 />
               ) : (
                 <Image
@@ -533,6 +534,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   fetchPriority="high"
                   sizes="100vw"
                   className="object-cover"
+                  loading="lazy"
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -563,6 +565,7 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                       width={48}
                       height={48}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   ) : (
                     <span className="text-white text-sm sm:text-lg font-semibold">

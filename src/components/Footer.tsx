@@ -195,7 +195,7 @@ export default function Footer() {
                   target="_blank"
                   className="w-fit block hover:opacity-100 cursor-pointer transition-opacity"
                 >
-                  MVP Dev. & PMF Test
+                  MVP Development
                 </a>
                 <a
                   href="https://mindefy.tech/staff-augmentation-services"
