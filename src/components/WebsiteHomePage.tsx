@@ -219,9 +219,9 @@ export default function WebsiteHomePage() {
       <section className="py-12 px-4 md:px-[10%]">
         <div className="text-center">
           <img
-            src="yourhour-website-img/YourHourDashboard.webp"
+            src="yourhour-website-img/dark-light.webp"
             alt="YourHour Dashboard"
-            className="max-w-full h-auto mx-auto"
+            className="w-full max-w-5xl mx-auto"
             loading="lazy"
           />
         </div>

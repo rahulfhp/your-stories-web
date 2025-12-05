@@ -120,3 +120,17 @@ export const trackWebsiteChatbotQuerySubmitted = (query: string) => {
     console.error('Mixpanel track error:', error);
   }
 };
+
+export const trackWebsiteChatbotTokensUsed = (tokensUsed: number, query: string) => {
+  if (!isBrowser) return;
+  try {
+    const trimmedQuery = query.slice(0, 150);
+    mixpanel.track('website_mindfulNest_chatbot_tokens_used', {
+      tokens_used: tokensUsed,
+      query: trimmedQuery,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('Mixpanel track error:', error);
+  }
+};
