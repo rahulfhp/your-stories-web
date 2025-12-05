@@ -73,17 +73,17 @@ const FeaturesPage = () => {
   return (
     <div className="bg-white">
       {/* Features Section - The Dashboard */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="w-full max-w-lg">
+            <div className="w-full max-w-[33.15rem]">
               <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
                 The Dashboard
               </h2>
               <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
                 Your Daily Usage Summary
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 Mr. Slow awaits you on this board! The app keeps a track on your
                 "Usage Time" & "Unlock Count" and thereby, gives a comparative
                 infographic view of your today's and past 7-day's activity.
@@ -101,7 +101,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_dashboard.webp"
                 alt="Dashboard"
-                className="w-full max-w-[25rem] mx-auto"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -110,7 +110,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - The Reports */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -120,7 +120,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_multiple_reports.webp"
                 alt="Reports"
-                className="w-full max-w-[25rem] mx-auto"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -131,7 +131,7 @@ const FeaturesPage = () => {
               <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
                 Multiple Detailed Reports
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 YourHour app provides its users insightful Daily, Weekly and
                 Monthly infographic based reports for their app usage with great
                 analytics. The Daily consolidated usage report gets delivered
@@ -148,7 +148,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Goal Spots */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -158,7 +158,7 @@ const FeaturesPage = () => {
               <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
                 Know Your Level of Addiction!
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 Using the data of your phone usage for past 7 days, YourHour app
                 defines the Category of Phone Addict that you currently are from
                 the listed six categories vis-a-vis Addicted, Obsessed,
@@ -177,7 +177,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_level.webp"
                 alt="Addiction Level"
-                className="w-full max-w-[25rem] mx-auto"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -186,7 +186,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Challenges */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -196,7 +196,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_challenges.webp"
                 alt="Challenges"
-                className="w-full max-w-[25rem] md:h-[37.5rem] mx-auto object-contain"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -204,7 +204,7 @@ const FeaturesPage = () => {
               <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
                 Smart & Curated Challenges
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 YourHour app provides personalized challenge recommendations to
                 its users to help them Break the Habit Loop.
               </p>
@@ -220,14 +220,14 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Usage Analytics */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
                 Usage Analytics
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 Generate PDF reports with all the important analytics at your
                 fingertips.
               </p>
@@ -244,7 +244,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_detailed_reports.webp"
                 alt="Analytics"
-                className="w-full max-w-[25rem] mx-auto"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -253,7 +253,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Export Data */}
-      <section className="py-12 px-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -263,7 +263,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_reports.webp"
                 alt="Export"
-                className="w-full max-w-[25rem] mx-auto"
+                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -271,7 +271,7 @@ const FeaturesPage = () => {
               <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
                 Export your data to XLSX format!
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide text-justify">
+              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
                 YourHour app does not store any of your data, so all your data
                 is stored in your phone memory and you can export the entire
                 data since the installation of the app in excel format for your
@@ -288,31 +288,45 @@ const FeaturesPage = () => {
         </div>
       </section>
 
-      {/* The Dark Mode */}
-      <section className="py-12 px-4 md:px-[10%]">
-        <div className="container mx-auto">
-          <div className="text-center mb-5 mx-auto">
-            <h2 className="text-3xl text-black md:text-4xl mb-7 font-bold tracking-wide">
-              The Dark Mode
-            </h2>
-            <h3 className="text-xl text-black md:text-2xl mb-7 font-medium">
-              Know Your Level of Addictions
-            </h3>
-            <p className="max-w-4xl mx-auto text-center text-black font-normal leading-[180%] tracking-wide">
-              YourHour equips the user with Dark Mode feature where they can
-              change the App Layout, according to their preference. And guess
-              what? You can use this feature for free!
-            </p>
-          </div>
-          <AnimatedSection direction="bottom" className="w-full">
-            <img
-              src="yourhour-website-img/yourhour-dark-image.webp"
-              alt="Export"
-              className="w-full max-w-[1120px] mx-auto py-5"
-              loading="lazy"
-            />
-          </AnimatedSection>
+      {/* NEW FEATURES Mindful Pause */}
+      <section className="px-4 py-4 mx-auto">
+        <div className="max-w-5xl flex flex-col gap-7 items-center justify-center mx-auto px-4 mb-8">
+          {/* Heading */}
+          <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide text-center">
+            Mindful Pause | Usage Pattern | Dark Mode
+          </h2>
+
+          {/* Description */}
+          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+            We’ve Added Powerful Features To Help You Stay Aware And In Control
+            Of Your Screentime:
+          </p>
+
+          {/* Paragraphs */}
+          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+            <span className="font-semibold">Mindful Pause</span> – Get Notified
+            When You Exceed Yourself Beyond Your Set App Usage Limit. A Gentle
+            Reminder Appears Right On The App’s Opening Screen To Help You Take
+            A Mindful Break.
+          </p>
+
+          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+            <span className="font-semibold">Usage Pattern</span> – Visualize
+            Your App Habits With Easy-To-Read Graphs. See How Often You Open An
+            App And How Much Time You Spend, Categorized Into Four Behavioral
+            Types For Better Self-Awareness.
+          </p>
         </div>
+
+        {/* Image */}
+        <AnimatedSection direction="bottom" className="w-full">
+          <img
+            src="yourhour-website-img/mindful-pause.webp"
+            alt="Export"
+            className="w-full md:w-[46rem] lg:w-[50.65rem] mx-auto"
+            loading="lazy"
+          />
+        </AnimatedSection>
       </section>
     </div>
   );

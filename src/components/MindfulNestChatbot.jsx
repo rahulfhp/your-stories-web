@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { trackWebsiteChatbotOpened, trackWebsiteChatbotClosed, trackWebsiteChatbotQuerySubmitted } from "@/lib/website-analytics";
+import {
+  trackWebsiteChatbotOpened,
+  trackWebsiteChatbotClosed,
+  trackWebsiteChatbotQuerySubmitted,
+  trackWebsiteChatbotTokensUsed,
+} from "@/lib/website-analytics";
 
 export default function MindfulNestChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -75,16 +80,46 @@ Let's get started! 🚀`;
   };
 
   const parseContent = (content) => {
-    const paragraphs = content.split(/\n\n|\n/);
-    return paragraphs
-      .map((paragraph, index) => {
-        const className =
-          index === 0 || index === paragraphs.length - 1
-            ? "font-medium text-sm leading-[21px] m-0"
-            : "font-medium text-sm leading-[21px] m-0 mt-1.5";
-        return `<p class="${className}">${paragraph}</p>`;
-      })
-      .join("\n");
+    // Check if content contains numbered list pattern (e.g., "1. ", "2. ", etc.)
+    const hasNumberedList = /\n\n\d+\.\s/.test(content);
+
+    if (hasNumberedList) {
+      // Split by double newline to get sections
+      const sections = content.split(/\n\n/);
+
+      return sections
+        .map((section, index) => {
+          // Check if this section is a numbered item
+          if (/^\d+\.\s/.test(section.trim())) {
+            const className =
+              "font-medium text-sm leading-[21px] m-0 mt-1.5 ml-4";
+            return `<li class="${className}">${section.replace(
+              /^\d+\.\s/,
+              ""
+            )}</li>`;
+          } else {
+            // Regular paragraph
+            const className =
+              index === 0
+                ? "font-medium text-sm leading-[21px] m-0"
+                : "font-medium text-sm leading-[21px] m-0 mt-1.5";
+            return `<p class="${className}">${section}</p>`;
+          }
+        })
+        .join("\n");
+    } else {
+      // Original behavior for non-list content
+      const paragraphs = content.split(/\n\n|\n/);
+      return paragraphs
+        .map((paragraph, index) => {
+          const className =
+            index === 0 || index === paragraphs.length - 1
+              ? "font-medium text-sm leading-[21px] m-0"
+              : "font-medium text-sm leading-[21px] m-0 mt-1.5";
+          return `<p class="${className}">${paragraph}</p>`;
+        })
+        .join("\n");
+    }
   };
 
   const scrollToBottom = () => {
@@ -111,7 +146,8 @@ Let's get started! 🚀`;
     if (!userInput) return;
 
     // Track query submission event with 150-character limit
-    const truncated = userInput.length > 150 ? userInput.slice(0, 150) : userInput;
+    const truncated =
+      userInput.length > 150 ? userInput.slice(0, 150) : userInput;
     trackWebsiteChatbotQuerySubmitted(truncated);
 
     const newMessage = {
@@ -126,7 +162,7 @@ Let's get started! 🚀`;
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://chatbot.mindefy.tech/ask", {
+      const response = await fetch("https://chatbot.mindefy.tech/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userInput }),
@@ -134,14 +170,20 @@ Let's get started! 🚀`;
 
       const data = await response.json();
 
+      // Track tokens used if available, and logged tokens_used in the mixpanel analytics
+      if (data.tokens_used) {
+        trackWebsiteChatbotTokensUsed(data.tokens_used, userInput);
+      }
+
       setTimeout(() => {
         const botMessage = {
-          content: data.response,
+          content: data.answer || data.response,
           sender: "bot",
           timestamp: new Date().toISOString(),
+          tokensUsed: data.tokens_used,
         };
         setMessages((prev) => [...prev, botMessage]);
-        saveMessage(data.response, "bot");
+        saveMessage(data.answer || data.response, "bot");
         setIsLoading(false);
       }, 500);
     } catch (error) {
@@ -237,7 +279,7 @@ Let's get started! 🚀`;
   return (
     <>
       {/* Chatbot Icon */}
-      <div className="fixed bottom-12 right-2 z-[9998]">
+      <div className="fixed bottom-12 right-0.5 z-[9998]">
         <div className="relative">
           {/* Pulsing Ring Effect */}
           <div className="absolute inset-0 chatbot-icon-pulse">
