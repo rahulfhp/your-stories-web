@@ -73,7 +73,7 @@ const FeaturesPage = () => {
   return (
     <div className="bg-white">
       {/* Features Section - The Dashboard */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="w-full max-w-[33.15rem]">
@@ -101,7 +101,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_dashboard.webp"
                 alt="Dashboard"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -110,7 +110,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - The Reports */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -120,7 +120,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_multiple_reports.webp"
                 alt="Reports"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -148,7 +148,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Goal Spots */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -177,7 +177,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_level.webp"
                 alt="Addiction Level"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -186,7 +186,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Challenges */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -196,7 +196,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_challenges.webp"
                 alt="Challenges"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -220,7 +220,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Usage Analytics */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -244,7 +244,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_detailed_reports.webp"
                 alt="Analytics"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -253,7 +253,7 @@ const FeaturesPage = () => {
       </section>
 
       {/* Features Section - Export Data */}
-      <section className="px-4 py-4 md:px-[10%]">
+      <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection
@@ -263,7 +263,7 @@ const FeaturesPage = () => {
               <img
                 src="yourhour-website-img/phoneaddiction_reports.webp"
                 alt="Export"
-                className="aspect-[1/1] w-full md:w-xl object-contain mx-auto"
+                className="aspect-[1/1] w-full md:w-4xl object-contain mx-auto"
                 loading="lazy"
               />
             </AnimatedSection>
@@ -289,8 +289,8 @@ const FeaturesPage = () => {
       </section>
 
       {/* NEW FEATURES Mindful Pause */}
-      <section className="px-4 py-4 mx-auto">
-        <div className="max-w-5xl flex flex-col gap-7 items-center justify-center mx-auto px-4 mb-8">
+      <section className="px-4 py-4 md:px-[10%] md:py-10 mx-auto">
+        <div className="max-w-5xl flex flex-col gap-7 items-center justify-center mx-auto px-4 mb-10 md:mb-16">
           {/* Heading */}
           <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide text-center">
             Mindful Pause | Usage Pattern | Dark Mode
@@ -323,7 +323,7 @@ const FeaturesPage = () => {
           <img
             src="yourhour-website-img/mindful-pause.webp"
             alt="Export"
-            className="w-full md:w-[46rem] lg:w-[50.65rem] mx-auto"
+            className="w-full max-w-5xl scale-105 mx-auto"
             loading="lazy"
           />
         </AnimatedSection>
