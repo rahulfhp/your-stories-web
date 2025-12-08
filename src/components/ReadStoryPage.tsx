@@ -519,7 +519,6 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   src={story.coverPicRef}
                   alt={story.storyTitle}
                   fill
-                  priority
                   fetchPriority="high"
                   sizes="100vw"
                   className="object-cover"
@@ -530,7 +529,6 @@ const ReadStoryPage: React.FC<ReadStoryPageProps> = ({ storyId }) => {
                   src={TestImage}
                   alt={story.storyTitle}
                   fill
-                  priority
                   fetchPriority="high"
                   sizes="100vw"
                   className="object-cover"
