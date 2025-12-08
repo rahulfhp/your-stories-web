@@ -50,7 +50,6 @@ export default function NotFound() {
                     width={451}
                     height={283}
                     className="w-full h-auto filter drop-shadow-lg"
-                    priority
                     loading="lazy"
                   />
                 </div>
@@ -99,7 +98,6 @@ export default function NotFound() {
                     width={451}
                     height={283}
                     className="w-full h-auto filter drop-shadow-lg"
-                    priority
                     loading="lazy"
                   />
                 </div>
