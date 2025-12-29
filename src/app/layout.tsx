@@ -107,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     metadataBase,
     alternates: {
-      canonical: metadataBase,
+      canonical: "./",
     },
 
     // Open Graph for social sharing
