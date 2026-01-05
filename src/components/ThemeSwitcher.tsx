@@ -1,15 +1,28 @@
 "use client";
 
-import React from 'react';
-import { useThemeStore } from '@/stores/theme';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import React, { useEffect } from "react";
+import { useThemeStore, Theme } from "@/stores/theme";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 interface ThemeSwitcherProps {
   className?: string;
 }
 
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) => {
-  const { theme, toggleTheme } = useThemeStore();
+const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = "" }) => {
+  const { theme, toggleTheme, setTheme } = useThemeStore();
+
+  // Android system theme sync
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).Android) {
+      const systemTheme = (window as any).Android.getSystemTheme();
+
+      console.log("systemTheme", systemTheme);
+
+      if (systemTheme === "dark" || systemTheme === "light") {
+        setTheme(systemTheme as Theme);
+      }
+    }
+  }, [setTheme]);
 
   return (
     <button
