@@ -12,17 +12,23 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = "" }) => {
   const { theme, toggleTheme, setTheme } = useThemeStore();
 
   // Android system theme sync
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && (window as any).Android) {
+  //     const systemTheme = (window as any).Android.getSystemTheme();
+
+  //     console.log("systemTheme", systemTheme);
+
+  //     if (systemTheme === "dark" || systemTheme === "light") {
+  //       setTheme(systemTheme as Theme);
+  //     }
+  //   }
+  // }, [setTheme]);
+
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).Android) {
-      const systemTheme = (window as any).Android.getSystemTheme();
-
-      console.log("systemTheme", systemTheme);
-
-      if (systemTheme === "dark" || systemTheme === "light") {
-        setTheme(systemTheme as Theme);
-      }
-    }
-  }, [setTheme]);
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get("theme");
+    if (theme) setTheme(theme);
+  }, []);
 
   return (
     <button
