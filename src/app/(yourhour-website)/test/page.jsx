@@ -328,7 +328,7 @@ const Hero = () => {
                 <span>New: Reels & Shorts Blocker</span>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
                 Stop <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] relative">
                   {displayText}
@@ -338,7 +338,7 @@ const Hero = () => {
                 Start Living.
               </h1>
 
-              <p className="text-xl text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
+              <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
                 The only app that effectively blocks{" "}
                 <span className="font-bold text-[#00BCD4] border-b border-white">
                   YouTube Shorts
@@ -757,7 +757,7 @@ const MindefyPromo = () => {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-900/20 rounded-full blur-[100px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-[2.5rem] p-10 md:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-xl shadow-black/20">
+        <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-[2.5rem] p-6 md:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-xl shadow-black/20">
           <div className="flex-1 text-center lg:text-left">
             <Badge className="mb-6 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
               Developed by Mindefy Technologies
@@ -789,7 +789,7 @@ const MindefyPromo = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-white text-slate-900 hover:bg-slate-200 px-8 shadow-lg shadow-white/10">
+              <Button className="bg-white text-slate-900 hover:bg-slate-200 px-4 md:px-8 shadow-lg shadow-white/10">
                 Partner with Mindefy
               </Button>
               <Button
@@ -801,46 +801,44 @@ const MindefyPromo = () => {
             </div>
           </div>
 
-          <div className="flex-1 w-full relative">
-            <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#00BCD4] to-[#4DD0E1] rounded-full opacity-10 animate-pulse"></div>
-              <div className="absolute inset-4 bg-slate-900 rounded-3xl border border-slate-800 flex items-center justify-center shadow-2xl overflow-hidden">
-                <div className="text-center p-8">
-                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg">
-                    <img
-                      src={`yourhour-website-img/brain-logo.svg`}
-                      alt="logo"
-                      className="h-16 md:h-20"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-white">
-                    Mindefy Technologies
-                  </h3>
-                  <p className="text-slate-500">
-                    Where Innovation Meets Execution
-                  </p>
+          <div className="flex-1 w-full relative flex justify-center">
+            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+              {/* 🔵 Animated Background Glow (PRESERVED) */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00BCD4] to-[#4DD0E1] rounded-full opacity-10 animate-pulse scale-110" />
 
-                  <div className="mt-8 space-y-3 text-left bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
+              {/* 🟦 Card Container */}
+              <div className="relative bg-slate-900 rounded-3xl border border-slate-800 shadow-2xl p-4 sm:p-8 md:p-10 text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 flex items-center justify-center shadow-lg">
+                  <img
+                    src="yourhour-website-img/brain-logo.svg"
+                    alt="logo"
+                    className="h-12 sm:h-16 md:h-20"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white">
+                  Mindefy Technologies
+                </h3>
+
+                <p className="text-slate-500 text-sm sm:text-base">
+                  Where Innovation Meets Execution
+                </p>
+
+                {/* 🧩 Feature List */}
+                <div className="mt-6 sm:mt-8 space-y-3 text-left bg-slate-800/50 p-4 sm:p-6 rounded-xl border border-slate-700">
+                  {[
+                    "Mobile App Development",
+                    "AI/ML Development",
+                    "UI/UX Design Strategy",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <span className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-sm font-mono text-slate-300">
-                        Mobile App Development
+                        {item}
                       </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-sm font-mono text-slate-300">
-                        AI/ML Development
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-sm font-mono text-slate-300">
-                        UI/UX Design Strategy
-                      </span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -949,7 +947,7 @@ const AddictionScale = () => {
             />
 
             <RevealOnScroll delay={200}>
-              <div className="bg-cyan-400/50 border border-slate-800 p-8 rounded-[2rem] shadow-2xl text-white relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500 shadow-cyan-900/50">
+              <div className="bg-cyan-400/50 border border-slate-800 p-4 md:p-8 rounded-[2rem] shadow-2xl text-white relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500 shadow-cyan-900/50">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform duration-700"></div>
 
                 <div className="flex items-start gap-5 relative z-10">
@@ -1555,7 +1553,7 @@ const Globe3D = () => {
     <>
       <div
         ref={containerRef}
-        className="w-full h-full absolute inset-0 z-0 cursor-grab active:cursor-grabbing"
+        className="w-full lg:h-[85vh] absolute inset-0 z-0 cursor-grab active:cursor-grabbing"
       />
       {tooltipData && (
         <div
@@ -1585,12 +1583,12 @@ const TrustedBySection = () => {
   return (
     <section className="py-32 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[800px] border border-slate-900">
+        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[600px] md:h-[800px] border border-slate-900">
           {/* 3D Globe Container */}
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 py-12">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-48 z-10 py-12">
             <div className="relative max-w-4xl mx-auto px-6">
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
@@ -1610,7 +1608,7 @@ const TrustedBySection = () => {
               </RevealOnScroll>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pointer-events-auto max-w-4xl mx-auto px-6 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pointer-events-auto max-w-2xl mx-auto px-6 w-full">
               {[
                 { val: "5M+", label: "Downloads" },
                 { val: "4.6", label: "Rating" },
@@ -1618,11 +1616,11 @@ const TrustedBySection = () => {
                 { val: "25+", label: "Languages" },
               ].map((stat, i) => (
                 <RevealOnScroll key={i} delay={i * 100}>
-                  <div className="p-4 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-slate-800/50 hover:bg-slate-800/80 transition-colors text-center">
+                  <div className="p-2 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-slate-800/50 hover:bg-slate-800/80 transition-colors text-center">
                     <div className="text-2xl md:text-3xl font-black text-white mb-1">
                       {stat.val}
                     </div>
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                       {stat.label}
                     </div>
                   </div>
@@ -1714,7 +1712,7 @@ const AIDetoxCoachSection = () => {
             <div className="text-center mb-10">
               <button
                 onClick={handleRoast}
-                className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white cursor-pointer shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent w-full md:w-auto text-lg py-4 px-10 rounded-2xl font-bold flex items-center justify-center gap-2 mx-auto transition-all hover:scale-105"
+                className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white cursor-pointer shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent w-full md:w-auto text-lg py-4 px-6 md:px-10 rounded-2xl font-bold flex items-center justify-center gap-2 mx-auto transition-all hover:scale-105"
               >
                 <BrainCircuit size={20} /> <span>Roast My Habit ✨</span>
               </button>
@@ -1777,7 +1775,7 @@ const AIDetoxCoachSection = () => {
 
 const Home = () => {
   return (
-    <div className="font-sans text-slate-100 bg-slate-950 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
+    <div className="px-3 font-sans text-slate-100 bg-slate-950 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
       <GlobalStyles />
       <Hero />
       <LogoTicker />
