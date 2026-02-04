@@ -9,7 +9,7 @@ export default function WebsiteHeader() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
       <div className="relative pt-3">
-        <nav className="relative container w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 rounded-2xl">
+        <nav className="relative container w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 rounded-2xl">
           <div className="absolute inset-0 bg-slate-500/50 backdrop-blur-xl border border-slate-800/50 rounded-2xl shadow-xl shadow-black/40"></div>
 
           {/* Desktop Layout */}
@@ -24,13 +24,13 @@ export default function WebsiteHeader() {
                 <img
                   src="/yourhour-website-img/YourHourApp-logo.svg"
                   alt="YourHour"
-                  className="h-10 w-auto brightness-0 invert"
+                  className="h-15 w-auto"
                 />
               </Link>
             </div>
 
             {/* Center: Navigation Links */}
-            <div className="flex items-center justify-center gap-6 text-sm font-semibold text-slate-300">
+            <div className="flex items-center justify-center gap-6 text-base font-semibold text-slate-300">
               <Link href="/" className="hover:text-[#00BCD4] transition-colors">
                 Home
               </Link>
@@ -60,7 +60,7 @@ export default function WebsiteHeader() {
                 <img
                   src="/yourhour-website-img/stories-logo.svg"
                   alt="YourStories"
-                  className="h-10 w-auto brightness-0 invert"
+                  className="h-13 w-auto brightness-0 invert"
                 />
               </a>
               <a
@@ -85,7 +85,7 @@ export default function WebsiteHeader() {
               <img
                 src="/yourhour-website-img/YourHourApp-logo.svg"
                 alt="YourHour"
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto scale-110"
               />
             </Link>
 
@@ -120,7 +120,7 @@ export default function WebsiteHeader() {
                 <img
                   src="/yourhour-website-img/stories-logo.svg"
                   alt="YourStories"
-                  className="h-9 w-auto brightness-0 invert"
+                  className="h-10 w-auto scale-105 brightness-0 invert"
                 />
               </a>
               <a
@@ -145,7 +145,7 @@ export default function WebsiteHeader() {
               <img
                 src="/yourhour-website-img/YourHourApp-logo.svg"
                 alt="YourHour"
-                className="h-9 w-auto brightness-0 invert"
+                className="h-10 w-auto scale-110 ml-2"
               />
             </Link>
 
@@ -224,7 +224,7 @@ export default function WebsiteHeader() {
                     <img
                       src="/yourhour-website-img/stories-logo.svg"
                       alt="YourStories"
-                      className="h-9 w-auto brightness-0 invert"
+                      className="h-10 w-auto scale-110 brightness-0 invert"
                     />
                   </a>
                   <a

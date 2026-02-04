@@ -30,6 +30,14 @@ import {
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import FeaturesPage from "@/components/YourHourAppFeatures";
+import {
+  trackWebsiteHandpickedStoryCardClicked,
+  trackWebsiteLetsReadClicked,
+  trackWebsiteBlogCardClicked,
+} from "@/lib/website-analytics";
+import { createStorySlug, createBlogSlug } from "@/lib/utils";
+import { popularPosts, blogData } from "@/lib/website-blogs";
+import { useRouter } from "next/navigation";
 
 // --- Global Styles & Animations ---
 const GlobalStyles = () => (
@@ -141,7 +149,7 @@ const Button = ({
   ...props
 }) => {
   const baseStyle =
-    "inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95";
+    "inline-flex items-center justify-center px-6 py-3 cursor-pointer rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95";
   const variants = {
     primary:
       "bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:brightness-110 border border-transparent",
@@ -233,7 +241,7 @@ const FeatureCard = ({
 
         {(color === "red" || color === "orange") && (
           <div className="mt-4 inline-flex items-center text-sm font-bold text-cyan-400">
-            Most Popular Feature <ArrowRight size={14} className="ml-1" />
+            Most Popular Feature
           </div>
         )}
       </div>
@@ -312,7 +320,7 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
             <RevealOnScroll>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 cursor-pointer hover:border-cyan-500/50 transition-all group">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
                 <Zap
                   size={14}
                   className="text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform"
@@ -356,7 +364,7 @@ const Hero = () => {
 
                   <button
                     onClick={() => setIsBlocked(!isBlocked)}
-                    className={`relative w-16 h-8 rounded-full transition-colors duration-300 focus:outline-none ${
+                    className={`relative w-16 h-8 cursor-pointer rounded-full transition-colors duration-300 focus:outline-none ${
                       isBlocked ? "bg-[#00BCD4]" : "bg-slate-700"
                     }`}
                   >
@@ -376,9 +384,14 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <Button className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] hover:brightness-110 text-white px-8 py-4 text-lg shadow-cyan-900/30 shadow-xl rounded-2xl">
-                  Install Now - It's Free
-                </Button>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
+                >
+                  Install Now
+                </a>
 
                 <div className="flex items-center gap-3 px-6 py-3 rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md shadow-sm">
                   <div className="flex -space-x-3">
@@ -639,7 +652,7 @@ const LogoTicker = () => {
           {[...logos, ...logos].map((logo, index) => (
             <div
               key={`${logo.key}-${index}`}
-              className="mx-8 relative flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+              className="mx-8 relative flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-300"
             >
               <div className="relative p-2 border border-white rounded-xl">
                 <img
@@ -1013,7 +1026,7 @@ const Challenges = () => {
             },
           ].map((card, i) => (
             <RevealOnScroll key={i} delay={i * 100}>
-              <div className="group relative h-full bg-slate-800 border border-slate-700 p-8 rounded-[2rem] hover:bg-slate-700 shadow-sm hover:shadow-xl hover:shadow-cyan-900/10 transition-all duration-300 cursor-pointer overflow-hidden">
+              <div className="group relative h-full bg-slate-800 border border-slate-700 p-8 rounded-[2rem] hover:bg-slate-700 shadow-sm hover:shadow-xl hover:shadow-cyan-900/10 transition-all duration-300 overflow-hidden">
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
@@ -1036,9 +1049,16 @@ const Challenges = () => {
 
 const Stories = () => {
   const { handpickedStories, fetchHandpickedStories } = useStoriesStore();
+
   useEffect(() => {
     fetchHandpickedStories();
   }, [fetchHandpickedStories]);
+
+  const handleStoryClick = (storyId, storyTitle) => {
+    trackWebsiteHandpickedStoryCardClicked(storyId, storyTitle);
+    const slug = createStorySlug(storyTitle, storyId);
+    window.open(`https://stories.yourhourapp.com/screentime/${slug}`, "_blank");
+  };
 
   return (
     <section id="stories" className="py-32 bg-slate-950 relative">
@@ -1049,12 +1069,27 @@ const Stories = () => {
           subtitle="Join thousands of users who have transformed their digital habits with Your Hour by Mindefy."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {handpickedStories.slice(0, 3).map((story) => (
             <RevealOnScroll key={story._id}>
-              <WebsiteStoryCard storyData={story} />
+              <WebsiteStoryCard
+                storyData={story}
+                onClick={() => handleStoryClick(story._id, story.storyTitle)}
+              />
             </RevealOnScroll>
           ))}
+        </div>
+
+        <div className="text-center">
+          <a
+            href="https://stories.yourhourapp.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-center font-semibold font-montserrat text-lg text-[#21ABE1] border border-[#21ABE1] px-8 py-3 rounded-xl hover:bg-[#21ABE1]/10 hover:scale-105 transition-all inline-block"
+            onClick={() => trackWebsiteLetsReadClicked()}
+          >
+            Let's Read
+          </a>
         </div>
       </div>
     </section>
@@ -1062,35 +1097,20 @@ const Stories = () => {
 };
 
 const BlogSection = () => {
-  const blogPosts = [
-    {
-      title: "How to Reduce Screen Time",
-      excerpt:
-        "Discover practical strategies to disconnect while staying informed and connected.",
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
-      date: "Oct 12, 2025",
-      readTime: "5 min read",
-    },
-    {
-      title: "The Psychology Behind App Addiction",
-      excerpt:
-        "Understanding the dopamine loops that keep you scrolling and how to break them.",
-      image:
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-      date: "Sep 28, 2025",
-      readTime: "7 min read",
-    },
-    {
-      title: "Mindfulness in the Digital Age",
-      excerpt:
-        "Simple techniques to bring more awareness to your daily digital interactions.",
-      image:
-        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1999&auto=format&fit=crop",
-      date: "Sep 15, 2025",
-      readTime: "4 min read",
-    },
-  ];
+  const router = useRouter();
+
+  const handlePostClick = (id) => {
+    const post = popularPosts.find((p) => p.id === id);
+    if (post) {
+      trackWebsiteBlogCardClicked(post.id, post.title, "popular");
+    }
+
+    const actualBlog = blogData[id];
+    if (actualBlog) {
+      const slug = createBlogSlug(actualBlog.title, id);
+      router.push(`/blog/${slug}`);
+    }
+  };
 
   return (
     <section className="py-24 bg-slate-950 relative border-t border-slate-900">
@@ -1101,9 +1121,12 @@ const BlogSection = () => {
           subtitle="Read popular posts on mindfulness, productivity, and reducing screen time."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <RevealOnScroll key={index} delay={index * 100}>
-              <div className="group rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-cyan-900/10">
+          {popularPosts.slice(0, 3).map((post, index) => (
+            <RevealOnScroll key={post.id} delay={index * 100}>
+              <div
+                onClick={() => handlePostClick(post.id)}
+                className="cursor-pointer group rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-cyan-900/10"
+              >
                 <div className="h-48 overflow-hidden relative">
                   <img
                     src={post.image}
@@ -1115,21 +1138,13 @@ const BlogSection = () => {
                 <div className="p-6">
                   <div className="flex items-center gap-4 text-xs font-bold text-slate-400 mb-3">
                     <span>{post.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-slate-600"></span>
-                    <span>{post.readTime}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00BCD4] transition-colors">
+                  <h3 className="text-xl min-h-15 font-bold text-white mb-3 group-hover:text-[#00BCD4] transition-colors line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-                  <a
-                    href="#"
-                    className="inline-flex items-center text-sm font-bold text-[#00BCD4] hover:text-[#00B0C0]"
-                  >
+                  <div className="inline-flex items-center text-sm font-bold text-[#00BCD4] hover:text-[#00B0C0]">
                     Read Article <ArrowRight size={16} className="ml-2" />
-                  </a>
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
@@ -1235,20 +1250,38 @@ const TestimonialsSection = () => {
       review:
         "Unlock count insights were an eye-opener. The app helped me gain control.",
     },
+    {
+      name: "John",
+      rating: 5,
+      review:
+        "Cut my screen time by half. The blocker works flawlessly and the reports keep me aware.",
+    },
+    {
+      name: "Sara",
+      rating: 4,
+      review:
+        "Mindful Pause makes me think before scrolling. Loving the clear analytics.",
+    },
+    {
+      name: "Rohan",
+      rating: 5,
+      review:
+        "Unlock count insights were an eye-opener. The app helped me gain control.",
+    },
   ];
   return (
-    <section className="py-24 bg-slate-950 relative border-t border-slate-900">
+    <section className="py-24 bg-slate-950 relative border-t border-slate-900 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="Testimonials"
           title="Rated By Our Users"
           subtitle="Real reviews from people improving their digital habits."
         />
-        <div className="animate-scroll grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="animate-scroll flex flex-row gap-6">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="p-8 rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
+              className="p-8 min-w-md max-w-lg rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
             >
               <div className="flex items-center gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, idx) => (
@@ -1670,7 +1703,7 @@ const AIDetoxCoachSection = () => {
                     type="number"
                     value={hours}
                     onChange={(e) => setHours(e.target.value)}
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-2xl px-6 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                    className="w-full bg-slate-950/50 border border-slate-700 rounded-2xl px-6 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors appearance-none"
                     placeholder="e.g. 4"
                   />
                   <Clock className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
@@ -1681,7 +1714,7 @@ const AIDetoxCoachSection = () => {
             <div className="text-center mb-10">
               <button
                 onClick={handleRoast}
-                className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent w-full md:w-auto text-lg py-4 px-10 rounded-2xl font-bold flex items-center justify-center gap-2 mx-auto transition-all hover:scale-105"
+                className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white cursor-pointer shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent w-full md:w-auto text-lg py-4 px-10 rounded-2xl font-bold flex items-center justify-center gap-2 mx-auto transition-all hover:scale-105"
               >
                 <BrainCircuit size={20} /> <span>Roast My Habit ✨</span>
               </button>
@@ -1751,13 +1784,13 @@ const Home = () => {
       <DashboardFeatures />
       <AddictionScale />
       <Challenges />
-      <Stories />
+      <TestimonialsSection />
       <TrustedBySection />
+      <Stories />
       <AIDetoxCoachSection />
       <MindefyPromo />
       <BlogSection />
       <FAQsSection />
-      <TestimonialsSection />
       {/* <FeaturesPage /> */}
     </div>
   );

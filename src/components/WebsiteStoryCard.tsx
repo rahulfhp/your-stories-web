@@ -31,7 +31,7 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
 
   return (
     <div
-      className="group relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-[#00BCD4]/30 transition-all duration-300 cursor-pointer hover:scale-[1.02] hover:shadow-xl shadow-lg shadow-black/50"
+      className="group relative max-h-fit min-h-[29.5rem] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-[#00BCD4]/30 transition-all duration-300 cursor-pointer hover:scale-[1.02] hover:shadow-xl shadow-lg shadow-black/50"
       onClick={onClick}
     >
       {/* Story Cover Image */}

@@ -151,9 +151,15 @@ export default function WebsiteFooter() {
                   href="https://mindefy.tech/customer-testimonials-reviews"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-fit block text-sm font-medium text-slate-400 hover:text-[#00BCD4] transition-colors font-montserrat"
+                  className="w-fit block text-sm font-medium text-slate-400 hover:text-[#00BCD4] transition-colors mb-4 font-montserrat"
                 >
                   Testimonials
+                </a>
+                <a
+                  href="/privacy-policy"
+                  className="w-fit block text-sm font-medium text-slate-400 hover:text-[#00BCD4] transition-colors font-montserrat"
+                >
+                  Privacy Policy
                 </a>
               </div>
             </div>
