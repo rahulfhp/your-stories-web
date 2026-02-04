@@ -6,11 +6,7 @@ if (typeof window !== "undefined" && !mixpanel.__loaded) {
 
   // Domains mapping
   const APP_DOMAINS = ["stories.yourhourapp.com"];
-  const WEBSITE_DOMAINS = [
-    "demo.yourhourapp.com",
-    "yourhourapp.com",
-    "www.yourhourapp.com",
-  ];
+  const WEBSITE_DOMAINS = ["yourhourapp.com", "www.yourhourapp.com"];
 
   const isLocalhost =
     hostname === "localhost" || hostname.startsWith("127.0.0.1");

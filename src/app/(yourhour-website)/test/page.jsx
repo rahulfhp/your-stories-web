@@ -3,17 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import useStoriesStore from "@/stores/stories";
 import WebsiteStoryCard from "@/components/WebsiteStoryCard";
-import { PopularPosts } from "@/components/PopularBlogs";
 import {
   Activity,
   BarChart3,
   Shield,
   ArrowRight,
-  Quote,
   Zap,
   Layout,
   FileText,
-  Code2,
   Globe,
   Rocket,
   Lock,
@@ -23,7 +20,16 @@ import {
   Send,
   Music2,
   MoreHorizontal,
+  Sparkles,
+  Smartphone,
+  Clock,
+  BrainCircuit,
+  Users,
+  Star,
 } from "lucide-react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import FeaturesPage from "@/components/YourHourAppFeatures";
 
 // --- Global Styles & Animations ---
 const GlobalStyles = () => (
@@ -37,23 +43,17 @@ const GlobalStyles = () => (
     .animate-blob {
       animation: blob 7s infinite;
     }
-    .animation-delay-2000 {
-      animation-delay: 2s;
-    }
-    .animation-delay-4000 {
-      animation-delay: 4s;
-    }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(30, 41, 59, 0.4);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     .text-gradient {
       background-clip: text;
@@ -144,15 +144,15 @@ const Button = ({
     "inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95";
   const variants = {
     primary:
-      "bg-[#00BCD4] text-white shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:bg-[#00B0C0] border border-transparent",
-    dark: "bg-slate-900 text-white shadow-lg shadow-slate-900/30 hover:shadow-slate-900/50 hover:bg-slate-800",
+      "bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:brightness-110 border border-transparent",
+    dark: "bg-slate-800 text-slate-100 shadow-lg shadow-black/20 hover:bg-slate-700 hover:text-white",
     gradient:
-      "bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent",
+      "bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 border border-transparent",
     secondary:
-      "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:border-white/50 hover:bg-white/20 shadow-sm",
+      "bg-slate-800/50 backdrop-blur-md text-slate-200 border border-slate-700 hover:border-[#00BCD4]/50 hover:bg-slate-800 shadow-sm",
     outline:
-      "border-2 border-white/20 text-white hover:bg-white/10 backdrop-blur-sm",
-    ghost: "text-gray-600 hover:text-[#00BCD4] hover:bg-cyan-50/50",
+      "border-2 border-slate-700 text-slate-300 hover:border-[#00BCD4] hover:text-[#00BCD4] hover:bg-slate-800/50",
+    ghost: "text-slate-400 hover:text-[#00BCD4] hover:bg-cyan-500/10",
   };
 
   return (
@@ -167,7 +167,7 @@ const Button = ({
 
 const Badge = ({ children, className = "" }) => (
   <span
-    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-blue-50 text-blue-600 border border-blue-100 ${className}`}
+    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 ${className}`}
   >
     {children}
   </span>
@@ -178,7 +178,7 @@ const SectionHeading = ({
   title,
   subtitle,
   align = "center",
-  dark = false,
+  dark = true,
 }) => (
   <RevealOnScroll
     className={`mb-12 ${
@@ -187,17 +187,11 @@ const SectionHeading = ({
   >
     {badge && <Badge className="mb-6">{badge}</Badge>}
     <h2
-      className={`text-4xl md:text-5xl font-extrabold mb-6 leading-tight tracking-tight ${
-        dark ? "text-white" : "text-slate-900"
-      }`}
+      className={`text-4xl md:text-5xl font-extrabold mb-6 leading-tight tracking-tight text-white`}
     >
       {title}
     </h2>
-    <p
-      className={`text-xl leading-relaxed font-light ${
-        dark ? "text-slate-300" : "text-slate-600"
-      }`}
-    >
+    <p className={`text-xl leading-relaxed font-light text-slate-400`}>
       {subtitle}
     </p>
   </RevealOnScroll>
@@ -211,34 +205,34 @@ const FeatureCard = ({
   delay,
 }) => {
   const colors = {
-    blue: "bg-blue-500/20 text-blue-400",
-    indigo: "bg-indigo-500/20 text-indigo-400",
-    purple: "bg-purple-500/20 text-purple-400",
-    green: "bg-green-500/20 text-green-400",
-    orange: "bg-orange-500/20 text-orange-400",
-    pink: "bg-pink-500/20 text-pink-400",
-    red: "bg-red-500/20 text-red-400",
+    blue: "bg-cyan-500/10 text-cyan-400",
+    indigo: "bg-cyan-500/10 text-cyan-400",
+    purple: "bg-cyan-500/10 text-cyan-400",
+    green: "bg-cyan-500/10 text-cyan-400",
+    orange: "bg-cyan-500/10 text-cyan-400",
+    pink: "bg-cyan-500/10 text-cyan-400",
+    red: "bg-cyan-500/10 text-cyan-400",
   };
 
   return (
     <RevealOnScroll delay={delay}>
       <div
-        className={`group h-full p-8 rounded-3xl border transition-all duration-500 ${
-          color === "red" || color === "orange"
-            ? "bg-slate-800 border-orange-500/30 shadow-xl shadow-orange-900/20 hover:border-orange-500/50"
-            : "bg-slate-800/60 backdrop-blur-xl border-white/10 shadow-sm hover:shadow-2xl hover:shadow-blue-900/10"
-        } hover:-translate-y-2`}
+        className={`group h-full p-8 rounded-3xl border transition-all duration-500 bg-slate-900/50 backdrop-blur-sm border-slate-800 hover:border-[#00BCD4]/30 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 hover:-translate-y-2`}
       >
         <div
-          className={`w-14 h-14 rounded-2xl ${colors[color]} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm`}
+          className={`w-14 h-14 rounded-2xl ${colors[color]} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm ring-1 ring-white/5`}
         >
           <Icon size={28} />
         </div>
-        <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-        <p className="text-slate-400 leading-relaxed">{description}</p>
+        <h3 className="text-xl font-bold text-white mb-3 transition-colors">
+          {title}
+        </h3>
+        <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+          {description}
+        </p>
 
         {(color === "red" || color === "orange") && (
-          <div className="mt-4 inline-flex items-center text-sm font-bold text-orange-400">
+          <div className="mt-4 inline-flex items-center text-sm font-bold text-cyan-400">
             Most Popular Feature <ArrowRight size={14} className="ml-1" />
           </div>
         )}
@@ -250,19 +244,62 @@ const FeatureCard = ({
 // --- Sections ---
 
 const Hero = () => {
-  const [isBlocked, setIsBlocked] = useState(false); // Default to Playing state
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [displayText, setDisplayText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const phrases = [
+    "Doomscrolling.",
+    "Wasting Time.",
+    "Addiction.",
+    "Procrastination.",
+    "Distraction.",
+  ];
+
+  // Typewriter effect
+  useEffect(() => {
+    let timeout;
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+      // Deleting characters
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentPhrase.substring(0, displayText.length - 1));
+        }, 50);
+      } else {
+        // Done deleting, move to next phrase
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      }
+    } else {
+      // Typing characters
+      if (displayText.length < currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentPhrase.substring(0, displayText.length + 1));
+        }, 100);
+      } else {
+        // Done typing, wait then start deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, phraseIndex]);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-slate-900 text-white min-h-[90vh] flex items-center">
-      {/* Dynamic Dark Background for High Contrast/Hook */}
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-slate-950 text-white min-h-[90vh] flex items-center">
+      {/* Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute inset-0 bg-slate-900"></div>
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-slate-950"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#4DD0E1]/10 rounded-full blur-[100px] animate-pulse delay-1000"></div>
         {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
@@ -271,47 +308,48 @@ const Hero = () => {
         ></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container w-full max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
             <RevealOnScroll>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 backdrop-blur-md border border-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-blue-900/20 cursor-pointer hover:bg-blue-500/20 transition-all group">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 cursor-pointer hover:border-cyan-500/50 transition-all group">
                 <Zap
                   size={14}
-                  className="text-yellow-400 fill-yellow-400 group-hover:scale-110 transition-transform"
+                  className="text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform"
                 />
                 <span>New: Reels & Shorts Blocker</span>
               </div>
 
               <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-                Stop{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
-                  Doomscrolling.
+                Stop <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] relative">
+                  {displayText}
+                  <span className="animate-blink">|</span>
                 </span>{" "}
                 <br />
                 Start Living.
               </h1>
 
-              <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
+              <p className="text-xl text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
                 The only app that effectively blocks{" "}
-                <span className="font-bold text-white border-b border-red-500/50">
+                <span className="font-bold text-[#00BCD4] border-b border-white">
                   YouTube Shorts
                 </span>
                 ,{" "}
-                <span className="font-bold text-white border-b border-purple-500/50">
+                <span className="font-bold text-[#00BCD4] border-b border-white">
                   Instagram Reels
                 </span>
                 , and addictive games. Reclaim 2+ hours every day.
               </p>
 
               {/* --- Interactive Demo Control --- */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl mb-10 max-w-md mx-auto lg:mx-0">
+              <div className="bg-slate-900/60 backdrop-blur-md border border-slate-800 p-5 rounded-2xl mb-10 max-w-md mx-auto lg:mx-0 shadow-lg shadow-black/20">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <p className="font-bold text-white text-sm">
                       Interactive Demo
                     </p>
-                    <p className="text-xs text-slate-300">
+                    <p className="text-xs text-slate-400">
                       Toggle to see blocking in action
                     </p>
                   </div>
@@ -319,7 +357,7 @@ const Hero = () => {
                   <button
                     onClick={() => setIsBlocked(!isBlocked)}
                     className={`relative w-16 h-8 rounded-full transition-colors duration-300 focus:outline-none ${
-                      isBlocked ? "bg-red-500" : "bg-slate-600"
+                      isBlocked ? "bg-[#00BCD4]" : "bg-slate-700"
                     }`}
                   >
                     <div
@@ -328,9 +366,9 @@ const Hero = () => {
                       }`}
                     >
                       {isBlocked ? (
-                        <Lock size={14} className="text-red-500" />
+                        <Lock size={14} className="text-[#00BCD4]" />
                       ) : (
-                        <PlayCircle size={14} className="text-slate-600" />
+                        <PlayCircle size={14} className="text-slate-400" />
                       )}
                     </div>
                   </button>
@@ -338,16 +376,16 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <Button className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 text-lg shadow-blue-900/50 shadow-xl rounded-2xl">
+                <Button className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] hover:brightness-110 text-white px-8 py-4 text-lg shadow-cyan-900/30 shadow-xl rounded-2xl">
                   Install Now - It's Free
                 </Button>
 
-                <div className="flex items-center gap-3 px-6 py-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md">
+                <div className="flex items-center gap-3 px-6 py-3 rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md shadow-sm">
                   <div className="flex -space-x-3">
                     {[1, 2, 3].map((i) => (
                       <div
                         key={i}
-                        className="w-8 h-8 rounded-full border-2 border-slate-900 bg-gray-200 overflow-hidden"
+                        className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 overflow-hidden"
                       >
                         <img
                           src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${
@@ -368,12 +406,12 @@ const Hero = () => {
           </div>
 
           {/* Animated Phone Mockup - Focusing on Blocking */}
-          <div className="flex-1 relative w-full max-w-[500px] lg:max-w-none flex justify-center perspective-1000">
+          <div className="flex-1 relative w-full max-w-[500px] lg:max-w-none flex justify-center lg:justify-end perspective-1000">
             <RevealOnScroll
               delay={200}
               className="relative z-10 w-[300px] md:w-[340px]"
             >
-              <div className="relative mx-auto w-full h-[680px] bg-slate-950 rounded-[3rem] border-[8px] border-slate-800 shadow-2xl overflow-hidden transform rotate-y-12 hover:rotate-0 transition-transform duration-700 ease-out shadow-blue-900/50">
+              <div className="relative mx-auto w-full h-[680px] bg-slate-900 rounded-[3rem] border-[8px] border-slate-800 shadow-2xl overflow-hidden transform rotate-y-12 hover:rotate-0 transition-transform duration-700 ease-out shadow-black/50">
                 {/* Screen Content: Showing Simulated Reel OR Blocking Overlay */}
                 <div className="w-full h-full bg-black relative overflow-hidden">
                   {/* --- STATE 1: REEL PLAYING SIMULATION --- */}
@@ -456,18 +494,18 @@ const Hero = () => {
                         : "opacity-0 translate-y-full"
                     }`}
                   >
-                    <div className="w-24 h-24 bg-red-500/10 rounded-full flex items-center justify-center mb-6 animate-pulse border border-red-500/20">
-                      <Shield size={48} className="text-red-500" />
+                    <div className="w-24 h-24 bg-cyan-900/20 rounded-full flex items-center justify-center mb-6 animate-pulse border border-cyan-500/20">
+                      <Shield size={48} className="text-[#00BCD4]" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">
                       Limit Reached!
                     </h3>
-                    <p className="text-slate-300 mb-8 leading-relaxed">
+                    <p className="text-slate-400 mb-8 leading-relaxed">
                       You've hit your 30m limit on Reels. Time to focus on your
                       goals!
                     </p>
 
-                    <div className="w-full bg-slate-800 rounded-2xl p-5 mb-6 border border-slate-700">
+                    <div className="w-full bg-slate-800/50 rounded-2xl p-5 mb-6 border border-slate-700">
                       <div className="flex justify-between text-sm mb-3">
                         <span className="text-slate-400 font-medium">
                           Daily Limit
@@ -475,24 +513,24 @@ const Hero = () => {
                         <span className="text-white font-bold">30m / 30m</span>
                       </div>
                       <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-red-500 to-orange-500 w-full animate-pulse"></div>
+                        <div className="h-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] w-full animate-pulse"></div>
                       </div>
                     </div>
 
-                    <button className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-colors shadow-lg shadow-white/10">
+                    <button className="w-full py-4 bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white rounded-xl font-bold hover:brightness-110 transition-all shadow-lg shadow-cyan-900/20">
                       Close App
                     </button>
 
                     {/* Notification Popups simulation */}
-                    <div className="absolute top-12 left-4 right-4 bg-slate-800/90 backdrop-blur-md border border-slate-600/50 p-3 rounded-xl flex items-center gap-3 animate-bounce shadow-xl">
-                      <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                    <div className="absolute top-12 left-4 right-4 bg-slate-800/90 backdrop-blur-md border border-slate-700 p-3 rounded-xl flex items-center gap-3 animate-bounce shadow-xl shadow-black/40">
+                      <div className="w-8 h-8 bg-[#00BCD4] rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
                         YT
                       </div>
                       <div>
                         <p className="text-xs text-white font-bold">
                           Shorts Blocked
                         </p>
-                        <p className="text-[10px] text-slate-300">
+                        <p className="text-[10px] text-slate-400">
                           You saved 15 mins today
                         </p>
                       </div>
@@ -501,12 +539,12 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Floating Elements hooking specific features - Conditionally hide when blocked to clean up UI? Or keep them? Keeping them looks cooler. */}
+              {/* Floating Elements hooking specific features */}
               <div
                 className="absolute top-[30%] -left-4 md:-left-12 z-20 animate-float"
                 style={{ animation: "float 6s ease-in-out infinite" }}
               >
-                <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-2xl flex items-center gap-3 transform -rotate-6 hover:rotate-0 transition-transform">
+                <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform -rotate-6 hover:rotate-0 transition-transform">
                   <div className="w-12 h-12 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white shadow-lg">
                     <span className="font-bold text-sm">IG</span>
                   </div>
@@ -523,7 +561,7 @@ const Hero = () => {
                 className="absolute bottom-[20%] -right-4 md:-right-12 z-20 animate-float"
                 style={{ animation: "float 5s ease-in-out infinite 1s" }}
               >
-                <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-2xl flex items-center gap-3 transform rotate-6 hover:rotate-0 transition-transform">
+                <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform rotate-6 hover:rotate-0 transition-transform">
                   <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white shadow-lg">
                     <span className="font-bold text-sm">YT</span>
                   </div>
@@ -541,6 +579,22 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes blink {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+        }
+
+        .animate-blink {
+          animation: blink 0.75s step-end infinite;
+        }
+      `}</style>
     </section>
   );
 };
@@ -574,20 +628,20 @@ const LogoTicker = () => {
   ];
 
   return (
-    <section className="py-10 bg-slate-900 border-y border-slate-800 overflow-hidden">
+    <section className="py-10 bg-slate-950 border-y border-slate-800 overflow-hidden">
       <div className="container mx-auto px-4 mb-6 text-center">
-        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">
           Featured In Global Media
         </p>
       </div>
-      <div className="relative flex overflow-x-hidden group">
+      <div className="relative flex group">
         <div className="flex animate-scroll whitespace-nowrap group-hover:pause">
           {[...logos, ...logos].map((logo, index) => (
             <div
               key={`${logo.key}-${index}`}
-              className="mx-8 relative flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+              className="mx-8 relative flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
             >
-              <div className="relative p-2">
+              <div className="relative p-2 border border-white rounded-xl">
                 <img
                   src={`yourhour-website-img/yourhour_${logo.label}.${
                     logo.label === "techdator" ? "png" : "webp"
@@ -597,7 +651,7 @@ const LogoTicker = () => {
                   loading="lazy"
                 />
               </div>
-              <span className="absolute -bottom-2 -right-2 text-base shadow-sm bg-slate-800 rounded-full w-6 h-6 flex items-center justify-center border border-slate-700">
+              <span className="absolute text-4xl -bottom-2 -right-4 shadow-sm rounded-full flex items-center justify-center">
                 {logo.countryFlag}
               </span>
             </div>
@@ -610,13 +664,15 @@ const LogoTicker = () => {
 
 const DashboardFeatures = () => {
   return (
-    <section id="features" className="py-32 bg-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+    <section
+      id="features"
+      className="py-32 bg-slate-950 relative overflow-hidden"
+    >
       <div
-        className="absolute inset-0 opacity-[0.1]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "linear-gradient(#4f46e5 1px, transparent 1px), linear-gradient(90deg, #4f46e5 1px, transparent 1px)",
+            "linear-gradient(#00BCD4 1px, transparent 1px), linear-gradient(90deg, #00BCD4 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       ></div>
@@ -626,7 +682,6 @@ const DashboardFeatures = () => {
           badge="Powerful Features"
           title="Everything You Need to Beat Addiction"
           subtitle="Don't just track your time. Control it. Our advanced blocking tools are designed to stop compulsive scrolling in its tracks."
-          dark={true}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -682,25 +737,25 @@ const MindefyPromo = () => {
   return (
     <section
       id="mindefy"
-      className="py-24 bg-slate-900 text-white relative overflow-hidden"
+      className="py-24 bg-slate-900 relative overflow-hidden"
     >
       {/* Abstract Tech Background */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/20 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px]"></div>
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-cyan-900/10 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-900/20 rounded-full blur-[100px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-[2.5rem] p-10 md:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-[2.5rem] p-10 md:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-xl shadow-black/20">
           <div className="flex-1 text-center lg:text-left">
-            <Badge className="mb-6 bg-blue-500/20 text-blue-300 border-blue-500/30">
+            <Badge className="mb-6 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
               Developed by Mindefy Technologies
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Want to build an app with{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4]">
                 Millions of Users?
               </span>
             </h2>
-            <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
               Your Hour is a testament to our engineering excellence. At{" "}
               <span className="font-bold text-white">Mindefy Technologies</span>
               , we are a premier IT services provider specializing in turning
@@ -708,25 +763,25 @@ const MindefyPromo = () => {
             </p>
 
             <div className="grid grid-cols-2 gap-6 mb-10">
-              <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                <Rocket className="text-blue-400 mb-2" />
-                <h4 className="font-bold text-lg">Scalable Tech</h4>
-                <p className="text-sm text-slate-400">Built for millions</p>
+              <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
+                <Rocket className="text-cyan-400 mb-2" />
+                <h4 className="font-bold text-lg text-white">Scalable Tech</h4>
+                <p className="text-sm text-slate-500">Built for millions</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                <Globe className="text-indigo-400 mb-2" />
-                <h4 className="font-bold text-lg">Global Reach</h4>
-                <p className="text-sm text-slate-400">25+ Languages Support</p>
+              <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
+                <Globe className="text-blue-400 mb-2" />
+                <h4 className="font-bold text-lg text-white">Global Reach</h4>
+                <p className="text-sm text-slate-500">25+ Languages Support</p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-white text-slate-900 hover:bg-blue-50 px-8">
+              <Button className="bg-white text-slate-900 hover:bg-slate-200 px-8 shadow-lg shadow-white/10">
                 Partner with Mindefy
               </Button>
               <Button
                 variant="outline"
-                className="border-slate-700 hover:bg-slate-800"
+                className="border-slate-700 text-slate-300 hover:border-white hover:text-white"
               >
                 View Our Portfolio
               </Button>
@@ -735,33 +790,40 @@ const MindefyPromo = () => {
 
           <div className="flex-1 w-full relative">
             <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full opacity-20 animate-pulse"></div>
-              <div className="absolute inset-4 bg-slate-800 rounded-3xl border border-slate-700 flex items-center justify-center shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00BCD4] to-[#4DD0E1] rounded-full opacity-10 animate-pulse"></div>
+              <div className="absolute inset-4 bg-slate-900 rounded-3xl border border-slate-800 flex items-center justify-center shadow-2xl overflow-hidden">
                 <div className="text-center p-8">
-                  <div className="w-20 h-20 bg-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                    <Code2 size={40} />
+                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg">
+                    <img
+                      src={`yourhour-website-img/brain-logo.svg`}
+                      alt="logo"
+                      className="h-16 md:h-20"
+                      loading="lazy"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Mindefy Labs</h3>
-                  <p className="text-slate-400">
+                  <h3 className="text-2xl font-bold mb-2 text-white">
+                    Mindefy Technologies
+                  </h3>
+                  <p className="text-slate-500">
                     Where Innovation Meets Execution
                   </p>
 
-                  <div className="mt-8 space-y-3 text-left bg-slate-900/50 p-6 rounded-xl border border-slate-700/50">
+                  <div className="mt-8 space-y-3 text-left bg-slate-800/50 p-6 rounded-xl border border-slate-700">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-sm font-mono">
+                      <span className="text-sm font-mono text-slate-300">
                         Mobile App Development
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-sm font-mono">
-                        Enterprise Solutions
+                      <span className="text-sm font-mono text-slate-300">
+                        AI/ML Development
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-sm font-mono">
+                      <span className="text-sm font-mono text-slate-300">
                         UI/UX Design Strategy
                       </span>
                     </div>
@@ -810,34 +872,34 @@ const AddictionScale = () => {
     },
     {
       label: "Addicted",
-      color: "bg-rose-900",
+      color: "bg-rose-600",
       range: "> 8h",
       desc: "Immediate digital detox required.",
     },
   ];
 
   return (
-    <section id="impact" className="py-32 bg-slate-50 relative">
+    <section id="impact" className="py-32 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-20">
           <div className="flex-1 order-2 lg:order-1 w-full">
             <RevealOnScroll>
-              <div className="relative pl-8 border-l-2 border-dashed border-slate-200 space-y-8">
+              <div className="relative pl-8 border-l-2 border-dashed border-slate-800 space-y-8">
                 {levels.map((level, index) => (
                   <div key={level.label} className="relative group">
                     <div
-                      className={`absolute -left-[41px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-4 border-white ${level.color} shadow-md transition-all duration-300 group-hover:scale-150`}
+                      className={`absolute -left-[41px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-4 border-slate-900 ${level.color} shadow-md transition-all duration-300 group-hover:scale-150`}
                     ></div>
-                    <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group-hover:shadow-lg group-hover:-translate-x-2 transition-all duration-300 cursor-default">
+                    <div className="bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-800 flex items-center justify-between group-hover:shadow-lg group-hover:border-slate-700 group-hover:-translate-x-2 transition-all duration-300 cursor-default">
                       <div>
                         <h4
                           className={`font-bold text-lg ${
-                            index > 3 ? "text-rose-600" : "text-slate-800"
+                            index > 3 ? "text-rose-500" : "text-white"
                           }`}
                         >
                           {level.label}
                         </h4>
-                        <p className="text-sm text-slate-500">{level.desc}</p>
+                        <p className="text-sm text-slate-400">{level.desc}</p>
                       </div>
                       <div
                         className={`px-4 py-2 rounded-xl ${level.color} text-white font-bold text-sm shadow-sm`}
@@ -859,13 +921,13 @@ const AddictionScale = () => {
               subtitle={
                 <>
                   Using data from the past 7 days,{" "}
-                  <span className="font-bold text-blue-600">Your Hour</span>{" "}
+                  <span className="font-bold text-[#00BCD4]">Your Hour</span>{" "}
                   defines your Phone Addict Category. We help you move from{" "}
-                  <span className="text-rose-600 font-bold bg-rose-50 px-2 py-1 rounded">
+                  <span className="text-rose-500 font-bold bg-rose-500/10 px-2 py-1 rounded">
                     Addicted
                   </span>{" "}
                   to{" "}
-                  <span className="text-green-600 font-bold bg-green-50 px-2 py-1 rounded">
+                  <span className="text-green-500 font-bold bg-green-500/10 px-2 py-1 rounded">
                     Champion
                   </span>{" "}
                   through actionable insights.
@@ -874,7 +936,7 @@ const AddictionScale = () => {
             />
 
             <RevealOnScroll delay={200}>
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 rounded-[2rem] shadow-2xl text-white relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+              <div className="bg-cyan-400/50 border border-slate-800 p-8 rounded-[2rem] shadow-2xl text-white relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500 shadow-cyan-900/50">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform duration-700"></div>
 
                 <div className="flex items-start gap-5 relative z-10">
@@ -885,11 +947,11 @@ const AddictionScale = () => {
                     <h4 className="font-bold text-2xl mb-3">
                       Mindefy Smart Analysis
                     </h4>
-                    <p className="text-blue-100 leading-relaxed text-lg">
-                      Our proprietary algorithm developed at Mindefy Labs
-                      analyzes your peak usage times, frequency of unlocks, and
-                      app categories to give you a precise diagnosis and action
-                      plan.
+                    <p className="text-cyan-50 leading-relaxed text-lg">
+                      Our proprietary algorithm developed at Mindefy
+                      Technologies analyzes your peak usage times, frequency of
+                      unlocks, and app categories to give you a precise
+                      diagnosis and action plan.
                     </p>
                   </div>
                 </div>
@@ -904,14 +966,13 @@ const AddictionScale = () => {
 
 const Challenges = () => {
   return (
-    <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+    <section className="py-32 bg-slate-900 relative overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 opacity-80"></div>
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-5"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 50%, #4f46e5 2px, transparent 2px)",
+              "radial-gradient(circle at 50% 50%, #00BCD4 2px, transparent 2px)",
             backgroundSize: "48px 48px",
           }}
         ></div>
@@ -922,7 +983,6 @@ const Challenges = () => {
           badge="Take Control"
           title="Smart & Curated Challenges"
           subtitle="Break the habit loop with personalized challenges designed to reduce screen time gradually."
-          dark={true}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
@@ -953,7 +1013,7 @@ const Challenges = () => {
             },
           ].map((card, i) => (
             <RevealOnScroll key={i} delay={i * 100}>
-              <div className="group relative h-full bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-[2rem] hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden">
+              <div className="group relative h-full bg-slate-800 border border-slate-700 p-8 rounded-[2rem] hover:bg-slate-700 shadow-sm hover:shadow-xl hover:shadow-cyan-900/10 transition-all duration-300 cursor-pointer overflow-hidden">
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
@@ -961,18 +1021,10 @@ const Challenges = () => {
                 <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {card.icon}
                 </div>
-                <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-200">
-                  {card.desc}
-                </p>
-
-                <div className="mt-6 flex items-center text-sm font-bold text-white/60 group-hover:text-white transition-colors">
-                  Start Challenge{" "}
-                  <ArrowRight
-                    size={16}
-                    className="ml-2 group-hover:translate-x-1 transition-transform"
-                  />
-                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white">
+                  {card.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed">{card.desc}</p>
               </div>
             </RevealOnScroll>
           ))}
@@ -989,21 +1041,17 @@ const Stories = () => {
   }, [fetchHandpickedStories]);
 
   return (
-    <section id="stories" className="py-32 bg-slate-900 relative">
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#4DD0E1]/10 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-[#00BCD4]/10 rounded-full blur-3xl opacity-30"></div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section id="stories" className="py-32 bg-slate-950 relative">
+      <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
-          badge="Community"
+          badge="Inspiration"
           title="Where Stories Find You"
           subtitle="Join thousands of users who have transformed their digital habits with Your Hour by Mindefy."
-          dark={true}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {handpickedStories.slice(0, 3).map((story) => (
-            <RevealOnScroll key={story.storyId}>
+            <RevealOnScroll key={story._id}>
               <WebsiteStoryCard storyData={story} />
             </RevealOnScroll>
           ))}
@@ -1016,41 +1064,46 @@ const Stories = () => {
 const BlogSection = () => {
   const blogPosts = [
     {
-      title: "How to Reduce Screen Time Without Missing Out",
-      excerpt: "Discover practical strategies to disconnect while staying informed and connected.",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+      title: "How to Reduce Screen Time",
+      excerpt:
+        "Discover practical strategies to disconnect while staying informed and connected.",
+      image:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
       date: "Oct 12, 2025",
       readTime: "5 min read",
     },
     {
       title: "The Psychology Behind App Addiction",
-      excerpt: "Understanding the dopamine loops that keep you scrolling and how to break them.",
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+      excerpt:
+        "Understanding the dopamine loops that keep you scrolling and how to break them.",
+      image:
+        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
       date: "Sep 28, 2025",
       readTime: "7 min read",
     },
     {
       title: "Mindfulness in the Digital Age",
-      excerpt: "Simple techniques to bring more awareness to your daily digital interactions.",
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1999&auto=format&fit=crop",
+      excerpt:
+        "Simple techniques to bring more awareness to your daily digital interactions.",
+      image:
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1999&auto=format&fit=crop",
       date: "Sep 15, 2025",
       readTime: "4 min read",
     },
   ];
 
   return (
-    <section className="py-24 bg-slate-900 relative">
+    <section className="py-24 bg-slate-950 relative border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="Blog"
           title="Insights From Our Experts"
           subtitle="Read popular posts on mindfulness, productivity, and reducing screen time."
-          dark={true}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
             <RevealOnScroll key={index} delay={index * 100}>
-              <div className="group rounded-3xl overflow-hidden bg-slate-800 border border-white/10 hover:border-white/20 transition-all hover:shadow-xl hover:shadow-cyan-500/10">
+              <div className="group rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-cyan-900/10">
                 <div className="h-48 overflow-hidden relative">
                   <img
                     src={post.image}
@@ -1065,7 +1118,7 @@ const BlogSection = () => {
                     <span className="w-1 h-1 rounded-full bg-slate-600"></span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00BCD4] transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-slate-400 text-sm leading-relaxed mb-4">
@@ -1073,7 +1126,7 @@ const BlogSection = () => {
                   </p>
                   <a
                     href="#"
-                    className="inline-flex items-center text-sm font-bold text-cyan-400 hover:text-cyan-300"
+                    className="inline-flex items-center text-sm font-bold text-[#00BCD4] hover:text-[#00B0C0]"
                   >
                     Read Article <ArrowRight size={16} className="ml-2" />
                   </a>
@@ -1108,23 +1161,24 @@ const FAQsSection = () => {
   ];
   const [open, setOpen] = useState(null);
   return (
-    <section className="py-24 bg-slate-900 relative border-t border-slate-800">
+    <section className="py-24 bg-slate-950 relative border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="FAQs"
           title="Frequently Asked Questions"
           subtitle="Find quick answers to common questions."
-          dark={true}
         />
         <div className="max-w-3xl mx-auto">
           <ul className="space-y-4">
             {items.map((it, idx) => (
               <li key={idx} className="border-b border-slate-800">
                 <button
-                  className="w-full text-left py-4 px-4 flex items-center justify-between hover:bg-slate-800/50 rounded-lg transition-colors"
+                  className="w-full text-left py-4 px-4 flex items-center justify-between hover:bg-slate-900 rounded-lg transition-colors"
                   onClick={() => setOpen(open === idx ? null : idx)}
                 >
-                  <span className="text-white font-semibold text-lg">{it.q}</span>
+                  <span className="text-white font-semibold text-lg">
+                    {it.q}
+                  </span>
                   <span
                     className={`text-[#00BCD4] transition-transform duration-300 ${
                       open === idx ? "rotate-180" : ""
@@ -1134,10 +1188,12 @@ const FAQsSection = () => {
                   </span>
                 </button>
                 <div
-                    className={`grid transition-all duration-300 ease-in-out ${
-                      open === idx ? "grid-rows-[1fr] opacity-100 pb-4" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    open === idx
+                      ? "grid-rows-[1fr] opacity-100 pb-4"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
                   <div className="overflow-hidden px-4 text-slate-400 leading-relaxed">
                     {it.a}
                   </div>
@@ -1181,19 +1237,18 @@ const TestimonialsSection = () => {
     },
   ];
   return (
-    <section className="py-24 bg-slate-900 relative">
+    <section className="py-24 bg-slate-950 relative border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="Testimonials"
           title="Rated By Our Users"
           subtitle="Real reviews from people improving their digital habits."
-          dark={true}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="animate-scroll grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="p-8 rounded-3xl border bg-slate-800/60 backdrop-blur-xl border-white/10 shadow-lg hover:border-white/20 transition-all"
+              className="p-8 rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
             >
               <div className="flex items-center gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, idx) => (
@@ -1207,11 +1262,11 @@ const TestimonialsSection = () => {
                   </span>
                 ))}
               </div>
-              <p className="text-slate-300 mb-6 leading-relaxed italic">
+              <p className="text-slate-400 mb-6 leading-relaxed italic">
                 "{t.review}"
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4DD0E1] to-[#00BCD4] flex items-center justify-center text-white font-bold text-sm">
                   {t.name.charAt(0)}
                 </div>
                 <div className="text-white font-bold">{t.name}</div>
@@ -1224,9 +1279,472 @@ const TestimonialsSection = () => {
   );
 };
 
-const App = () => {
+const Globe3D = () => {
+  const containerRef = useRef(null);
+  const [tooltipData, setTooltipData] = useState(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const scene = new THREE.Scene();
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 2.5;
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = false;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.8;
+
+    // Globe Group
+    const globeGroup = new THREE.Group();
+    scene.add(globeGroup);
+
+    // 1. Globe Core (Dark Sphere)
+    const coreGeometry = new THREE.SphereGeometry(1, 64, 64);
+    const coreMaterial = new THREE.MeshBasicMaterial({
+      color: 0x020617, // Slate-950
+      transparent: true,
+      opacity: 0.95,
+    });
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    globeGroup.add(core);
+
+    // 2. Globe Dots (Points)
+    const dotGeometry = new THREE.SphereGeometry(1.01, 64, 64);
+    const dotMaterial = new THREE.PointsMaterial({
+      color: 0x4dd0e1, // Cyan theme color
+      size: 0.012,
+      transparent: true,
+      opacity: 0.6,
+    });
+    const globeDots = new THREE.Points(dotGeometry, dotMaterial);
+    globeGroup.add(globeDots);
+
+    // 3. Locations Data & Pins
+    const locations = [
+      { lat: 20.6, lon: 79.0, country: "India", users: "2.1M+", rating: "4.7" },
+      { lat: 37.1, lon: -95.7, country: "USA", users: "1.2M+", rating: "4.6" },
+      { lat: 51.5, lon: -0.1, country: "UK", users: "500K+", rating: "4.5" },
+      {
+        lat: -14.2,
+        lon: -51.9,
+        country: "Brazil",
+        users: "400K+",
+        rating: "4.8",
+      },
+      {
+        lat: 51.2,
+        lon: 10.4,
+        country: "Germany",
+        users: "300K+",
+        rating: "4.6",
+      },
+      {
+        lat: 36.2,
+        lon: 138.3,
+        country: "Japan",
+        users: "250K+",
+        rating: "4.7",
+      },
+      {
+        lat: 55.7,
+        lon: 37.6,
+        country: "Russia",
+        users: "200K+",
+        rating: "4.5",
+      },
+      {
+        lat: -25.3,
+        lon: 133.8,
+        country: "Australia",
+        users: "150K+",
+        rating: "4.6",
+      },
+      {
+        lat: 56.1,
+        lon: -106.3,
+        country: "Canada",
+        users: "180K+",
+        rating: "4.7",
+      },
+      { lat: 46.2, lon: 2.2, country: "France", users: "220K+", rating: "4.5" },
+      { lat: 41.9, lon: 12.6, country: "Italy", users: "190K+", rating: "4.6" },
+      {
+        lat: -30.6,
+        lon: 22.9,
+        country: "South Africa",
+        users: "120K+",
+        rating: "4.8",
+      },
+      {
+        lat: 23.6,
+        lon: -102.5,
+        country: "Mexico",
+        users: "160K+",
+        rating: "4.7",
+      },
+      {
+        lat: 35.9,
+        lon: 127.8,
+        country: "South Korea",
+        users: "140K+",
+        rating: "4.6",
+      },
+      { lat: 23.4, lon: 53.8, country: "UAE", users: "90K+", rating: "4.9" },
+    ];
+
+    const pinMeshes = [];
+
+    const latLonToVector3 = (lat, lon, radius) => {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return new THREE.Vector3(x, y, z);
+    };
+
+    const pinMaterial = new THREE.MeshBasicMaterial({ color: 0x22d3ee });
+    const pinGeometry = new THREE.SphereGeometry(0.025, 16, 16);
+    const ringGeo = new THREE.RingGeometry(0.03, 0.035, 32);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0x22d3ee,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.5,
+    });
+
+    locations.forEach((loc) => {
+      const pin = new THREE.Mesh(pinGeometry, pinMaterial);
+      const pos = latLonToVector3(loc.lat, loc.lon, 1.02);
+      pin.position.copy(pos);
+      pin.userData = loc;
+      globeGroup.add(pin);
+      pinMeshes.push(pin);
+
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.position.copy(pos.clone().multiplyScalar(1.005));
+      ring.lookAt(new THREE.Vector3(0, 0, 0));
+      globeGroup.add(ring);
+    });
+
+    // Raycasting
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    const onMouseMove = (event) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      setTooltipPos({ x: event.clientX, y: event.clientY });
+    };
+
+    container.addEventListener("mousemove", onMouseMove);
+
+    // Animation Loop
+    let animationId;
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+      controls.update();
+
+      // Raycast check
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(pinMeshes);
+
+      if (intersects.length > 0) {
+        const intersectedPin = intersects[0].object;
+        setTooltipData(intersectedPin.userData);
+        container.style.cursor = "pointer";
+        // Reset all scales first
+        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+        intersectedPin.scale.set(1.5, 1.5, 1.5);
+        controls.autoRotate = false; // Pause rotation on hover
+      } else {
+        setTooltipData(null);
+        container.style.cursor = "grab";
+        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+        controls.autoRotate = true;
+      }
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // Handle Resize
+    const handleResize = () => {
+      if (!container) return;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      container.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(animationId);
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
+      coreGeometry.dispose();
+      coreMaterial.dispose();
+      dotGeometry.dispose();
+      dotMaterial.dispose();
+      pinGeometry.dispose();
+      pinMaterial.dispose();
+      ringGeo.dispose();
+      ringMat.dispose();
+    };
+  }, []);
+
   return (
-    <div className="font-sans text-white bg-slate-900 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth">
+    <>
+      <div
+        ref={containerRef}
+        className="w-full h-full absolute inset-0 z-0 cursor-grab active:cursor-grabbing"
+      />
+      {tooltipData && (
+        <div
+          className="fixed z-50 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full mt-[-10px] animate-fade-in"
+          style={{ left: tooltipPos.x, top: tooltipPos.y }}
+        >
+          <h3 className="font-bold text-white text-lg mb-1">
+            {tooltipData.country}
+          </h3>
+          <div className="flex items-center gap-4 text-sm text-slate-300">
+            <div className="flex items-center gap-1">
+              <Users size={14} className="text-cyan-400" />
+              <span>{tooltipData.users}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Star size={14} className="text-yellow-400 fill-current" />
+              <span>{tooltipData.rating}</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+const TrustedBySection = () => {
+  return (
+    <section className="py-32 bg-slate-950 relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[800px] border border-slate-900">
+          {/* 3D Globe Container */}
+          <Globe3D />
+
+          {/* Overlay Content */}
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 py-12">
+            <div className="relative max-w-4xl mx-auto px-6">
+              <RevealOnScroll>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
+                  <Globe size={14} />
+                  <span>Global Phenomenon</span>
+                </div>
+                <h2 className="text-4xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl text-white">
+                  Trusted by{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4]">
+                    5 Million+
+                  </span>{" "}
+                  Users
+                </h2>
+                <p className="text-slate-400 text-xl mb-4 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+                  Spin the globe to explore our impact.
+                </p>
+              </RevealOnScroll>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pointer-events-auto max-w-4xl mx-auto px-6 w-full">
+              {[
+                { val: "5M+", label: "Downloads" },
+                { val: "4.6", label: "Rating" },
+                { val: "140+", label: "Countries" },
+                { val: "25+", label: "Languages" },
+              ].map((stat, i) => (
+                <RevealOnScroll key={i} delay={i * 100}>
+                  <div className="p-4 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-slate-800/50 hover:bg-slate-800/80 transition-colors text-center">
+                    <div className="text-2xl md:text-3xl font-black text-white mb-1">
+                      {stat.val}
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      {stat.label}
+                    </div>
+                  </div>
+                </RevealOnScroll>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const AIDetoxCoachSection = () => {
+  const [app, setApp] = useState("Instagram");
+  const [hours, setHours] = useState("4");
+  const [loading, setLoading] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
+  const handleRoast = () => {
+    setLoading(true);
+    setShowResult(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
+
+  return (
+    <section
+      id="ai-coach"
+      className="py-24 bg-slate-950 relative overflow-hidden border-t border-slate-900"
+    >
+      {/* Background effects */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 mix-blend-overlay"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-4 relative z-10 max-w-4xl">
+        <div className="text-center mb-12">
+          <RevealOnScroll>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6 border border-slate-800/50 backdrop-blur-sm">
+              <Sparkles size={16} />
+              <span>Powered by Gemini AI</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black mb-6 text-white">
+              AI Detox Coach
+            </h2>
+            <p className="text-xl text-slate-400">
+              Tell us your bad habit. We'll roast it & fix it.
+            </p>
+          </RevealOnScroll>
+        </div>
+
+        <RevealOnScroll delay={100}>
+          <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            {/* Inputs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-400 mb-2 ml-4">
+                  Most Addictive App
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={app}
+                    onChange={(e) => setApp(e.target.value)}
+                    className="w-full bg-slate-950/50 border border-slate-700 rounded-2xl px-6 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                    placeholder="e.g. TikTok..."
+                  />
+                  <Smartphone className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-400 mb-2 ml-4">
+                  Daily Usage (Hours)
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                    className="w-full bg-slate-950/50 border border-slate-700 rounded-2xl px-6 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                    placeholder="e.g. 4"
+                  />
+                  <Clock className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mb-10">
+              <button
+                onClick={handleRoast}
+                className="bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-transparent w-full md:w-auto text-lg py-4 px-10 rounded-2xl font-bold flex items-center justify-center gap-2 mx-auto transition-all hover:scale-105"
+              >
+                <BrainCircuit size={20} /> <span>Roast My Habit ✨</span>
+              </button>
+            </div>
+
+            {showResult && (
+              <div className="bg-slate-950 rounded-3xl p-8 border border-slate-800 relative">
+                {loading ? (
+                  <div className="flex flex-col items-center justify-center py-8 gap-4 opacity-50">
+                    <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                    <p className="text-slate-400">
+                      Consulting with Mr. Slow...
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid gap-6 animate-fade-in">
+                    <div className="flex gap-4">
+                      <div className="p-3 bg-red-500/10 rounded-xl h-fit">
+                        <Zap className="w-6 h-6 text-red-400" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-red-400 text-sm uppercase tracking-wide mb-2">
+                          The Roast 🔥
+                        </h4>
+                        <p className="text-lg leading-relaxed text-white">
+                          Spending {hours} hours on {app}? That's not a hobby,
+                          that's a part-time job with zero pay. Your thumb has
+                          traveled more miles scrolling than you have walking
+                          this year.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="h-px bg-slate-800"></div>
+                    <div className="flex gap-4">
+                      <div className="p-3 bg-green-500/10 rounded-xl h-fit">
+                        <Shield className="w-6 h-6 text-green-400" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-green-400 text-sm uppercase tracking-wide mb-2">
+                          The Rescue Plan 🛡️
+                        </h4>
+                        <p className="text-lg leading-relaxed text-slate-300">
+                          Set a 30-minute hard limit on {app} using YourHour.
+                          Replace the other {parseInt(hours || 0) - 0.5} hours
+                          with learning a new skill or actually talking to
+                          humans.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
+};
+
+const Home = () => {
+  return (
+    <div className="font-sans text-slate-100 bg-slate-950 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
       <GlobalStyles />
       <Hero />
       <LogoTicker />
@@ -1234,12 +1752,15 @@ const App = () => {
       <AddictionScale />
       <Challenges />
       <Stories />
+      <TrustedBySection />
+      <AIDetoxCoachSection />
       <MindefyPromo />
       <BlogSection />
       <FAQsSection />
       <TestimonialsSection />
+      {/* <FeaturesPage /> */}
     </div>
   );
 };
 
-export default App;
+export default Home;

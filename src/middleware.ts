@@ -6,12 +6,7 @@ import type { NextRequest } from 'next/server';
  * 
  * This middleware routes users based on the domain they're accessing:
  * - stories.yourhourapp.com: Shows app pages (/, /bookmarked, /profile, /screentime, /search, /write)
- * - demo.yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
  * - yourhourapp.com: Shows website/info pages (/, /faqs, /blogs, /blog, /privacy-policy)
- * 
- * Setup for testing:
- * - demo.yourhourapp.com → website pages 
- * - stories.yourhourapp.com → app pages
  */
 
 // Define which pages should be accessible on subdomain vs main domain
@@ -35,7 +30,7 @@ const MAIN_DOMAIN_PAGES = [
 const APP_DOMAINS = ['stories.yourhourapp.com'];
 
 // Domains that serve website pages (main domain equivalent)
-const WEBSITE_DOMAINS = ['demo.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
+const WEBSITE_DOMAINS = ['yourhourapp.com', 'www.yourhourapp.com'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
