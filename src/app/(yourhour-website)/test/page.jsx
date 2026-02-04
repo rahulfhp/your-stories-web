@@ -299,23 +299,17 @@ const Hero = () => {
   }, [displayText, isDeleting, phraseIndex]);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-slate-950 text-white min-h-[90vh] flex items-center">
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden text-white min-h-[90vh] flex items-center">
       {/* Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute inset-0 bg-slate-950"></div>
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#4DD0E1]/10 rounded-full blur-[100px] animate-pulse delay-1000"></div>
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-      </div>
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#040915] via-[#081A2D] to-[#020617]" />
 
+        <div className="absolute -top-[30%] -left-[20%] w-[900px] h-[900px] bg-[#00BCD4]/18 rounded-full blur-[160px]" />
+        <div className="absolute top-[10%] right-[-20%] w-[800px] h-[800px] bg-[#6D5DF6]/16 rounded-full blur-[160px]" />
+        <div className="absolute bottom-[-35%] left-[15%] w-[900px] h-[900px] bg-[#4DD0E1]/12 rounded-full blur-[180px]" />
+
+        <div className="absolute inset-0 opacity-[0.035] bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px]" />
+      </div>
       <div className="container w-full max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
@@ -1775,7 +1769,7 @@ const AIDetoxCoachSection = () => {
 
 const Home = () => {
   return (
-    <div className="px-3 font-sans text-slate-100 bg-slate-950 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
+    <div className="px-3 font-sans text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
       <GlobalStyles />
       <Hero />
       <LogoTicker />
