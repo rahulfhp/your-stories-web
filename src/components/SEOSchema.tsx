@@ -128,6 +128,12 @@ export default function StructuredDataSchema({
     "@type": "MobileApplication",
     name: "YourHour - Phone Addiction Tracker",
     operatingSystem: "Android",
+    applicationCategory: "Productivity Application",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.3",
+      ratingCount: "77000",
+    },
     url: "https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US",
   };
 
