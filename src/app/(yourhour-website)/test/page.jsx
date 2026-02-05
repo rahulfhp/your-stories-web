@@ -42,6 +42,7 @@ import {
 import { createStorySlug, createBlogSlug } from "@/lib/utils";
 import { popularPosts, blogData } from "@/lib/website-blogs";
 import { useRouter } from "next/navigation";
+import MindfulNestChatbot from "@/components/MindfulNestChatbot";
 
 // --- Global Styles & Animations ---
 const GlobalStyles = () => (
@@ -229,7 +230,7 @@ const FeatureCard = ({
   return (
     <RevealOnScroll delay={delay}>
       <div
-        className={`group h-full p-8 rounded-3xl border transition-all duration-500 bg-slate-900/50 backdrop-blur-sm border-slate-800 hover:border-[#00BCD4]/30 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 hover:-translate-y-2`}
+        className={`group min-h-76 p-8 rounded-3xl border transition-all duration-500 bg-slate-900/50 backdrop-blur-sm border-slate-800 hover:border-[#00BCD4]/30 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 hover:-translate-y-2`}
       >
         <div
           className={`w-14 h-14 rounded-2xl ${colors[color]} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm ring-1 ring-white/5`}
@@ -418,11 +419,8 @@ const Hero = () => {
 
           {/* Animated Phone Mockup - Focusing on Blocking */}
           <div className="flex-1 relative w-full max-w-[500px] lg:max-w-none flex justify-center lg:justify-end perspective-1000">
-            <RevealOnScroll
-              delay={200}
-              className="relative z-10 w-[300px] md:w-[340px]"
-            >
-              <div className="relative mx-auto w-full h-[680px] bg-slate-900 rounded-[3rem] border-[8px] border-slate-800 shadow-2xl overflow-hidden transform rotate-y-12 hover:rotate-0 transition-transform duration-700 ease-out shadow-black/50">
+            <RevealOnScroll delay={200} className="relative z-10 w-75 md:w-85">
+              <div className="relative mx-auto w-full h-[680px] bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl overflow-hidden transform rotate-y-12 hover:rotate-0 transition-transform duration-700 ease-out shadow-black/50">
                 {/* Screen Content: Showing Simulated Reel OR Blocking Overlay */}
                 <div className="w-full h-full bg-black relative overflow-hidden">
                   {/* --- STATE 1: REEL PLAYING SIMULATION --- */}
@@ -541,7 +539,7 @@ const Hero = () => {
                         <p className="text-xs text-white font-bold">
                           Shorts Blocked
                         </p>
-                        <p className="text-[10px] text-slate-400">
+                        <p className="text-xs text-slate-400">
                           You saved 15 mins today
                         </p>
                       </div>
@@ -560,7 +558,7 @@ const Hero = () => {
                     <span className="font-bold text-sm">IG</span>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">
                       Reels
                     </p>
                     <p className="font-bold text-white text-base">BLOCKED 🛑</p>
@@ -577,7 +575,7 @@ const Hero = () => {
                     <span className="font-bold text-sm">YT</span>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">
                       Shorts
                     </p>
                     <p className="font-bold text-white text-base">
@@ -1172,7 +1170,7 @@ const AddictionScale = () => {
                 {levels.map((level, index) => (
                   <div key={level.label} className="relative group">
                     <div
-                      className={`absolute -left-[41px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-4 border-slate-900 ${level.color} shadow-md transition-all duration-300 group-hover:scale-150`}
+                      className={`absolute -left-10 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-4 border-slate-900 ${level.color} shadow-md transition-all duration-300 group-hover:scale-150`}
                     ></div>
                     <div className="bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-800 flex items-center justify-between group-hover:shadow-lg group-hover:border-slate-700 group-hover:-translate-x-2 transition-all duration-300 cursor-default">
                       <div>
@@ -1830,7 +1828,7 @@ const Globe3D = () => {
       />
       {tooltipData && (
         <div
-          className="fixed z-50 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full mt-[-10px] animate-fade-in"
+          className="fixed z-50 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full -mt-2.5 animate-fade-in"
           style={{ left: tooltipPos.x, top: tooltipPos.y }}
         >
           <h3 className="font-bold text-white text-lg mb-1">
@@ -1861,7 +1859,7 @@ const TrustedBySection = () => {
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-48 z-10 py-12">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-28 md:gap-48 z-10 py-12">
             <div className="relative max-w-4xl mx-auto px-6">
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
@@ -2047,6 +2045,16 @@ const AIDetoxCoachSection = () => {
 };
 
 const Home = () => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="font-sans text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 scroll-smooth mx-auto">
       <GlobalStyles />
@@ -2063,6 +2071,17 @@ const Home = () => {
       <BlogSection />
       <FAQsSection />
       {/* <FeaturesPage /> */}
+      <MindfulNestChatbot />
+
+      {/* Scroll to Top Button */}
+      {isSticky && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-2 right-2 w-10 h-10 cursor-pointer bg-slate-800 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#00BCD4] transition-all z-[99] text-4xl border border-slate-700"
+        >
+          <span className="text-2xl">↑</span>
+        </button>
+      )}
     </div>
   );
 };
