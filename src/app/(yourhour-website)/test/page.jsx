@@ -263,11 +263,10 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const phrases = [
-    "Doomscrolling.",
-    "Wasting Time.",
-    "Addiction.",
-    "Procrastination.",
-    "Distraction.",
+    "Losing control is.",
+    "Doomscrolling is.",
+    "The dopamine loop is.",
+    "Mental clutter is.",
   ];
 
   // Typewriter effect
@@ -316,7 +315,7 @@ const Hero = () => {
         <div className="absolute inset-0 opacity-[0.035] bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px]" />
       </div>
       <div className="container w-full max-w-7xl mx-auto relative z-10 px-2">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16">
           <div className="flex-1 text-center lg:text-left">
             <RevealOnScroll>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
@@ -324,29 +323,32 @@ const Hero = () => {
                   size={14}
                   className="text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform"
                 />
-                <span>New: Reels & Shorts Blocker</span>
+                <span>The Ultimate Digital Wellbeing App Android</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-                Stop <br />
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                Your phone isn't the problem. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] relative">
                   {displayText}
                   <span className="animate-blink">|</span>
-                </span>{" "}
+                </span>
                 <br />
-                Start Living.
               </h1>
 
               <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
-                The only app that effectively blocks{" "}
-                <span className="font-bold text-[#00BCD4] border-b border-white">
-                  YouTube Shorts
+                Stop the unconscious scroll with{" "}
+                <span className="font-bold text-[#00BCD4]">YourHour,</span> the
+                ultimate{" "}
+                <span className="font-bold text-[#00BCD4]">
+                  dopamine detox app.
+                </span>{" "}
+                Reclaim 2+ hours of your life daily. <br />
+                Built for{" "}
+                <span className="font-bold text-[#00BCD4]">ADHD brains, </span>
+                minds, and anyone fighting a{" "}
+                <span className="font-bold text-[#00BCD4]">
+                  scrolling addiction.
                 </span>
-                ,{" "}
-                <span className="font-bold text-[#00BCD4] border-b border-white">
-                  Instagram Reels
-                </span>
-                , and addictive games. Reclaim 2+ hours every day.
               </p>
 
               {/* --- Interactive Demo Control --- */}
@@ -389,7 +391,7 @@ const Hero = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
                 >
-                  Install Now
+                  Reclaim My Focus
                 </a>
 
                 <div className="flex items-center gap-3 px-6 py-3 rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md shadow-sm">
@@ -409,8 +411,8 @@ const Hero = () => {
                     ))}
                   </div>
                   <div className="flex flex-col text-xs text-left">
-                    <span className="font-bold text-white">4.6/5 Rating</span>
-                    <span className="text-slate-400">76k+ Reviews</span>
+                    <span className="font-bold text-white">4.3 Rating</span>
+                    <span className="text-slate-400">76.9k+ Reviews</span>
                   </div>
                 </div>
               </div>
@@ -820,7 +822,7 @@ const InteractiveFeatureLab = () => {
               Export Reports
             </h3>
             <p className="text-slate-400 leading-relaxed relative z-10">
-              Get detailed PDF/Excel reports to share your progress.
+              Get detailed PDF reports to share your progress.
             </p>
           </div>
         </div>
@@ -934,8 +936,8 @@ const InteractiveFeatureLab = () => {
               Floating Timer
             </h3>
             <p className="text-slate-400 leading-relaxed relative z-10">
-              A persistent floating timer on screen shows you exactly how long
-              you've been using an app.
+              Experience the stay focused app tool that follows you into the
+              "danger zone" apps.
             </p>
           </div>
         </div>
@@ -948,7 +950,7 @@ const DashboardFeatures = () => {
   return (
     <section
       id="features"
-      className="py-32 bg-slate-950 relative overflow-hidden"
+      className="py-24 bg-slate-950 relative overflow-hidden"
     >
       <div
         className="absolute inset-0 opacity-[0.05]"
@@ -962,36 +964,36 @@ const DashboardFeatures = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <SectionHeading
           badge="Powerful Features"
-          title="Everything You Need to Beat Addiction"
-          subtitle="Don't just track your time. Control it. Our advanced blocking tools are designed to stop compulsive scrolling in its tracks."
+          title="THE AWARENESS LAB"
+          subtitle='Encourage high "time on page" through interactive demos.'
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <FeatureCard
             icon={Shield}
-            title="Shorts & Reels Blocker"
-            description="The only app that specifically targets and blocks short-form video feeds on YouTube and Instagram without blocking the entire app."
-            color="red" // Highlighting this
+            title="Interactive Addiction Meter"
+            description="Where do you stand? Our digital detox app identifies your level from Champion to Addicted."
+            color="blue"
             delay={0}
           />
           <FeatureCard
             icon={Lock}
-            title="Strict App Limits"
-            description="Set unbreakable daily limits for games and social media. Once the time is up, the app locks down. No cheats, no bypasses."
+            title="Strict Mode Simulator"
+            description="Experience the ultimate social media detox. Lock distracting apps (Games, Social, Video) with zero bypasses."
             color="orange"
             delay={100}
           />
           <FeatureCard
             icon={BarChart3}
-            title="Precision Tracking"
-            description="See exactly where your time goes with our floating timer and detailed daily/weekly usage reports."
+            title="The Floating Timer"
+            description='Experience the stay focused app tool that follows you into the "danger zone" apps.'
             color="blue"
             delay={200}
           />
           <FeatureCard
             icon={Layout}
-            title="Unlock Frequency"
-            description="Track how often you check your phone. High unlock counts are a key indicator of compulsive behavior."
+            title="Unlock Frequency Tracker"
+            description='Every unlock is an interruption. Real-time feedback on your "Compulsive Check" count.'
             color="indigo"
             delay={300}
           />
@@ -999,14 +1001,14 @@ const DashboardFeatures = () => {
             icon={Activity}
             title="Addiction Level Meter"
             description="We categorize your usage into 6 distinct levels, guiding you from 'Addicted' to 'Champion' status."
-            color="green"
+            color="orange"
             delay={400}
           />
           <FeatureCard
             icon={FileText}
             title="Data Export"
             description="Transparency is key. Export your detailed usage reports to PDF or XLSX anytime for personal archiving."
-            color="pink"
+            color="orange"
             delay={500}
           />
         </div>
@@ -1042,8 +1044,7 @@ const MindefyPromo = () => {
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
               Your Hour is a testament to our engineering excellence. At{" "}
               <span className="font-bold text-white">Mindefy Technologies</span>
-              , we are a premier IT services provider specializing in turning
-              ambitious ideas into scalable, market-leading digital products.
+              , we turn ambitious ideas into scalable products.
             </p>
 
             <div className="grid grid-cols-2 gap-6 mb-10">
@@ -1126,42 +1127,42 @@ const AddictionScale = () => {
       label: "Champion",
       color: "bg-green-500",
       range: "< 1h",
-      desc: "You are the master of your time.",
+      desc: "Total control.",
     },
     {
       label: "Achiever",
       color: "bg-emerald-500",
       range: "1-2h",
-      desc: "Great balance of life and tech.",
+      desc: "Disciplined focus.",
     },
     {
       label: "Habitual",
       color: "bg-yellow-500",
       range: "2-3.5h",
-      desc: "Starting to slip, be careful.",
+      desc: "Usage is becoming unconscious.",
     },
     {
       label: "Dependent",
       color: "bg-orange-500",
       range: "3.5-5.5h",
-      desc: "You rely heavily on your device.",
+      desc: "Struggling to function without checks.",
     },
     {
       label: "Obsessed",
       color: "bg-red-500",
       range: "5.5-8h",
-      desc: "Your phone controls your day.",
+      desc: "High distraction and mental clutter.",
     },
     {
       label: "Addicted",
       color: "bg-rose-600",
       range: "> 8h",
-      desc: "Immediate digital detox required.",
+      desc: "Immediate detox required.",
     },
   ];
 
   return (
-    <section id="impact" className="py-32 bg-slate-950 relative">
+    <section id="impact" className="py-24 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-20">
           <div className="flex-1 order-2 lg:order-1 w-full">
@@ -1248,7 +1249,7 @@ const AddictionScale = () => {
 
 const Challenges = () => {
   return (
-    <section className="py-32 bg-slate-900 relative overflow-hidden">
+    <section className="py-24 bg-slate-900 relative overflow-hidden">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 opacity-5"
@@ -1330,7 +1331,7 @@ const Stories = () => {
   };
 
   return (
-    <section id="stories" className="py-32 bg-slate-950 relative">
+    <section id="stories" className="py-24 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="Inspiration"
@@ -1428,70 +1429,93 @@ const FAQsSection = () => {
   const items = [
     {
       q: "Why floating timer suddenly stops?",
-      a: "Some devices kill background services when you close the app. Keep sticky notifications enabled to ensure features work.",
+      a: "Some devices like Redmi, Oppo, Vivo, Realme etc kill the background service when you close the app by removing it from recent apps. Features like floating timer, auto lock, app usage alerts, etc does not work without the service. To use them make sure the sticky notifications always stay in the notification tray. If you can see the sticky notification then app's background service is running.",
+    },
+    {
+      q: "How can I use floating timer in devices like Redmi, Oppo, Vivo, Realme etc?",
+      a: "Try to lock YourHour app in the recent apps to avoid killing it accidentally. You can also remove it from the list of battery optimized apps in your phone settings.",
     },
     {
       q: "Where is my data stored?",
-      a: "Data is stored on your device only.",
+      a: "We are not storing your data on any cloud platform. Your data is safely stored in your device only.",
+    },
+    {
+      q: "Why Auto Lock suddenly stops?",
+      a: "Some devices like Redmi, Oppo, Vivo, Realme etc kill the background service when you close the app by removing it from recent apps. Features like floating timer, auto lock, app usage alerts, etc does not work without the service.",
+    },
+    {
+      q: "How can I use Auto Lock in devices like Redmi, Oppo, Vivo, Realme etc?",
+      a: "Try to lock YourHour app in the recent apps to avoid killing it accidentally. You can also remove it from the list of battery optimized apps in your phone settings.",
+    },
+    {
+      q: "What will happen to my premium subscription when I will change my phone?",
+      a: "Your purchase is linked with your play store account. Reinstalling, changing phone etc won't affect your purchase.",
+    },
+    {
+      q: "My money has been deducted but premium features are still locked, what can I do?",
+      a: "Sometimes depending on the mode of the payment, it takes around 1-2 days of time to confirm the purchase. Try to restore the purchase after some time.",
     },
     {
       q: "How to initiate the refund process?",
       a: "Reach out to us with your order id and we will revert to you.",
     },
-    {
-      q: "How can I use Auto Lock on certain devices?",
-      a: "Lock the app in recent apps and remove battery optimization to keep background service active.",
-    },
   ];
+
   const [open, setOpen] = useState(null);
+
+  // Split FAQs into 2 columns
+  const mid = Math.ceil(items.length / 2);
+  const col1 = items.slice(0, mid);
+  const col2 = items.slice(mid);
+
+  const renderItem = (it, idx) => (
+    <li key={idx} className="border-b border-slate-800">
+      <button
+        className="w-full text-left py-4 px-4 flex items-center justify-between hover:bg-slate-900 rounded-lg transition-colors"
+        onClick={() => setOpen(open === idx ? null : idx)}
+      >
+        <span className="text-white font-semibold text-lg">{it.q}</span>
+        <span
+          className={`text-[#00BCD4] transition-transform duration-300 ${
+            open === idx ? "rotate-180" : ""
+          }`}
+        >
+          ▼
+        </span>
+      </button>
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${
+          open === idx
+            ? "grid-rows-[1fr] opacity-100 pb-4"
+            : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden px-4 text-slate-400 leading-relaxed">
+          {it.a}
+        </div>
+      </div>
+    </li>
+  );
+
   return (
-    <section className="py-24 bg-slate-950 relative border-t border-slate-900">
+    <section className="py-20 bg-slate-950 relative border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
           badge="FAQs"
           title="Frequently Asked Questions"
           subtitle="Find quick answers to common questions."
         />
-        <div className="max-w-3xl mx-auto">
-          <ul className="space-y-4">
-            {items.map((it, idx) => (
-              <li key={idx} className="border-b border-slate-800">
-                <button
-                  className="w-full text-left py-4 px-4 flex items-center justify-between hover:bg-slate-900 rounded-lg transition-colors"
-                  onClick={() => setOpen(open === idx ? null : idx)}
-                >
-                  <span className="text-white font-semibold text-lg">
-                    {it.q}
-                  </span>
-                  <span
-                    className={`text-[#00BCD4] transition-transform duration-300 ${
-                      open === idx ? "rotate-180" : ""
-                    }`}
-                  >
-                    ▼
-                  </span>
-                </button>
-                <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    open === idx
-                      ? "grid-rows-[1fr] opacity-100 pb-4"
-                      : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden px-4 text-slate-400 leading-relaxed">
-                    {it.a}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="text-center mt-10">
-            <a
-              href="/faqs"
-              className="inline-flex items-center px-8 py-3 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all hover:-translate-y-1"
-            >
-              View All FAQs
-            </a>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Two Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <ul className="space-y-4">
+              {col1.map((it, idx) => renderItem(it, idx))}
+            </ul>
+
+            <ul className="space-y-4">
+              {col2.map((it, idx) => renderItem(it, idx + mid))}
+            </ul>
           </div>
         </div>
       </div>
@@ -1643,7 +1667,7 @@ const Globe3D = () => {
     // 3. Locations Data & Pins
     const locations = [
       { lat: 20.6, lon: 79.0, country: "India", users: "2.1M+", rating: "4.7" },
-      { lat: 37.1, lon: -95.7, country: "USA", users: "1.2M+", rating: "4.6" },
+      { lat: 37.1, lon: -95.7, country: "USA", users: "1.2M+", rating: "4.3" },
       { lat: 51.5, lon: -0.1, country: "UK", users: "500K+", rating: "4.5" },
       {
         lat: -14.2,
@@ -1657,7 +1681,7 @@ const Globe3D = () => {
         lon: 10.4,
         country: "Germany",
         users: "300K+",
-        rating: "4.6",
+        rating: "4.3",
       },
       {
         lat: 36.2,
@@ -1678,7 +1702,7 @@ const Globe3D = () => {
         lon: 133.8,
         country: "Australia",
         users: "150K+",
-        rating: "4.6",
+        rating: "4.3",
       },
       {
         lat: 56.1,
@@ -1688,7 +1712,7 @@ const Globe3D = () => {
         rating: "4.7",
       },
       { lat: 46.2, lon: 2.2, country: "France", users: "220K+", rating: "4.5" },
-      { lat: 41.9, lon: 12.6, country: "Italy", users: "190K+", rating: "4.6" },
+      { lat: 41.9, lon: 12.6, country: "Italy", users: "190K+", rating: "4.3" },
       {
         lat: -30.6,
         lon: 22.9,
@@ -1708,7 +1732,7 @@ const Globe3D = () => {
         lon: 127.8,
         country: "South Korea",
         users: "140K+",
-        rating: "4.6",
+        rating: "4.3",
       },
       { lat: 23.4, lon: 53.8, country: "UAE", users: "90K+", rating: "4.9" },
     ];
@@ -1852,7 +1876,7 @@ const Globe3D = () => {
 
 const TrustedBySection = () => {
   return (
-    <section className="py-32 bg-slate-950 relative">
+    <section className="py-24 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[600px] md:h-[800px] border border-slate-900">
           {/* 3D Globe Container */}
@@ -1864,7 +1888,7 @@ const TrustedBySection = () => {
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
                   <Globe size={14} />
-                  <span>Global Phenomenon</span>
+                  <span>Reclaiming Digital Lives Globally</span>
                 </div>
                 <h2 className="text-4xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl text-white">
                   Trusted by{" "}
@@ -1882,8 +1906,8 @@ const TrustedBySection = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pointer-events-auto max-w-2xl mx-auto px-6 w-full">
               {[
                 { val: "5M+", label: "Downloads" },
-                { val: "4.6", label: "Rating" },
-                { val: "140+", label: "Countries" },
+                { val: "4.3", label: "Rating" },
+                { val: "180+", label: "Countries" },
                 { val: "25+", label: "Languages" },
               ].map((stat, i) => (
                 <RevealOnScroll key={i} delay={i * 100}>
@@ -1933,13 +1957,15 @@ const AIDetoxCoachSection = () => {
           <RevealOnScroll>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6 border border-slate-800/50 backdrop-blur-sm">
               <Sparkles size={16} />
-              <span>Powered by Gemini AI</span>
+              <span>AI DETOX COACH</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-black mb-6 text-white">
-              AI Detox Coach
+              The AI Habit Roast
             </h2>
             <p className="text-xl text-slate-400">
-              Tell us your bad habit. We'll roast it & fix it.
+              Tell us your bad habit. We'll roast your scrolling addiction and
+              provide a scientific dopamine detox plan to cut down screen time
+              immediately.
             </p>
           </RevealOnScroll>
         </div>
@@ -2060,13 +2086,13 @@ const Home = () => {
       <GlobalStyles />
       <Hero />
       <LogoTicker />
+      <TrustedBySection />
       <DashboardFeatures />
+      <AIDetoxCoachSection />
       <AddictionScale />
       <Challenges />
       <TestimonialsSection />
-      <TrustedBySection />
       <Stories />
-      <AIDetoxCoachSection />
       <MindefyPromo />
       <BlogSection />
       <FAQsSection />

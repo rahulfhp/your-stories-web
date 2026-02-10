@@ -69,7 +69,7 @@ export default function WebsiteHeader() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-2.5 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all whitespace-nowrap"
               >
-                Get the App
+                Free Download
               </a>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function WebsiteHeader() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all whitespace-nowrap"
               >
-                Get the App
+                Free Download
               </a>
             </div>
           </div>
@@ -234,7 +234,7 @@ export default function WebsiteHeader() {
                     className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get the App
+                    Free Download
                   </a>
                 </div>
               </div>
