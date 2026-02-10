@@ -2,9 +2,22 @@
 import Link from "next/link";
 import { trackWebsiteHeaderStoriesLogoClicked } from "@/lib/website-analytics";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function WebsiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleScrollToMindefy = () => {
+    const target = document.getElementById("mindefy");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    setIsMobileMenuOpen(false);
+    router.push("/#mindefy");
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
@@ -34,17 +47,18 @@ export default function WebsiteHeader() {
               <Link href="/" className="hover:text-[#00BCD4] transition-colors">
                 Home
               </Link>
+              <button
+                type="button"
+                onClick={handleScrollToMindefy}
+                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                About Us
+              </button>
               <Link
                 href="/blogs"
                 className="hover:text-[#00BCD4] transition-colors"
               >
                 Blogs
-              </Link>
-              <Link
-                href="/faqs"
-                className="hover:text-[#00BCD4] transition-colors"
-              >
-                FAQs
               </Link>
             </div>
 
@@ -94,17 +108,18 @@ export default function WebsiteHeader() {
               <Link href="/" className="hover:text-[#00BCD4] transition-colors">
                 Home
               </Link>
+              <button
+                type="button"
+                onClick={handleScrollToMindefy}
+                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                About Us
+              </button>
               <Link
                 href="/blogs"
                 className="hover:text-[#00BCD4] transition-colors"
               >
                 Blogs
-              </Link>
-              <Link
-                href="/faqs"
-                className="hover:text-[#00BCD4] transition-colors"
-              >
-                FAQs
               </Link>
             </div>
 
@@ -193,19 +208,19 @@ export default function WebsiteHeader() {
                   >
                     Home
                   </Link>
+                  <button
+                    type="button"
+                    onClick={handleScrollToMindefy}
+                    className="hover:text-[#00BCD4] transition-colors py-2 text-left cursor-pointer"
+                  >
+                    About Us
+                  </button>
                   <Link
                     href="/blogs"
                     className="hover:text-[#00BCD4] transition-colors py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Blogs
-                  </Link>
-                  <Link
-                    href="/faqs"
-                    className="hover:text-[#00BCD4] transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    FAQs
                   </Link>
                 </div>
 

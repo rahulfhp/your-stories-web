@@ -30,6 +30,9 @@ import {
   Instagram,
   Youtube,
   Facebook,
+  AppWindow,
+  Timer,
+  Focus,
 } from "lucide-react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -150,9 +153,11 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
 const Button = ({
   children,
   variant = "primary",
+  as = "button",
   className = "",
   ...props
 }) => {
+  const Comp = as;
   const baseStyle =
     "inline-flex items-center justify-center px-6 py-3 cursor-pointer rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95";
   const variants = {
@@ -169,12 +174,12 @@ const Button = ({
   };
 
   return (
-    <button
+    <Comp
       className={`${baseStyle} ${variants[variant]} ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </Comp>
   );
 };
 
@@ -552,12 +557,16 @@ const Hero = () => {
 
               {/* Floating Elements hooking specific features */}
               <div
-                className="absolute top-[30%] -left-4 md:-left-12 z-20 animate-float"
+                className={`absolute top-[30%] -left-4 md:-left-12 z-20 animate-float transition-all duration-500 ${
+                  isBlocked
+                    ? "opacity-0 scale-95 pointer-events-none"
+                    : "opacity-100 scale-100"
+                }`}
                 style={{ animation: "float 6s ease-in-out infinite" }}
               >
                 <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform -rotate-6 hover:rotate-0 transition-transform">
                   <div className="w-12 h-12 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white shadow-lg">
-                    <span className="font-bold text-sm">IG</span>
+                    <Instagram size={20} className="text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">
@@ -569,12 +578,16 @@ const Hero = () => {
               </div>
 
               <div
-                className="absolute bottom-[20%] -right-4 md:-right-12 z-20 animate-float"
+                className={`absolute bottom-[20%] -right-4 md:-right-12 z-20 animate-float transition-all duration-500 ${
+                  isBlocked
+                    ? "opacity-0 scale-95 pointer-events-none"
+                    : "opacity-100 scale-100"
+                }`}
                 style={{ animation: "float 5s ease-in-out infinite 1s" }}
               >
                 <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform rotate-6 hover:rotate-0 transition-transform">
                   <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white shadow-lg">
-                    <span className="font-bold text-sm">YT</span>
+                    <Youtube size={20} className="text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">
@@ -652,13 +665,13 @@ const LogoTicker = () => {
               key={`${logo.key}-${index}`}
               className="mx-8 relative flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-300"
             >
-              <div className="relative p-2 border border-white rounded-xl">
+              <div className="relative p-4 border border-white rounded-xl">
                 <img
                   src={`yourhour-website-img/yourhour_${logo.label}.${
                     logo.label === "techdator" ? "png" : "webp"
                   }`}
                   alt={logo.label}
-                  className="h-16 md:h-20 max-w-fit object-contain brightness-0 invert"
+                  className="h-20 md:h-32 max-w-fit object-contain brightness-0 invert"
                   loading="lazy"
                 />
               </div>
@@ -1061,11 +1074,21 @@ const MindefyPromo = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-white text-slate-900 hover:bg-slate-200 px-4 md:px-8 shadow-lg shadow-white/10">
+              <Button
+                as="a"
+                href="https://mindefy.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-slate-900 hover:bg-slate-200 px-4 md:px-8 shadow-lg shadow-white/10"
+              >
                 Partner with Mindefy
               </Button>
               <Button
                 variant="outline"
+                as="a"
+                href="https://portfolio.mindefy.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border-slate-700 text-slate-300 hover:border-white hover:text-white"
               >
                 View Our Portfolio
@@ -1272,25 +1295,25 @@ const Challenges = () => {
           {[
             {
               title: "App Diet",
-              icon: "🥗",
+              icon: AppWindow,
               desc: "Limit specific apps for a set duration.",
               color: "from-green-400 to-emerald-600",
             },
             {
               title: "Phone Fasting",
-              icon: "🤐",
+              icon: Timer,
               desc: "No phone usage for X hours straight.",
               color: "from-blue-400 to-blue-600",
             },
             {
               title: "No Phone",
-              icon: "📵",
+              icon: Smartphone,
               desc: "Leave your phone in another room.",
               color: "from-purple-400 to-purple-600",
             },
             {
               title: "Mindful Pause",
-              icon: "🧘",
+              icon: Focus,
               desc: "2-minute breathing before apps.",
               color: "from-orange-400 to-red-600",
             },
@@ -1301,8 +1324,8 @@ const Challenges = () => {
                   className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
 
-                <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {card.icon}
+                <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <card.icon className="w-12 h-12 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">
                   {card.title}
@@ -1526,40 +1549,39 @@ const FAQsSection = () => {
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Praneeth",
+      name: "o lemonqueen o",
       rating: 5,
       review:
-        "Cut my screen time by half. The blocker works flawlessly and the reports keep me aware.",
+        "Beautiful beautiful update YourHour team, thank you! I never blocked YouTube because I have practical uses at times and now I'm forced to think about it for a second. I had another app that had this function but wanted to charge for multiple apps. Now I continue to stick with you guys, thanks :)",
     },
     {
-      name: "Sarah K.",
-      rating: 4,
-      review:
-        "Mindful Pause makes me think before scrolling. Loving the clear analytics.",
-    },
-    {
-      name: "Rahul M.",
+      name: "Kiran Kiran",
       rating: 5,
       review:
-        "Unlock count insights were an eye-opener. The app helped me gain control.",
+        "It is one of the best applications for tracking time you on your phone and apps and unlock counts. I love the floating clock feature of this application.❤️❤️❤️🙌🏻🙌🏻🙌🏻🥳🥳🥳",
     },
     {
-      name: "John",
+      name: "Devender Singh",
       rating: 5,
       review:
-        "Cut my screen time by half. The blocker works flawlessly and the reports keep me aware.",
+        "Great features and have different options if you are a premium member.",
     },
     {
-      name: "Sara",
-      rating: 4,
-      review:
-        "Mindful Pause makes me think before scrolling. Loving the clear analytics.",
-    },
-    {
-      name: "Rohan",
+      name: "Mustafa Joha glass",
       rating: 5,
       review:
-        "Unlock count insights were an eye-opener. The app helped me gain control.",
+        "very nice app for people tryin to control screen time and see how much they can control themselves.also easy to use , go with the flow kind of app",
+    },
+    {
+      name: "richita dutta",
+      rating: 5,
+      review:
+        "Its an Amazing app. It genuinely helps cut down unnecessary phone usage. That said, phones are essential for study and work, so time spent on productive apps should be excluded from both the addiction level and total usage. That distinction would make the insights far more accurate and fair.",
+    },
+    {
+      name: "Aman Pandey",
+      rating: 5,
+      review: "I am a pro user for more than 3 years now.",
     },
   ];
   return (
@@ -1588,7 +1610,7 @@ const TestimonialsSection = () => {
                   </span>
                 ))}
               </div>
-              <p className="text-slate-400 mb-6 leading-relaxed italic">
+              <p className="text-slate-400 mb-6 leading-relaxed h-40">
                 "{t.review}"
               </p>
               <div className="flex items-center gap-3">
@@ -1876,7 +1898,7 @@ const Globe3D = () => {
 
 const TrustedBySection = () => {
   return (
-    <section className="py-24 bg-slate-950 relative">
+    <section className="pt-32 pb-16 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[600px] md:h-[800px] border border-slate-900">
           {/* 3D Globe Container */}
@@ -1934,14 +1956,58 @@ const AIDetoxCoachSection = () => {
   const [hours, setHours] = useState("4");
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [resultIndex, setResultIndex] = useState(0);
+
+  const roastOptions = [
+    {
+      roast: ({ appName, hoursLabel }) =>
+        `Spending ${hoursLabel} hours on ${appName}? That's not a hobby, that's a part-time job with zero pay. Your thumb has traveled more miles scrolling than you have walking this year.`,
+      rescue: ({ appName, replaceHoursLabel }) =>
+        `Set a 30-minute hard limit on ${appName} using YourHour. Replace the other ${replaceHoursLabel} hours with learning a new skill or actually talking to humans.`,
+    },
+    {
+      roast: ({ appName, hoursLabel }) =>
+        `${hoursLabel} hours on ${appName} is wild. At this point, your screen time report is basically a confession letter.`,
+      rescue: ({ appName, replaceHoursLabel }) =>
+        `Start with a 20-minute cap on ${appName}, then use the freed ${replaceHoursLabel} hours to build a real-world streak: gym, books, or a 10-minute walk.`,
+    },
+    {
+      roast: ({ appName, hoursLabel }) =>
+        `You gave ${appName} ${hoursLabel} hours today? That's rent-level attention. The algorithm is paying you in dopamine and you're working overtime.`,
+      rescue: ({ appName, replaceHoursLabel }) =>
+        `Flip ${appName} into Focus Mode with a 30-minute lock. Spend the extra ${replaceHoursLabel} hours on a single deep task and watch your brain unclog.`,
+    },
+    {
+      roast: ({ appName, hoursLabel }) =>
+        `${hoursLabel} hours scrolling ${appName}? Your battery isn't the only thing dying. Your attention span is on 1%.`,
+      rescue: ({ appName, replaceHoursLabel }) =>
+        `Block ${appName} after 30 minutes. Trade the saved ${replaceHoursLabel} hours for a creative outlet or a quick skill sprint.`,
+    },
+  ];
 
   const handleRoast = () => {
     setLoading(true);
     setShowResult(true);
+    setResultIndex((prev) => {
+      if (roastOptions.length <= 1) return 0;
+      let next = Math.floor(Math.random() * roastOptions.length);
+      if (next === prev) {
+        next = (next + 1) % roastOptions.length;
+      }
+      return next;
+    });
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   };
+
+  const numericHours = Number(hours) || 0;
+  const hoursLabel = hours?.toString().trim() || "0";
+  const replaceHours = Math.max(0, numericHours - 0.5);
+  const replaceHoursLabel =
+    replaceHours % 1 === 0 ? replaceHours.toFixed(0) : replaceHours.toFixed(1);
+  const appName = app?.trim() || "that app";
+  const currentOption = roastOptions[resultIndex] || roastOptions[0];
 
   return (
     <section
@@ -2035,10 +2101,7 @@ const AIDetoxCoachSection = () => {
                           The Roast 🔥
                         </h4>
                         <p className="text-lg leading-relaxed text-white">
-                          Spending {hours} hours on {app}? That's not a hobby,
-                          that's a part-time job with zero pay. Your thumb has
-                          traveled more miles scrolling than you have walking
-                          this year.
+                          {currentOption.roast({ appName, hoursLabel })}
                         </p>
                       </div>
                     </div>
@@ -2052,10 +2115,10 @@ const AIDetoxCoachSection = () => {
                           The Rescue Plan 🛡️
                         </h4>
                         <p className="text-lg leading-relaxed text-slate-300">
-                          Set a 30-minute hard limit on {app} using YourHour.
-                          Replace the other {parseInt(hours || 0) - 0.5} hours
-                          with learning a new skill or actually talking to
-                          humans.
+                          {currentOption.rescue({
+                            appName,
+                            replaceHoursLabel,
+                          })}
                         </p>
                       </div>
                     </div>
@@ -2072,6 +2135,16 @@ const AIDetoxCoachSection = () => {
 
 const Home = () => {
   const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash === "#mindefy") {
+      const target = document.getElementById("mindefy");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
