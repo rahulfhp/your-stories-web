@@ -42,9 +42,7 @@ export default function LogoTicker() {
             >
               <div className="relative p-4 border border-white rounded-xl">
                 <img
-                  src={`yourhour-website-img/yourhour_${logo.label}.${
-                    logo.label === "techdator" ? "png" : "webp"
-                  }`}
+                  src={`yourhour-website-img/yourhour_${logo.label}.${"webp"}`}
                   alt={logo.label}
                   className="h-20 md:h-32 max-w-fit object-contain brightness-0 invert"
                   loading="lazy"

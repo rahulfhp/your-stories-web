@@ -187,16 +187,17 @@ Let's get started! 🚀`;
   };
 
   const scrollToBottom = () => {
-    if (chatBodyRef.current) {
-      requestAnimationFrame(() => {
-        const last = chatBodyRef.current.lastElementChild;
-        if (last && last.scrollIntoView) {
-          last.scrollIntoView({ behavior: "auto", block: "end" });
-        } else {
-          chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
-        }
-      });
-    }
+    requestAnimationFrame(() => {
+      const chatBody = chatBodyRef.current;
+      if (!chatBody) return;
+
+      const last = chatBody.lastElementChild;
+      if (last && last.scrollIntoView) {
+        last.scrollIntoView({ behavior: "auto", block: "end" });
+      } else {
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    });
   };
 
   const saveMessage = (content, sender) => {
