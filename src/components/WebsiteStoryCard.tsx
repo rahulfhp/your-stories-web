@@ -31,7 +31,7 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
 
   return (
     <div
-      className="group relative bg-gray-100/80 backdrop-blur-xl border border-gray-300/40 rounded-2xl overflow-hidden hover:bg-gray-200/90 hover:border-gray-400/60 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl shadow-lg shadow-gray-400/20"
+      className="group relative max-h-fit min-h-[29.5rem] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-[#00BCD4]/30 transition-all duration-300 cursor-pointer hover:scale-[1.02] hover:shadow-xl shadow-lg shadow-black/50"
       onClick={onClick}
     >
       {/* Story Cover Image */}
@@ -40,7 +40,7 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
           <Image
             src={storyData.coverPicRef}
             alt={storyData.storyTitle}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             fill
             loading="lazy"
           />
@@ -48,12 +48,12 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
           <Image
             src={TestImage}
             alt={storyData.storyTitle}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             fill
             loading="lazy"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
 
         {/* Remove Button */}
         {onRemove && (
@@ -62,71 +62,73 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
               e.stopPropagation();
               onRemove();
             }}
-            className="absolute top-3 right-3 group/remove p-2 bg-gray-100/80 backdrop-blur-xl border border-gray-300/40 rounded-full transition-all duration-300 hover:bg-red-100/90 hover:border-red-300/60 hover:scale-110 shadow-lg shadow-gray-400/20 cursor-pointer"
+            className="absolute top-3 right-3 group/remove p-2 bg-slate-900/90 backdrop-blur-md border border-slate-700 rounded-full transition-all duration-300 hover:bg-red-500/20 hover:border-red-500 hover:scale-110 shadow-sm"
           >
-            <XMarkIcon className="w-4 h-4 text-gray-600 group-hover/remove:text-red-500 transition-colors duration-200" />
+            <XMarkIcon className="w-4 h-4 text-slate-400 group-hover/remove:text-red-500 transition-colors duration-200" />
           </button>
         )}
       </div>
 
       {/* Story Content */}
-      <div className="p-4 space-y-3">
+      <div className="p-5 space-y-4">
         {/* Author Info */}
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center">
-            {storyData.profilePicRef ? (
-              <img
-                src={storyData.profilePicRef}
-                alt={storyData.userName}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            ) : (
-              <span className="text-white text-sm font-semibold">
-                {storyData.userName?.charAt(0)?.toUpperCase() || "U"}
-              </span>
-            )}
+          <div className="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#4DD0E1] to-[#00BCD4] p-0.5">
+            <div className="w-full h-full rounded-full overflow-hidden bg-slate-800">
+              {storyData.profilePicRef ? (
+                <img
+                  src={storyData.profilePicRef}
+                  alt={storyData.userName}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold">
+                  {storyData.userName?.charAt(0)?.toUpperCase() || "U"}
+                </div>
+              )}
+            </div>
           </div>
           <div>
-            <p className="text-gray-800 text-sm font-medium">
+            <p className="text-white text-sm font-semibold font-montserrat">
               {storyData.userName}
             </p>
-            <p className="text-gray-600 text-xs">
+            <p className="text-[#00BCD4] text-xs font-medium font-montserrat">
               {storyData.profession || "Storyteller"}
             </p>
           </div>
         </div>
 
         {/* Story Title */}
-        <h3 className="text-gray-900 font-semibold text-lg leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+        <h3 className="text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-[#00BCD4] transition-colors duration-200 font-montserrat">
           {storyData.storyTitle}
         </h3>
 
         {/* Story Preview */}
         {storyData.storyContent && (
-          <p className="text-gray-700 text-sm line-clamp-2 leading-relaxed">
+          <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed font-montserrat">
             {storyData.storyContent.replace(/<[^>]*>/g, "").substring(0, 100)}
             ...
           </p>
         )}
 
         {/* Story Meta */}
-        <div className="flex items-center justify-between text-gray-600 text-xs">
+        <div className="flex items-center justify-between text-slate-500 text-xs font-medium font-montserrat pt-2 border-t border-slate-800">
           <div className="flex items-center space-x-4">
             <span>{formatDate(storyData.publishDate)}</span>
-            <span>•</span>
+            <span className="w-1 h-1 rounded-full bg-slate-700"></span>
             <span>{formatReadTime(storyData.readCount || 0)}</span>
           </div>
           <div className="flex items-center space-x-3">
             {storyData.readCount > 0 && (
               <span className="flex items-center space-x-1">
-                <EyeIcon className="w-3.5 h-3.5" />
+                <EyeIcon className="w-4 h-4" />
                 <span>{storyData.readCount}</span>
               </span>
             )}
             {storyData.upvoteCount > 0 && (
               <span className="flex items-center space-x-1">
-                <StarIcon className="w-3.5 h-3.5" />
+                <StarIcon className="w-4 h-4" />
                 <span>{storyData.upvoteCount}</span>
               </span>
             )}
@@ -139,13 +141,13 @@ const WebsiteStoryCard: React.FC<StoryCardProps> = ({
             {storyData.tagList.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-gray-200/80 text-gray-700 text-xs rounded-full backdrop-blur-md border border-gray-300/50"
+                className="px-2 py-1 bg-slate-800/80 text-slate-300 text-xs rounded-full backdrop-blur-md border border-slate-700/50"
               >
                 #{tag}
               </span>
             ))}
             {storyData.tagList.length > 3 && (
-              <span className="px-2 py-1 bg-gray-200/80 text-gray-600 text-xs rounded-full backdrop-blur-md border border-gray-300/50">
+              <span className="px-2 py-1 bg-slate-800/80 text-slate-300 text-xs rounded-full backdrop-blur-md border border-slate-700/50">
                 +{storyData.tagList.length - 3}
               </span>
             )}

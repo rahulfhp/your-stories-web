@@ -10,19 +10,19 @@ const websitePages = [
 export default async function SitemapPage() {
   return (
     <>
-      <div className="pt-20 w-full bg-white">
+      <div className="pt-20 w-full bg-slate-950 min-h-screen">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <header className="mb-8 text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white">
               Sitemap
             </h1>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-slate-400">
               Find and visit all the pages on the YourHour website.
             </p>
           </header>
           <div className="max-w-lg mx-auto grid grid-cols-1 gap-8">
-            <section className="bg-white/80 backdrop-blur-xl border border-gray-300/60 rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <section className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 shadow-xl shadow-black/20">
+              <h2 className="text-xl font-semibold text-white mb-4">
                 YourHour
               </h2>
               <ul className="space-y-3">
@@ -30,7 +30,7 @@ export default async function SitemapPage() {
                   <li key={page.href}>
                     <Link
                       href={page.href}
-                      className="block px-4 py-2 rounded-lg text-gray-800 border border-gray-300/60 bg-gray-100/70 hover:bg-gray-200/80 transition-colors cursor-pointer"
+                      className="block px-4 py-2 rounded-lg text-slate-200 border border-slate-700 bg-slate-800/50 hover:bg-slate-700/80 hover:text-white hover:border-[#4DD0E1]/50 transition-all cursor-pointer"
                     >
                       {page.label}
                     </Link>

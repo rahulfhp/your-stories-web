@@ -62,9 +62,9 @@ export default function FAQPage() {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-slate-950 min-h-screen">
       {/* Header Section */}
-      <div className="relative w-full overflow-hidden bg-white pt-[12%] md:pt-[8%] lg:pt-[4%]">
+      <div className="relative w-full overflow-hidden bg-slate-950 pt-[12%] md:pt-[8%] lg:pt-[4%]">
         {/* SKY BACKGROUND IMAGE */}
         <div
           className="w-full bg-no-repeat bg-cover bg-top pt-16 pb-[10%]"
@@ -73,18 +73,18 @@ export default function FAQPage() {
             backgroundSize: "100% auto",
           }}
         >
-          <div className="max-w-5xl mx-auto px-4">
+          <div className="max-w-5xl mx-auto px-4 relative z-10">
             {/* LEFT TEXT */}
             <div className="max-w-lg">
-              <span className="block text-3xl md:text-4xl text-black font-bold font-montserrat">
+              <span className="block text-3xl md:text-4xl text-white font-bold font-montserrat">
                 Hello!
               </span>
 
-              <span className="block text-2xl md:text-3xl text-black font-normal font-montserrat mt-2">
+              <span className="block text-2xl md:text-3xl text-white font-normal font-montserrat mt-2">
                 We take care of your
               </span>
 
-              <span className="block text-3xl md:text-4xl font-semibold font-montserrat text-[#21ABE1] tracking-widest mt-2">
+              <span className="block text-3xl md:text-4xl font-semibold font-montserrat text-[#4DD0E1] tracking-widest mt-2">
                 SCREENTIME
               </span>
             </div>
@@ -94,7 +94,7 @@ export default function FAQPage() {
 
       {/* FAQ Title */}
       <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl text-black font-semibold font-montserrat leading-normal">
+        <h1 className="text-4xl text-white font-semibold font-montserrat leading-normal">
           Frequently Asked Questions
         </h1>
       </div>
@@ -105,26 +105,26 @@ export default function FAQPage() {
           <div className="max-w-3xl mx-auto">
             <ul className="space-y-4">
               {faqs.map((faq, index) => (
-                <li key={index} className="border-b border-gray-300">
+                <li key={index} className="border-b border-slate-800">
                   <button
-                    className="w-full cursor-pointer text-left py-3 px-5 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full cursor-pointer text-left py-3 px-5 flex items-center justify-between hover:bg-slate-900 transition-colors rounded-lg"
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }
                   >
-                    <span className="max-w-[90%] text-sm md:text-base font-semibold text-[#333333] pr-10 font-montserrat">
+                    <span className="max-w-[90%] text-sm md:text-base font-semibold text-slate-200 pr-10 font-montserrat">
                       {faq.question}
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 transition-transform ${
                         openIndex === index
-                          ? "rotate-180 text-[#21ABE1]"
-                          : "text-[#333333]"
+                          ? "rotate-180 text-[#4DD0E1]"
+                          : "text-slate-400"
                       }`}
                     />
                   </button>
                   {openIndex === index && (
-                    <div className="px-5 pb-4 text-sm text-[#666666] leading-relaxed font-normal font-montserrat">
+                    <div className="px-5 pb-4 text-sm text-slate-400 leading-relaxed font-normal font-montserrat">
                       {faq.answer}
                     </div>
                   )}
@@ -142,7 +142,7 @@ export default function FAQPage() {
         rel="noopener noreferrer"
         className="fixed bottom-16 right-2 z-50 flex items-center gap-2"
       >
-        <span className="hidden md:inline-block bg-white px-4 py-2 rounded shadow-lg text-[#080a3c] text-sm border border-gray-200 font-normal font-montserrat">
+        <span className="hidden md:inline-block bg-slate-900 px-4 py-2 rounded shadow-lg text-white text-sm border border-slate-700 font-normal font-montserrat">
           Message us
         </span>
         <img
@@ -156,7 +156,7 @@ export default function FAQPage() {
       {isSticky && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-2 right-2 w-10 h-10 cursor-pointer bg-white text-[#080a3c] rounded-full shadow-lg flex items-center justify-center hover:bg-[#24abe0] hover:text-white transition-all z-[4] text-4xl"
+          className="fixed bottom-2 right-2 w-10 h-10 cursor-pointer bg-slate-800 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#00BCD4] transition-all z-[4] text-4xl border border-slate-700"
         >
           <span className="text-2xl">↑</span>
         </button>

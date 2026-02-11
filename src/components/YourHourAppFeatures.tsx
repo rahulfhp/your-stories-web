@@ -71,24 +71,24 @@ const AnimatedSection = ({
 
 const FeaturesPage = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-slate-950">
       {/* Features Section - The Dashboard */}
       <section className="px-4 py-4 md:px-[10%] md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="w-full max-w-[33.15rem]">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 The Dashboard
               </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
+              <h3 className="text-xl text-white md:text-2xl mb-4 font-medium">
                 Your Daily Usage Summary
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 Mr. Slow awaits you on this board! The app keeps a track on your
                 "Usage Time" & "Unlock Count" and thereby, gives a comparative
                 infographic view of your today's and past 7-day's activity.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>Create Your Goals</li>
                 <li>Set Screen Unlock Count</li>
                 <li>Track Usage Time</li>
@@ -125,19 +125,19 @@ const FeaturesPage = () => {
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 The Reports
               </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
+              <h3 className="text-xl text-white md:text-2xl mb-4 font-medium">
                 Multiple Detailed Reports
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 YourHour app provides its users insightful Daily, Weekly and
                 Monthly infographic based reports for their app usage with great
                 analytics. The Daily consolidated usage report gets delivered
                 everyday through a notification.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>Daily Reports</li>
                 <li>Weekly Reports</li>
                 <li>Monthly Reports</li>
@@ -152,19 +152,19 @@ const FeaturesPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 The Goal Spots
               </h2>
-              <h3 className="text-xl text-black md:text-2xl mb-4 font-medium">
+              <h3 className="text-xl text-white md:text-2xl mb-4 font-medium">
                 Know Your Level of Addiction!
               </h3>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 Using the data of your phone usage for past 7 days, YourHour app
                 defines the Category of Phone Addict that you currently are from
                 the listed six categories vis-a-vis Addicted, Obsessed,
                 Dependent, Habitual, Achiever and Champion.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>Addicted</li>
                 <li>Obsessed</li>
                 <li>Dependent</li>
@@ -201,14 +201,14 @@ const FeaturesPage = () => {
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 Smart & Curated Challenges
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 YourHour app provides personalized challenge recommendations to
                 its users to help them Break the Habit Loop.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>App Diet Challenge</li>
                 <li>App Fasting Challenge</li>
                 <li>No Phone Challenge</li>
@@ -224,14 +224,14 @@ const FeaturesPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 Usage Analytics
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 Generate PDF reports with all the important analytics at your
                 fingertips.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>Weekly and Monthly Average</li>
                 <li>Top Used Category</li>
                 <li>Peak Usage Time</li>
@@ -268,16 +268,16 @@ const FeaturesPage = () => {
               />
             </AnimatedSection>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide">
+              <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide">
                 Export your data to XLSX format!
               </h2>
-              <p className="mb-6 text-black font-normal leading-[180%] tracking-wide">
+              <p className="mb-6 text-slate-400 font-normal leading-[180%] tracking-wide">
                 YourHour app does not store any of your data, so all your data
                 is stored in your phone memory and you can export the entire
                 data since the installation of the app in excel format for your
                 data analysis or statistics purpose.
               </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#06CCDB] font-bold list-disc pl-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[#4DD0E1] font-bold list-disc pl-4">
                 <li>Export Data to PDF</li>
                 <li>Export Data to Excel</li>
                 <li>Backup on Google Drive</li>
@@ -292,29 +292,29 @@ const FeaturesPage = () => {
       <section className="px-4 py-4 md:px-[10%] md:py-10 mx-auto">
         <div className="max-w-5xl flex flex-col gap-7 items-center justify-center mx-auto px-4 mb-10 md:mb-16">
           {/* Heading */}
-          <h2 className="text-3xl text-black md:text-4xl mb-4 font-bold tracking-wide text-center">
+          <h2 className="text-3xl text-white md:text-4xl mb-4 font-bold tracking-wide text-center">
             Mindful Pause | Usage Pattern | Dark Mode
           </h2>
 
           {/* Description */}
-          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+          <p className="text-slate-400 font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
             We’ve Added Powerful Features To Help You Stay Aware And In Control
             Of Your Screentime:
           </p>
 
           {/* Paragraphs */}
-          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
-            <span className="font-semibold">Mindful Pause</span> – Get Notified
-            When You Exceed Yourself Beyond Your Set App Usage Limit. A Gentle
-            Reminder Appears Right On The App’s Opening Screen To Help You Take
-            A Mindful Break.
+          <p className="text-slate-400 font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+            <span className="font-semibold text-white">Mindful Pause</span> –
+            Get Notified When You Exceed Yourself Beyond Your Set App Usage
+            Limit. A Gentle Reminder Appears Right On The App’s Opening Screen
+            To Help You Take A Mindful Break.
           </p>
 
-          <p className="text-black font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
-            <span className="font-semibold">Usage Pattern</span> – Visualize
-            Your App Habits With Easy-To-Read Graphs. See How Often You Open An
-            App And How Much Time You Spend, Categorized Into Four Behavioral
-            Types For Better Self-Awareness.
+          <p className="text-slate-400 font-normal tracking-wide leading-relaxed text-sm md:text-base mx-auto">
+            <span className="font-semibold text-white">Usage Pattern</span> –
+            Visualize Your App Habits With Easy-To-Read Graphs. See How Often
+            You Open An App And How Much Time You Spend, Categorized Into Four
+            Behavioral Types For Better Self-Awareness.
           </p>
         </div>
 

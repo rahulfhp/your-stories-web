@@ -10,16 +10,80 @@ import {
 
 export default function MindfulNestChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatMounted, setIsChatMounted] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const chatBodyRef = useRef(null);
   const typingTimerRef = useRef(null);
+  const autoCloseTimerRef = useRef(null);
+  const closeTimerRef = useRef(null);
+  const hasUserInteractedRef = useRef(false);
+  const CHAT_ANIMATION_MS = 300;
+  const CHATBOT_AUTOOPEN_KEY = "mindfulnest_chatbot_auto_opened";
+
+  const scheduleAutoClose = (delayMs) => {
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+    }
+    autoCloseTimerRef.current = setTimeout(() => {
+      if (!hasUserInteractedRef.current) {
+        closeChatbot();
+      }
+    }, delayMs);
+  };
+
+  const getAutoOpenFlag = () => {
+    try {
+      if (localStorage.getItem(CHATBOT_AUTOOPEN_KEY) === "true") {
+        return true;
+      }
+    } catch (error) {
+      console.error("Error reading auto-open flag:", error);
+    }
+    if (typeof document !== "undefined") {
+      return document.cookie
+        .split("; ")
+        .some((row) => row.startsWith(`${CHATBOT_AUTOOPEN_KEY}=true`));
+    }
+    return false;
+  };
+
+  const setAutoOpenFlag = () => {
+    try {
+      localStorage.setItem(CHATBOT_AUTOOPEN_KEY, "true");
+    } catch (error) {
+      console.error("Error setting auto-open flag:", error);
+    }
+    if (typeof document !== "undefined") {
+      document.cookie = `${CHATBOT_AUTOOPEN_KEY}=true; Max-Age=31536000; Path=/; SameSite=Lax`;
+    }
+  };
 
   // Initialize chat on mount
   useEffect(() => {
     initializeChat();
+    if (typeof window !== "undefined") {
+      const hasAutoOpened = getAutoOpenFlag();
+      const isLanding =
+        window.location.pathname === "/" ||
+        window.location.pathname === "/test" ||
+        window.location.pathname === "/home";
+      if (!hasAutoOpened && isLanding) {
+        setAutoOpenFlag();
+        openChatbot(false, 2500);
+      }
+    }
+
+    return () => {
+      if (autoCloseTimerRef.current) {
+        clearTimeout(autoCloseTimerRef.current);
+      }
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+      }
+    };
   }, []);
 
   // Scroll to bottom when messages change or chat opens
@@ -144,6 +208,10 @@ Let's get started! 🚀`;
   const handleSendMessage = async () => {
     const userInput = inputValue.trim();
     if (!userInput) return;
+    hasUserInteractedRef.current = true;
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+    }
 
     // Track query submission event with 150-character limit
     const truncated =
@@ -162,11 +230,14 @@ Let's get started! 🚀`;
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://chatbot.mindefy.tech/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userInput }),
-      });
+      const response = await fetch(
+        "https://portfolio-backend.mindefy.tech/mindfulnest/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userInput }),
+        }
+      );
 
       const data = await response.json();
 
@@ -206,18 +277,37 @@ Let's get started! 🚀`;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    if (e.target.value.trim()) {
+      hasUserInteractedRef.current = true;
+      if (autoCloseTimerRef.current) {
+        clearTimeout(autoCloseTimerRef.current);
+      }
+    }
 
     clearTimeout(typingTimerRef.current);
     if (e.target.value.trim()) {
       typingTimerRef.current = setTimeout(() => {
         console.log("User typed:", e.target.value);
-      }, 5000);
+      }, 2500);
     }
   };
 
-  const openChatbot = () => {
-    setIsChatOpen(true);
+  const openChatbot = (markInteracted = true, autoCloseMs = null) => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+    setIsChatMounted(true);
+    requestAnimationFrame(() => setIsChatOpen(true));
     trackWebsiteChatbotOpened();
+    if (markInteracted) {
+      hasUserInteractedRef.current = true;
+    }
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+    }
+    if (autoCloseMs) {
+      scheduleAutoClose(autoCloseMs);
+    }
     const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     if (chatHistory.length === 0 && messages.length === 0) {
       initializeChat();
@@ -227,6 +317,29 @@ Let's get started! 🚀`;
   const closeChatbot = () => {
     setIsChatOpen(false);
     trackWebsiteChatbotClosed();
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+    }
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+    closeTimerRef.current = setTimeout(() => {
+      setIsChatMounted(false);
+    }, CHAT_ANIMATION_MS);
+  };
+
+  const handleResetChat = async () => {
+    try {
+      await fetch("https://portfolio-backend.mindefy.tech/mindfulnest/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.error("Error resetting chat:", error);
+    } finally {
+      localStorage.removeItem("chatHistory");
+      initializeChat();
+    }
   };
 
   const handleOverlayClick = (e) => {
@@ -247,11 +360,11 @@ Let's get started! 🚀`;
         <React.Fragment key={index}>
           {showDateHeader && (
             <div className="flex items-center my-0">
-              <hr className="flex-1 border-none border-t border-gray-300 m-0 p-0" />
-              <div className="text-center text-gray-500 font-montserrat text-xs font-semibold px-2">
+              <hr className="flex-1 border-none border-t border-gray-600 m-0 p-0" />
+              <div className="text-center text-gray-400 font-montserrat text-xs font-semibold px-2">
                 {formattedDate}
               </div>
-              <hr className="flex-1 border-none border-t border-gray-300 m-0 p-0" />
+              <hr className="flex-1 border-none border-t border-gray-600 m-0 p-0" />
             </div>
           )}
           <div
@@ -262,8 +375,8 @@ Let's get started! 🚀`;
             <div
               className={`max-w-xs w-max px-2 py-2 rounded-2xl font-montserrat text-sm font-medium leading-normal ${
                 msg.sender === "user"
-                  ? "bg-[#21ABE1] text-white rounded-br-sm"
-                  : "bg-[rgba(200,200,200,0.35)] text-black rounded-bl-sm shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+                  ? "bg-[#21ABE1] text-white rounded-br-sm shadow-lg"
+                  : "bg-gradient-to-br from-[#2a2a2a] to-[#1f1f1f] text-gray-100 rounded-bl-sm shadow-xl border border-gray-700/50"
               }`}
               dangerouslySetInnerHTML={{ __html: parseContent(msg.content) }}
             />
@@ -291,8 +404,8 @@ Let's get started! 🚀`;
             onClick={openChatbot}
             className="relative cursor-pointer flex items-center gap-1 hover:scale-105 transition-all duration-300 chatbot-icon-float chatbot-icon-wiggle"
           >
-            {/* Label with Shine Effect */}
-            <span className="relative overflow-hidden bg-[#FFFFFF] border border-[#E2E2E2] rounded-lg transition-all duration-300 py-2 px-3 text-[#000000] font-montserrat font-normal text-base hidden sm:block hover:shadow-lg hover:border-[#21ABE1]">
+            {/* Label with Shine Effect - Dark Mode */}
+            <span className="relative overflow-hidden bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a] border border-gray-700 rounded-lg transition-all duration-300 py-2 px-3 text-[#21ABE1] font-montserrat font-normal text-base hidden sm:block hover:shadow-lg hover:shadow-[#21ABE1]/20 hover:border-[#21ABE1]">
               <span className="relative z-10">MindfulNest</span>
               <span className="absolute inset-0 chatbot-shine"></span>
             </span>
@@ -313,21 +426,29 @@ Let's get started! 🚀`;
       </div>
 
       {/* Background Overlay */}
-      {isChatOpen && (
+      {isChatMounted && (
         <div
-          className="fixed top-0 left-0 w-full h-full bg-black/50 z-[999]"
+          className={`fixed top-0 left-0 w-full h-full bg-black/40 z-[999] transition-opacity duration-300 ${
+            isChatOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
           onClick={handleOverlayClick}
         />
       )}
 
       {/* Chatbot Overlay */}
-      {isChatOpen && (
-        <div className="fixed z-[9999] bottom-0 right-0 md:bottom-4 md:right-0 rounded-none md:rounded-2xl w-full md:w-[25rem] md:max-w-[25rem] shadow-[0_4px_24px_rgba(0,0,0,0.3)] h-full md:h-auto">
-          <div className="bg-white rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto">
+      {isChatMounted && (
+        <div
+          className={`fixed z-[9999] bottom-0 right-0 md:bottom-4 md:right-0 rounded-none md:rounded-2xl w-full md:w-[25rem] md:max-w-[25rem] shadow-[0_8px_32px_rgba(0,0,0,0.6)] h-full md:h-auto transition-all duration-300 ease-out ${
+            isChatOpen
+              ? "opacity-100 translate-y-0 scale-100"
+              : "opacity-0 translate-y-4 scale-[0.98] pointer-events-none"
+          }`}
+        >
+          <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-gray-800/50">
             {/* Header */}
-            <div className="bg-white flex items-center justify-between pt-3 px-3 md:px-4 md:pt-4">
+            <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between pt-3 px-3 md:px-4 md:pt-4 border-b border-gray-800/50 shadow-lg">
               <div className="flex items-center justify-center gap-2">
-                <div className="w-12 h-12 bg-[#21ABE11A] rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#21ABE1]/20 to-[#21ABE1]/10 rounded-full flex items-center justify-center border border-[#21ABE1]/30 shadow-lg shadow-[#21ABE1]/20">
                   <img
                     src="yourhour-website-img/chatBotLogo.svg"
                     alt="chatBot Icon"
@@ -335,27 +456,35 @@ Let's get started! 🚀`;
                     loading="lazy"
                   />
                 </div>
-                <span className="text-[#333333] text-center font-semibold text-2xl font-montserrat">
+                <span className="text-gray-100 text-center font-semibold text-2xl font-montserrat">
                   MindfulNest
                 </span>
               </div>
-              <button
-                onClick={closeChatbot}
-                className="w-10 flex items-center justify-end cursor-pointer"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M18 6L6 18M6 6l12 12"
-                    stroke="#333"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleResetChat}
+                  className="text-xs font-semibold text-gray-300 hover:text-[#21ABE1] transition-colors"
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={closeChatbot}
+                  className="w-10 flex items-center justify-end cursor-pointer hover:opacity-70 transition-opacity"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M18 6L6 18M6 6l12 12"
+                      stroke="#E5E5E5"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             {/* Chat Body */}
-            <div className="bg-white">
+            <div className="bg-gradient-to-b from-[#141414] to-[#0a0a0a]">
               <div
                 ref={chatBodyRef}
                 className="h-[72vh] md:h-[64vh] max-h-[70vh] rounded-2xl p-3 md:p-4 overflow-y-auto scrollbar-none scroll-smooth"
@@ -366,11 +495,11 @@ Let's get started! 🚀`;
                 {/* Loading Animation */}
                 {isLoading && (
                   <div className="flex flex-col items-start my-2">
-                    <div className="max-w-xs w-max px-2 py-2 rounded-2xl bg-[rgba(200,200,200,0.35)] text-black rounded-bl-lg shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+                    <div className="max-w-xs w-max px-2 py-2 rounded-2xl bg-gradient-to-br from-[#2a2a2a] to-[#1f1f1f] text-gray-100 rounded-bl-lg shadow-xl border border-gray-700/50">
                       <div className="dots-loading flex justify-center items-center gap-1 h-5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#333333]"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#333333]"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#333333]"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#21ABE1]"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#21ABE1]"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#21ABE1]"></span>
                       </div>
                     </div>
                   </div>
@@ -379,18 +508,18 @@ Let's get started! 🚀`;
             </div>
 
             {/* Chat Footer */}
-            <div className="flex items-center p-3 md:p-4 bg-white">
+            <div className="flex items-center p-3 md:p-4 bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] border-t border-gray-800/50">
               <input
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Send a message..."
-                className="flex-1 border border-[#757575] text-black rounded-full px-3 py-2.5 text-sm font-montserrat focus:outline-none focus:border-black"
+                className="flex-1 border border-gray-700 bg-[#1a1a1a] text-gray-100 placeholder-gray-500 rounded-full px-3 py-2.5 text-sm font-montserrat focus:outline-none focus:border-[#21ABE1] focus:ring-1 focus:ring-[#21ABE1] transition-all"
               />
               <button
                 onClick={handleSendMessage}
-                className="bg-[#21ABE1] text-white cursor-pointer border-none rounded-full w-10 h-10 ml-2.5 flex justify-center items-center text-base font-montserrat hover:bg-[#1a8db5] transition-colors"
+                className="bg-gradient-to-r from-[#21ABE1] to-[#1a8db5] text-white cursor-pointer border-none rounded-full w-10 h-10 ml-2.5 flex justify-center items-center text-base font-montserrat hover:shadow-lg hover:shadow-[#21ABE1]/50 transition-all duration-300 hover:scale-105"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path

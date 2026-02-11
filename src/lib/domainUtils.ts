@@ -6,7 +6,7 @@
 const APP_DOMAINS = ['stories.yourhourapp.com'];
 
 // Domains that serve website pages
-const WEBSITE_DOMAINS = ['demo.yourhourapp.com', 'yourhourapp.com', 'www.yourhourapp.com'];
+const WEBSITE_DOMAINS = ['yourhourapp.com', 'www.yourhourapp.com'];
 
 export function isAppDomain(): boolean {
   if (typeof window === 'undefined') return false;
@@ -55,4 +55,3 @@ export function getDomainTypeByHost(hostname: string): 'app' | 'website' | 'loca
   }
   return 'app';
 }
-

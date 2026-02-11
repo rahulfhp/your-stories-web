@@ -23,7 +23,7 @@ export const PopularPosts: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-montserrat">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-montserrat">
         Popular Posts
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -31,7 +31,7 @@ export const PopularPosts: React.FC = () => {
           <div
             key={post.id}
             onClick={() => handlePostClick(post.id)}
-            className="cursor-pointer group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+            className="cursor-pointer group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-slate-800 bg-slate-900 shadow-black/20"
           >
             <div className="relative h-48 overflow-hidden">
               <img
@@ -41,11 +41,11 @@ export const PopularPosts: React.FC = () => {
                 loading="lazy"
               />
             </div>
-            <div className="p-4 bg-white">
-              <p className="text-sm text-gray-500 mb-2 font-montserrat">
+            <div className="p-4 bg-slate-900">
+              <p className="text-sm text-slate-400 mb-2 font-montserrat">
                 {post.date}
               </p>
-              <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-[#21ABE1] transition-colors font-montserrat">
+              <h3 className="text-lg font-semibold text-slate-200 line-clamp-2 group-hover:text-[#4DD0E1] transition-colors font-montserrat">
                 {post.title}
               </h3>
             </div>
