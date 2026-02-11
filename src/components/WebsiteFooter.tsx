@@ -31,7 +31,7 @@ export default function WebsiteFooter() {
             <img
               src="/yourhour-website-img/Footer-logo.webp"
               alt="Make in India Badge"
-              className="h-14 mb-6"
+              className="ml-2 h-14 mb-6 brightness-0 invert scale-125"
             />
 
             {/* Social Icons */}

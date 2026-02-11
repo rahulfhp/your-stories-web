@@ -1167,7 +1167,7 @@ const AddictionScale = () => {
     {
       label: "Dependent",
       color: "bg-orange-500",
-      range: "3.5-5.5h",
+      range: "3.5-5h",
       desc: "Struggling to function without checks.",
     },
     {
