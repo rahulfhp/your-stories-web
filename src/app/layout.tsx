@@ -55,14 +55,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: isWebsite
-        ? "YourHour App: ScreenTime App | Mobile Addiction Tracker App | Digital Wellbeing App | Mindefy Labs | Mindefy Technologies | YourHour App"
-        : "YourHour App: ScreenTime App | Mobile Addiction Tracker App | Digital Wellbeing App | Mindefy Labs | Mindefy Technologies | YourHour App",
+        ? "YourHour App: Screen Time & Digital Wellbeing"
+        : "YourStories: Screen Time Recovery Stories",
       template: isWebsite ? "%s | YourHour" : "%s | YourStories",
     },
 
     description: isWebsite
-      ? "YourHour helps you understand and reduce phone usage with daily limits, detailed reports, and mindful nudges to build healthier digital habits. Discover real student and youngster success stories on how they cut screen time, beat phone addiction, and built healthier digital habits using YourHour screen time reduction app. Read inspiring screen time reduction journeys, digital detox stories, and phone addiction recovery experiences that motivate you to take control and enjoy a balanced, distraction-free life."
-      : "Discover authentic screen time recovery stories and share your own journey. Read, write, and connect with real experiences from students and youngsters overcoming phone addiction, digital detox, and excessive device usage on YourStories. Find inspiration, community support, and helpful tips to reduce screen time, beat phone addiction, build healthier digital habits, and improve digital wellbeing.",
+      ? "YourHour helps you cut screen time with usage tracking, app limits, focus tools, and mindful nudges. Build healthier digital habits with clear reports and gentle guidance from Mindefy."
+      : "Read and share real screen time recovery stories from students and young adults. Get inspiration, tips, and community support to reduce phone addiction and build healthier digital habits.",
 
     keywords: isWebsite
       ? [
@@ -147,7 +147,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // Additional metadata
     applicationName: isWebsite ? "YourHour" : "YourStories",
     appleWebApp: {
-      capable: true,
+      capable: false,
       statusBarStyle: "default",
       title: isWebsite ? "YourHour" : "YourStories",
     },
@@ -171,11 +171,32 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Prevent fallback favicon flash */}
-        <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-
-        {/* Manifest for PWA and shortcuts */}
-        <link rel="manifest" href="/manifest.json" />
+        {/* Explicit favicons for SEO tools and browsers */}
+        <link
+          rel="icon"
+          type={isWebsite ? "image/png" : "image/x-icon"}
+          sizes="16x16"
+          href={
+            isWebsite
+              ? "/yourhour-website-img/website-favicon-16x16.png"
+              : "/stories-favicon.ico"
+          }
+        />
+        {/* Google Search Console verification */}
+        <meta
+          name="google-site-verification"
+          content="d7wxqNf7N5syZIKKGLIN8uJtbicO3hn1kmZOpWnZhmk"
+        />
+        <link
+          rel="icon"
+          type={isWebsite ? "image/png" : "image/x-icon"}
+          sizes="32x32"
+          href={
+            isWebsite
+              ? "/yourhour-website-img/website-favicon.png"
+              : "/stories-favicon.ico"
+          }
+        />
 
         {/* Theme color */}
         <meta name="theme-color" content="#ffffff" />
@@ -183,14 +204,9 @@ export default async function RootLayout({
         {/* Add Structured Data for SEO shortcuts */}
         <StructuredDataSchema isWebsite={isWebsite} />
 
-        {/* Preload LCP image for YourHour website */}
+        {/* Preconnect for YourHour website */}
         {isWebsite && (
           <>
-            <link
-              rel="preload"
-              as="image"
-              href="/yourhour-website-img/hero-BG-Img.webp"
-            />
             <link
               rel="preconnect"
               href="https://stories.yourhourapp.com"

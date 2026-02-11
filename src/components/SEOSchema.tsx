@@ -129,6 +129,13 @@ export default function StructuredDataSchema({
     name: "YourHour - Phone Addiction Tracker",
     operatingSystem: "Android",
     applicationCategory: "Productivity Application",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: "https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US",
+    },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.3",

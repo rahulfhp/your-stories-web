@@ -13,47 +13,47 @@ export async function GET() {
   let content = "";
 
   if (isWebsite) {
-    content = `site: YourHour App
+    content = `# YourHour App
 
-url: https://www.yourhourapp.com
+> YourHour is a screen time management and digital wellbeing app that helps users track usage, set limits, and build healthier digital habits.
 
-description: YourHour is a screen time management and digital wellbeing app that helps users track usage, set limits, and build healthier digital habits. Developed by Mindefy Technologies.
+This file provides a concise map of the most important pages and resources for the YourHour website.
 
-primary_language: en
-region: Global
+## Key Pages
+- [Home](https://www.yourhourapp.com/): Overview of the app and its core benefits.
+- [Blogs](https://www.yourhourapp.com/blogs): Expert insights on screen time, mindfulness, and productivity.
+- [FAQs](https://www.yourhourapp.com/faqs): Common questions and answers.
+- [Privacy Policy](https://www.yourhourapp.com/privacy-policy): Privacy and data handling details.
 
-important_pages:
-- https://www.yourhourapp.com/
-- https://www.yourhourapp.com/blogs
-- https://www.yourhourapp.com/faqs
-- https://www.yourhourapp.com/privacy-policy
+## App & Company
+- [Google Play](https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US): Android app listing.
+- [YourStories](https://stories.yourhourapp.com/): Community stories and recovery journeys.
+- [Mindefy Technologies](https://mindefy.tech/): Company site.
 
-sitemap: https://www.yourhourapp.com/sitemap.xml
-
-contact:
-- https://mindefy.tech/#contact
+## Optional
+- [Sitemap](https://www.yourhourapp.com/sitemap.xml): Full list of indexable pages.
 `;
   } else {
     // Stories Webapp
-    content = `site: YourStories
+    content = `# YourStories
 
-url: https://stories.yourhourapp.com
+> YourStories is a platform for sharing and reading authentic screen time recovery stories and digital detox experiences.
 
-description: YourStories is a platform for sharing and reading authentic screen time recovery stories, overcoming phone addiction, and digital detox experiences. Developed by Mindefy Technologies.
+This file provides a concise map of the most important pages and resources for the YourStories webapp.
 
-primary_language: en
-region: Global
+## Key Pages
+- [Home](https://stories.yourhourapp.com/): Recent and featured stories.
+- [Search](https://stories.yourhourapp.com/search): Find stories by title or tags.
+- [Write](https://stories.yourhourapp.com/write): Share a recovery story.
+- [Profile](https://stories.yourhourapp.com/profile): Manage your stories and account.
 
-important_pages:
-- https://stories.yourhourapp.com/
-- https://stories.yourhourapp.com/search
-- https://stories.yourhourapp.com/write
-- https://stories.yourhourapp.com/profile
+## App & Company
+- [YourHour](https://www.yourhourapp.com/): Main app website.
+- [Google Play](https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US): Android app listing.
+- [Mindefy Technologies](https://mindefy.tech/): Company site.
 
-sitemap: https://stories.yourhourapp.com/sitemap.xml
-
-contact:
-- https://mindefy.tech/#contact 
+## Optional
+- [Sitemap](https://stories.yourhourapp.com/sitemap.xml): Full list of indexable pages.
 `;
   }
 

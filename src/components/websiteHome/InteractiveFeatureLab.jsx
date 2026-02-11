@@ -85,9 +85,9 @@ export default function InteractiveFeatureLab() {
     <div className="mt-20">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <Badge className="mb-6">Interactive Feature Lab</Badge>
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+        <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white">
           Play with the Tools
-        </h2>
+        </h3>
         <p className="text-xl text-slate-400 font-light">
           Experience how YourHour helps you change your habits.
         </p>

@@ -1,20 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import GlobalStyles from "./websiteHome/GlobalStyles";
 import Hero from "./websiteHome/Hero";
 import LogoTicker from "./websiteHome/LogoTicker";
-import TrustedBySection from "./websiteHome/Globe3D";
-import DashboardFeatures from "./websiteHome/DashboardFeatures";
-import AIDetoxCoachSection from "./websiteHome/AIDetoxCoachSection";
-import AddictionScale from "./websiteHome/AddictionScale";
-import Challenges from "./websiteHome/Challenges";
-import TestimonialsSection from "./websiteHome/TestimonialsSection";
-import Stories from "./websiteHome/Stories";
-import MindefyPromo from "./websiteHome/MindefyPromo";
-import FAQsSection from "./websiteHome/FAQsSection";
-import MindfulNestChatbot from "./MindfulNestChatbot";
-import BlogSection from "./websiteHome/BlogSection";
+
+const TrustedBySection = dynamic(() => import("./websiteHome/Globe3D"), {
+  ssr: false,
+  loading: () => <div className="min-h-[420px]" />,
+});
+const DashboardFeatures = dynamic(
+  () => import("./websiteHome/DashboardFeatures"),
+  { loading: () => <div className="min-h-[420px]" /> }
+);
+const AIDetoxCoachSection = dynamic(
+  () => import("./websiteHome/AIDetoxCoachSection"),
+  { loading: () => <div className="min-h-[420px]" /> }
+);
+const AddictionScale = dynamic(() => import("./websiteHome/AddictionScale"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const Challenges = dynamic(() => import("./websiteHome/Challenges"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const TestimonialsSection = dynamic(
+  () => import("./websiteHome/TestimonialsSection"),
+  { loading: () => <div className="min-h-[320px]" /> }
+);
+const Stories = dynamic(() => import("./websiteHome/Stories"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const MindefyPromo = dynamic(() => import("./websiteHome/MindefyPromo"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const BlogSection = dynamic(() => import("./websiteHome/BlogSection"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const FAQsSection = dynamic(() => import("./websiteHome/FAQsSection"), {
+  loading: () => <div className="min-h-[320px]" />,
+});
+const MindfulNestChatbot = dynamic(() => import("./MindfulNestChatbot"), {
+  ssr: false,
+});
 
 export default function WebsiteHomePage() {
   const [isSticky, setIsSticky] = useState(false);
