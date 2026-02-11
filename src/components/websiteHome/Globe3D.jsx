@@ -27,7 +27,7 @@ const Globe3D = () => {
     // Renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     // Controls
@@ -171,6 +171,33 @@ const Globe3D = () => {
       globeGroup.add(ring);
     });
 
+    const applyResponsiveSettings = () => {
+      const width = container.clientWidth;
+      let cameraZ = 2.5;
+      let scale = 1;
+      let dotSize = 0.012;
+
+      if (width < 480) {
+        cameraZ = 3.2;
+        scale = 0.9;
+        dotSize = 0.009;
+      } else if (width < 768) {
+        cameraZ = 2.9;
+        scale = 0.95;
+        dotSize = 0.01;
+      } else if (width < 1024) {
+        cameraZ = 2.7;
+        scale = 1;
+        dotSize = 0.011;
+      }
+
+      camera.position.z = cameraZ;
+      globeGroup.scale.setScalar(scale);
+      dotMaterial.size = dotSize;
+    };
+
+    applyResponsiveSettings();
+
     // Raycasting
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
@@ -218,6 +245,7 @@ const Globe3D = () => {
     const handleResize = () => {
       if (!container) return;
       camera.aspect = container.clientWidth / container.clientHeight;
+      applyResponsiveSettings();
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
@@ -275,28 +303,28 @@ const Globe3D = () => {
 
 export default function TrustedBySection() {
   return (
-    <section className="pt-32 pb-16 bg-slate-950 relative">
+    <section className="pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-14 lg:pb-16 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[600px] md:h-[800px] border border-slate-900">
+        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[520px] sm:h-[620px] md:h-[720px] lg:h-[800px] border border-slate-900">
           {/* 3D Globe Container */}
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-28 md:gap-48 z-10 py-12">
-            <div className="relative max-w-4xl mx-auto px-6">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-12 sm:gap-20 md:gap-28 lg:gap-40 z-10 py-8 sm:py-10 lg:py-12">
+            <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
                   <Globe size={14} />
                   <span>Reclaiming Digital Lives Globally</span>
                 </div>
-                <h2 className="text-4xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl text-white">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 leading-tight drop-shadow-xl text-white">
                   Trusted by{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4]">
                     5 Million+
                   </span>{" "}
                   Users
                 </h2>
-                <p className="text-slate-400 text-xl mb-4 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+                <p className="text-slate-400 text-base sm:text-lg md:text-xl mb-4 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
                   Spin the globe to explore our impact.
                 </p>
               </RevealOnScroll>

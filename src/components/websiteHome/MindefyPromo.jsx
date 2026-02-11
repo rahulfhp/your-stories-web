@@ -63,7 +63,7 @@ export default function MindefyPromo() {
               <Button
                 variant="outline"
                 as="a"
-                href="https://portfolio.mindefy.tech/"
+                href="https://mindefy.tech/mindful-ux-design-user-experience"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-slate-700 text-slate-300 hover:border-white hover:text-white"

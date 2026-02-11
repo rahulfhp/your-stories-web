@@ -50,7 +50,7 @@ export default function WebsiteFooter() {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/company/mindefytechnologies/?viewAsMember=true"
+                href="https://www.linkedin.com/company/yourhour-screen-time-control/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
