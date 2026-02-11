@@ -23,6 +23,17 @@ export default function MindfulNestChatbot() {
   const CHAT_ANIMATION_MS = 300;
   const CHATBOT_AUTOOPEN_KEY = "mindfulnest_chatbot_auto_opened";
 
+  const scheduleAutoClose = (delayMs) => {
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+    }
+    autoCloseTimerRef.current = setTimeout(() => {
+      if (!hasUserInteractedRef.current) {
+        closeChatbot();
+      }
+    }, delayMs);
+  };
+
   const getAutoOpenFlag = () => {
     try {
       if (localStorage.getItem(CHATBOT_AUTOOPEN_KEY) === "true") {
@@ -61,12 +72,7 @@ export default function MindfulNestChatbot() {
         window.location.pathname === "/home";
       if (!hasAutoOpened && isLanding) {
         setAutoOpenFlag();
-        openChatbot(false);
-        autoCloseTimerRef.current = setTimeout(() => {
-          if (!hasUserInteractedRef.current) {
-            closeChatbot();
-          }
-        }, 2500);
+        openChatbot(false, 2500);
       }
     }
 
@@ -286,7 +292,7 @@ Let's get started! 🚀`;
     }
   };
 
-  const openChatbot = (markInteracted = true) => {
+  const openChatbot = (markInteracted = true, autoCloseMs = null) => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
     }
@@ -298,6 +304,9 @@ Let's get started! 🚀`;
     }
     if (autoCloseTimerRef.current) {
       clearTimeout(autoCloseTimerRef.current);
+    }
+    if (autoCloseMs) {
+      scheduleAutoClose(autoCloseMs);
     }
     const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     if (chatHistory.length === 0 && messages.length === 0) {

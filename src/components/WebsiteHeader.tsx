@@ -19,6 +19,17 @@ export default function WebsiteHeader() {
     router.push("/#mindefy");
   };
 
+  const handleScrollToAIDetoxCoach = () => {
+    const target = document.getElementById("ai-coach");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    setIsMobileMenuOpen(false);
+    router.push("/#ai-coach");
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
       <div className="relative pt-3">
@@ -53,6 +64,13 @@ export default function WebsiteHeader() {
                 className="hover:text-[#00BCD4] transition-colors cursor-pointer"
               >
                 About Us
+              </button>
+              <button
+                type="button"
+                onClick={handleScrollToAIDetoxCoach}
+                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                AI Coach
               </button>
               <Link
                 href="/blogs"
@@ -114,6 +132,13 @@ export default function WebsiteHeader() {
                 className="hover:text-[#00BCD4] transition-colors cursor-pointer"
               >
                 About Us
+              </button>
+              <button
+                type="button"
+                onClick={handleScrollToAIDetoxCoach}
+                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                AI Coach
               </button>
               <Link
                 href="/blogs"
@@ -214,6 +239,13 @@ export default function WebsiteHeader() {
                     className="hover:text-[#00BCD4] transition-colors py-2 text-left cursor-pointer"
                   >
                     About Us
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleScrollToAIDetoxCoach}
+                    className="hover:text-[#00BCD4] transition-colors py-2 text-left cursor-pointer"
+                  >
+                    AI Coach
                   </button>
                   <Link
                     href="/blogs"
