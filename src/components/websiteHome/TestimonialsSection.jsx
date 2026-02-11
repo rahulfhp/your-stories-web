@@ -1,0 +1,83 @@
+import SectionHeading from "./SectionHeading";
+
+export default function TestimonialsSection() {
+  const testimonials = [
+    {
+      name: "o lemonqueen o",
+      rating: 5,
+      review:
+        "Beautiful beautiful update YourHour team, thank you! I never blocked YouTube because I have practical uses at times and now I'm forced to think about it for a second. I had another app that had this function but wanted to charge for multiple apps. Now I continue to stick with you guys, thanks :)",
+    },
+    {
+      name: "Kiran Kiran",
+      rating: 5,
+      review:
+        "It is one of the best applications for tracking time you on your phone and apps and unlock counts. I love the floating clock feature of this application.❤️❤️❤️🙌🏻🙌🏻🙌🏻🥳🥳🥳",
+    },
+    {
+      name: "Devender Singh",
+      rating: 5,
+      review:
+        "Great features and have different options if you are a premium member.",
+    },
+    {
+      name: "Mustafa Joha glass",
+      rating: 5,
+      review:
+        "very nice app for people tryin to control screen time and see how much they can control themselves.also easy to use , go with the flow kind of app",
+    },
+    {
+      name: "richita dutta",
+      rating: 5,
+      review:
+        "Its an Amazing app. It genuinely helps cut down unnecessary phone usage. That said, phones are essential for study and work, so time spent on productive apps should be excluded from both the addiction level and total usage. That distinction would make the insights far more accurate and fair.",
+    },
+    {
+      name: "Aman Pandey",
+      rating: 5,
+      review: "I am a pro user for more than 3 years now.",
+    },
+  ];
+
+  return (
+    <section className="py-24 bg-slate-950 relative border-t border-slate-900 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <SectionHeading
+          badge="Testimonials"
+          title="Rated By Our Users"
+          subtitle="Real reviews from people improving their digital habits."
+        />
+        <div className="animate-scroll flex flex-row gap-6">
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="p-8 min-w-md max-w-lg rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
+            >
+              <div className="flex items-center gap-1 mb-4">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`text-yellow-400 text-lg ${
+                      idx < t.rating ? "" : "opacity-30"
+                    }`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <p className="text-slate-400 mb-6 leading-relaxed h-40">
+                "{t.review}"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4DD0E1] to-[#00BCD4] flex items-center justify-center text-white font-bold text-sm">
+                  {t.name.charAt(0)}
+                </div>
+                <div className="text-white font-bold">{t.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
