@@ -21,12 +21,26 @@ export default function WebsiteHomePage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.location.hash === "#mindefy") {
-      const target = document.getElementById("mindefy");
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    if (!id) return;
+
+    let attempts = 0;
+    const maxAttempts = 10;
+    const tryScroll = () => {
+      const target = document.getElementById(id);
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
-    }
+      if (attempts < maxAttempts) {
+        attempts += 1;
+        requestAnimationFrame(tryScroll);
+      }
+    };
+
+    tryScroll();
   }, []);
 
   useEffect(() => {
