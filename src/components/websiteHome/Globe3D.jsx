@@ -8,6 +8,7 @@ const Globe3D = () => {
   const containerRef = useRef(null);
   const [tooltipData, setTooltipData] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const pointerInsideRef = useRef(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -27,7 +28,7 @@ const Globe3D = () => {
     // Renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     // Controls
@@ -171,11 +172,39 @@ const Globe3D = () => {
       globeGroup.add(ring);
     });
 
+    const applyResponsiveSettings = () => {
+      const width = container.clientWidth;
+      let cameraZ = 2.5;
+      let scale = 1;
+      let dotSize = 0.012;
+
+      if (width < 480) {
+        cameraZ = 3.2;
+        scale = 0.9;
+        dotSize = 0.009;
+      } else if (width < 768) {
+        cameraZ = 2.9;
+        scale = 0.95;
+        dotSize = 0.01;
+      } else if (width < 1024) {
+        cameraZ = 2.7;
+        scale = 1;
+        dotSize = 0.011;
+      }
+
+      camera.position.z = cameraZ;
+      globeGroup.scale.setScalar(scale);
+      dotMaterial.size = dotSize;
+    };
+
+    applyResponsiveSettings();
+
     // Raycasting
     const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+    const mouse = new THREE.Vector2(5, 5); // start offscreen so nothing is intersected
 
-    const onMouseMove = (event) => {
+    const handlePointerMove = (event) => {
+      pointerInsideRef.current = true;
       const rect = container.getBoundingClientRect();
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -183,7 +212,18 @@ const Globe3D = () => {
       setTooltipPos({ x: event.clientX, y: event.clientY });
     };
 
-    container.addEventListener("mousemove", onMouseMove);
+    const handlePointerLeave = () => {
+      pointerInsideRef.current = false;
+      setTooltipData(null);
+      mouse.set(5, 5); // push raycaster off sphere
+      pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+      controls.autoRotate = true;
+      container.style.cursor = "grab";
+    };
+
+    container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointerleave", handlePointerLeave);
+    container.addEventListener("wheel", handlePointerLeave, { passive: true });
 
     // Animation Loop
     let animationId;
@@ -191,23 +231,25 @@ const Globe3D = () => {
       animationId = requestAnimationFrame(animate);
       controls.update();
 
-      // Raycast check
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(pinMeshes);
+      if (pointerInsideRef.current) {
+        // Raycast check only while pointer is inside
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(pinMeshes);
 
-      if (intersects.length > 0) {
-        const intersectedPin = intersects[0].object;
-        setTooltipData(intersectedPin.userData);
-        container.style.cursor = "pointer";
-        // Reset all scales first
-        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
-        intersectedPin.scale.set(1.5, 1.5, 1.5);
-        controls.autoRotate = false; // Pause rotation on hover
-      } else {
-        setTooltipData(null);
-        container.style.cursor = "grab";
-        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
-        controls.autoRotate = true;
+        if (intersects.length > 0) {
+          const intersectedPin = intersects[0].object;
+          setTooltipData(intersectedPin.userData);
+          container.style.cursor = "pointer";
+          // Reset all scales first
+          pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+          intersectedPin.scale.set(1.5, 1.5, 1.5);
+          controls.autoRotate = false; // Pause rotation on hover
+        } else {
+          setTooltipData(null);
+          container.style.cursor = "grab";
+          pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+          controls.autoRotate = true;
+        }
       }
 
       renderer.render(scene, camera);
@@ -218,6 +260,7 @@ const Globe3D = () => {
     const handleResize = () => {
       if (!container) return;
       camera.aspect = container.clientWidth / container.clientHeight;
+      applyResponsiveSettings();
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
@@ -226,7 +269,9 @@ const Globe3D = () => {
     // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("mousemove", onMouseMove);
+      container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerleave", handlePointerLeave);
+      container.removeEventListener("wheel", handlePointerLeave);
       cancelAnimationFrame(animationId);
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
@@ -275,28 +320,30 @@ const Globe3D = () => {
 
 export default function TrustedBySection() {
   return (
-    <section className="pt-32 pb-16 bg-slate-950 relative">
+    <section className="pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-14 lg:pb-16 bg-slate-950 relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[600px] md:h-[800px] border border-slate-900">
+        <div className="bg-slate-950 rounded-[3rem] text-white relative overflow-hidden text-center shadow-2xl shadow-cyan-900/10 h-[520px] sm:h-[620px] md:h-[720px] lg:h-[800px] border border-slate-900">
           {/* 3D Globe Container */}
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-28 md:gap-48 z-10 py-12">
-            <div className="relative max-w-4xl mx-auto px-6">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 md:pt-10 md:pb-32">
+            <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
                   <Globe size={14} />
-                  <span>Reclaiming Digital Lives Globally</span>
+                  <span className="w-max">
+                    Reclaiming Digital Lives Globally
+                  </span>
                 </div>
-                <h2 className="text-4xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl text-white">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 leading-tight drop-shadow-xl text-white">
                   Trusted by{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4]">
                     5 Million+
                   </span>{" "}
                   Users
                 </h2>
-                <p className="text-slate-400 text-xl mb-4 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+                <p className="text-slate-400 text-base sm:text-lg md:text-xl mb-4 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
                   Spin the globe to explore our impact.
                 </p>
               </RevealOnScroll>

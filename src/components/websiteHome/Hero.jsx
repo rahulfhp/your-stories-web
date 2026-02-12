@@ -76,7 +76,7 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16">
           <div className="flex-1 text-center lg:text-left">
             <RevealOnScroll>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
+              <div className="inline-flex sm:items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
                 <Zap
                   size={14}
                   className="text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform"

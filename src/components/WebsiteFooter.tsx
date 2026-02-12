@@ -3,6 +3,69 @@
 export default function WebsiteFooter() {
   const getYear = new Date().getFullYear();
 
+  const socialLinks = [
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/YourHourApp/",
+      background: "#1877F2",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="w-4 h-4"
+          fill="currentColor"
+        >
+          <path d="M22.675 0h-21.35C.597 0 0 .6 0 1.337v21.326C0 23.4.597 24 1.325 24H12.82v-9.294H9.692V11.06h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.288h3.587l-.467 3.646h-3.12V24h5.116C23.403 24 24 23.4 24 22.663V1.337C24 .6 23.403 0 22.675 0Z" />
+        </svg>
+      ),
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/mindefy_technologies?igsh=MThpZGRkeWNxdHhnaA==",
+      background: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="w-5 h-5"
+          fill="currentColor"
+        >
+          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm10 1.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
+        </svg>
+      ),
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/yourhour-screen-time-control/?viewAsMember=true",
+      background: "#0A66C2",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="w-4 h-4"
+          fill="currentColor"
+        >
+          <path d="M22.23 0H1.77C.79 0 0 .774 0 1.726v20.548C0 23.226.79 24 1.77 24h20.46C23.2 24 24 23.226 24 22.274V1.726C24 .774 23.2 0 22.23 0ZM7.08 20.452H3.56V9.033h3.52v11.419ZM5.32 7.462c-1.124 0-2.034-.915-2.034-2.041 0-1.125.91-2.04 2.034-2.04 1.125 0 2.035.915 2.035 2.04 0 1.126-.91 2.041-2.035 2.041Zm15.132 12.99h-3.52v-5.569c0-1.328-.026-3.036-1.85-3.036-1.85 0-2.134 1.445-2.134 2.938v5.667h-3.52V9.033h3.379v1.561h.049c.47-.888 1.618-1.823 3.329-1.823 3.561 0 4.219 2.346 4.219 5.396v6.285Z" />
+        </svg>
+      ),
+    },
+    {
+      name: "Pinterest",
+      href: "https://in.pinterest.com/yourhourapp/",
+      background: "#E60023",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="w-5 h-5"
+          fill="currentColor"
+        >
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 4.993 3.657 9.128 8.438 10.125-.117-.859-.223-2.172.047-3.104.242-.83 1.558-5.299 1.558-5.299s-.397-.793-.397-1.963c0-1.841 1.067-3.214 2.398-3.214 1.132 0 1.678.85 1.678 1.87 0 1.139-.726 2.842-1.099 4.421-.313 1.326.664 2.409 1.97 2.409 2.364 0 3.966-3.04 3.966-6.638 0-2.736-1.847-4.787-5.206-4.787-3.795 0-6.166 2.834-6.166 6.006 0 1.09.321 1.86.823 2.452.23.274.262.384.179.699-.06.229-.197.786-.256 1.009-.084.317-.343.43-.633.314-1.766-.72-2.586-2.65-2.586-4.816 0-3.582 3.022-7.867 9.03-7.867 4.825 0 7.994 3.495 7.994 7.243 0 4.952-2.745 8.651-6.799 8.651-1.36 0-2.638-.738-3.075-1.582l-.834 3.181c-.253.964-.94 2.172-1.4 2.914A12.004 12.004 0 0 0 24 12C24 5.373 18.627 0 12 0Z" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
     <footer className="pt-16 pb-6">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
@@ -35,46 +98,23 @@ export default function WebsiteFooter() {
             />
 
             {/* Social Icons */}
-            <div className="flex gap-4">
-              <a
-                href="https://www.facebook.com/YourHourApp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:scale-110 transition-transform"
-              >
-                <img
-                  src="/yourhour-website-img/facebook.svg"
-                  alt="icon"
-                  className="opacity-80 hover:opacity-100"
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/mindefytechnologies/?viewAsMember=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="hover:scale-110 transition-transform"
-              >
-                <img
-                  src="/yourhour-website-img/linkedin.svg"
-                  alt="icon"
-                  className="opacity-80 hover:opacity-100"
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/mindefy_technologies?igsh=MThpZGRkeWNxdHhnaA=="
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="hover:scale-110 transition-transform"
-              >
-                <img
-                  src="/yourhour-website-img/insta.svg"
-                  alt="icon"
-                  className="opacity-80 hover:opacity-100"
-                />
-              </a>
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="w-9 h-9 rounded-full flex items-center justify-center shadow-lg shadow-black/30 ring-1 ring-white/10 hover:ring-white/40 hover:scale-110 transition-all"
+                  style={{
+                    background: social.background,
+                    color: "#fff",
+                  }}
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
             <a
               href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"

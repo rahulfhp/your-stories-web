@@ -95,7 +95,7 @@ export default function AIDetoxCoachSection() {
         </div>
 
         <RevealOnScroll delay={100}>
-          <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] p-4 md:p-12 shadow-2xl relative overflow-hidden">
             {/* Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
@@ -140,7 +140,7 @@ export default function AIDetoxCoachSection() {
             </div>
 
             {showResult && (
-              <div className="bg-slate-950 rounded-3xl p-8 border border-slate-800 relative">
+              <div className="bg-slate-950 rounded-3xl p-4 md:p-8 border border-slate-800 relative">
                 {loading ? (
                   <div className="flex flex-col items-center justify-center py-8 gap-4 opacity-50">
                     <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>

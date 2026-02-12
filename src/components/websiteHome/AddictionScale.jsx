@@ -66,7 +66,7 @@ export default function AddictionScale() {
                         <p className="text-sm text-slate-400">{level.desc}</p>
                       </div>
                       <div
-                        className={`px-4 py-2 rounded-xl ${level.color} text-white font-bold text-sm shadow-sm`}
+                        className={`px-4 py-2 rounded-xl ${level.color} text-white font-bold text-nowrap text-sm shadow-sm`}
                       >
                         {level.range}
                       </div>

@@ -288,6 +288,203 @@ body.dark .toast-glassmorphism .toast-message {
   animation-delay: 0.6s;
 }
 
+.chatbot-welcome-animate {
+  position: relative;
+  overflow: hidden;
+  animation:
+    chatbotWelcomeRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both,
+    chatbotWelcomeGlow 3s ease-in-out 0.4s infinite alternate;
+}
+
+.chatbot-welcome-animate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.16), transparent 65%);
+  transform: translateX(-120%);
+  animation: chatbotWelcomeSheen 1s ease 0.2s forwards;
+  pointer-events: none;
+}
+
+@keyframes chatbotWelcomeRise {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95) rotate(-1deg);
+    filter: blur(4px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.02) rotate(0.4deg);
+    filter: blur(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes chatbotWelcomeGlow {
+  from {
+    box-shadow:
+      0 10px 30px rgba(33, 171, 225, 0.18),
+      0 0 0 1px rgba(33, 171, 225, 0.18);
+  }
+
+  to {
+    box-shadow:
+      0 12px 36px rgba(33, 171, 225, 0.28),
+      0 0 0 1px rgba(33, 171, 225, 0.32);
+  }
+}
+
+@keyframes chatbotWelcomeSheen {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+.chatbot-quick-animate {
+  animation: chatbotQuickGroup 0.5s ease 0.08s both;
+}
+
+.chatbot-quick-item {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98) skewY(1deg);
+  filter: blur(3px);
+  animation: chatbotQuickItem 0.55s cubic-bezier(0.25, 0.8, 0.35, 1) forwards;
+}
+
+.chatbot-quick-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.chatbot-quick-item:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.chatbot-quick-item:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.chatbot-quick-item:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+@keyframes chatbotQuickGroup {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chatbotQuickItem {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98) skewY(1deg);
+    filter: blur(3px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.01) skewY(0deg);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) skewY(0);
+    filter: blur(0);
+  }
+}
+
+/* Chatbot launcher icon animations */
+.chatbot-icon-pulse {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.chatbot-icon-pulse::before,
+.chatbot-icon-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 2px solid rgba(33, 171, 225, 0.35);
+  animation: chatbotIconPulse 2.4s ease-out infinite;
+}
+
+.chatbot-icon-pulse::after {
+  animation-delay: 0.8s;
+}
+
+.chatbot-icon-float {
+  animation: chatbotIconFloat 3s ease-in-out infinite;
+}
+
+.chatbot-icon-wiggle:hover {
+  animation: chatbotIconWiggle 0.6s ease-in-out;
+}
+
+@keyframes chatbotIconPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes chatbotIconFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes chatbotIconWiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(4deg);
+  }
+
+  50% {
+    transform: rotate(-3deg);
+  }
+
+  75% {
+    transform: rotate(2deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 /* Chrome, Edge, Safari */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

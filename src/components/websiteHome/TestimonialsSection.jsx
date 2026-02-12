@@ -38,6 +38,7 @@ export default function TestimonialsSection() {
       review: "I am a pro user for more than 3 years now.",
     },
   ];
+  const marqueeTestimonials = [...testimonials, ...testimonials];
 
   return (
     <section className="py-24 bg-slate-950 relative border-t border-slate-900 overflow-hidden">
@@ -47,35 +48,38 @@ export default function TestimonialsSection() {
           title="Rated By Our Users"
           subtitle="Real reviews from people improving their digital habits."
         />
-        <div className="animate-scroll flex flex-row gap-6">
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="p-8 min-w-md max-w-lg rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
-            >
-              <div className="flex items-center gap-1 mb-4">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <span
-                    key={idx}
-                    className={`text-yellow-400 text-lg ${
-                      idx < t.rating ? "" : "opacity-30"
-                    }`}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
-              <p className="text-slate-400 mb-6 leading-relaxed h-40">
-                "{t.review}"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4DD0E1] to-[#00BCD4] flex items-center justify-center text-white font-bold text-sm">
-                  {t.name.charAt(0)}
+        <div className="overflow-x-auto md:overflow-hidden">
+          <div className="flex flex-row gap-6 w-max snap-x snap-mandatory animate-scroll md:snap-none">
+            {marqueeTestimonials.map((t, i) => (
+              <div
+                key={`${t.name}-${i}`}
+                aria-hidden={i >= testimonials.length}
+                className="p-6 sm:p-8 min-w-[260px] sm:min-w-[320px] md:min-w-[360px] max-w-xs sm:max-w-sm md:max-w-md rounded-3xl border bg-slate-900 shadow-lg shadow-black/20 border-slate-800 hover:border-cyan-500/30 transition-all hover:-translate-y-1 snap-start"
+              >
+                <div className="flex items-center gap-1 mb-4">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <span
+                      key={idx}
+                      className={`text-yellow-400 text-lg ${
+                        idx < t.rating ? "" : "opacity-30"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  ))}
                 </div>
-                <div className="text-white font-bold">{t.name}</div>
+                <p className="text-slate-400 mb-6 leading-relaxed md:h-40">
+                  "{t.review}"
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4DD0E1] to-[#00BCD4] flex items-center justify-center text-white font-bold text-sm">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div className="text-white font-bold">{t.name}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

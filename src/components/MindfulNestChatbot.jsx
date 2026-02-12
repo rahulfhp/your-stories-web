@@ -7,6 +7,7 @@ import {
   trackWebsiteChatbotQuerySubmitted,
   trackWebsiteChatbotTokensUsed,
 } from "@/lib/website-analytics";
+import { RotateCcw } from "lucide-react";
 
 export default function MindfulNestChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -14,50 +15,46 @@ export default function MindfulNestChatbot() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasUserStartedChat, setHasUserStartedChat] = useState(false);
+  const quickPrompts = [
+    "How to reduce my screen time",
+    "Give me a 2-minute breathing break",
+    "Create a 7-day mindful screen detox plan",
+    "How screen time affects my mental health",
+  ];
 
   const chatBodyRef = useRef(null);
   const typingTimerRef = useRef(null);
-  const autoCloseTimerRef = useRef(null);
+  const autoOpenTimerRef = useRef(null);
   const closeTimerRef = useRef(null);
-  const hasUserInteractedRef = useRef(false);
+  const sessionOpenFlagRef = useRef(false);
   const CHAT_ANIMATION_MS = 300;
-  const CHATBOT_AUTOOPEN_KEY = "mindfulnest_chatbot_auto_opened";
+  const CHATBOT_SESSION_OPENED_KEY = "mindfulnest_chatbot_session_opened";
+  const AUTO_OPEN_DELAY_MS = 3200;
 
-  const scheduleAutoClose = (delayMs) => {
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
-    autoCloseTimerRef.current = setTimeout(() => {
-      if (!hasUserInteractedRef.current) {
-        closeChatbot();
+  const hasOpenedThisSession = () => {
+    if (sessionOpenFlagRef.current) return true;
+    if (typeof window === "undefined") return false;
+    try {
+      const opened =
+        sessionStorage.getItem(CHATBOT_SESSION_OPENED_KEY) === "true";
+      if (opened) {
+        sessionOpenFlagRef.current = true;
       }
-    }, delayMs);
+      return opened;
+    } catch (error) {
+      console.error("Error reading chatbot session flag:", error);
+      return sessionOpenFlagRef.current;
+    }
   };
 
-  const getAutoOpenFlag = () => {
+  const markOpenedThisSession = () => {
+    sessionOpenFlagRef.current = true;
+    if (typeof window === "undefined") return;
     try {
-      if (localStorage.getItem(CHATBOT_AUTOOPEN_KEY) === "true") {
-        return true;
-      }
+      sessionStorage.setItem(CHATBOT_SESSION_OPENED_KEY, "true");
     } catch (error) {
-      console.error("Error reading auto-open flag:", error);
-    }
-    if (typeof document !== "undefined") {
-      return document.cookie
-        .split("; ")
-        .some((row) => row.startsWith(`${CHATBOT_AUTOOPEN_KEY}=true`));
-    }
-    return false;
-  };
-
-  const setAutoOpenFlag = () => {
-    try {
-      localStorage.setItem(CHATBOT_AUTOOPEN_KEY, "true");
-    } catch (error) {
-      console.error("Error setting auto-open flag:", error);
-    }
-    if (typeof document !== "undefined") {
-      document.cookie = `${CHATBOT_AUTOOPEN_KEY}=true; Max-Age=31536000; Path=/; SameSite=Lax`;
+      console.error("Error setting chatbot session flag:", error);
     }
   };
 
@@ -65,20 +62,20 @@ export default function MindfulNestChatbot() {
   useEffect(() => {
     initializeChat();
     if (typeof window !== "undefined") {
-      const hasAutoOpened = getAutoOpenFlag();
       const isLanding =
         window.location.pathname === "/" ||
         window.location.pathname === "/test" ||
         window.location.pathname === "/home";
-      if (!hasAutoOpened && isLanding) {
-        setAutoOpenFlag();
-        openChatbot(false, 2500);
+      if (isLanding && !hasOpenedThisSession()) {
+        autoOpenTimerRef.current = window.setTimeout(() => {
+          openChatbot();
+        }, AUTO_OPEN_DELAY_MS);
       }
     }
 
     return () => {
-      if (autoCloseTimerRef.current) {
-        clearTimeout(autoCloseTimerRef.current);
+      if (autoOpenTimerRef.current) {
+        clearTimeout(autoOpenTimerRef.current);
       }
       if (closeTimerRef.current) {
         clearTimeout(closeTimerRef.current);
@@ -115,6 +112,7 @@ Let's get started! 🚀`;
     };
 
     setMessages([defaultMsg, ...recentMessages]);
+    setHasUserStartedChat(recentMessages.length > 0);
   };
 
   const formatTimeToAMPM = (date) => {
@@ -206,13 +204,10 @@ Let's get started! 🚀`;
     localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
   };
 
-  const handleSendMessage = async () => {
-    const userInput = inputValue.trim();
+  const handleSendMessage = async (presetText = null) => {
+    const userInput = (presetText ?? inputValue).trim();
     if (!userInput) return;
-    hasUserInteractedRef.current = true;
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
+    setHasUserStartedChat(true);
 
     // Track query submission event with 150-character limit
     const truncated =
@@ -276,14 +271,13 @@ Let's get started! 🚀`;
     }
   };
 
+  const handleQuickPrompt = (prompt) => {
+    setInputValue(prompt);
+    handleSendMessage(prompt);
+  };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    if (e.target.value.trim()) {
-      hasUserInteractedRef.current = true;
-      if (autoCloseTimerRef.current) {
-        clearTimeout(autoCloseTimerRef.current);
-      }
-    }
 
     clearTimeout(typingTimerRef.current);
     if (e.target.value.trim()) {
@@ -293,22 +287,17 @@ Let's get started! 🚀`;
     }
   };
 
-  const openChatbot = (markInteracted = true, autoCloseMs = null) => {
+  const openChatbot = () => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
+    }
+    if (autoOpenTimerRef.current) {
+      clearTimeout(autoOpenTimerRef.current);
     }
     setIsChatMounted(true);
     requestAnimationFrame(() => setIsChatOpen(true));
     trackWebsiteChatbotOpened();
-    if (markInteracted) {
-      hasUserInteractedRef.current = true;
-    }
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
-    if (autoCloseMs) {
-      scheduleAutoClose(autoCloseMs);
-    }
+    markOpenedThisSession();
     const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     if (chatHistory.length === 0 && messages.length === 0) {
       initializeChat();
@@ -318,9 +307,6 @@ Let's get started! 🚀`;
   const closeChatbot = () => {
     setIsChatOpen(false);
     trackWebsiteChatbotClosed();
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
     }
@@ -339,6 +325,7 @@ Let's get started! 🚀`;
       console.error("Error resetting chat:", error);
     } finally {
       localStorage.removeItem("chatHistory");
+      setHasUserStartedChat(false);
       initializeChat();
     }
   };
@@ -378,9 +365,12 @@ Let's get started! 🚀`;
                 msg.sender === "user"
                   ? "bg-[#21ABE1] text-white rounded-br-sm shadow-lg"
                   : "bg-gradient-to-br from-[#2a2a2a] to-[#1f1f1f] text-gray-100 rounded-bl-sm shadow-xl border border-gray-700/50"
-              }`}
-              dangerouslySetInnerHTML={{ __html: parseContent(msg.content) }}
-            />
+              } ${msg.isDefault ? "chatbot-welcome-animate" : ""}`}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: parseContent(msg.content) }}
+              />
+            </div>
             <div className="font-montserrat text-xs font-medium text-gray-500 pl-2">
               {formatTimeToAMPM(messageDate)}
             </div>
@@ -429,7 +419,7 @@ Let's get started! 🚀`;
       {/* Background Overlay */}
       {isChatMounted && (
         <div
-          className={`fixed top-0 left-0 w-full h-full bg-black/40 z-[999] transition-opacity duration-300 ${
+          className={`fixed top-0 left-0 w-full h-full bg-black/30 z-[999] transition-opacity duration-300 ${
             isChatOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
           onClick={handleOverlayClick}
@@ -445,9 +435,9 @@ Let's get started! 🚀`;
               : "opacity-0 translate-y-4 scale-[0.98] pointer-events-none"
           }`}
         >
-          <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-gray-800/50">
+          <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-[#21ABE1]/40">
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between pt-3 px-3 md:px-4 md:pt-4 border-b border-gray-800/50 shadow-lg">
+            <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between py-3 px-3 md:px-4 border-b border-gray-800/50 shadow-lg">
               <div className="flex items-center justify-center gap-2">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#21ABE1]/20 to-[#21ABE1]/10 rounded-full flex items-center justify-center border border-[#21ABE1]/30 shadow-lg shadow-[#21ABE1]/20">
                   <img
@@ -464,9 +454,11 @@ Let's get started! 🚀`;
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleResetChat}
-                  className="text-xs font-semibold text-gray-300 hover:text-[#21ABE1] transition-colors"
+                  className="flex items-center justify-center w-8 h-8 rounded-full text-gray-300 hover:text-[#21ABE1] hover:bg-white/5 transition-colors"
+                  aria-label="Reset chat"
+                  title="Reset chat"
                 >
-                  Reset
+                  <RotateCcw className="w-4 h-4" strokeWidth={2.2} />
                 </button>
                 <button
                   onClick={closeChatbot}
@@ -492,6 +484,24 @@ Let's get started! 🚀`;
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {renderMessages()}
+
+                {!isLoading && !hasUserStartedChat && (
+                  <div className="mt-6 grid grid-cols-1 gap-4 chatbot-quick-actions chatbot-quick-animate">
+                    {quickPrompts.map((prompt) => (
+                      <button
+                        key={prompt}
+                        onClick={() => handleQuickPrompt(prompt)}
+                        className="group text-left w-max px-3 py-2 rounded-xl bg-gradient-to-r from-[#131313] to-[#0f172a] text-gray-100 shadow-md shadow-black/20 border border-[#21ABE1]/60 hover:shadow-[#21ABE1]/25 transition-all duration-200 chatbot-quick-item"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="cursor-pointer text-sm font-medium font-montserrat leading-tight">
+                            {prompt}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {/* Loading Animation */}
                 {isLoading && (
