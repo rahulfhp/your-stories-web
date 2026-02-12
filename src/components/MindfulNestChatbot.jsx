@@ -17,47 +17,36 @@ export default function MindfulNestChatbot() {
 
   const chatBodyRef = useRef(null);
   const typingTimerRef = useRef(null);
-  const autoCloseTimerRef = useRef(null);
+  const autoOpenTimerRef = useRef(null);
   const closeTimerRef = useRef(null);
-  const hasUserInteractedRef = useRef(false);
+  const sessionOpenFlagRef = useRef(false);
   const CHAT_ANIMATION_MS = 300;
-  const CHATBOT_AUTOOPEN_KEY = "mindfulnest_chatbot_auto_opened";
+  const CHATBOT_SESSION_OPENED_KEY = "mindfulnest_chatbot_session_opened";
+  const AUTO_OPEN_DELAY_MS = 3200;
 
-  const scheduleAutoClose = (delayMs) => {
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
-    autoCloseTimerRef.current = setTimeout(() => {
-      if (!hasUserInteractedRef.current) {
-        closeChatbot();
+  const hasOpenedThisSession = () => {
+    if (sessionOpenFlagRef.current) return true;
+    if (typeof window === "undefined") return false;
+    try {
+      const opened =
+        sessionStorage.getItem(CHATBOT_SESSION_OPENED_KEY) === "true";
+      if (opened) {
+        sessionOpenFlagRef.current = true;
       }
-    }, delayMs);
+      return opened;
+    } catch (error) {
+      console.error("Error reading chatbot session flag:", error);
+      return sessionOpenFlagRef.current;
+    }
   };
 
-  const getAutoOpenFlag = () => {
+  const markOpenedThisSession = () => {
+    sessionOpenFlagRef.current = true;
+    if (typeof window === "undefined") return;
     try {
-      if (localStorage.getItem(CHATBOT_AUTOOPEN_KEY) === "true") {
-        return true;
-      }
+      sessionStorage.setItem(CHATBOT_SESSION_OPENED_KEY, "true");
     } catch (error) {
-      console.error("Error reading auto-open flag:", error);
-    }
-    if (typeof document !== "undefined") {
-      return document.cookie
-        .split("; ")
-        .some((row) => row.startsWith(`${CHATBOT_AUTOOPEN_KEY}=true`));
-    }
-    return false;
-  };
-
-  const setAutoOpenFlag = () => {
-    try {
-      localStorage.setItem(CHATBOT_AUTOOPEN_KEY, "true");
-    } catch (error) {
-      console.error("Error setting auto-open flag:", error);
-    }
-    if (typeof document !== "undefined") {
-      document.cookie = `${CHATBOT_AUTOOPEN_KEY}=true; Max-Age=31536000; Path=/; SameSite=Lax`;
+      console.error("Error setting chatbot session flag:", error);
     }
   };
 
@@ -65,20 +54,20 @@ export default function MindfulNestChatbot() {
   useEffect(() => {
     initializeChat();
     if (typeof window !== "undefined") {
-      const hasAutoOpened = getAutoOpenFlag();
       const isLanding =
         window.location.pathname === "/" ||
         window.location.pathname === "/test" ||
         window.location.pathname === "/home";
-      if (!hasAutoOpened && isLanding) {
-        setAutoOpenFlag();
-        openChatbot(false, 2500);
+      if (isLanding && !hasOpenedThisSession()) {
+        autoOpenTimerRef.current = window.setTimeout(() => {
+          openChatbot();
+        }, AUTO_OPEN_DELAY_MS);
       }
     }
 
     return () => {
-      if (autoCloseTimerRef.current) {
-        clearTimeout(autoCloseTimerRef.current);
+      if (autoOpenTimerRef.current) {
+        clearTimeout(autoOpenTimerRef.current);
       }
       if (closeTimerRef.current) {
         clearTimeout(closeTimerRef.current);
@@ -209,10 +198,6 @@ Let's get started! 🚀`;
   const handleSendMessage = async () => {
     const userInput = inputValue.trim();
     if (!userInput) return;
-    hasUserInteractedRef.current = true;
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
 
     // Track query submission event with 150-character limit
     const truncated =
@@ -278,12 +263,6 @@ Let's get started! 🚀`;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    if (e.target.value.trim()) {
-      hasUserInteractedRef.current = true;
-      if (autoCloseTimerRef.current) {
-        clearTimeout(autoCloseTimerRef.current);
-      }
-    }
 
     clearTimeout(typingTimerRef.current);
     if (e.target.value.trim()) {
@@ -293,22 +272,17 @@ Let's get started! 🚀`;
     }
   };
 
-  const openChatbot = (markInteracted = true, autoCloseMs = null) => {
+  const openChatbot = () => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
+    }
+    if (autoOpenTimerRef.current) {
+      clearTimeout(autoOpenTimerRef.current);
     }
     setIsChatMounted(true);
     requestAnimationFrame(() => setIsChatOpen(true));
     trackWebsiteChatbotOpened();
-    if (markInteracted) {
-      hasUserInteractedRef.current = true;
-    }
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
-    if (autoCloseMs) {
-      scheduleAutoClose(autoCloseMs);
-    }
+    markOpenedThisSession();
     const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     if (chatHistory.length === 0 && messages.length === 0) {
       initializeChat();
@@ -318,9 +292,6 @@ Let's get started! 🚀`;
   const closeChatbot = () => {
     setIsChatOpen(false);
     trackWebsiteChatbotClosed();
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-    }
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
     }
@@ -429,7 +400,7 @@ Let's get started! 🚀`;
       {/* Background Overlay */}
       {isChatMounted && (
         <div
-          className={`fixed top-0 left-0 w-full h-full bg-black/40 z-[999] transition-opacity duration-300 ${
+          className={`fixed top-0 left-0 w-full h-full bg-black/30 z-[999] transition-opacity duration-300 ${
             isChatOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
           onClick={handleOverlayClick}
@@ -445,7 +416,7 @@ Let's get started! 🚀`;
               : "opacity-0 translate-y-4 scale-[0.98] pointer-events-none"
           }`}
         >
-          <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-gray-800/50">
+          <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-[#21ABE1]/40">
             {/* Header */}
             <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between pt-3 px-3 md:px-4 md:pt-4 border-b border-gray-800/50 shadow-lg">
               <div className="flex items-center justify-center gap-2">
