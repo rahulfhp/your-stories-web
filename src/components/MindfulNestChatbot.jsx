@@ -7,6 +7,7 @@ import {
   trackWebsiteChatbotQuerySubmitted,
   trackWebsiteChatbotTokensUsed,
 } from "@/lib/website-analytics";
+import { RotateCcw } from "lucide-react";
 
 export default function MindfulNestChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -14,6 +15,13 @@ export default function MindfulNestChatbot() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasUserStartedChat, setHasUserStartedChat] = useState(false);
+  const quickPrompts = [
+    "How to reduce my screen time",
+    "Give me a 2-minute breathing break",
+    "Create a 7-day mindful screen detox plan",
+    "How screen time affects my mental health",
+  ];
 
   const chatBodyRef = useRef(null);
   const typingTimerRef = useRef(null);
@@ -104,6 +112,7 @@ Let's get started! 🚀`;
     };
 
     setMessages([defaultMsg, ...recentMessages]);
+    setHasUserStartedChat(recentMessages.length > 0);
   };
 
   const formatTimeToAMPM = (date) => {
@@ -195,9 +204,10 @@ Let's get started! 🚀`;
     localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
   };
 
-  const handleSendMessage = async () => {
-    const userInput = inputValue.trim();
+  const handleSendMessage = async (presetText = null) => {
+    const userInput = (presetText ?? inputValue).trim();
     if (!userInput) return;
+    setHasUserStartedChat(true);
 
     // Track query submission event with 150-character limit
     const truncated =
@@ -261,6 +271,11 @@ Let's get started! 🚀`;
     }
   };
 
+  const handleQuickPrompt = (prompt) => {
+    setInputValue(prompt);
+    handleSendMessage(prompt);
+  };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
 
@@ -310,6 +325,7 @@ Let's get started! 🚀`;
       console.error("Error resetting chat:", error);
     } finally {
       localStorage.removeItem("chatHistory");
+      setHasUserStartedChat(false);
       initializeChat();
     }
   };
@@ -349,9 +365,12 @@ Let's get started! 🚀`;
                 msg.sender === "user"
                   ? "bg-[#21ABE1] text-white rounded-br-sm shadow-lg"
                   : "bg-gradient-to-br from-[#2a2a2a] to-[#1f1f1f] text-gray-100 rounded-bl-sm shadow-xl border border-gray-700/50"
-              }`}
-              dangerouslySetInnerHTML={{ __html: parseContent(msg.content) }}
-            />
+              } ${msg.isDefault ? "chatbot-welcome-animate" : ""}`}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: parseContent(msg.content) }}
+              />
+            </div>
             <div className="font-montserrat text-xs font-medium text-gray-500 pl-2">
               {formatTimeToAMPM(messageDate)}
             </div>
@@ -418,7 +437,7 @@ Let's get started! 🚀`;
         >
           <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] rounded-none md:rounded-[10px] flex flex-col overflow-hidden h-full md:h-auto border border-[#21ABE1]/40">
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between pt-3 px-3 md:px-4 md:pt-4 border-b border-gray-800/50 shadow-lg">
+            <div className="bg-gradient-to-r from-[#1f1f1f] to-[#2a2a2a] flex items-center justify-between py-3 px-3 md:px-4 border-b border-gray-800/50 shadow-lg">
               <div className="flex items-center justify-center gap-2">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#21ABE1]/20 to-[#21ABE1]/10 rounded-full flex items-center justify-center border border-[#21ABE1]/30 shadow-lg shadow-[#21ABE1]/20">
                   <img
@@ -435,9 +454,11 @@ Let's get started! 🚀`;
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleResetChat}
-                  className="text-xs font-semibold text-gray-300 hover:text-[#21ABE1] transition-colors"
+                  className="flex items-center justify-center w-8 h-8 rounded-full text-gray-300 hover:text-[#21ABE1] hover:bg-white/5 transition-colors"
+                  aria-label="Reset chat"
+                  title="Reset chat"
                 >
-                  Reset
+                  <RotateCcw className="w-4 h-4" strokeWidth={2.2} />
                 </button>
                 <button
                   onClick={closeChatbot}
@@ -463,6 +484,24 @@ Let's get started! 🚀`;
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {renderMessages()}
+
+                {!isLoading && !hasUserStartedChat && (
+                  <div className="mt-6 grid grid-cols-1 gap-4 chatbot-quick-actions chatbot-quick-animate">
+                    {quickPrompts.map((prompt) => (
+                      <button
+                        key={prompt}
+                        onClick={() => handleQuickPrompt(prompt)}
+                        className="group text-left w-max px-3 py-2 rounded-xl bg-gradient-to-r from-[#131313] to-[#0f172a] text-gray-100 shadow-md shadow-black/20 border border-[#21ABE1]/60 hover:shadow-[#21ABE1]/25 transition-all duration-200 chatbot-quick-item"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="cursor-pointer text-sm font-medium font-montserrat leading-tight">
+                            {prompt}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {/* Loading Animation */}
                 {isLoading && (
