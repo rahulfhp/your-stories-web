@@ -8,6 +8,7 @@ const Globe3D = () => {
   const containerRef = useRef(null);
   const [tooltipData, setTooltipData] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const pointerInsideRef = useRef(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -200,9 +201,10 @@ const Globe3D = () => {
 
     // Raycasting
     const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+    const mouse = new THREE.Vector2(5, 5); // start offscreen so nothing is intersected
 
-    const onMouseMove = (event) => {
+    const handlePointerMove = (event) => {
+      pointerInsideRef.current = true;
       const rect = container.getBoundingClientRect();
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -210,7 +212,18 @@ const Globe3D = () => {
       setTooltipPos({ x: event.clientX, y: event.clientY });
     };
 
-    container.addEventListener("mousemove", onMouseMove);
+    const handlePointerLeave = () => {
+      pointerInsideRef.current = false;
+      setTooltipData(null);
+      mouse.set(5, 5); // push raycaster off sphere
+      pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+      controls.autoRotate = true;
+      container.style.cursor = "grab";
+    };
+
+    container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointerleave", handlePointerLeave);
+    container.addEventListener("wheel", handlePointerLeave, { passive: true });
 
     // Animation Loop
     let animationId;
@@ -218,23 +231,25 @@ const Globe3D = () => {
       animationId = requestAnimationFrame(animate);
       controls.update();
 
-      // Raycast check
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(pinMeshes);
+      if (pointerInsideRef.current) {
+        // Raycast check only while pointer is inside
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(pinMeshes);
 
-      if (intersects.length > 0) {
-        const intersectedPin = intersects[0].object;
-        setTooltipData(intersectedPin.userData);
-        container.style.cursor = "pointer";
-        // Reset all scales first
-        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
-        intersectedPin.scale.set(1.5, 1.5, 1.5);
-        controls.autoRotate = false; // Pause rotation on hover
-      } else {
-        setTooltipData(null);
-        container.style.cursor = "grab";
-        pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
-        controls.autoRotate = true;
+        if (intersects.length > 0) {
+          const intersectedPin = intersects[0].object;
+          setTooltipData(intersectedPin.userData);
+          container.style.cursor = "pointer";
+          // Reset all scales first
+          pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+          intersectedPin.scale.set(1.5, 1.5, 1.5);
+          controls.autoRotate = false; // Pause rotation on hover
+        } else {
+          setTooltipData(null);
+          container.style.cursor = "grab";
+          pinMeshes.forEach((pin) => pin.scale.set(1, 1, 1));
+          controls.autoRotate = true;
+        }
       }
 
       renderer.render(scene, camera);
@@ -254,7 +269,9 @@ const Globe3D = () => {
     // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("mousemove", onMouseMove);
+      container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerleave", handlePointerLeave);
+      container.removeEventListener("wheel", handlePointerLeave);
       cancelAnimationFrame(animationId);
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
