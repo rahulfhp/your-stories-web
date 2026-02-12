@@ -310,12 +310,14 @@ export default function TrustedBySection() {
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center gap-12 sm:gap-20 md:gap-28 lg:gap-40 z-10 py-8 sm:py-10 lg:py-12">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 md:pt-10 md:pb-32">
             <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
               <RevealOnScroll>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
                   <Globe size={14} />
-                  <span>Reclaiming Digital Lives Globally</span>
+                  <span className="w-max">
+                    Reclaiming Digital Lives Globally
+                  </span>
                 </div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 leading-tight drop-shadow-xl text-white">
                   Trusted by{" "}

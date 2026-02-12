@@ -18,7 +18,7 @@ export default function SectionHeading({
   return (
     <RevealOnScroll
       className={`mb-12 ${
-        align === "center" ? "text-center" : "text-left"
+        align === "center" ? "text-center" : "text-center lg:text-left"
       } max-w-4xl mx-auto`}
     >
       {badge && <Badge className="mb-6">{badge}</Badge>}

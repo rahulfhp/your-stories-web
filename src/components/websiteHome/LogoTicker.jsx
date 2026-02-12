@@ -1,29 +1,30 @@
 export default function LogoTicker() {
+  // Use ISO country codes and fetch flag PNGs to avoid OS-dependent emoji rendering
   const logos = [
-    { key: "inc42", label: "inc42", countryFlag: "🇮🇳" },
-    { key: "dainik_bhasker", label: "dainik_bhasker", countryFlag: "🇮🇳" },
-    { key: "sakal", label: "sakal", countryFlag: "🇮🇳" },
-    { key: "dailyStar", label: "dailyStar", countryFlag: "🇧🇩" },
-    { key: "independent", label: "independent", countryFlag: "🇬🇧" },
-    { key: "dailyhunt", label: "dailyhunt", countryFlag: "🇮🇳" },
-    { key: "lifehack", label: "lifehack", countryFlag: "🇺🇸" },
-    { key: "witty_spark", label: "witty_spark", countryFlag: "🇮🇳" },
-    { key: "tracxn", label: "tracxn", countryFlag: "🇮🇳" },
-    { key: "nerdschalk", label: "nerdschalk", countryFlag: "🇮🇳" },
-    { key: "techarival", label: "techarival", countryFlag: "🇮🇳" },
-    { key: "techConnecto", label: "techConnecto", countryFlag: "🇮🇳" },
-    { key: "techdator", label: "techdator", countryFlag: "🇳🇱" },
-    { key: "newsBytes", label: "newsBytes", countryFlag: "🇮🇳" },
-    { key: "tech_comuters", label: "tech_comuters", countryFlag: "🇮🇳" },
-    { key: "Elcome", label: "Elcome", countryFlag: "🇪🇬" },
-    { key: "android4all", label: "android4all", countryFlag: "🇪🇸" },
-    { key: "cosmo", label: "cosmo", countryFlag: "🇩🇪" },
-    { key: "h2s", label: "h2s", countryFlag: "🇮🇳" },
-    { key: "gt", label: "gt", countryFlag: "🇺🇸" },
-    { key: "geochild", label: "geochild", countryFlag: "🇮🇳" },
-    { key: "rochamama", label: "rochamama", countryFlag: "🇮🇳" },
-    { key: "steemit", label: "steemit", countryFlag: "🇺🇸" },
-    { key: "topbest", label: "topbest", countryFlag: "🇺🇸" },
+    { key: "inc42", label: "inc42", countryCode: "IN" },
+    { key: "dainik_bhasker", label: "dainik_bhasker", countryCode: "IN" },
+    { key: "sakal", label: "sakal", countryCode: "IN" },
+    { key: "dailyStar", label: "dailyStar", countryCode: "BD" },
+    { key: "independent", label: "independent", countryCode: "GB" },
+    { key: "dailyhunt", label: "dailyhunt", countryCode: "IN" },
+    { key: "lifehack", label: "lifehack", countryCode: "US" },
+    { key: "witty_spark", label: "witty_spark", countryCode: "IN" },
+    { key: "tracxn", label: "tracxn", countryCode: "IN" },
+    { key: "nerdschalk", label: "nerdschalk", countryCode: "IN" },
+    { key: "techarival", label: "techarival", countryCode: "IN" },
+    { key: "techConnecto", label: "techConnecto", countryCode: "IN" },
+    { key: "techdator", label: "techdator", countryCode: "NL" },
+    { key: "newsBytes", label: "newsBytes", countryCode: "IN" },
+    { key: "tech_comuters", label: "tech_comuters", countryCode: "IN" },
+    { key: "Elcome", label: "Elcome", countryCode: "EG" },
+    { key: "android4all", label: "android4all", countryCode: "ES" },
+    { key: "cosmo", label: "cosmo", countryCode: "DE" },
+    { key: "h2s", label: "h2s", countryCode: "IN" },
+    { key: "gt", label: "gt", countryCode: "US" },
+    { key: "geochild", label: "geochild", countryCode: "IN" },
+    { key: "rochamama", label: "rochamama", countryCode: "IN" },
+    { key: "steemit", label: "steemit", countryCode: "US" },
+    { key: "topbest", label: "topbest", countryCode: "US" },
   ];
 
   return (
@@ -48,8 +49,14 @@ export default function LogoTicker() {
                   loading="lazy"
                 />
               </div>
-              <span className="absolute text-4xl -bottom-2 -right-4 shadow-sm rounded-full flex items-center justify-center">
-                {logo.countryFlag}
+              <span className="absolute bottom-1 -right-4.5 shadow-sm rounded-full flex items-center justify-center p-1">
+                <img
+                  src={`https://flagcdn.com/w40/${logo.countryCode.toLowerCase()}.png`}
+                  alt={`${logo.countryCode} flag`}
+                  className="w-8 h-6 object-cover rounded-sm"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
               </span>
             </div>
           ))}

@@ -38,12 +38,12 @@ export default function MindefyPromo() {
             </p>
 
             <div className="grid grid-cols-2 gap-6 mb-10">
-              <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
+              <div className="p-4 text-left rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
                 <Rocket className="text-cyan-400 mb-2" />
                 <h4 className="font-bold text-lg text-white">Scalable Tech</h4>
                 <p className="text-sm text-slate-500">Built for millions</p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
+              <div className="p-4 text-left rounded-xl bg-slate-900/50 border border-slate-700 shadow-sm">
                 <Globe className="text-blue-400 mb-2" />
                 <h4 className="font-bold text-lg text-white">Global Reach</h4>
                 <p className="text-sm text-slate-500">25+ Languages Support</p>
