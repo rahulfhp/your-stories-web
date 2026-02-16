@@ -30,7 +30,7 @@ export default function MindfulNestChatbot() {
   const sessionOpenFlagRef = useRef(false);
   const CHAT_ANIMATION_MS = 300;
   const CHATBOT_SESSION_OPENED_KEY = "mindfulnest_chatbot_session_opened";
-  const AUTO_OPEN_DELAY_MS = 3200;
+  const AUTO_OPEN_DELAY_MS = 7500;
 
   const hasOpenedThisSession = () => {
     if (sessionOpenFlagRef.current) return true;
