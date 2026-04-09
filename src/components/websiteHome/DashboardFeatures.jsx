@@ -9,6 +9,7 @@ import {
 import RevealOnScroll from "./RevealOnScroll";
 import SectionHeading from "./SectionHeading";
 import InteractiveFeatureLab from "./InteractiveFeatureLab";
+import MobileFeatureShowcase from "./MobileFeatureShowcase";
 
 const FeatureCard = ({
   icon: Icon,
@@ -121,6 +122,7 @@ export default function DashboardFeatures() {
           />
         </div>
 
+        <MobileFeatureShowcase />
         <InteractiveFeatureLab />
       </div>
     </section>
