@@ -1,7 +1,8 @@
 "use client";
 
-import { Activity, FileText, Layout } from "lucide-react";
+import { Activity, Layout } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
+import Link from "next/link";
 
 const features = [
   {
@@ -12,7 +13,6 @@ const features = [
     image: "/yourhour-website-img/phoneaddiction_dashboard.webp",
     icon: Layout,
     tags: ["Live usage", "Strict mode", "Floating timer"],
-    stat: "2.1h avg time reclaimed",
   },
   {
     id: "levels",
@@ -22,17 +22,6 @@ const features = [
     image: "/yourhour-website-img/phoneaddiction_level.webp",
     icon: Activity,
     tags: ["Trendlines", "Unlock heatmap", "Weekly analysis"],
-    stat: "6 addiction levels",
-  },
-  {
-    id: "reports",
-    title: "Deep Reports & Exports",
-    description:
-      "Download PDF and XLS reports with category breakdowns, peak usage hours, and weekly progress to track improvement and share insights easily.",
-    image: "/yourhour-website-img/phoneaddiction_detailed_reports.webp",
-    icon: FileText,
-    tags: ["PDF export", "Peak hours", "Usage breakdown"],
-    stat: "PDF & XLS Reports",
   },
 ];
 
@@ -94,16 +83,22 @@ export default function MobileAppFeatures() {
                       </span>
                     ))}
                   </div>
-
-                  <div className="inline-block px-5 py-3 rounded-xl bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-slate-900 font-bold">
-                    {feature.stat}
-                  </div>
                 </div>
               </RevealOnScroll>
             </div>
           </section>
         );
       })}
+
+      {/* button */}
+      <div className="text-center">
+        <Link
+          href="/yourhour-features"
+          className="text-center font-semibold font-montserrat text-lg text-[#21ABE1] border border-[#21ABE1] px-8 py-3 rounded-xl hover:bg-[#21ABE1]/10 hover:scale-105 transition-all inline-block"
+        >
+          See All Features
+        </Link>
+      </div>
     </div>
   );
 }
