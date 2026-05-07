@@ -13,6 +13,7 @@ import {
   Sparkles,
   Target,
   Trophy,
+  BookOpen,
 } from "lucide-react";
 
 const PLAYSTORE_URL =
@@ -36,6 +37,15 @@ const featureScreens = [
       "Get visual usage reports with clear comparisons across days and weeks.",
     image: "/yourhour-website-img/phoneaddiction_multiple_reports.webp",
     icon: BarChart3,
+  },
+  {
+    id: "focus",
+    title: "Block Reels",
+    subtitle: "Block Reels & Endless Scrolling",
+    description:
+      "Interrupt unconscious scrolling with smart blocking prompts for Reels, and Shorts. Regain focus, reduce distractions.",
+    image: "/yourhour-website-img/block-reels.webp",
+    icon: ShieldCheck,
   },
   {
     id: "goal-spots",
@@ -73,10 +83,20 @@ const featureScreens = [
   {
     id: "mindful-pause",
     title: "Mindful Pause",
-    subtitle: "Intervene at the Right Time",
-    description: "Pause prompts to reduce unconscious scrolling.",
+    subtitle: "Pause Before You Open Distracting Apps",
+    description:
+      "Interrupt impulsive app usage with customizable mindful pause screens. Track how many times you try to open apps like WhatsApp and choose whether to continue or stay focused.",
     image: "/yourhour-website-img/mindful-pause.webp",
     icon: ShieldCheck,
+  },
+  {
+    id: "your-stories",
+    title: "Your Stories",
+    subtitle: "Share Growth, Struggles & Progress",
+    description:
+      "Read inspiring personal stories from students and individuals overcoming anxiety, distractions, and unhealthy habits. Share your own journey, stay motivated, and grow together through real experiences and mindful change.",
+    image: "/yourhour-website-img/your-stories.webp",
+    icon: BookOpen,
   },
   {
     id: "dark-mode",
@@ -142,16 +162,17 @@ export default function YourHourFeaturesModernPage() {
             </p>
 
             <div className="flex gap-4 mt-8 flex-wrap">
-              <a
+              <Link
                 href={PLAYSTORE_URL}
                 target="_blank"
                 className="bg-[#00BCD4] px-4 py-2.5 rounded-full font-semibold flex items-center gap-2 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
               >
                 Download App
-              </a>
+              </Link>
 
               <Link
-                href="/blogs"
+                href="https://stories.yourhourapp.com/"
+                target="_blank"
                 className="border border-[#00BCD4] text-[#00BCD4] font-semibold px-4 py-2.5 rounded-full hover:shadow-cyan-500/40 hover:scale-105 transition-all"
               >
                 Success Stories
@@ -161,11 +182,11 @@ export default function YourHourFeaturesModernPage() {
 
           <div className="flex justify-center">
             <motion.img
-              src="/yourhour-website-img/phoneaddiction_dashboard.webp"
+              src="/yourhour-website-img/dashboard-hero.webp"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="w-95 rounded-3xl shadow-2xl"
+              className="w-80 shadow-2xl"
             />
           </div>
         </div>
@@ -213,7 +234,7 @@ export default function YourHourFeaturesModernPage() {
         </div>
 
         {/* CONTENT BELOW TABS */}
-        <div className="mt-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="mt-8 max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFeature.image}
@@ -223,10 +244,7 @@ export default function YourHourFeaturesModernPage() {
               transition={{ duration: 0.5 }}
               className="flex justify-center"
             >
-              <img
-                src={activeFeature.image}
-                className="w-90 rounded-3xl shadow-2xl"
-              />
+              <img src={activeFeature.image} className="w-80 shadow-2xl" />
             </motion.div>
           </AnimatePresence>
 
@@ -263,14 +281,14 @@ export default function YourHourFeaturesModernPage() {
           Feature Overview
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
           {featureScreens.map((feature) => (
             <motion.div
               key={feature.id}
               whileHover={{ scale: 1.05 }}
-              className="bg-slate-900 border border-slate-700 rounded-2xl p-6 text-center"
+              className="bg-slate-900 border border-slate-700 rounded-2xl py-4 px-2 text-center"
             >
-              <feature.icon className="mx-auto text-cyan-400 mb-4" />
+              <feature.icon className="mx-auto text-cyan-400 mb-3" />
               <p className="font-semibold">{feature.title}</p>
               <p className="text-xs text-slate-400 mt-2">{feature.subtitle}</p>
             </motion.div>

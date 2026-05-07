@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, Layout } from "lucide-react";
+import { Shield, Layout } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
 import Link from "next/link";
 
@@ -15,40 +15,36 @@ const features = [
     tags: ["Live usage", "Strict mode", "Floating timer"],
   },
   {
-    id: "levels",
-    title: "Addiction Level Meter",
+    id: "focus-mode",
+    title: "Block Reels & Shorts",
     description:
-      "6-level radar from Champion to Addicted with weekly trends and unlock frequency to help users understand their phone addiction level and improve daily habits.",
-    image: "/yourhour-website-img/phoneaddiction_level.webp",
-    icon: Activity,
-    tags: ["Trendlines", "Unlock heatmap", "Weekly analysis"],
+      "Silence endless scrolling by blocking YouTube Shorts, Instagram Reels, and Facebook Reels. YourHour detects short-video sections and instantly shows a focus overlay to help users stay mindful and avoid distractions.",
+    image: "/yourhour-website-img/focus.webp",
+    icon: Shield,
+    tags: ["Reels blocker", "Focus overlay", "Accessibility detection"],
   },
 ];
 
 export default function MobileAppFeatures() {
   return (
-    <div className="mt-16 lg:mt-24 space-y-24">
+    <div className="max-w-7xl mx-auto mt-16 lg:mt-24 space-y-24">
       {features.map((feature, index) => {
         const Icon = feature.icon;
         const isReverse = index % 2 !== 0;
 
         return (
           <section key={feature.id}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
               {/* Image */}
               <RevealOnScroll className={`${isReverse ? "lg:order-2" : ""}`}>
-                <div className="relative rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
-                  <div className="aspect-square py-6 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+                <div className="relative rounded-3xl bg-slate-900 shadow-xl">
+                  <div className="aspect-[1/1.2] py-6 rounded-2xl overflow-hidden bg-slate-950">
                     <img
                       src={feature.image}
                       alt={feature.title}
                       className="w-full h-full object-contain"
                       loading="lazy"
                     />
-                  </div>
-
-                  <div className="absolute top-2 left-2 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full text-xs text-cyan-300">
-                    Mobile UI
                   </div>
                 </div>
               </RevealOnScroll>

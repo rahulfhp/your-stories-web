@@ -47,7 +47,7 @@ export default function FAQsSection() {
   const renderItem = (it, idx) => (
     <li key={idx} className="border-b border-slate-800">
       <button
-        className="w-full text-left py-4 px-4 flex items-center justify-between hover:bg-slate-900 rounded-lg transition-colors"
+        className="w-full text-left py-4 px-4 flex items-center justify-between cursor-pointer hover:bg-slate-900 rounded-lg transition-colors"
         onClick={() => setOpen(open === idx ? null : idx)}
       >
         <span className="text-white font-semibold text-lg">{it.q}</span>
