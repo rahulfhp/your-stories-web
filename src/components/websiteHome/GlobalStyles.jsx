@@ -51,6 +51,28 @@ export default function GlobalStyles() {
     .animate-heart {
       animation: float-heart 2s ease-out infinite;
     }
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float-soft {
+      animation: float-soft 2.8s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .animate-shimmer {
+      background-size: 200% 200%;
+      animation: shimmer 3s linear infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0.2); }
+      50% { box-shadow: 0 0 0 10px rgba(0, 188, 212, 0); }
+    }
+    .animate-pulse-glow {
+      animation: pulse-glow 2.2s ease-in-out infinite;
+    }
     .delay-500 { animation-delay: 500ms; }
     .delay-1000 { animation-delay: 1000ms; }
     

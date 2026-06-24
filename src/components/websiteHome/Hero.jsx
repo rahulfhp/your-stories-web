@@ -1,4 +1,5 @@
 import {
+  Apple,
   Heart,
   Instagram,
   Lock,
@@ -8,6 +9,7 @@ import {
   PlayCircle,
   Send,
   Shield,
+  Sparkles,
   Youtube,
   Zap,
 } from "lucide-react";
@@ -76,12 +78,35 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16">
           <div className="flex-1 text-center lg:text-left">
             <RevealOnScroll>
-              <div className="inline-flex sm:items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-8 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
+              <div className="inline-flex sm:items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wide mb-4 shadow-lg shadow-cyan-900/10 hover:border-cyan-500/50 transition-all group">
                 <Zap
                   size={14}
                   className="text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform"
                 />
                 <span>The Ultimate Digital Wellbeing App Android</span>
+              </div>
+
+              <div className="mb-8 flex flex-col sm:flex-row flex-wrap items-center lg:items-start gap-3">
+                <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-4 py-3 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-transparent animate-shimmer" />
+                  <div className="relative flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border animate-float-soft border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
+                      <Apple size={30} className="text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">
+                        YourHour is coming soon for iPhone
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        A calmer, beautifully designed iOS experience is almost
+                        here.
+                      </p>
+                    </div>
+                    <div className="ml-1 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 animate-float-soft">
+                      <Sparkles size={26} />
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
