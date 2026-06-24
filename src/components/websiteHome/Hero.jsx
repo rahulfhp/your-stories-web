@@ -87,19 +87,19 @@ export default function Hero() {
               </div>
 
               <div className="mb-8 flex flex-col sm:flex-row flex-wrap items-center lg:items-start gap-3">
-                <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-4 py-3 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
+                <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-3 py-3 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-transparent animate-shimmer" />
                   <div className="relative flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border animate-float-soft border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
-                      <Apple size={30} className="text-cyan-400" />
+                      <Apple size={28} className="text-cyan-400" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-white">
-                        YourHour is coming soon for iPhone
+                      <p className="text-base font-semibold text-white mb-1.5">
+                        The wait is almost over. YourHour is coming to iPhone
                       </p>
-                      <p className="text-xs text-slate-400">
-                        A calmer, beautifully designed iOS experience is almost
-                        here.
+                      <p className="text-sm font-medium text-slate-400">
+                        The screen-time companion trusted by millions is coming
+                        to iOS.
                       </p>
                     </div>
                     <div className="ml-1 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 animate-float-soft">

@@ -64,11 +64,20 @@ export default function GlobalStyles() {
     }
     .animate-shimmer {
       background-size: 200% 200%;
-      animation: shimmer 3s linear infinite;
+      animation: shimmer 4s linear infinite;
     }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0.2); }
-      50% { box-shadow: 0 0 0 10px rgba(0, 188, 212, 0); }
+    @keyframes pulse-glow { 
+      0%, 100% {
+        box-shadow:
+          0 0 0 0 rgba(236, 72, 153, 0.20),   /* pink-500 */
+          0 0 30px rgba(236, 72, 153, 0.20);  /* pink-500 */
+      }
+
+      50% {
+        box-shadow:
+          0 0 0 10px rgba(139, 92, 246, 0),
+          0 0 40px rgba(236, 72, 153, 0);
+      }
     }
     .animate-pulse-glow {
       animation: pulse-glow 2.2s ease-in-out infinite;
