@@ -5,21 +5,45 @@ import path from "path";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const votesFilePath = path.join(process.cwd(), "data", "ios-votes.json");
+type VoteStore = { totalVotes: number; users: string[] };
 
-async function readVotes() {
+const votesFilePath = process.env.VOTE_FILE_PATH || path.join("/tmp", "ios-votes.json");
+let memoryStore: VoteStore = { totalVotes: 0, users: [] };
+
+function normalizeVotes(data: unknown): VoteStore {
+  if (!data || typeof data !== "object") {
+    return { totalVotes: 0, users: [] };
+  }
+
+  const record = data as Partial<VoteStore>;
+  const users = Array.isArray(record.users) ? record.users.filter((id): id is string => typeof id === "string") : [];
+
+  return {
+    totalVotes: typeof record.totalVotes === "number" ? record.totalVotes : users.length,
+    users,
+  };
+}
+
+async function readVotes(): Promise<VoteStore> {
   try {
     await fs.mkdir(path.dirname(votesFilePath), { recursive: true });
     const fileContents = await fs.readFile(votesFilePath, "utf8");
-    return JSON.parse(fileContents);
+    const parsed = normalizeVotes(JSON.parse(fileContents));
+    memoryStore = parsed;
+    return parsed;
   } catch (error) {
-    return { totalVotes: 0, users: [] };
+    return memoryStore;
   }
 }
 
-async function writeVotes(data: { totalVotes: number; users: string[] }) {
-  await fs.mkdir(path.dirname(votesFilePath), { recursive: true });
-  await fs.writeFile(votesFilePath, JSON.stringify(data, null, 2), "utf8");
+async function writeVotes(data: VoteStore) {
+  try {
+    await fs.mkdir(path.dirname(votesFilePath), { recursive: true });
+    await fs.writeFile(votesFilePath, JSON.stringify(data, null, 2), "utf8");
+    memoryStore = data;
+  } catch (error) {
+    memoryStore = data;
+  }
 }
 
 export async function GET() {
@@ -28,8 +52,15 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const userId = body?.userId;
+  let body: unknown;
+
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const userId = body && typeof body === "object" && "userId" in body ? (body as { userId?: unknown }).userId : undefined;
 
   if (!userId || typeof userId !== "string") {
     return NextResponse.json({ error: "Missing userId" }, { status: 400 });
