@@ -9,7 +9,6 @@ import {
   PlayCircle,
   Send,
   Shield,
-  ThumbsUp,
   Youtube,
   Zap,
 } from "lucide-react";
@@ -23,6 +22,7 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVoted, setIsVoted] = useState(false);
   const [isVoting, setIsVoting] = useState(false);
+  const [voteBurst, setVoteBurst] = useState(false);
   const [userId, setUserId] = useState("");
 
   const phrases = [
@@ -61,9 +61,17 @@ export default function Hero() {
     loadVotes();
   }, []);
 
+  useEffect(() => {
+    if (!voteBurst) return;
+
+    const timer = window.setTimeout(() => setVoteBurst(false), 800);
+    return () => window.clearTimeout(timer);
+  }, [voteBurst]);
+
   const handleVoteSubmit = async () => {
     if (!userId || isVoting || isVoted) return;
 
+    setVoteBurst(true);
     setIsVoting(true);
 
     try {
@@ -145,7 +153,7 @@ export default function Hero() {
                 <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-4 py-4 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-transparent animate-shimmer" />
                   <div className="relative flex items-center gap-3">
-                    <div className="flex h-12 sm:w-12 max-w-12 w-full items-center justify-center rounded-2xl border animate-float-soft border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
+                    <div className="flex h-12 sm:w-12 max-w-12 w-full items-center justify-center rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
                       <Apple size={28} className="text-cyan-400" />
                     </div>
                     <div>
@@ -158,22 +166,52 @@ export default function Hero() {
                       </p>
                     </div>
                     <div
-                      className={`flex items-center justify-center text-cyan-400 animate-float-soft 
-                      ${isVoted ? "opacity-100" : "opacity-60"} transition-opacity duration-300
-                      `}
+                      className={
+                        "flex items-center justify-center text-cyan-400 animate-float-soft"
+                      }
                     >
-                      {/* Vote Button */}
-                      <button
-                        type="button"
-                        onClick={handleVoteSubmit}
-                        disabled={isVoting || isVoted}
-                        className={`transition-all duration-300
-                          ${!isVoted ? "cursor-pointer" : ""}
-                         ${isVoting ? "opacity-70 cursor-not-allowed" : ""}
-                        `}
-                      >
-                        <ThumbsUp size={30} />
-                      </button>
+                      <div className="relative flex items-center justify-center">
+                        {/* Vote Button */}
+                        <button
+                          type="button"
+                          onClick={handleVoteSubmit}
+                          disabled={isVoting || isVoted}
+                          aria-label="Vote for iPhone support"
+                          className={`relative flex items-center justify-center rounded-full px-2 py-2 shadow-[0_0_18px_rgba(0,188,212,0.25)] transition-all duration-300
+                            ${isVoted ? "bg-cyan-400 border-none" : "bg-slate-950/70 border border-cyan-400/20"} 
+                            ${!isVoted ? "cursor-pointer hover:scale-110 hover:shadow-cyan-400/40" : ""}
+                          
+                            ${voteBurst ? "animate-vote-pop" : ""}
+                          `}
+                        >
+                          <Heart
+                            size={28}
+                            className={`transition-all duration-300 ${
+                              isVoted ? "text-white" : "text-cyan-300"
+                            }`}
+                            fill={isVoted ? "currentColor" : "none"}
+                            strokeWidth={2}
+                          />
+                        </button>
+
+                        {voteBurst && (
+                          <>
+                            <span className="absolute -left-2 -top-3 h-2 w-2 rounded-full bg-cyan-300 animate-vote-particle" />
+                            <span
+                              className="absolute -right-1 -top-2 h-2 w-2 rounded-full bg-white/80 animate-vote-particle"
+                              style={{ animationDelay: "120ms" }}
+                            />
+                            <span
+                              className="absolute -left-3 bottom-0 h-2 w-2 rounded-full bg-[#4DD0E1] animate-vote-particle"
+                              style={{ animationDelay: "220ms" }}
+                            />
+                            <span
+                              className="absolute -right-3 bottom-1 h-2 w-2 rounded-full bg-[#6D5DF6] animate-vote-particle"
+                              style={{ animationDelay: "320ms" }}
+                            />
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -453,8 +491,45 @@ export default function Hero() {
           }
         }
 
+        @keyframes vote-pop {
+          0% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 rgba(34, 211, 238, 0);
+          }
+          45% {
+            transform: scale(1.15);
+            box-shadow: 0 0 24px rgba(34, 211, 238, 0.35);
+          }
+          100% {
+            transform: scale(1);
+            box-shadow: 0 0 18px rgba(34, 211, 238, 0.25);
+          }
+        }
+
+        @keyframes vote-particle {
+          0% {
+            transform: translate3d(0, 0, 0) scale(0.6);
+            opacity: 0;
+          }
+          20% {
+            opacity: 1;
+          }
+          100% {
+            transform: translate3d(0, -20px, 0) scale(1);
+            opacity: 0;
+          }
+        }
+
         .animate-blink {
           animation: blink 0.75s step-end infinite;
+        }
+
+        .animate-vote-pop {
+          animation: vote-pop 0.6s ease-out;
+        }
+
+        .animate-vote-particle {
+          animation: vote-particle 0.7s ease-out forwards;
         }
       `}</style>
     </section>
