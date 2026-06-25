@@ -9,7 +9,7 @@ import {
   PlayCircle,
   Send,
   Shield,
-  Sparkles,
+  ThumbsUp,
   Youtube,
   Zap,
 } from "lucide-react";
@@ -21,6 +21,9 @@ export default function Hero() {
   const [displayText, setDisplayText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isVoted, setIsVoted] = useState(false);
+  const [isVoting, setIsVoting] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const phrases = [
     "Losing control is.",
@@ -28,6 +31,58 @@ export default function Hero() {
     "The dopamine loop is.",
     "Mental clutter is.",
   ];
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const storedUserId = window.localStorage.getItem("yourhour-ios-vote-user");
+    const generatedUserId =
+      storedUserId ||
+      (typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `ios-user-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
+
+    window.localStorage.setItem("yourhour-ios-vote-user", generatedUserId);
+    setUserId(generatedUserId);
+
+    const loadVotes = async () => {
+      try {
+        const response = await fetch("/api/ios-votes");
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const hasVoted = Boolean(data.users?.includes(generatedUserId));
+        setIsVoted(hasVoted);
+      } catch (error) {
+        console.error("Failed to load iPhone vote count", error);
+      }
+    };
+
+    loadVotes();
+  }, []);
+
+  const handleVoteSubmit = async () => {
+    if (!userId || isVoting || isVoted) return;
+
+    setIsVoting(true);
+
+    try {
+      const response = await fetch("/api/ios-votes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+      setIsVoted(Boolean(data.userVoted));
+    } catch (error) {
+      console.error("Failed to update iPhone vote", error);
+    } finally {
+      setIsVoting(false);
+    }
+  };
 
   // Typewriter effect
   useEffect(() => {
@@ -86,11 +141,11 @@ export default function Hero() {
                 <span>The Ultimate Digital Wellbeing App Android</span>
               </div>
 
-              <div className="mb-8 flex flex-col sm:flex-row flex-wrap items-center lg:items-start gap-3">
-                <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-3 py-3 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
+              <div className="mt-3 mb-5 flex flex-col sm:flex-row flex-wrap items-center lg:items-start gap-3">
+                <div className="group relative overflow-hidden rounded-[1.35rem] border border-cyan-400/20 bg-slate-900/70 px-4 py-4 text-left shadow-[0_0_35px_rgba(0,188,212,0.16)] backdrop-blur-xl animate-pulse-glow">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-transparent animate-shimmer" />
                   <div className="relative flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border animate-float-soft border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
+                    <div className="flex h-12 sm:w-12 max-w-12 w-full items-center justify-center rounded-2xl border animate-float-soft border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-slate-900/80">
                       <Apple size={28} className="text-cyan-400" />
                     </div>
                     <div>
@@ -102,8 +157,23 @@ export default function Hero() {
                         to iOS.
                       </p>
                     </div>
-                    <div className="ml-1 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 animate-float-soft">
-                      <Sparkles size={26} />
+                    <div
+                      className={`flex items-center justify-center text-cyan-400 animate-float-soft 
+                      ${isVoted ? "opacity-100" : "opacity-60"} transition-opacity duration-300
+                      `}
+                    >
+                      {/* Vote Button */}
+                      <button
+                        type="button"
+                        onClick={handleVoteSubmit}
+                        disabled={isVoting || isVoted}
+                        className={`transition-all duration-300
+                          ${!isVoted ? "cursor-pointer" : ""}
+                         ${isVoting ? "opacity-70 cursor-not-allowed" : ""}
+                        `}
+                      >
+                        <ThumbsUp size={30} />
+                      </button>
                     </div>
                   </div>
                 </div>
