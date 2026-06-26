@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Apple,
   Heart,
@@ -45,20 +47,11 @@ export default function Hero() {
     window.localStorage.setItem("yourhour-ios-vote-user", generatedUserId);
     setUserId(generatedUserId);
 
-    const loadVotes = async () => {
-      try {
-        const response = await fetch("/api/ios-votes");
-        if (!response.ok) return;
-
-        const data = await response.json();
-        const hasVoted = Boolean(data.users?.includes(generatedUserId));
-        setIsVoted(hasVoted);
-      } catch (error) {
-        console.error("Failed to load iPhone vote count", error);
-      }
-    };
-
-    loadVotes();
+    const hasAlreadyVoted =
+      window.localStorage.getItem("yourhour-ios-vote-status") === "1";
+    if (hasAlreadyVoted) {
+      setIsVoted(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -69,22 +62,26 @@ export default function Hero() {
   }, [voteBurst]);
 
   const handleVoteSubmit = async () => {
-    if (!userId || isVoting || isVoted) return;
+    const storedUserId =
+      userId || window.localStorage.getItem("yourhour-ios-vote-user");
+    if (!storedUserId || isVoting || isVoted) return;
 
     setVoteBurst(true);
     setIsVoting(true);
+    setUserId(storedUserId);
 
     try {
-      const response = await fetch("/api/ios-votes", {
+      const response = await fetch("/api/iphone-votes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId: storedUserId }),
       });
 
       if (!response.ok) return;
 
-      const data = await response.json();
-      setIsVoted(Boolean(data.userVoted));
+      setIsVoted(true);
+      window.localStorage.setItem("yourhour-ios-vote-status", "1");
+      await response.json().catch(() => null);
     } catch (error) {
       console.error("Failed to update iPhone vote", error);
     } finally {
@@ -167,7 +164,7 @@ export default function Hero() {
                     </div>
                     <div
                       className={
-                        "flex items-center justify-center text-cyan-400 animate-float-soft"
+                        "flex items-center justify-center text-cyan-400 animate-float-soft gap-4"
                       }
                     >
                       <div className="relative flex items-center justify-center">
@@ -175,20 +172,17 @@ export default function Hero() {
                         <button
                           type="button"
                           onClick={handleVoteSubmit}
-                          disabled={isVoting || isVoted}
                           aria-label="Vote for iPhone support"
-                          className={`relative flex items-center justify-center rounded-full px-2 py-2 shadow-[0_0_18px_rgba(0,188,212,0.25)] transition-all duration-300
-                            ${isVoted ? "bg-cyan-400 border-none" : "bg-slate-950/70 border border-cyan-400/20"} 
-                            ${!isVoted ? "cursor-pointer hover:scale-110 hover:shadow-cyan-400/40" : ""}
-                          
+                          aria-disabled={isVoting || isVoted}
+                          className={`relative flex items-center justify-center rounded-full px-2 py-2 shadow-[0_0_18px_rgba(0,188,212,0.25)] transition-all duration-300 cursor-pointer
+                            ${isVoted ? "bg-cyan-400 border-none" : "bg-slate-950/70 border border-cyan-400/20 hover:scale-110 hover:shadow-cyan-400/40"}
                             ${voteBurst ? "animate-vote-pop" : ""}
                           `}
                         >
                           <Heart
                             size={28}
-                            className={`transition-all duration-300 ${
-                              isVoted ? "text-white" : "text-cyan-300"
-                            }`}
+                            className={`transition-all duration-300 ${isVoted ? "text-white" : "text-cyan-300"
+                              }`}
                             fill={isVoted ? "currentColor" : "none"}
                             strokeWidth={2}
                           />
@@ -246,14 +240,12 @@ export default function Hero() {
 
                   <button
                     onClick={() => setIsBlocked(!isBlocked)}
-                    className={`relative w-16 h-8 cursor-pointer rounded-full transition-colors duration-300 focus:outline-none ${
-                      isBlocked ? "bg-[#00BCD4]" : "bg-slate-700"
-                    }`}
+                    className={`relative w-16 h-8 cursor-pointer rounded-full transition-colors duration-300 focus:outline-none ${isBlocked ? "bg-[#00BCD4]" : "bg-slate-700"
+                      }`}
                   >
                     <div
-                      className={`absolute top-1 left-1 bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${
-                        isBlocked ? "translate-x-8" : "translate-x-0"
-                      }`}
+                      className={`absolute top-1 left-1 bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${isBlocked ? "translate-x-8" : "translate-x-0"
+                        }`}
                     >
                       {isBlocked ? (
                         <Lock size={14} className="text-[#00BCD4]" />
@@ -283,9 +275,8 @@ export default function Hero() {
                         className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 overflow-hidden"
                       >
                         <img
-                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${
-                            i + 30
-                          }`}
+                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 30
+                            }`}
                           alt="user"
                         />
                       </div>
@@ -308,9 +299,8 @@ export default function Hero() {
                 <div className="w-full h-full bg-black relative overflow-hidden">
                   {/* --- STATE 1: REEL PLAYING SIMULATION --- */}
                   <div
-                    className={`absolute inset-0 transition-opacity duration-500 ${
-                      isBlocked ? "opacity-0 scale-95" : "opacity-100 scale-100"
-                    }`}
+                    className={`absolute inset-0 transition-opacity duration-500 ${isBlocked ? "opacity-0 scale-95" : "opacity-100 scale-100"
+                      }`}
                   >
                     {/* Fake Video Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-60"></div>
@@ -380,11 +370,10 @@ export default function Hero() {
 
                   {/* --- STATE 2: BLOCKED OVERLAY --- */}
                   <div
-                    className={`absolute inset-0 bg-slate-900/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center z-20 transition-all duration-500 transform ${
-                      isBlocked
+                    className={`absolute inset-0 bg-slate-900/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center z-20 transition-all duration-500 transform ${isBlocked
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-full"
-                    }`}
+                      }`}
                   >
                     <div className="w-24 h-24 bg-cyan-900/20 rounded-full flex items-center justify-center mb-6 animate-pulse border border-cyan-500/20">
                       <Shield size={48} className="text-[#00BCD4]" />
@@ -433,11 +422,10 @@ export default function Hero() {
 
               {/* Floating Elements hooking specific features */}
               <div
-                className={`absolute top-[30%] -left-4 md:-left-12 z-20 animate-float transition-all duration-500 ${
-                  isBlocked
+                className={`absolute top-[30%] -left-4 md:-left-12 z-20 animate-float transition-all duration-500 ${isBlocked
                     ? "opacity-0 scale-95 pointer-events-none"
                     : "opacity-100 scale-100"
-                }`}
+                  }`}
                 style={{ animation: "float 6s ease-in-out infinite" }}
               >
                 <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform -rotate-6 hover:rotate-0 transition-transform">
@@ -454,11 +442,10 @@ export default function Hero() {
               </div>
 
               <div
-                className={`absolute bottom-[20%] -right-4 md:-right-12 z-20 animate-float transition-all duration-500 ${
-                  isBlocked
+                className={`absolute bottom-[20%] -right-4 md:-right-12 z-20 animate-float transition-all duration-500 ${isBlocked
                     ? "opacity-0 scale-95 pointer-events-none"
                     : "opacity-100 scale-100"
-                }`}
+                  }`}
                 style={{ animation: "float 5s ease-in-out infinite 1s" }}
               >
                 <div className="bg-slate-800/90 backdrop-blur-xl border border-slate-700 p-4 rounded-2xl shadow-xl shadow-black/40 flex items-center gap-3 transform rotate-6 hover:rotate-0 transition-transform">
