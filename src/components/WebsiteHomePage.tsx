@@ -94,7 +94,7 @@ export default function WebsiteHomePage() {
       <MindefyPromo />
       <BlogSection />
       <FAQsSection />
-      <MindfulNestChatbot />
+      {/* <MindfulNestChatbot /> */}
       {/* Scroll to Top Button */}
       {isSticky && (
         <button
