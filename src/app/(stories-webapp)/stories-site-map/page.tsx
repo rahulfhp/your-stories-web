@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const appPages = [
-  { label: "Home", href: "/" },
   { label: "Search", href: "/search" },
   { label: "Write", href: "/write" },
   { label: "Bookmarked", href: "/bookmarked" },
