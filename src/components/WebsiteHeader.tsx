@@ -76,7 +76,7 @@ export default function WebsiteHeader() {
                 iPhone App
               </Link>
               <Link
-                href="/tv"
+                href="/yourhour-tv"
                 className="hover:text-[#00BCD4] transition-colors"
               >
                 Android TV
@@ -196,7 +196,7 @@ export default function WebsiteHeader() {
                     iPhone App
                   </Link>
                   <Link
-                    href="/tv"
+                    href="/yourhour-tv"
                     className="hover:text-[#00BCD4] transition-colors py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

@@ -33,7 +33,7 @@ const platformCards = [
     ],
     button: {
       label: "Explore Android TV",
-      href: "/tv",
+      href: "/yourhour-tv",
       variant: "primary",
     },
   },
