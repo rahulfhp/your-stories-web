@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const websitePages = [
-  { label: "Home", href: "/" },
   { label: "Blogs", href: "/blogs" },
   { label: "FAQs", href: "/faqs" },
   { label: "Privacy Policy", href: "/privacy-policy" },

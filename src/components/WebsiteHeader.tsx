@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { trackWebsiteHeaderStoriesLogoClicked } from "@/lib/website-analytics";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -32,12 +31,12 @@ export default function WebsiteHeader() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-      <div className="relative pt-3">
-        <nav className="relative container w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 rounded-2xl">
+      <div className="relative pt-2">
+        <nav className="relative container w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-3 rounded-2xl">
           <div className="absolute inset-0 bg-slate-500/50 backdrop-blur-xl border border-slate-800/50 rounded-2xl shadow-xl shadow-black/40"></div>
 
           {/* Desktop Layout */}
-          <div className="relative hidden lg:grid lg:grid-cols-3 items-center gap-4">
+          <div className="relative hidden lg:flex items-center justify-between gap-2">
             {/* Left: YourHour Logo */}
             <div className="flex items-center justify-start">
               <Link
@@ -49,15 +48,13 @@ export default function WebsiteHeader() {
                   src="/yourhour-website-img/YourHourApp-logo.svg"
                   alt="YourHour"
                   className="h-15 w-auto"
+                  loading="lazy"
                 />
               </Link>
             </div>
 
             {/* Center: Navigation Links */}
             <div className="flex items-center justify-center gap-6 text-base font-semibold text-slate-300">
-              <Link href="/" className="hover:text-[#00BCD4] transition-colors">
-                Home
-              </Link>
               <button
                 type="button"
                 onClick={handleScrollToMindefy}
@@ -65,13 +62,25 @@ export default function WebsiteHeader() {
               >
                 About Us
               </button>
-              <button
-                type="button"
-                onClick={handleScrollToAIDetoxCoach}
-                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
+
+              <Link
+                href="/yourhour-features"
+                className="hover:text-[#00BCD4] transition-colors"
               >
-                AI Coach
-              </button>
+                Android App
+              </Link>
+              <Link
+                href="/#platforms"
+                className="hover:text-[#00BCD4] transition-colors"
+              >
+                iPhone App
+              </Link>
+              <Link
+                href="/yourhour-tv"
+                className="hover:text-[#00BCD4] transition-colors"
+              >
+                Android TV
+              </Link>
               <Link
                 href="/blogs"
                 className="hover:text-[#00BCD4] transition-colors"
@@ -81,101 +90,40 @@ export default function WebsiteHeader() {
             </div>
 
             {/* Right: YourStories Logo & Get App Button */}
-            <div className="flex items-center justify-end gap-6">
+            <div className="flex items-center justify-end gap-5">
               <a
-                href="https://stories.yourhourapp.com/"
+                href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 hover:opacity-80 transition-opacity"
-                onClick={() => trackWebsiteHeaderStoriesLogoClicked()}
               >
                 <img
-                  src="/yourhour-website-img/stories-logo.svg"
+                  src="/yourhour-website-img/play-store.png"
                   alt="YourStories"
-                  className="h-13 w-auto brightness-0 invert"
+                  loading="lazy"
+                  width={120}
+                  height={40}
+                  className="h-15 w-auto scale-110"
                 />
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
+                href="https://apps.apple.com/in/app/yourhour/id6784166547"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-2.5 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all whitespace-nowrap"
-              >
-                Free Download
-              </a>
-            </div>
-          </div>
-
-          {/* Tablet Layout (md to lg) */}
-          <div className="relative hidden md:flex lg:hidden items-center justify-between">
-            {/* Left: YourHour Logo */}
-            <Link
-              href="/"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 hover:opacity-80 transition-opacity"
-            >
-              <img
-                src="/yourhour-website-img/YourHourApp-logo.svg"
-                alt="YourHour"
-                className="h-10 w-auto scale-110"
-              />
-            </Link>
-
-            {/* Center: Navigation */}
-            <div className="flex items-center gap-4 text-sm font-semibold text-slate-300">
-              <Link href="/" className="hover:text-[#00BCD4] transition-colors">
-                Home
-              </Link>
-              <button
-                type="button"
-                onClick={handleScrollToMindefy}
-                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
-              >
-                About Us
-              </button>
-              <button
-                type="button"
-                onClick={handleScrollToAIDetoxCoach}
-                className="hover:text-[#00BCD4] transition-colors cursor-pointer"
-              >
-                AI Coach
-              </button>
-              <Link
-                href="/blogs"
-                className="hover:text-[#00BCD4] transition-colors"
-              >
-                Blogs
-              </Link>
-            </div>
-
-            {/* Right: YourStories & Get App */}
-            <div className="flex items-center gap-3">
-              <a
-                href="https://stories.yourhourapp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 hover:opacity-80 transition-opacity"
-                onClick={() => trackWebsiteHeaderStoriesLogoClicked()}
               >
                 <img
-                  src="/yourhour-website-img/stories-logo.svg"
+                  src="/yourhour-website-img/app-store.png"
                   alt="YourStories"
-                  className="h-10 w-auto scale-105 brightness-0 invert"
+                  loading="lazy"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto scale-110"
                 />
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all whitespace-nowrap"
-              >
-                Free Download
               </a>
             </div>
           </div>
 
           {/* Mobile Layout */}
-          <div className="relative flex md:hidden items-center justify-between">
+          <div className="relative flex lg:hidden items-center justify-between">
             {/* YourHour Logo */}
             <Link
               href="/"
@@ -192,7 +140,7 @@ export default function WebsiteHeader() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-300 hover:text-[#00BCD4] transition-colors"
+              className="p-2 text-slate-300 cursor-pointer hover:text-[#00BCD4] transition-colors"
               aria-label="Toggle menu"
             >
               <svg
@@ -222,17 +170,10 @@ export default function WebsiteHeader() {
 
           {/* Mobile Menu Dropdown */}
           {isMobileMenuOpen && (
-            <div className="relative md:hidden mt-2 border-t border-slate-700">
+            <div className="relative lg:hidden mt-2 border-t border-slate-700">
               <div className="flex flex-col gap-4">
                 {/* Navigation Links */}
                 <div className="flex flex-col gap-3 text-sm font-semibold text-slate-300">
-                  <Link
-                    href="/"
-                    className="hover:text-[#00BCD4] transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Home
-                  </Link>
                   <button
                     type="button"
                     onClick={handleScrollToMindefy}
@@ -240,13 +181,27 @@ export default function WebsiteHeader() {
                   >
                     About Us
                   </button>
-                  <button
-                    type="button"
-                    onClick={handleScrollToAIDetoxCoach}
-                    className="hover:text-[#00BCD4] transition-colors py-2 text-left cursor-pointer"
+                  <Link
+                    href="/yourhour-features"
+                    className="hover:text-[#00BCD4] transition-colors py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    AI Coach
-                  </button>
+                    Android App
+                  </Link>
+                  <Link
+                    href="/#platforms"
+                    className="hover:text-[#00BCD4] transition-colors py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    iPhone App
+                  </Link>
+                  <Link
+                    href="/yourhour-tv"
+                    className="hover:text-[#00BCD4] transition-colors py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Android TV
+                  </Link>
                   <Link
                     href="/blogs"
                     className="hover:text-[#00BCD4] transition-colors py-2"
@@ -259,29 +214,32 @@ export default function WebsiteHeader() {
                 {/* YourStories Logo & Get App Button */}
                 <div className="flex flex-col gap-4 pt-3 border-t border-slate-700">
                   <a
-                    href="https://stories.yourhourapp.com/"
+                    href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                    onClick={() => {
-                      trackWebsiteHeaderStoriesLogoClicked();
-                      setIsMobileMenuOpen(false);
-                    }}
                   >
                     <img
-                      src="/yourhour-website-img/stories-logo.svg"
+                      src="/yourhour-website-img/play-store.png"
                       alt="YourStories"
-                      className="h-10 w-auto scale-110 brightness-0 invert"
+                      loading="lazy"
+                      width={120}
+                      height={40}
+                      className="h-14 w-auto scale-110"
                     />
                   </a>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
+                    href="https://apps.apple.com/in/app/yourhour/id6784166547"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Free Download
+                    <img
+                      src="/yourhour-website-img/app-store.png"
+                      alt="YourStories"
+                      loading="lazy"
+                      width={120}
+                      height={40}
+                      className="ml-2 h-11 w-auto scale-110"
+                    />
                   </a>
                 </div>
               </div>
