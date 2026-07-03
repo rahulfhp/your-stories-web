@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function WebsiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPlatformsOpen, setIsPlatformsOpen] = useState(false);
   const router = useRouter();
 
   const handleScrollToMindefy = () => {
@@ -64,6 +65,73 @@ export default function WebsiteHeader() {
                 className="hover:text-[#00BCD4] transition-colors cursor-pointer"
               >
                 About Us
+              </button>
+              <button
+                type="button"
+                onMouseEnter={() => setIsPlatformsOpen(true)}
+                onMouseLeave={() => setIsPlatformsOpen(false)}
+                className="relative hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                Platforms
+                <div
+                  className={`absolute left-1/2 top-full z-50 mt-3 w-64 -translate-x-1/2 rounded-[1.75rem] border border-slate-700 bg-slate-950/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl transition-all duration-200 ${
+                    isPlatformsOpen ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"
+                  }`}
+                  onMouseEnter={() => setIsPlatformsOpen(true)}
+                  onMouseLeave={() => setIsPlatformsOpen(false)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPlatformsOpen(false);
+                      setIsMobileMenuOpen(false);
+                      router.push("/#platforms");
+                    }}
+                    className="flex items-center gap-3 w-full rounded-2xl px-4 py-3 text-left text-slate-100 hover:bg-slate-800 transition"
+                  >
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-3xl bg-[#00BCD4]/10 text-[#00BCD4]">
+                      A
+                    </span>
+                    <div>
+                      <div className="font-semibold">Android App</div>
+                      <div className="text-sm text-slate-400">Mobile detox on the go</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPlatformsOpen(false);
+                      setIsMobileMenuOpen(false);
+                      router.push("/tv");
+                    }}
+                    className="flex items-center gap-3 w-full rounded-2xl px-4 py-3 text-left text-slate-100 hover:bg-slate-800 transition mt-3"
+                  >
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-3xl bg-[#4DD0E1]/10 text-[#4DD0E1]">
+                      TV
+                    </span>
+                    <div>
+                      <div className="font-semibold">Android TV</div>
+                      <div className="text-sm text-slate-400">Living room control</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPlatformsOpen(false);
+                      setIsMobileMenuOpen(false);
+                      router.push("/#platforms");
+                    }}
+                    className="flex items-center gap-3 w-full rounded-2xl px-4 py-3 text-left text-slate-100 hover:bg-slate-800 transition mt-3"
+                  >
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-3xl bg-slate-700 text-slate-200">
+                      
+                    </span>
+                    <div>
+                      <div className="font-semibold">iOS App</div>
+                      <div className="text-sm text-slate-400">Coming soon</div>
+                    </div>
+                  </button>
+                </div>
               </button>
               <button
                 type="button"
@@ -254,6 +322,38 @@ export default function WebsiteHeader() {
                   >
                     Blogs
                   </Link>
+                </div>
+                <div className="flex flex-col gap-3 pt-3 border-t border-slate-700">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      router.push("/#platforms");
+                    }}
+                    className="hover:text-[#00BCD4] transition-colors py-2 text-left"
+                  >
+                    Android App
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      router.push("/tv");
+                    }}
+                    className="hover:text-[#00BCD4] transition-colors py-2 text-left"
+                  >
+                    Android TV
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      router.push("/#platforms");
+                    }}
+                    className="hover:text-[#00BCD4] transition-colors py-2 text-left"
+                  >
+                    iOS App
+                  </button>
                 </div>
 
                 {/* YourStories Logo & Get App Button */}

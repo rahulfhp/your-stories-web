@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import GlobalStyles from "./websiteHome/GlobalStyles";
 import Hero from "./websiteHome/Hero";
 import LogoTicker from "./websiteHome/LogoTicker";
+import PlatformSection from "./websiteHome/PlatformSection";
 
 const TrustedBySection = dynamic(() => import("./websiteHome/Globe3D"), {
   ssr: false,
@@ -85,6 +86,7 @@ export default function WebsiteHomePage() {
       <Hero />
       <LogoTicker />
       <TrustedBySection />
+      <PlatformSection />
       <DashboardFeatures />
       <AIDetoxCoachSection />
       <AddictionScale />
