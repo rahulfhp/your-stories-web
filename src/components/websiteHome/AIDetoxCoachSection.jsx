@@ -79,7 +79,7 @@ export default function AIDetoxCoachSection() {
       <div className="container mx-auto px-4 relative z-10 max-w-4xl">
         <div className="text-center mb-12">
           <RevealOnScroll>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6 border border-slate-800/50 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full border border-cyan-600 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm">
               <Sparkles size={16} />
               <span>AI DETOX COACH</span>
             </div>

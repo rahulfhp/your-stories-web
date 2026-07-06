@@ -116,14 +116,38 @@ export default function WebsiteFooter() {
                 </a>
               ))}
             </div>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe&hl=en_IN&gl=US"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-[#4DD0E1] to-[#00BCD4] text-white font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all"
-            >
-              Download the App
-            </a>
+            {/* platforms Logo & Get App Button */}
+            <div className="flex flex-col md:flex-row gap-4 mt-6">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/yourhour-website-img/play-store.png"
+                  alt="YourStories"
+                  loading="lazy"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto scale-110"
+                />
+              </a>
+              <a
+                href="https://apps.apple.com/in/app/yourhour/id6784166547"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2.5"
+              >
+                <img
+                  src="/yourhour-website-img/app-store.png"
+                  alt="YourStories"
+                  loading="lazy"
+                  width={120}
+                  height={40}
+                  className="ml-2 h-11 w-auto scale-110"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Main Footer Content */}

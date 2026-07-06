@@ -73,7 +73,7 @@ export default function DashboardFeatures() {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <SectionHeading
           badge="Powerful Features"
-          title="THE AWARENESS LAB"
+          title="The Awareness Lab"
           subtitle='Encourage high "time on page" through interactive demos.'
         />
 

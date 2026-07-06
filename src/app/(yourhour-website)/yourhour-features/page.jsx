@@ -145,7 +145,7 @@ export default function YourHourFeaturesModernPage() {
       <section className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 font-semibold border border-[#00BCD4] px-2 py-2 rounded-full text-[#00BCD4] mb-6">
+            <div className="inline-flex items-center gap-2 font-semibold border border-[#00BCD4] px-4 py-2 rounded-full text-[#00BCD4] mb-6">
               <Sparkles className="w-4 h-4" /> YourHour Mobile Features
             </div>
 
@@ -165,7 +165,7 @@ export default function YourHourFeaturesModernPage() {
               <Link
                 href={PLAYSTORE_URL}
                 target="_blank"
-                className="bg-[#00BCD4] px-4 py-2.5 rounded-full font-semibold flex items-center gap-2 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
+                className="bg-[#00BCD4] px-4 py-2 rounded-full font-semibold flex items-center gap-2 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
               >
                 Download App
               </Link>
@@ -173,7 +173,7 @@ export default function YourHourFeaturesModernPage() {
               <Link
                 href="https://stories.yourhourapp.com/"
                 target="_blank"
-                className="border border-[#00BCD4] text-[#00BCD4] font-semibold px-4 py-2.5 rounded-full hover:shadow-cyan-500/40 hover:scale-105 transition-all"
+                className="border border-[#00BCD4] text-[#00BCD4] font-semibold px-4 py-2 rounded-full hover:shadow-cyan-500/40 hover:scale-105 transition-all"
               >
                 Success Stories
               </Link>
@@ -299,7 +299,7 @@ export default function YourHourFeaturesModernPage() {
       {/* CTA */}
       <section className="container mx-auto max-w-4xl px-4 pb-8 text-center">
         <h3 className="text-3xl font-bold">
-          Start your digital wellbeing journey today
+          Start Your Digital Wellbeing Journey Today
         </h3>
 
         <p className="text-slate-300 mt-4">

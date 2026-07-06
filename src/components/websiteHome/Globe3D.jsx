@@ -21,7 +21,7 @@ const Globe3D = () => {
       45,
       container.clientWidth / container.clientHeight,
       0.1,
-      1000
+      1000,
     );
     camera.position.z = 2.5;
 
@@ -327,10 +327,10 @@ export default function TrustedBySection() {
           <Globe3D />
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 md:pt-10 md:pb-32">
+          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-between z-10 pt-2 md:pt-10 md:pb-32">
             <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
               <RevealOnScroll>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 border border-slate-800/50 backdrop-blur-sm">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 rounded-full border border-cyan-600 text-cyan-400 font-bold uppercase text-xs tracking-wider mb-8 backdrop-blur-sm">
                   <Globe size={14} />
                   <span className="w-max">
                     Reclaiming Digital Lives Globally

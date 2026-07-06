@@ -1,20 +1,21 @@
 "use client";
 
+import SectionHeading from "@/components/websiteHome/SectionHeading";
+import { Lock, TimerIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect } from "react";
 
 const sections = [
   {
     step: "01. The Setup",
-    title: "Set healthy boundaries.",
+    title: "Set Healthy Boundaries.",
     description:
       "From your phone or directly on the TV, assign a daily limit to highly addictive apps like YouTube or Netflix. Let's say, 45 minutes.",
     image: "/yourhour-website-img/tv-usage.webp",
   },
   {
     step: "02. The Intervention",
-    title: "Unbreakable limits.",
+    title: "Unbreakable Limits.",
     description:
       "When the 45 minutes are up, the app doesn't just warn them. It instantly overlays the screen. Auto-play is stopped dead in its tracks. The TV is securely locked.",
     image: "/yourhour-website-img/tv-pin.webp",
@@ -76,11 +77,11 @@ export default function TVPlatformPage() {
       <section className="relative pt-28 pb-20">
         <div className="mx-auto flex max-w-7xl flex-col items-center px-6 text-center">
           <div className="mb-16 max-w-4xl">
-            <h1 className="text-5xl font-extrabold leading-tight text-white sm:text-6xl md:text-7xl">
-              Modern Parenting for
+            <h1 className="text-5xl font-extrabold leading-tight text-white sm:text-6xl">
+              Modern Parenting For
               <br />
               <span className="bg-gradient-to-r from-[#00F0FF] to-[#00D0FF] bg-clip-text text-transparent">
-                the Big Screen.
+                The Big Screen.
               </span>
             </h1>
             <p className="mt-6 text-lg text-slate-400 sm:text-xl">
@@ -113,20 +114,14 @@ export default function TVPlatformPage() {
       </section>
 
       <section className="relative overflow-hidden bg-[#050611] py-16">
-        <div className="mx-auto max-w-7xl px-6 text-center">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 text-center">
           <div className="mb-24 reveal opacity-0 translate-y-6 transition-all duration-700">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300 bg-[#0f172a]/80 px-4 py-2 text-xs uppercase tracking-[0.35em] text-cyan-300">
-              See It In Action
-            </div>
-            <h2 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
-              The end of
-              <br />
-              screen time arguments.
-            </h2>
-            <p className="mt-6 text-lg text-slate-400 max-w-3xl mx-auto leading-8">
-              Watch how YourHour seamlessly intercepts infinite watching and
-              puts the control back in your hands, without the yelling.
-            </p>
+            <SectionHeading
+              badge="See It In Action"
+              title="The End Of Screen Time Arguments"
+              subtitle="Watch how YourHour seamlessly intercepts infinite watching and
+              puts the control back in your hands, without the yelling."
+            />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -144,7 +139,7 @@ export default function TVPlatformPage() {
                       {item.step}
                     </p>
 
-                    <h2 className="text-4xl font-bold text-white mb-5">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
                       {item.title}
                     </h2>
 
@@ -178,11 +173,11 @@ export default function TVPlatformPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-20 lg:grid-cols-2 items-center">
             <div className="reveal opacity-0 translate-y-6 transition-all duration-700">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-xs uppercase tracking-[0.35em] text-red-300">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-xs uppercase tracking-widest text-red-300">
                 Unbreakable Security
               </div>
               <h2 className="text-4xl font-extrabold text-white md:text-5xl mb-6">
-                Absolute peace of mind.
+                Absolute Peace Of Mind.
               </h2>
               <p className="mb-8 text-lg leading-relaxed text-slate-400">
                 The living room TV is the hardest screen to monitor. We've built
@@ -195,45 +190,17 @@ export default function TVPlatformPage() {
                     title: "Automated App Locking",
                     description:
                       "Set daily limits for specific apps. Once the limit is hit, a full-screen lock overlay appears instantly. Only the parent's PIN can bypass it.",
-                    icon: (
-                      <svg
-                        className="h-6 w-6 text-[#00F0FF]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                        />
-                      </svg>
-                    ),
+                    icon: <Lock className="text-[#00F0FF]" />,
                   },
                   {
                     title: "Temporary Extensions",
                     description:
                       "Kids need 5 more minutes? Securely grant temporary unlocks for 5 mins, 15 mins, or 1 hour.",
-                    icon: (
-                      <svg
-                        className="h-6 w-6 text-[#00F0FF]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    ),
+                    icon: <TimerIcon className="text-[#00F0FF]" />,
                   },
                 ].map((item) => (
                   <div key={item.title} className="flex gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-center h-12 px-3 rounded-2xl bg-white/5 border border-white/10">
                       {item.icon}
                     </div>
                     <div>
@@ -300,7 +267,7 @@ export default function TVPlatformPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center reveal opacity-0 translate-y-6 transition-all duration-700">
             <h2 className="text-4xl font-extrabold text-white md:text-5xl mb-4">
-              Seamless Setup. Total Control.
+              Seamless Setup & Total Control
             </h2>
             <p className="text-lg leading-8 text-slate-400 max-w-2xl mx-auto">
               Follow our guided TV onboarding to enable essential permissions
@@ -328,17 +295,13 @@ export default function TVPlatformPage() {
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16 reveal opacity-0 translate-y-6 transition-all duration-700">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#00F0FF]/20 bg-[#00F0FF]/10 px-3 py-1 text-xs uppercase tracking-[0.35em] text-[#00F0FF]">
-              Premium Ecosystem
-            </div>
-            <h2 className="text-4xl font-extrabold text-white md:text-5xl mb-6">
-              Control from your pocket.
-            </h2>
-            <p className="mx-auto max-w-3xl text-xl leading-8 text-slate-400">
-              Pair the TV with your YourHour mobile app via a quick QR code.
+            <SectionHeading
+              badge="Premium Ecosystem"
+              title="Control From Your Pocket"
+              subtitle="Pair the TV with your YourHour mobile app via a quick QR code.
               Follow these simple steps to manage your living room remotely in
-              real-time.
-            </p>
+              real-time."
+            />
           </div>
           <div className="reveal rounded-[2rem] border border-white/10 bg-[#0b111a] p-8 shadow-2xl shadow-cyan-900/20 transition-all duration-700">
             <h3 className="text-center text-2xl font-bold text-white mb-8">
