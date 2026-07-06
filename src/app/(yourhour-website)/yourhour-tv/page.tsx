@@ -1,7 +1,16 @@
 "use client";
 
 import SectionHeading from "@/components/websiteHome/SectionHeading";
-import { Lock, TimerIcon } from "lucide-react";
+import {
+  Lock,
+  TimerIcon,
+  BarChart3,
+  ShieldCheck,
+  Globe,
+  Tv,
+  ThumbsUp,
+  Bell,
+} from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -139,7 +148,7 @@ export default function TVPlatformPage() {
                       {item.step}
                     </p>
 
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
+                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-5">
                       {item.title}
                     </h2>
 
@@ -216,7 +225,7 @@ export default function TVPlatformPage() {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b101c] p-10 shadow-2xl shadow-cyan-900/10 reveal opacity-0 translate-y-6 transition-all duration-700">
-              <div className="absolute inset-0 rounded-[2rem] bg-red-500/5 blur-3xl" />
+              <div className="absolute inset-0 rounded-[2rem] bg-red-500/5 blur-2xl" />
               <div className="relative z-10 flex min-h-[24rem] flex-col items-center justify-center">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-500/20 text-red-500 shadow-[0_0_30px_rgba(239,68,68,0.3)]">
                   <svg
@@ -314,6 +323,181 @@ export default function TVPlatformPage() {
                 fill
                 className="object-contain"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-[#020613] border-t border-white/5">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-16 reveal translate-y-6 transition-all duration-700">
+            <SectionHeading
+              badge="The Complete Toolkit"
+              title="Engineered For The Living Room"
+              subtitle="We took the comprehensive tracking engine of YourHour and
+              meticulously re-architected it for Android TV, ensuring absolute
+              reliability and deep insights."
+            />
+          </div>
+
+          <div className="grid grid-cols-12 gap-6">
+            {/* Analytics */}
+            <div className="relative col-span-12 lg:col-span-6 lg:row-span-2 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-8">
+              <div className="absolute right-[-80px] top-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-[100px]" />
+
+              <div className="relative z-10">
+                <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-500/20 bg-cyan-500/10">
+                  <BarChart3 className="h-7 w-7 text-cyan-400" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Deep Usage Analytics
+                </h3>
+
+                <p className="max-w-md text-slate-400 leading-7">
+                  Go beyond simple timers. View detailed daily and weekly
+                  summaries, identify the most visited apps, and drill down into
+                  specific app usage histories directly on your TV.
+                </p>
+
+                <div className="mt-16 rounded-2xl border border-white/10 bg-black/20 p-6">
+                  <div className="mt-3 mx-[38%] text-xs font-semibold tracking-wider text-cyan-400">
+                    PEAK
+                  </div>
+                  <div className="flex h-36 items-end gap-3">
+                    {[25, 45, 82, 52, 35, 58].map((height, index) => (
+                      <div
+                        key={index}
+                        style={{ height: `${height}%` }}
+                        className={`flex-1 rounded-t-md ${
+                          index === 2
+                            ? "bg-cyan-400 shadow-[0_0_40px_rgba(0,240,255,0.6)]"
+                            : "bg-slate-700/70"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Reliability */}
+            <div className="relative col-span-12 lg:col-span-6 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-8">
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    Bulletproof Reliability
+                  </h3>
+
+                  <p className="text-slate-400 leading-7 max-w-lg">
+                    Tech-savvy kids can't bypass this. We use a multi-layer
+                    foreground service with WorkManager fallback and a boot
+                    receiver to ensure tracking automatically restarts even if
+                    the TV reboots.
+                  </p>
+                </div>
+
+                <div className="hidden md:flex h-13 w-14 items-center justify-center rounded-full border border-blue-600/30 bg-blue-500/10">
+                  <Lock className="text-blue-600" />
+                </div>
+              </div>
+            </div>
+
+            {/* Privacy */}
+            <div className="relative col-span-12 md:col-span-6 lg:col-span-3 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-6">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                <ShieldCheck className="h-6 w-6 text-emerald-400" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Bank-Grade Privacy
+              </h3>
+
+              <p className="text-sm leading-7 text-slate-400">
+                Your Parental PIN is encrypted using SHA-256. Usage data is
+                stored locally via Room DB and only synced via secure cloud
+                workers if Premium is active.
+              </p>
+            </div>
+
+            {/* Language */}
+            <div className="relative col-span-12 md:col-span-6 lg:col-span-3 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-6">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                <Globe className="h-6 w-6 text-cyan-400" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Speaks your language
+              </h3>
+
+              <p className="text-sm leading-7 text-slate-400 mb-6">
+                Full native support for global families.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                {["EN", "ES", "FR", "DE"].map((lang) => (
+                  <span
+                    key={lang}
+                    className="rounded-md border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400"
+                  >
+                    {lang}
+                  </span>
+                ))}
+
+                <span className="rounded-md border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-300">
+                  PT-BR
+                </span>
+              </div>
+            </div>
+
+            {/* TV Experience */}
+            <div className="relative col-span-12 lg:col-span-6 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-8">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                <Tv className="h-7 w-7 text-white" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-4">
+                TV-Native Experience
+              </h3>
+
+              <p className="text-slate-400 leading-7">
+                Built from the ground up for big screens using Google's Material
+                3 guidelines. Complete with remote-friendly focus management,
+                accessibility features, custom toasts, and seamless Dark/Light
+                theme toggling.
+              </p>
+            </div>
+
+            {/* Goals */}
+            <div className="relative col-span-12 md:col-span-6 lg:col-span-3 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-6">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <ThumbsUp className="h-6 w-6 text-amber-400" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Happy Time Goals
+              </h3>
+
+              <p className="text-sm leading-7 text-slate-400">
+                Track and reward idle/off-screen time to actively promote a
+                healthier lifestyle away from the television.
+              </p>
+            </div>
+
+            {/* Alerts */}
+            <div className="relative col-span-12 md:col-span-6 lg:col-span-3 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b111a] p-6">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                <Bell className="h-6 w-6 text-cyan-400" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Over-Usage Alerts
+              </h3>
+
+              <p className="text-sm leading-7 text-slate-400">
+                Gentle on-screen nudges that appear before the hard lock,
+                helping users wrap up their current show gracefully.
+              </p>
             </div>
           </div>
         </div>
