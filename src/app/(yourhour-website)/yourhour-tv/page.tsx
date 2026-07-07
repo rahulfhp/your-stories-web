@@ -114,6 +114,7 @@ export default function TVPlatformPage() {
             <Image
               src="/yourhour-website-img/tv-hero.webp"
               alt="YourHour TV Platform"
+              loading="lazy"
               width={1200}
               height={675}
               className="mx-auto"
@@ -134,7 +135,7 @@ export default function TVPlatformPage() {
           </div>
 
           <div className="max-w-7xl mx-auto px-4 md:px-6">
-            <div className="space-y-16">
+            <div className="space-y-8">
               {sections.map((item, index) => (
                 <div
                   key={item.step}
@@ -159,10 +160,11 @@ export default function TVPlatformPage() {
 
                   {/* Image */}
                   <div className="flex justify-center">
-                    <div className="relative w-full max-w-[520px] aspect-square">
+                    <div className="relative w-full max-w-lg aspect-square">
                       <Image
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
                         fill
                         className="object-contain"
                       />
@@ -177,7 +179,7 @@ export default function TVPlatformPage() {
 
       <section
         id="parenting"
-        className="py-16 bg-[#020613] border-y border-white/5"
+        className="py-16 mb-10 bg-[#020613] border-y border-white/5"
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-20 lg:grid-cols-2 items-center">
@@ -290,6 +292,7 @@ export default function TVPlatformPage() {
               <Image
                 src="/yourhour-website-img/tv-setup.webp"
                 alt="setup"
+                loading="lazy"
                 fill
                 className="object-contain"
               />
@@ -298,12 +301,9 @@ export default function TVPlatformPage() {
         </div>
       </section>
 
-      <section
-        id="ecosystem"
-        className="py-16 bg-[#020613] border-t border-white/5"
-      >
+      <section id="ecosystem" className="pt-16 bg-[#020613]">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16 reveal opacity-0 translate-y-6 transition-all duration-700">
+          <div className="text-center mb-12 reveal opacity-0 translate-y-6 transition-all duration-700">
             <SectionHeading
               badge="Premium Ecosystem"
               title="Control From Your Pocket"
@@ -312,23 +312,36 @@ export default function TVPlatformPage() {
               real-time."
             />
           </div>
-          <div className="reveal rounded-[2rem] border border-white/10 bg-[#0b111a] p-8 shadow-2xl shadow-cyan-900/20 transition-all duration-700">
+          <div className="reveal rounded-3xl p-4 transition-all duration-700">
             <h3 className="text-center text-2xl font-bold text-white mb-8">
               Connect Your Mobile App
             </h3>
-            <div className="relative w-full max-w-7xl aspect-[16/9]">
-              <Image
-                src="/yourhour-website-img/tv-steps.webp"
-                alt="setup"
-                fill
-                className="object-contain"
-              />
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="relative w-full max-w-7xl aspect-[16/8] md:aspect-[16/7]">
+                <Image
+                  src="/yourhour-website-img/tv-steps.webp"
+                  alt="setup"
+                  loading="lazy"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              <div className="md:-top-36 relative w-full max-w-7xl aspect-[16/8] md:aspect-[16/10]">
+                <Image
+                  src="/yourhour-website-img/mobile-steps.webp"
+                  alt="setup"
+                  loading="lazy"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-[#020613] border-t border-white/5">
+      <section className="py-16 bg-[#020613] border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16 reveal translate-y-6 transition-all duration-700">
             <SectionHeading
