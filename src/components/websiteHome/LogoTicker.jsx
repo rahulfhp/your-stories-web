@@ -29,8 +29,8 @@ export default function LogoTicker() {
 
   return (
     <section className="py-10 bg-slate-950 border-y border-slate-800 overflow-hidden">
-      <div className="container mx-auto px-4 mb-6 text-center">
-        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">
+      <div className="container mx-auto px-4 mb-10 text-center">
+        <p className="mx-auto max-w-fit text-sm font-bold rounded-full border border-slate-500 text-slate-500 py-2 px-4 uppercase tracking-widest">
           Featured In Global Media
         </p>
       </div>

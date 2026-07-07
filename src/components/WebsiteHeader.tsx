@@ -211,7 +211,7 @@ export default function WebsiteHeader() {
                   </Link>
                 </div>
 
-                {/* YourStories Logo & Get App Button */}
+                {/* platforms Logo & Get App Button */}
                 <div className="flex flex-col gap-4 pt-3 border-t border-slate-700">
                   <a
                     href="https://play.google.com/store/apps/details?id=com.mindefy.phoneaddiction.mobilepe"
@@ -238,7 +238,7 @@ export default function WebsiteHeader() {
                       loading="lazy"
                       width={120}
                       height={40}
-                      className="ml-2 h-11 w-auto scale-110"
+                      className="ml-2.5 h-11 w-auto scale-110"
                     />
                   </a>
                 </div>

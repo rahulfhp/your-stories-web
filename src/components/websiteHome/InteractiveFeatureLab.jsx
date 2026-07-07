@@ -14,7 +14,7 @@ import {
 
 const Badge = ({ children, className = "" }) => (
   <span
-    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 ${className}`}
+    className={`inline-flex items-center px-3 py-2 rounded-full text-xs font-bold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 ${className}`}
   >
     {children}
   </span>
@@ -86,7 +86,7 @@ export default function InteractiveFeatureLab() {
       <div className="text-center max-w-3xl mx-auto mb-16">
         <Badge className="mb-6">Interactive Feature Lab</Badge>
         <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-          Play with the Tools
+          Play With The Tools
         </h3>
         <p className="text-xl text-slate-400 font-light">
           Experience how YourHour helps you change your habits.
