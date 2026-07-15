@@ -2,7 +2,7 @@
 google.com, pub-3128150064662905, DIRECT, f08c47fec0942fa0
 
 # --- Meta Audience Network ---
-facebook.com, 1374267182724556, RESELLER, c3e20eee3f780d68
+facebook.com, 1374267182724556, DIRECT, c3e20eee3f780d68
 
 # --- Unity Ads Direct ---
 unity.com, 9603495, DIRECT, 96cabb5fbdde37a7
