@@ -70,7 +70,7 @@ export default function WebsiteHeader() {
                 Android App
               </Link>
               <Link
-                href="/#platforms"
+                href="/yourhour-ios"
                 className="hover:text-[#00BCD4] transition-colors"
               >
                 iPhone App
@@ -189,7 +189,7 @@ export default function WebsiteHeader() {
                     Android App
                   </Link>
                   <Link
-                    href="/#platforms"
+                    href="/yourhour-ios"
                     className="hover:text-[#00BCD4] transition-colors py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
