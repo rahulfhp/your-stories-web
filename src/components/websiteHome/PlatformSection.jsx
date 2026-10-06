@@ -40,7 +40,7 @@ const platformCards = [
   {
     title: "iPhone App",
     subtitle: "The beautiful simplicity of YourHour, engineered for Apple.",
-    badge: "COMING SOON",
+    badge: "NEW",
     icon: <Apple className="w-7 h-7" strokeWidth={1.8} />,
     features: [
       "Deep iOS Integration",
@@ -48,9 +48,9 @@ const platformCards = [
       "Seamless Ecosystem Sync",
     ],
     button: {
-      label: "",
-      href: "",
-      variant: "secondary",
+      label: "Explore iPhone App",
+      href: "/yourhour-ios",
+      variant: "primary",
     },
   },
 ];
